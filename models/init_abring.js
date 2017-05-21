@@ -27,7 +27,7 @@ abring.init = function (data) {
     invitations_friend_detail = "";
     suggested_friend_detail = "";
     searched_friend_detail = "";
-    player_view_detail = "";
+    abring.params.player_view_detail = "";
     post_template = "";
 
     $("head").append('<meta charset="UTF-8">'+"\n");

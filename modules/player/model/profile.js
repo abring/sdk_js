@@ -8,7 +8,7 @@ var playerView = "";
 var initPlayer = function () {
     playerView = readFile("abring/modules/player/view/player.html");
     $("#"+abring.params.player_parent_id).html(playerView);
-    player_view_detail = $("#"+abring.params.player_parent_id+" .player_view_details").html();
+    abring.params.player_view_detail = $("#"+abring.params.player_parent_id+" .player_view_details").html();
     $("#"+abring.params.player_parent_id+" .friends_list .player_view_details *").remove();
     if(!abring.params.player_info)
     {
@@ -42,7 +42,7 @@ var viewProfile = function (other_player_id) {
     player_profile["avatar"] = player_profile["avatar"] || abring.params.abring_default_avatar_url;
 
     $("#"+abring.params.player_parent_id+" .player_view_details").html(
-        player_view_detail
+        abring.params.player_view_detail
             .replaceAll("PLAYER_ID",other_player_id)
             .replaceAll("PLAYER_NAME",player_profile["name"])
             .replaceAll("PLAYER_IMG",player_profile["avatar"])
