@@ -20,11 +20,16 @@ $(document).on("keyup","#abring_post_search_input",function (e) {
     var tag  = $("#abring_post_search_input").val();
     if(tag.length<2)
         return;
-    var suggested_tags = callAbring("post/tags",{"tag":tag});
-    $("#abring_post_tag_suggestion").html("");
-    $.each(suggested_tags ,function (index,suggested_tag) {
-        $("#abring_post_tag_suggestion").append("<div id='abring_suggested_tag'>"+suggested_tag+"</div>");
-    });
+    callAbringWithFileUpload("post/tags",{"tag":tag},
+        function (suggested_tags) {
+            $("#abring_post_tag_suggestion").html("");
+            $.each(suggested_tags ,function (index,suggested_tag) {
+                $("#abring_post_tag_suggestion").append("<div id='abring_suggested_tag'>"+suggested_tag+"</div>");
+            });
+        },function (x,c,e) {
+
+        }
+    );
 });
 $(document).on("click","#abring_suggested_tag",function (e) {
     if(!abring.params.player_info)
@@ -35,13 +40,17 @@ $(document).on("click","#abring_suggested_tag",function (e) {
     $("#abring_post_search_input").val($(this).html());
     $("#abring_post_tag_suggestion").html("");
     var tag  = $("#abring_post_search_input").val();
-    var search_result_posts = callAbring("post/search",{"tag":tag});
-    $("#"+abring.params.posts_parent_id+" .timeline").html("");
-    $.each(search_result_posts,function (index,search_result_post) {
-        log(search_result_post);
-        abringPostPutIntoTimeline(search_result_post);
-    });
+    callAbringWithFileUpload("post/search",{"tag":tag},
+        function (search_result_posts) {
+            $("#"+abring.params.posts_parent_id+" .timeline").html("");
+            $.each(search_result_posts,function (index,search_result_post) {
+                log(search_result_post);
+                abringPostPutIntoTimeline(search_result_post);
+            });
+        },function (x,c,e) {
 
+        }
+    );
 });
 $(document).on("click",".abring_post_like_this_post",function (e){
     if(!abring.params.player_info)
@@ -128,13 +137,14 @@ $(document).on("click",".post_comment_add",function (e){
         $(this).parent().parent().parent().parent().addClass('current-post');
         post_id = $(".current-post").attr('id');
         comment = $(this).parent().children('input').val();
-        var post_comment_result = callAbring("post/comment",{"post_id":post_id,"comment":comment});
-        if(post_comment_result =="Done"){
-            $(".current-post .post-more-commnets-contain").prepend('<div class="post-comment player_'+abring.params.player_info.id+'" style="display:block;"><div class="avatar-box"> <img class="post-more-comment-avatar view_profile" name="'+abring.params.player_info.id+'" src="'+abring.params.player_info.avatar+'"> <label class="post-more-comment-name view_profile" name="'+abring.params.player_info.id+'">'+abring.params.player_info.name+'</label></div><div class="comment-box"><p class="post-more-comment-content">'+comment+'</p></div></div>');
-            $(".current-post").removeClass("current-post");
-        }else{
-            alert('comment submit failed');
-        }
+        callAbringWithFileUpload("post/comment",{"post_id":post_id,"comment":comment},
+            function (post_comment_result) {
+                $(".current-post .post-more-commnets-contain").prepend('<div class="post-comment player_'+abring.params.player_info.id+'" style="display:block;"><div class="avatar-box"> <img class="post-more-comment-avatar view_profile" name="'+abring.params.player_info.id+'" src="'+abring.params.player_info.avatar+'"> <label class="post-more-comment-name view_profile" name="'+abring.params.player_info.id+'">'+abring.params.player_info.name+'</label></div><div class="comment-box"><p class="post-more-comment-content">'+comment+'</p></div></div>');
+                $(".current-post").removeClass("current-post");
+            },function (x,c,e) {
+                abringPageShow("error",c);
+            }
+        );
     }
 });
 $(document).on("click",".post_delete",function (e){
@@ -145,13 +155,14 @@ $(document).on("click",".post_delete",function (e){
     }
     $(this).parent().parent().addClass('current-post');
     post_id = $(".current-post").attr('id');
-    var post_delete_result = callAbring("post/delete",{"post_id":post_id});
-    log(post_delete_result);
-    if(post_delete_result){
-        $(".current-post").remove();
-    }else{
-        alret("delete item failed");
-    }
+    callAbringWithFileUpload("post/delete",{"post_id":post_id},
+        function (post_delete_result) {
+            $(".current-post").remove();
+            log(post_delete_result);
+        },function (x,c,e) {
+
+        }
+    );
 });
 var limit = 10;
 var offset =1;
@@ -163,17 +174,24 @@ $(document).on("click",".post_comments_more",function (e){
     }
     $(this).parent().parent().parent().addClass('current-post');
     post_id = $(".current-post").attr('id');
-    var post_more_result = callAbring("post/comment-list",{"post_id":post_id , limit: limit, offset: offset });
-    offset = offset + limit;
-    limit = limit * 2;
+    callAbringWithFileUpload("post/comment-list",{"post_id":post_id , limit: limit, offset: offset },
+        function (post_more_result) {
 
-    if(post_more_result.count !== "0"){
-        $.each(post_more_result.list,function(moreIndex , moreVlaue){ log(moreVlaue.player_info);
-            $(".post-more-commnets-contain").append('<div class="post-comment player_848451114/1492425786" style="display:block;"><div class="avatar-box"><img class="post-more-comment-avatar" src="'+moreVlaue.player_info.avatar+'"><label class="post-more-comment-name">'+moreVlaue.player_info.name+'</label></div><div class="comment-box"><p class="post-more-comment-content">'+moreVlaue.comment+'</p></div></div>');
-        });
-    }else{
+            offset = offset + limit;
+            limit = limit * 2;
 
-    }
+            if(post_more_result.count !== "0"){
+                $.each(post_more_result.list,function(moreIndex , moreVlaue){ log(moreVlaue.player_info);
+                    $(".post-more-commnets-contain").append('<div class="post-comment player_848451114/1492425786" style="display:block;"><div class="avatar-box"><img class="post-more-comment-avatar" src="'+moreVlaue.player_info.avatar+'"><label class="post-more-comment-name">'+moreVlaue.player_info.name+'</label></div><div class="comment-box"><p class="post-more-comment-content">'+moreVlaue.comment+'</p></div></div>');
+                });
+            }else{
+
+            }
+
+        },function (x,c,e) {
+
+        }
+    );
 });
 $(document).on("click",".post_edit",function (e){
     if(!abring.params.player_info)
@@ -267,24 +285,25 @@ $(document).on("click",".abring_post_comment_send_edit",function(){
     post_id = post_id.split('post-');
     post_id = post_id[1];
     var commentContent = $(this).parent().children('input').val();
-    var send_edited_comment = callAbring("post/comment-edit",{"post_id":post_id , comment_id: comment_id, comment: commentContent });
-    if(send_edited_comment == "done"){
-        $(this).parent().html('');
-        $("#"+comment_id).append('<span class="post-more-comment-content-span">'+commentContent+'</span><span class="comment-btn-action"><a style="margin-left: 3px;" class="abring_post_comment_edit" href="#">edit</a><a style="margin-left: 3px;" class="abring_post_comment_delete" href="#">delete</a></span>');
-    }else{
-        alert('can not edit comment');
-    }
+    callAbringWithFileUpload("post/comment-edit",{"post_id":post_id , comment_id: comment_id, comment: commentContent },
+        function (send_edited_comment) {
+
+            $(this).parent().html('');
+            $("#"+comment_id).append('<span class="post-more-comment-content-span">'+commentContent+'</span><span class="comment-btn-action"><a style="margin-left: 3px;" class="abring_post_comment_edit" href="#">edit</a><a style="margin-left: 3px;" class="abring_post_comment_delete" href="#">delete</a></span>');
+        },function (x,c,e) {
+
+        }
+    );
 });
 $(document).on("click",".abring_post_comment_delete",function(){
     var post_id =  $(this).parent().parent().parent().attr('id');
     post_id = post_id.split('post-');
     post_id = post_id[1];
     var comment_id = $(this).parent().parent().attr('id');
-    var send_deleted_comment = callAbring("post/comment-delete",{"post_id":post_id , comment_id: comment_id });
-    log(send_deleted_comment);
-    if(send_deleted_comment == "done"){
-        $(this).parent().parent().parent().parent().remove();
-    }else{
-        alert('can not delete comment');
-    }
+    callAbringWithFileUpload("post/comment-delete",{"post_id":post_id , comment_id: comment_id },
+        function (send_deleted_comment) {
+            $(this).parent().parent().parent().parent().remove();
+            log(send_deleted_comment);
+        }
+    );
 });

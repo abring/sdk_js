@@ -93,7 +93,7 @@ var readFile = function (filePath) {
         return false;
     }
 };
-var callAbring = function (method,data) {
+var callAbringSynchronously = function (method,data) {
 
     if(!abring.params.isOnline)
     {
@@ -130,8 +130,8 @@ var callAbring = function (method,data) {
 var callAbringWithFileUpload = function (methodUrl,postData,successCallback,failCallback,identifier) {
 
     successCallback = successCallback || function () {};
-    failCallback = failCallback || function (x,c,e) {abringPageShow("error",e);};
-    
+    failCallback = failCallback || function () {};
+
     if(!abring.params.isOnline)
     {
         log("You are offline!\nPlease check your internet connection");

@@ -153,66 +153,62 @@ var abringFriendsSearchFail = function () {
 };
 var abringFriendsInvite = function (invited_player_id) {
     var data = {"player_id": invited_player_id};
-    var suggestion_result = callAbring("friends/invite",data);
-    log("suggestion result = " + suggestion_result);
-    if( suggestion_result ) {
-        $("#"+abring.params.friends_parent_id+" .invite[name='" + invited_player_id + "'] input[type='button']").val("Invited (cancel request)!");
-        $("#"+abring.params.friends_parent_id+" .invite[name='" + invited_player_id + "']").removeClass("invite").addClass("cancel_request");
-    }else{
-        alert("error");
-    }
-    return true;
+    callAbringWithFileUpload("friends/invite",data,
+        function (suggestion_result) {
+            $("#"+abring.params.friends_parent_id+" .invite[name='" + invited_player_id + "'] input[type='button']").val("Invited (cancel request)!");
+            $("#"+abring.params.friends_parent_id+" .invite[name='" + invited_player_id + "']").removeClass("invite").addClass("cancel_request");
+            log("suggestion result = " + suggestion_result);
+        }
+    );
 };
 var abringFriendsAccept = function (invited_player_id) {
     var data = {"player_id": invited_player_id};
-    var suggestion_result = callAbring("friends/accept",data);
-    log("accept request result = "+suggestion_result);
+    callAbringWithFileUpload("friends/accept",data,
+        function (suggestion_result) {
+            $("#"+abring.params.friends_parent_id+" .accept_request[name='" + invited_player_id + "'] input[type='button']").val("Accepted (Unfriend?)!");
+            $("#"+abring.params.friends_parent_id+" .reject_request[name='" + invited_player_id + "'] input[type='button']").hide();
+            $("#"+abring.params.friends_parent_id+" .accept_request[name='" + invited_player_id + "']").removeClass("accept_request").addClass("unfriend");
 
-    if( suggestion_result ) {
-        $("#"+abring.params.friends_parent_id+" .accept_request[name='" + invited_player_id + "'] input[type='button']").val("Accepted (Unfriend?)!");
-        $("#"+abring.params.friends_parent_id+" .reject_request[name='" + invited_player_id + "'] input[type='button']").hide();
-        $("#"+abring.params.friends_parent_id+" .accept_request[name='" + invited_player_id + "']").removeClass("accept_request").addClass("unfriend");
-    }else{
-        alert("error");
-    }
-    return true;
+            log("accept request result = "+suggestion_result);
+
+        },function (x,c,e) {
+
+        }
+    );
 };
 var abringFriendsReject = function (invited_player_id) {
     var data = {"player_id": invited_player_id};
-    var suggestion_result = callAbring("friends/reject",data);
-    log("reject request result = "+suggestion_result);
+    callAbringWithFileUpload("friends/reject",data,
+        function (suggestion_result) {
+            $("#"+abring.params.friends_parent_id+" .reject_request[name='" + invited_player_id + "'] input[type='button']").val("Rejected (Invite again?)!");
+            $("#"+abring.params.friends_parent_id+" .reject_request[name='" + invited_player_id + "']").removeClass("reject_request").addClass("invite");
+            log("reject request result = "+suggestion_result);
+        },function (x,c,e) {
 
-    if( suggestion_result ) {
-        $("#"+abring.params.friends_parent_id+" .reject_request[name='" + invited_player_id + "'] input[type='button']").val("Rejected (Invite again?)!");
-        $("#"+abring.params.friends_parent_id+" .reject_request[name='" + invited_player_id + "']").removeClass("reject_request").addClass("invite");
-    }else{
-        alert("error");
-    }
-    return true;
+        }
+    );
 };
 var abringFriendsCancel = function (invited_player_id) {
     var data = {"player_id": invited_player_id};
-    var suggestion_result = callAbring("friends/cancel-request",data);
-    log("cancel request result = "+suggestion_result);
+    callAbringWithFileUpload("friends/cancel-request",data,
+        function (suggestion_result) {
+            $("#"+abring.params.friends_parent_id+" .cancel_request[name='" + invited_player_id + "'] input[type='button']").val("Cancelled (Invite again?)!");
+            $("#"+abring.params.friends_parent_id+" .cancel_request[name='" + invited_player_id + "']").removeClass("cancel_request").addClass("invite");
+            log("cancel request result = "+suggestion_result);
+        },function (x,c,e) {
 
-    if( suggestion_result ) {
-        $("#"+abring.params.friends_parent_id+" .cancel_request[name='" + invited_player_id + "'] input[type='button']").val("Cancelled (Invite again?)!");
-        $("#"+abring.params.friends_parent_id+" .cancel_request[name='" + invited_player_id + "']").removeClass("cancel_request").addClass("invite");
-    }else{
-        alert("error");
-    }
-    return true;
+        }
+    );
 };
 var abringFriendsUnfriend = function (invited_player_id) {
     var data = {"player_id": invited_player_id};
-    var suggestion_result = callAbring("friends/unfriend",data);
-    log("unfriend result = "+suggestion_result);
+    callAbringWithFileUpload("friends/unfriend",data,
+        function (suggestion_result) {
+            $("#"+abring.params.friends_parent_id+" .unfriend_request[name='" + invited_player_id + "'] input[type='button']").val("Cancelled (Invite again?)!");
+            $("#"+abring.params.friends_parent_id+" .unfriend_request[name='" + invited_player_id + "']").removeClass("unfriend_request").addClass("invite");
+            log("unfriend result = "+suggestion_result);
+        },function (x,c,e) {
 
-    if( suggestion_result ) {
-        $("#"+abring.params.friends_parent_id+" .unfriend_request[name='" + invited_player_id + "'] input[type='button']").val("Cancelled (Invite again?)!");
-        $("#"+abring.params.friends_parent_id+" .unfriend_request[name='" + invited_player_id + "']").removeClass("unfriend_request").addClass("invite");
-    }else{
-        alert("error");
-    }
-    return true;
+        }
+    );
 };
