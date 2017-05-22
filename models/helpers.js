@@ -519,6 +519,7 @@ var checkIsOnline = function(checkIsOnlineSuccess){
     },function () {
         abring.params.isOnline = false;
         checkIsOnlineSuccess(false);
+        abring.params.socketObject.onclose();
     });
 };
 var array_diff = function (a1, a2) {

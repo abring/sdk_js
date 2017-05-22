@@ -24,7 +24,6 @@ abring.params = {
 
     "posts_parent_id" : "frog_posts", //use custom parent to show posts,
 
-
 //default icons
     "abring_loading_url" : "abring/img/loading.gif",
     "abring_error_url" : "abring/img/error.png",
@@ -57,6 +56,8 @@ abring.params = {
 
     "socketDomain" : '185.116.160.61',
     "socketPort" : 18000,
+    "socketConnectFunction" : function(){return on_socket_connect()},
+    "socketCloseFunction" : function(){return on_socket_close()},
     "socketObject" : null,
 
     "abring_sms_number" : "10005769297561",

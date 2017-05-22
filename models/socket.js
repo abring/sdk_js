@@ -18,8 +18,8 @@ var socketConnect = function()
     {
         abring.params.socketObject = new WebSocket("ws://" + abring.params.socketDomain+":"+abring.params.socketPort);
         abring.params.socketObject.onopen = function () {
-            $(".socket_status").html("online");
             socketSendMessage(abring.params.player_info["player_id"]);
+            abring.params.socketConnectFunction();
         };
 
         abring.params.socketObject.onmessage = function (evt) {
@@ -30,10 +30,11 @@ var socketConnect = function()
         };
 
         abring.params.socketObject.onclose = function () {
-            $(".socket_status").html("offline");
             socketClose();
             // websocket is closed.
+            abring.params.socketCloseFunction();
             log("Connection is closed...");
+
             //try to reconnect ??????????????????????
         };
     }
@@ -56,4 +57,11 @@ var socketClose = function()
     if(!socketIsConnected())
         abring.params.socketObject.close();
     abring.params.socketObject = null;
+};
+var on_socket_connect = function () {
+    $(".my_socket_status").css("background-color","green");
+};
+var on_socket_close = function () {
+
+    $(".my_socket_status").css("background-color","red");
 };
