@@ -19,6 +19,9 @@ abring.params = {
     "friends_loading_finish_function" : function(){return friends_loading_finish()},
     "friends_show_page_function" : function(){return friends_show_page()},
 
+    "chat_parent_id" : "abring_chat",
+    "chat_show_page_function" : function(){return friends_show_page()},
+
     "posts_parent_id" : "frog_posts", //use custom parent to show posts,
 
 
@@ -54,7 +57,7 @@ abring.params = {
 
     "socketDomain" : '185.116.160.61',
     "socketPort" : 18000,
-    "socketObject" : {},
+    "socketObject" : null,
 
     "abring_sms_number" : "10005769297561",
     "uuid" : "", //device's Universally Unique Identifier,

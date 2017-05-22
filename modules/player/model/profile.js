@@ -362,7 +362,7 @@ var chatStart = function(target_player_id)
 {
     getOtherPlayerInfo(target_player_id,false,
         function (target_player_info ) {
-
+            $("#"+abring.params.chat_parent_id).attr("player_id",target_player_id);
             //init chat if needed ????????
             if(!socketConnect())
                 abringPageShow("error","error connecting to socket server");
@@ -391,8 +391,8 @@ var getTargetPlayerInfoFailed = function () {
     abringPageShow("error","error loading target player info");
 };
 
-var chatSend = function (message) {
-    socketSendMessage(">unicast>"+target_player_info["player_id"]+">chat:"+message);
+var chatSend = function (target_player_id,message) {
+    socketSendMessage(">unicast>"+target_player_id+">chat:"+message);
     $(".chat_message").val('');
     $(".chat_content").append("<div class='chat-result-contain my-chat-contain'><span class='my-chat-name chat-name'>"+abring.params.player_info["name"]+"</span><span class='my-chat-message chat-message'>"+message+"</span></div");
 };

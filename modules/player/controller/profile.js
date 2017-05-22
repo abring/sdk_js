@@ -255,6 +255,7 @@ $(document).on("click",".chat_send",function () {
         abringPageShow("player_mobile_register","Your are not login!");
         return false;
     }
-    var message = $(".chat_message").val();
-    chatSend(message);
+    var target_player_id = $("#"+abring.params.chat_parent_id).attr("player_id");
+    var message = $("#"+abring.params.chat_parent_id+" .chat_message").val();
+    chatSend(target_player_id,message);
 });
