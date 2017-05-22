@@ -223,6 +223,8 @@ var setCookie = function (cname, cvalue, exdays,setCookieSuccess,setCookieFailed
     if(abring.params.isCordovaApp)
     {
         cname = "c_"+cname+".txt";
+        if(exdays<=0)
+            delCookie(cname);
         if(isArray(cvalue)||isObject(cvalue))
             cvalue = JSON.stringify(cvalue);
         log("set file as cookie of "+cname+"="+cvalue);
