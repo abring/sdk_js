@@ -78,15 +78,26 @@ var getPlayerInfo = function (resetCache,getPlayerInfoSuccess,getPlayerInfoFaile
         return abring.params.player_info;
     }
 };
-var getOtherPlayerInfo = function (player_id,resetCache) {
-    abring.params.other_players = getCookie("other_players") || {};
+var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSuccess,getOtherPlayerInfoFailed) {
+
+    getOtherPlayerInfoSuccess = getOtherPlayerInfoSuccess || function () {};
+    getOtherPlayerInfoFailed = getOtherPlayerInfoFailed || function () {};
+
+    if(abring.params.other_players[player_id])
+        other_player_info = abring.params.other_players[player_id];
+    else
+        abring.params.other_players = getCookie("other_players") || {};
     if( resetCache || !abring.params.other_players[player_id] )
     {
         var other_player_info = callAbring("player/get-multiple",{"player_id":player_id});
-        if(other_player_info["avatar"]=="undefined") other_player_info["avatar"] = "";
-        if(other_player_info["public"]=="undefined") other_player_info["public"] = [];
-        if(other_player_info["public"].constructor.name=="String") other_player_info["public"] = JSON.parse(other_player_info["public"]);
-        abring.params.other_players[other_player_info["player_id"]] = other_player_info;
+        $.each(other_player_info,function (index,other_player_info) {
+            if(!other_player_info["avatar"]) other_player_info["avatar"] = "";
+            if(!other_player_info["public"]) other_player_info["public"] = [];
+            var x = other_player_info["public"];
+            if(x.constructor.name=="String")
+                other_player_info["public"] = JSON.parse(other_player_info["public"]);
+            abring.params.other_players[other_player_info["player_id"]] = other_player_info;
+        });
         setCookie("other_players",abring.params.other_players,100);
         log("update other player profile ");
         log(abring.params.other_players);

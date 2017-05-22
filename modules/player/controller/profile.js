@@ -227,7 +227,8 @@ $(document).on("click",".view_profile",function () {
         return false;
     }
 
-    viewProfile($(this).attr("name"));
+    var target_player_id = $(this).attr("player_id") || $(this).attr("name");
+    viewProfile(target_player_id);
 });
 
 $(document).on("click",".chat_start",function () {
