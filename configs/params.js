@@ -31,7 +31,10 @@ abring.params = {
     "abring_logo_url" : "abring/img/abring.png",
     "abring_default_avatar_url" : "abring/img/default_avatar.png",
     "splashTime" : 0,
-    "beep" : "abring/sound/beep.wav",
+    "sounds":{
+        "beep" : "abring/sound/beep.wav",
+        "notification" : "abring/sound/notification.mp3"
+    },
 
 
 //global variables
@@ -63,5 +66,5 @@ abring.params = {
     "abring_sms_number" : "10005769297561",
     "uuid" : "", //device's Universally Unique Identifier,
 
-    "ping_time" : 10
+    "ping_time" : 30
 };

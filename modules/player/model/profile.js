@@ -451,9 +451,8 @@ socketMessageReceived = function (message){
         getOtherPlayerInfo(target_player_id,false,
             function (target_player_info) {
 
-                if(current_page!="abring_chat") {
-                    var beepSound = $("#beep-sound")[0];
-                    beepSound.play();
+                if(abring.params.current_page!="abring_chat") {
+                    play_sound(abring.params.sounds.notification);
                     showChatPage(target_player_id);
                 }
                 message = message.replace(message_parts[0]+":"+message_parts[1]+":","");

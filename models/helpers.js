@@ -516,6 +516,7 @@ var checkIsOnline = function(checkIsOnlineSuccess){
     callAbringWithFileUpload("site/ping",{}, function () {
         abring.params.isOnline = true;
         checkIsOnlineSuccess(true);
+        socketConnect();
     },function () {
         abring.params.isOnline = false;
         checkIsOnlineSuccess(false);
@@ -543,4 +544,9 @@ var array_diff = function (a1, a2) {
     }
 
     return diff;
+};
+var play_sound = function(sound_src){
+    sound_src = sound_src || abring.params.sounds.notification;
+    var audio = new Audio(sound_src);
+    audio.play();
 };
