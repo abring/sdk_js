@@ -451,7 +451,7 @@ socketMessageReceived = function (message){
         getOtherPlayerInfo(target_player_id,false,
             function (target_player_info) {
 
-                if(abring.params.current_page!="abring_chat") {
+                if(abring.params.current_page!=abring.params.chat_parent_id) {
                     play_sound(abring.params.sounds.notification);
                     showChatPage(target_player_id);
                 }
