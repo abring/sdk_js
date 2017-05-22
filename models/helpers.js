@@ -154,7 +154,7 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
         data.append("token", abring.params.token);
     postData = postData || {};
     $.each(postData,function (inputName,inputValue) {
-        if(inputValue.constructor.name=="Object" || inputValue.constructor.name=="Array")
+        if(typeof inputValue!="string")
             inputValue = JSON.stringify(inputValue);
         data.append(inputName, inputValue);
     });
