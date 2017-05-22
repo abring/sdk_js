@@ -36,19 +36,25 @@ var player_show_page = function () {
 
 var viewProfile = function (other_player_id) {
 
-    var player_profile =  getOtherPlayerInfo(other_player_id);
+    getOtherPlayerInfo(other_player_id,
+        function (player_profile) {
 
-    player_profile["name"] = player_profile["name"] || other_player_id;
-    player_profile["avatar"] = player_profile["avatar"] || abring.params.abring_default_avatar_url;
+            player_profile["name"] = player_profile["name"] || other_player_id;
+            player_profile["avatar"] = player_profile["avatar"] || abring.params.abring_default_avatar_url;
 
-    $("#"+abring.params.player_parent_id+" .player_view_details").html(
-        abring.params.player_view_detail
-            .replaceAll("PLAYER_ID",other_player_id)
-            .replaceAll("PLAYER_NAME",player_profile["name"])
-            .replaceAll("PLAYER_IMG",player_profile["avatar"])
+            $("#"+abring.params.player_parent_id+" .player_view_details").html(
+                abring.params.player_view_detail
+                    .replaceAll("PLAYER_ID",other_player_id)
+                    .replaceAll("PLAYER_NAME",player_profile["name"])
+                    .replaceAll("PLAYER_IMG",player_profile["avatar"])
 //            .replaceAll(abring.params.abring_default_avatar_url,player_profile["avatar"])
+            );
+            abringPageShow("player_view_details");
+        },function (x,c,e) {
+            abringPageShow("error",e);
+        }
     );
-    abringPageShow("player_view_details");
+
 };
 var getPlayerInfo = function (resetCache,getPlayerInfoSuccess,getPlayerInfoFailed) {
     abring.params.player_info = getCookie("player_info");
@@ -83,26 +89,30 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
     getOtherPlayerInfoSuccess = getOtherPlayerInfoSuccess || function () {};
     getOtherPlayerInfoFailed = getOtherPlayerInfoFailed || function () {};
 
-    if(abring.params.other_players[player_id])
-        other_player_info = abring.params.other_players[player_id];
-    else
+    if(!abring.params.other_players[player_id])
         abring.params.other_players = getCookie("other_players") || {};
     if( resetCache || !abring.params.other_players[player_id] )
     {
-        var other_player_info = callAbring("player/get-multiple",{"player_id":player_id});
-        $.each(other_player_info,function (index,other_player_info) {
-            if(!other_player_info["avatar"]) other_player_info["avatar"] = "";
-            if(!other_player_info["public"]) other_player_info["public"] = [];
-            var x = other_player_info["public"];
-            if(x.constructor.name=="String")
-                other_player_info["public"] = JSON.parse(other_player_info["public"]);
-            abring.params.other_players[other_player_info["player_id"]] = other_player_info;
-        });
-        setCookie("other_players",abring.params.other_players,100);
-        log("update other player profile ");
-        log(abring.params.other_players);
-    }
-    return abring.params.other_players[player_id];
+        callAbringWithFileUpload(
+            "player/get-multiple",
+            {"player_id":player_id},
+            function (other_player_info) {
+                $.each(other_player_info,function (index,other_player_info) {
+                    if(!other_player_info["avatar"]) other_player_info["avatar"] = "";
+                    if(!other_player_info["public"]) other_player_info["public"] = [];
+                    var x = other_player_info["public"];
+                    if(x.constructor.name=="String")
+                        other_player_info["public"] = JSON.parse(other_player_info["public"]);
+                    abring.params.other_players[other_player_info["player_id"]] = other_player_info;
+                });
+                setCookie("other_players",abring.params.other_players,100);
+                getOtherPlayerInfoSuccess(abring.params.other_players[player_id]);
+            },function (x,c,e) {
+                getOtherPlayerInfoFailed(x,c,e);
+            }
+        );
+    }else
+        getOtherPlayerInfoSuccess(abring.params.other_players[player_id]);
 };
 var abringPlayerMobileRegister = function () {
 };
@@ -356,16 +366,20 @@ var mobileVerifyFail = function () {
 var target_player_info = {};
 var chatStart = function(target_player_id)
 {
-    target_player_info = getOtherPlayerInfo(target_player_id);
-    if(!socketConnect())
-        abringPageShow("error","error connecting to socket server");
+    getOtherPlayerInfo(target_player_id,
+        function (target_player_info ) {
 
-    //fill display info ????????
-    abringPageShow("abring_chat",target_player_info["name"]);
+            //init chat if needed ????????
+            if(!socketConnect())
+                abringPageShow("error","error connecting to socket server");
 
-    //init chat if needed ????????
+            //fill display info ????????
+            abringPageShow("abring_chat",target_player_info["name"]);
 
-    // callAbringWithFileUpload("player/get",{"player_id":target_player_id},getTargetPlayerInfoSuccess,getTargetPlayerInfoFailed);
+        },function (x,c,e) {
+            abringPageShow("error",e);
+        }
+    );
 };
 var getTargetPlayerInfoSuccess = function (result) {
 
@@ -419,14 +433,21 @@ socketMessageReceived = function (message) {
     if(message_type=="chat")
     {
         log("process chat");
-        target_player_info = getOtherPlayerInfo(target_player_id);
-        if(current_page!="abring_chat") {
-            var beepSound = $("#beep-sound")[0];
-            beepSound.play();
-            chatStart(target_player_id);
-        }
-        message = message.replace(message_parts[0]+":"+message_parts[1]+":","");
-        $(".chat_content").append("<div class='chat-result-contain your-chat-contain'><span class='your-chat-name chat-name'>"+target_player_info["name"]+"</span><span class='your-chat-message chat-message'>"+message+"</span></div>");
+        getOtherPlayerInfo(target_player_id,
+            function (target_player_info) {
+
+                if(current_page!="abring_chat") {
+                    var beepSound = $("#beep-sound")[0];
+                    beepSound.play();
+                    chatStart(target_player_id);
+                }
+                message = message.replace(message_parts[0]+":"+message_parts[1]+":","");
+                $(".chat_content").append("<div class='chat-result-contain your-chat-contain'><span class='your-chat-name chat-name'>"+target_player_info["name"]+"</span><span class='your-chat-message chat-message'>"+message+"</span></div>");
+
+            },function (x,c,e) {
+                abringPageShow("error",e);
+            }
+        );
     }
 };
 var chatFinish = function()
