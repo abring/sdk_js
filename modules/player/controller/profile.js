@@ -115,19 +115,19 @@ $(document).on("click",".player_mobile_verify .resend_code ",function () {
     var data = {
         "mobile":mobile_number
     };
-    if(!callAbring("player/mobile-register",data))
-    {
-        abringPageShow("player_mobile_verify","resend failed.\n"+abring.params.last_error);
-        return false;
-    }
+    callAbringWithFileUpload("player/mobile-register",data,
+        function (res) {
 
-    //display verify page
-    $(".player_mobile_verify .mobile_number").val(mobile_number);
-    $(".player_mobile_verify .mobile_number_label").html(mobile_number);
+            //display verify page
+            $(".player_mobile_verify .mobile_number").val(mobile_number);
+            $(".player_mobile_verify .mobile_number_label").html(mobile_number);
 
-    abringPageShow("player_mobile_verify","Please enter verify code.\n");
+            abringPageShow("player_mobile_verify","Please enter verify code.\n");
 
-    return true;
+        },function (x,c,e) {
+            abringPageShow("player_mobile_verify","resend failed.\n"+e);
+        }
+    );
 });
 $(document).on("click",".register_using_abring",function () {
 

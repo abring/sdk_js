@@ -122,38 +122,37 @@ var abringPlayerMobileVerify = function () {
 var abringPlayerMobileResendCode = function () {
 };
 var abringPlayerLogin = function (username, password) {
-    abringLoadingStart();
-    abring.params.token = callAbring("player/login",{"username":username,"password":password});
-    if(!abring.params.token)
-    {
-        $("#"+abring.params.player_parent_id+" .player_login .message").html("Invalid login!\n"+abring.params.last_error);
-        abringPageShow("player_login");
-    }else{
-        setCookie("token",abring.params.token,100);
-        callAbringWithFileUpload(
-            "player/get",{},
-            function(result){
-                abring.params.player_info = result;
-                setCookie("player_info",abring.params.player_info,100);
-                abringPageHide();
-            },function(){
-                abringPageHide();
-            });
-    }
-    abringLoadingFinish();
+    abringPageShow("loading","logon to Abring\nPlease wait");
+    if(abring.params.token)
+        abringPlayerLogout();
+    callAbringWithFileUpload("player/login",{"username":username,"password":password},
+        function (res) {
+            abring.params.token = res["token"];
+            abring.params.player_info = res["player_info"];
+            setCookie("token",abring.params.token,100);
+            setCookie("player_info",abring.params.player_info,100);
+            abringPageHide();
+        },function (x,c,e) {
+            abringPageShow("error",e);
+        }
+    );
 };
-var abringPlayerLogout = function () {
+var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutFailed) {
+
+    abringPlayerLogoutSuccess = abringPlayerLogoutSuccess || function () {};
+    abringPlayerLogoutFailed = abringPlayerLogoutFailed || function () {};
 
     if(abring.params.player_info || abring.params.token)
     {
         if(abring.params.token)
             callAbringWithFileUpload(
                 "player/logout",{},
-                function(){
+                function(res){
+                    abringPlayerLogoutSuccess(res);
                     abringPageShow("player_mobile_register","Logout successfully!");
                 },
-                function(){
-                    abringPageShow("alert","failed to logout");
+                function(x,c,e){
+                    abringPlayerLogoutFailed(x,c,e);
                 }
             );
         abring.params.token = false;
@@ -162,7 +161,8 @@ var abringPlayerLogout = function () {
         setCookie("player_info",abring.params.player_info,0);
         abring.params.other_players = false;
         setCookie("other_players",abring.params.other_players,0);
-    }
+    }else
+        abringPlayerLogoutSuccess();
 };
 var abringPlayerRegisterDevice = function(abringPlayerRegisterDeviceSuccess,abringPlayerRegisterDeviceFailed){
 
@@ -195,7 +195,13 @@ var abringPlayerRegisterDevice = function(abringPlayerRegisterDeviceSuccess,abri
 };
 var abringPlayerRegister = function (username, password, variables, values) {
     abringLoadingStart();
-    abring.params.token = callAbring("player/register",{"username":username,"password":password,"variables":variables,"values":values});
+    abring.params.token = callAbringWithFileUpload("player/register",{"username":username,"password":password,"variables":variables,"values":values},
+        function (res) {
+
+        },function (x,c,e) {
+            abringPageShow("error",e);
+        }
+    );
     if(!abring.params.token)
     {
         $("#"+abring.params.player_parent_id+" .player_register .message").html("Invalid registration!\n"+abring.params.last_error);
@@ -246,19 +252,6 @@ var abringPlayerInfo = function (reset_cache) {
         $("#"+abring.params.player_parent_id+" .profile_form .cover").attr("src","");
         abringPageHide();
     }
-};
-var abringPlayerSetVariable = function (data) {
-    var variables = "";
-    var values = "";
-    $.each(data , function (variable,value) {
-        variables += "," + variable;
-        values += "," + value;
-    });
-
-    return callAbring("player/set",{"variables":variables,"values":values});
-};
-var abringPlayergetVariable = function (variables) {
-    return callAbring("player/get",{"variables":variables});
 };
 var abringPLayerLoginWithDeviceId = function(loginWithDeviceIdSuccess,loginWithDeviceIdFailed){
 

@@ -129,6 +129,9 @@ var callAbring = function (method,data) {
 };
 var callAbringWithFileUpload = function (methodUrl,postData,successCallback,failCallback,identifier) {
 
+    successCallback = successCallback || function () {};
+    failCallback = failCallback || function (x,c,e) {abringPageShow("error",e);};
+    
     if(!abring.params.isOnline)
     {
         log("You are offline!\nPlease check your internet connection");
