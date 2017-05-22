@@ -453,7 +453,7 @@ socketMessageReceived = function (message){
 
                 if(abring.params.current_page!=abring.params.chat_parent_id) {
                     play_sound(abring.params.sounds.notification);
-                    showChatPage(target_player_id);
+                    abring.params.chat_show_page_function(target_player_id);
                 }
                 message = message.replace(message_parts[0]+":"+message_parts[1]+":","");
                 $(".chat_content").append("<div class='chat-result-contain your-chat-contain'><span class='your-chat-name chat-name'>"+target_player_info["name"]+"</span><span class='your-chat-message chat-message'>"+message+"</span></div>");
