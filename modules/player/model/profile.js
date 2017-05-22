@@ -353,104 +353,7 @@ var mobileVerifyFail = function () {
     abringPageShow("player_mobile_verify","Verification failed.\n"+abring.params.last_error);
     return false;
 };
-
-
-
-//chat with just one people ???????????????
-var target_player_info = {};
-var chatStart = function(target_player_id)
-{
-    getOtherPlayerInfo(target_player_id,false,
-        function (target_player_info ) {
-            $("#"+abring.params.chat_parent_id).attr("player_id",target_player_id);
-            //init chat if needed ????????
-            if(!socketConnect())
-                abringPageShow("error","error connecting to socket server");
-
-            //fill display info ????????
-            abringPageShow("abring_chat",target_player_info["name"]);
-
-        },function (x,c,e) {
-            abringPageShow("error",e);
-        }
-    );
-};
-var getTargetPlayerInfoSuccess = function (result) {
-
-    target_player_info = result;
-
-    if(!socketConnect())
-        abringPageShow("error","error connecting to socket server");
-
-    //fill display info ????????
-    abringPageShow("abring_chat",target_player_info["name"]);
-
-    //init chat if needed ????????
-};
-var getTargetPlayerInfoFailed = function () {
-    abringPageShow("error","error loading target player info");
-};
-
-var chatSend = function (target_player_id,message) {
-    socketSendMessage(">unicast>"+target_player_id+">chat:"+message);
-    $(".chat_message").val('');
-    $(".chat_content").append("<div class='chat-result-contain my-chat-contain'><span class='my-chat-name chat-name'>"+abring.params.player_info["name"]+"</span><span class='my-chat-message chat-message'>"+message+"</span></div");
-};
-socketMessageReceived = function (message) {
-
-    log("server message:"+message);
-
-    //get message parts
-    var message_parts = message.split(":");
-
-    //get current action based on message (chat - force update - ...)
-    var message_type = message_parts[1];
-    //raise correct page if needed (if is chat will raise chat page)
-    if(message_parts[0]=="0")
-    {
-        if(message_type==-1)
-        {
-            log("login to socket server failed!");
-        }
-        if(message_type==0)
-        {
-            log("socket reply success");
-        }
-        log("socket reply");
-        return true;
-    }
-
-    //else it is not 0 it means we are in broadcast situation
-
-    var target_player_id = message_parts[0];//get player id that message comes from
-    //user defined types
-    if(message_type=="chat")
-    {
-        log("process chat");
-        getOtherPlayerInfo(target_player_id,false,
-            function (target_player_info) {
-
-                if(current_page!="abring_chat") {
-                    var beepSound = $("#beep-sound")[0];
-                    beepSound.play();
-                    chatStart(target_player_id);
-                }
-                message = message.replace(message_parts[0]+":"+message_parts[1]+":","");
-                $(".chat_content").append("<div class='chat-result-contain your-chat-contain'><span class='your-chat-name chat-name'>"+target_player_info["name"]+"</span><span class='your-chat-message chat-message'>"+message+"</span></div>");
-
-            },function (x,c,e) {
-                abringPageShow("error",e);
-            }
-        );
-    }
-};
-var chatFinish = function()
-{
-    target_player_info = {};
-    socketClose();
-};
-var updatePlayerTags = function(tags_to_add,tags_to_remove,updatePlayerTagsSuccess,updatePlayerTagsFailed)
-{
+var updatePlayerTags = function(tags_to_add,tags_to_remove,updatePlayerTagsSuccess,updatePlayerTagsFailed){
     updatePlayerTagsSuccess = updatePlayerTagsSuccess || function(){};
     updatePlayerTagsFailed = updatePlayerTagsFailed || function(){};
     if(!tags_to_add && !tags_to_remove)
@@ -487,4 +390,81 @@ var updatePlayerTags = function(tags_to_add,tags_to_remove,updatePlayerTagsSucce
             }
         );
     }
+};
+
+
+//chat with just one people ???????????????
+var showChatPage = function(target_player_id) {
+    getOtherPlayerInfo(target_player_id,false,
+        function (target_player_info ) {
+
+            //init chat if needed ????????
+            if(!socketConnect())
+                abringPageShow("error","error connecting to socket server");
+
+            $("#"+abring.params.chat_parent_id).attr("player_id",target_player_id);
+            abring.params.chat_show_page_function(target_player_info);
+        },function (x,c,e) {
+            abringPageShow("error",e);
+        }
+    );
+};
+var chat_show_page = function (target_player_info) {
+    abringPageShow(abring.params.chat_parent_id,target_player_info["name"]);
+};
+var chatSend = function (target_player_id,message) {
+    socketSendMessage(">unicast>"+target_player_id+">chat:"+message);
+    $(".chat_message").val('');
+    $(".chat_content").append("<div class='chat-result-contain my-chat-contain'><span class='my-chat-name chat-name'>"+abring.params.player_info["name"]+"</span><span class='my-chat-message chat-message'>"+message+"</span></div");
+};
+socketMessageReceived = function (message){
+
+    log("server message:"+message);
+
+    //get message parts
+    var message_parts = message.split(":");
+
+    //get current action based on message (chat - force update - ...)
+    var message_type = message_parts[1];
+    //raise correct page if needed (if is chat will raise chat page)
+    if(message_parts[0]=="0")
+    {
+        if(message_type==-1)
+        {
+            log("login to socket server failed!");
+        }
+        if(message_type==0)
+        {
+            log("socket reply success");
+        }
+        log("socket reply");
+        return true;
+    }
+
+    //else it is not 0 it means we are in broadcast situation
+
+    var target_player_id = message_parts[0];//get player id that message comes from
+    //user defined types
+    if(message_type=="chat")
+    {
+        log("process chat");
+        getOtherPlayerInfo(target_player_id,false,
+            function (target_player_info) {
+
+                if(current_page!="abring_chat") {
+                    var beepSound = $("#beep-sound")[0];
+                    beepSound.play();
+                    showChatPage(target_player_id);
+                }
+                message = message.replace(message_parts[0]+":"+message_parts[1]+":","");
+                $(".chat_content").append("<div class='chat-result-contain your-chat-contain'><span class='your-chat-name chat-name'>"+target_player_info["name"]+"</span><span class='your-chat-message chat-message'>"+message+"</span></div>");
+
+            },function (x,c,e) {
+                abringPageShow("error",e);
+            }
+        );
+    }
+};
+var chatFinish = function(){
+    socketClose();
 };

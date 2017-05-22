@@ -245,7 +245,7 @@ $(document).on("click",".chat_start",function () {
         abringPageShow("error","You cannot chat with yourself!");
         return false;
     }
-    chatStart(target_player_id);
+    showChatPage(target_player_id);
 });
 
 $(document).on("click",".chat_send",function () {
@@ -257,5 +257,6 @@ $(document).on("click",".chat_send",function () {
     }
     var target_player_id = $("#"+abring.params.chat_parent_id).attr("player_id");
     var message = $("#"+abring.params.chat_parent_id+" .chat_message").val();
+
     chatSend(target_player_id,message);
 });
