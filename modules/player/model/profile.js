@@ -121,21 +121,26 @@ var abringPlayerLogin = function (username, password) {
     abringLoadingFinish();
 };
 var abringPlayerLogout = function () {
-    callAbringWithFileUpload(
-        "player/logout",{},
-        function(){
-            abring.params.token = false;
-            setCookie("token",abring.params.token,0);
-            abring.params.player_info = false;
-            setCookie("player_info",abring.params.player_info,0);
-            abring.params.other_players = false;
-            setCookie("other_players",abring.params.other_players,0);
-            abringPageShow("player_mobile_register","Logout successfully!");
-        },
-        function(){
-            abringPageShow("alert","failed to logout");
-        }
-    );
+
+    if(abring.params.player_info || abring.params.token)
+    {
+        if(abring.params.token)
+            callAbringWithFileUpload(
+                "player/logout",{},
+                function(){
+                    abringPageShow("player_mobile_register","Logout successfully!");
+                },
+                function(){
+                    abringPageShow("alert","failed to logout");
+                }
+            );
+        abring.params.token = false;
+        setCookie("token",abring.params.token,0);
+        abring.params.player_info = false;
+        setCookie("player_info",abring.params.player_info,0);
+        abring.params.other_players = false;
+        setCookie("other_players",abring.params.other_players,0);
+    }
 };
 var abringPlayerRegisterDevice = function(abringPlayerRegisterDeviceSuccess,abringPlayerRegisterDeviceFailed){
 
