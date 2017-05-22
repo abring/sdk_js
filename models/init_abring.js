@@ -69,9 +69,6 @@ abring.init = function (data) {
     if(!socketConnect())
         log("Socket is not available");
 
-    $("#beep-sound").attr('src',abring.params.sounds.beep);
-    $("#notification-sound").attr('src',abring.params.sounds.notification);
-
     updateLocation(
         function(current_location){
             $(".current_location_country").html(abring.params.current_location_country).val(abring.params.current_location_country);
