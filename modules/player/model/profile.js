@@ -36,7 +36,7 @@ var player_show_page = function () {
 
 var viewProfile = function (other_player_id) {
 
-    getOtherPlayerInfo(other_player_id,
+    getOtherPlayerInfo(other_player_id,false,
         function (player_profile) {
 
             player_profile["name"] = player_profile["name"] || other_player_id;
@@ -86,6 +86,7 @@ var getPlayerInfo = function (resetCache,getPlayerInfoSuccess,getPlayerInfoFaile
 };
 var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSuccess,getOtherPlayerInfoFailed) {
 
+    resetCache = resetCache || false;
     getOtherPlayerInfoSuccess = getOtherPlayerInfoSuccess || function () {};
     getOtherPlayerInfoFailed = getOtherPlayerInfoFailed || function () {};
 
@@ -366,7 +367,7 @@ var mobileVerifyFail = function () {
 var target_player_info = {};
 var chatStart = function(target_player_id)
 {
-    getOtherPlayerInfo(target_player_id,
+    getOtherPlayerInfo(target_player_id,false,
         function (target_player_info ) {
 
             //init chat if needed ????????
@@ -433,7 +434,7 @@ socketMessageReceived = function (message) {
     if(message_type=="chat")
     {
         log("process chat");
-        getOtherPlayerInfo(target_player_id,
+        getOtherPlayerInfo(target_player_id,false,
             function (target_player_info) {
 
                 if(current_page!="abring_chat") {
