@@ -110,8 +110,8 @@ var callAbringSynchronously = function (method,data) {
         data_string += "&" + index + "=" + value ;
     });
     var url = abring.params.abring_base_url+method+data_string;
-    result = readFile(url);
-    var result = JSON.parse(result);
+    var result = readFile(url);
+    result = JSON.parse(result);
     if(result&&result['code']==200){
         log('call abring was successful');
         return result['result'];
