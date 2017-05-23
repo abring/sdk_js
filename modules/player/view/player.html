@@ -173,11 +173,35 @@
     </div>
 </div>
 <div id="abring_chat_template">
-    <div class="player_chat" id="chat_PLAYER_ID" player_id="PLAYER_ID">
-        <div class="content-div chat_content"></div>
-        <div class="chat-footer">
-            <textarea class="chat_message" placeholder="Type your message here"></textarea>
-            <input type="button" class="chat_send" value="Send" player_id="PLAYER_ID">
-        </div>
+    <style>
+        .abring_chat .message {
+            float: left;
+            margin: 0;
+        }
+        #abring_chat {
+            text-align: center;
+        }
+        .chat-footer {
+            position: relative;
+        }
+        .chat_send {
+            position: absolute;
+            right: 0;
+            bottom: 0px;
+            height: 46px;
+        }
+        .chat_content {
+            display: inline-block;
+            width: 100%;
+            padding: 0 15px;
+            height: 350px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+    </style>
+    <div class="content-div chat_content"></div>
+    <div class="chat-footer">
+        <input class="chat_message" placeholder="Type your message here" typeof="text" style="position: inherit;">
+        <input type="button" class="chat_send" value="Send" player_id="PLAYER_ID">
     </div>
 </div>
