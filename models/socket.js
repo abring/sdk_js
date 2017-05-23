@@ -70,7 +70,7 @@ var socketSendMessage = function(message)
     if(!socketIsConnected())
         return abringPageShow("error","socket not connected!");
 
-    abring.params.socketObject.send(message);
+    abring.params.socketObject.send(message+"\n");
     log("socket send: "+message);
 };
 var socketClose = function()

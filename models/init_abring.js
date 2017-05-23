@@ -123,5 +123,8 @@ abring.init = function (data) {
         else
             abringPlayerRegisterDevice();
     }
+
+    abring.params.chat_template = $("#"+abring.params.chat_parent_id).html();
+    $("#"+abring.params.chat_parent_id).html("");
 };
 

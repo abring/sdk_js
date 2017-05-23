@@ -395,6 +395,13 @@ var updatePlayerTags = function(tags_to_add,tags_to_remove,updatePlayerTagsSucce
 
 //chat with just one people ???????????????
 var showChatPage = function(target_player_id) {
+
+    if($("#"+abring.params.chat_parent_id+" #chat_"+target_player_id).length==0)
+    {
+        var template = abring.params.chat_template.replaceAll("PLAYER_ID",target_player_id);
+        $("#"+abring.params.chat_parent_id).append(template);
+    }
+
     getOtherPlayerInfo(target_player_id,false,
         function (target_player_info ) {
 
@@ -402,7 +409,6 @@ var showChatPage = function(target_player_id) {
             if(!socketConnect())
                 abringPageShow("error","error connecting to socket server");
 
-            $("#"+abring.params.chat_parent_id).attr("player_id",target_player_id);
             abring.params.chat_show_page_function(target_player_info);
         },function (x,c,e) {
             abringPageShow("error",e);
@@ -430,8 +436,9 @@ on_socket_message = function (from_player_id,message){
 
                     if(abring.params.current_page!=abring.params.chat_parent_id) {
                         play_sound(abring.params.sounds.notification);
-                        abring.params.chat_show_page_function(from_player_id);
                     }
+
+                    showChatPage(from_player_id);
                     var chat_message =
                         "<div class='chat-result-contain your-chat-contain'>" +
                         "<span class='your-chat-name chat-name'>" +
@@ -441,7 +448,7 @@ on_socket_message = function (from_player_id,message){
                         message[1].trim()+
                         "</span>" +
                         "</div>";
-                    $(".chat_content").append(chat_message);
+                    $("#"+abring.params.chat_parent_id+" #chat_"+from_player_id+" .chat_content").append(chat_message);
 
                 },function (x,c,e) {
                     abringPageShow("error",e);

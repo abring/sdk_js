@@ -20,6 +20,7 @@ abring.params = {
     "friends_show_page_function" : function(){return friends_show_page()},
 
     "chat_parent_id" : "abring_chat",
+    "chat_template" : "",
     "chat_show_page_function" : function(target_player_info){return chat_show_page(target_player_info)},
 
     "posts_parent_id" : "frog_posts", //use custom parent to show posts,

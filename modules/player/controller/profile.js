@@ -255,8 +255,13 @@ $(document).on("click",".chat_send",function () {
         abringPageShow("player_mobile_register","Your are not login!");
         return false;
     }
-    var target_player_id = $("#"+abring.params.chat_parent_id).attr("player_id");
-    var message = $("#"+abring.params.chat_parent_id+" .chat_message").val();
+    var target_player_id = $(this).attr("player_id");
+    if(!target_player_id)
+    {
+        abringPageShow("error","cannot detect target player id to send message!");
+        return false;
+    }
+    var message = $("#"+abring.params.chat_parent_id+" #chat_"+target_player_id+" .chat_message").val();
 
     chatSend(target_player_id,message);
 });
