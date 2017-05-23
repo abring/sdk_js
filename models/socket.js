@@ -24,9 +24,30 @@ var socketConnect = function()
 
         abring.params.socketObject.onmessage = function (evt) {
             var received_msg = evt.data;
-            if(received_msg=="0:0") socketSendMessage(abring.params.player_info["player_id"]);
-            if(received_msg=="0:1") socketSendMessage("No group");
-            socketMessageReceived(received_msg);
+            log("SOCKET:<"+received_msg+">");
+            var received_msg_parts = received_msg.split(":");
+            if(received_msg_parts.length>1)
+            {
+                var socket_target_player_id = received_msg_parts[0];
+                var socket_message = received_msg_parts.slice(1);
+                var socket_message_0 = socket_message[0].trim();
+                if(socket_target_player_id==0){
+                    if(socket_message_0=="0") log("ping from socket");
+                    else if(socket_message_0=="1") socketSendMessage(abring.params.player_info["player_id"]);
+                    else if(socket_message_0=="2") socketSendMessage(abring.params.app);//set app id as default group for this player
+                    else if(socket_message_0=="3") log("ready for multicast");
+                    else if(socket_message_0=="6") log("socket command executed");
+                    else log("unknown message from admin: '"+socket_message+"'");
+                }else if(socket_message_0=="4"){
+                    log(socket_target_player_id + " joined to the socket server!");
+                }else if(socket_message_0=="5"){
+                    log(socket_target_player_id + " left the socket server!");
+                }else{
+                    abring.params.socketMessageFunction(socket_target_player_id,socket_message);
+                }
+            }else{
+                log("unknown message '"+received_msg+"'");
+            }
         };
 
         abring.params.socketObject.onclose = function () {
