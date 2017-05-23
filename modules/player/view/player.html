@@ -194,14 +194,14 @@
             display: inline-block;
             width: 100%;
             padding: 0 15px;
-            height: 350px;
+            min-height: 350px;
             overflow-x: hidden;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
     </style>
     <div class="content-div chat_content"></div>
-    <div class="chat-footer" style="position: inherit;bottom: 0px;">
-        <input class="chat_message" placeholder="Type your message here" typeof="text">
+    <div class="chat-footer" style="position: fixed !important;bottom: 0px !important;width:94% !important;">
+        <input class="chat_message" placeholder="Type your message here" typeof="text" style="position: inherit">
         <input type="button" class="chat_send" value="Send" player_id="PLAYER_ID">
     </div>
 </div>
