@@ -89,23 +89,16 @@ abring.init = function (data) {
         checkIsOnline();
     });
 
-    if(!abring.params.uuid)
-    {
-        abring.params.uuid = getCookie("uuid");
-        if(!abring.params.uuid) {
-            abring.params.uuid = randomString(16);
-        }
-    }
-
     if(!abring.params.token)
     {
-        abringPLayerLoginWithDeviceId(
-            function () {
-                log("Logged in with device id!");
-            },function (xhr,code,error) {
-                log("Failed to login with device id:\n"+error);
-            }
-        );
+        if(abring.params.uuid)
+            abringPLayerLoginWithDeviceId(
+                function () {
+                    log("Logged in with device id!");
+                },function (xhr,code,error) {
+                    log("Failed to login with device id:\n"+error);
+                }
+            );
     }else{
         if(!abring.params.player_info)
             getPlayerInfo(true,
@@ -121,7 +114,7 @@ abring.init = function (data) {
                     log("failed");
                 }
             );
-        else
+        else if(abring.params.uuid)
             abringPlayerRegisterDevice();
     }
 
