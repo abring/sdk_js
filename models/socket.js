@@ -52,11 +52,15 @@ var socketConnect = function()
 
         abring.params.socketObject.onclose = function () {
             socketClose();
+            abring.params.socketObject = null;
             // websocket is closed.
             abring.params.socketCloseFunction();
             log("Connection is closed...");
 
-            //try to reconnect ??????????????????????
+            //try to reconnect in 5 seconds
+            setTimeout(function(){
+                socketConnect();
+            }, 5000);
         };
     }
     return abring.params.socketObject;
