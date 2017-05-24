@@ -35,7 +35,7 @@ abring.init = function (data) {
     post_template = "";
 
     $("head").append('<meta charset="UTF-8">'+"\n");
-    $("head").append('<link rel="shortcut icon" href="abring/img/favicon.ico">'+"\n");
+    $("head").append('<link rel="shortcut icon" href="abring/img/abring.png">'+"\n");
 
     abring.params.timeStamp = getTime("timestamp");
     abring.params.template = readFile("abring/view/theme.html?="+ new Date().getTime());
