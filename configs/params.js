@@ -29,6 +29,7 @@ abring.params = {
     "abring_loading_url" : "abring/img/loading.gif",
     "abring_error_url" : "abring/img/error.png",
     "abring_info_url" : "abring/img/info.png",
+    "abring_warning_url" : "abring/img/warning.png",
     "abring_logo_url" : "abring/img/abring.png",
     "abring_default_avatar_url" : "abring/img/default_avatar.png",
     "splashTime" : 0,

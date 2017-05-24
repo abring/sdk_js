@@ -41,10 +41,11 @@ abring.init = function (data) {
     abring.params.template = readFile("abring/view/theme.html?="+ new Date().getTime());
     $("body").prepend(abring.params.template);
     $("#abring .splash").append('<img src="'+abring.params.abring_logo_url+'" />').show();
-    $("#abring img.loading ").attr("src",abring.params.abring_loading_url);
-    $("#abring img.error").attr("src",abring.params.abring_error_url);
-    $("#abring img.info").attr("src",abring.params.abring_info_url);
-    $("#abring img.avatar").attr("src",abring.params.abring_default_avatar_url);
+    $("#abring .dialog img.loading ").attr("src",abring.params.abring_loading_url);
+    $("#abring .dialog img.error").attr("src",abring.params.abring_error_url);
+    $("#abring .dialog img.info").attr("src",abring.params.abring_info_url);
+    $("#abring .dialog img.warning").attr("src",abring.params.abring_warning_url);
+    $("#abring .dialog img.avatar").attr("src",abring.params.abring_default_avatar_url);
 
     initPlayer();
     initLeaderboard();

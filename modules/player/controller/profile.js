@@ -6,7 +6,7 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
 
     if(abring.params.token)
     {
-        abringPageShow("alert","Your are already a member and login.");
+        abringPageShow("warning","Your are already a member and login.");
         return false;
     }
 
@@ -59,7 +59,7 @@ $(document).on("click",".player_mobile_other_way_page",function () {
 
     if(abring.params.token)
     {
-        abringPageShow("alert","Your are already a member and login.");
+        abringPageShow("warning","Your are already a member and login.");
         return false;
     }
     abringPageShow("player_mobile_other_way");
@@ -69,7 +69,7 @@ $(document).on("click",".abring_buttons_player_mobile_register",function () {
 
     if(abring.params.token)
     {
-        abringPageShow("alert","Your are already a member and login.");
+        abringPageShow("warning","Your are already a member and login.");
         return false;
     }
     abringPageShow("player_mobile_register");
@@ -78,7 +78,7 @@ $(document).on("click",".abring_buttons_player_mobile_register",function () {
 $(document).on("click",".player_mobile_register .submit",function () {
     if(abring.params.token)
     {
-        abringPageShow("alert","Your are already a member and login.");
+        abringPageShow("warning","Your are already a member and login.");
         return false;
     }
     abringPageShow("loading","Registering your mobile number.\nPlease wait");
@@ -102,7 +102,7 @@ $(document).on("click",".player_mobile_verify .resend_code ",function () {
 
     if(abring.params.token)
     {
-        abringPageShow("alert","Your are already a member and login.");
+        abringPageShow("warning","Your are already a member and login.");
         return false;
     }
     //send register by mobile request
@@ -133,7 +133,7 @@ $(document).on("click",".register_using_abring",function () {
 
     if(abring.params.token)
     {
-        abringPageShow("alert","Your are already a member and login.");
+        abringPageShow("warning","Your are already a member and login.");
         return false;
     }
 
@@ -144,7 +144,7 @@ $(document).on("click",".login_using_abring",function () {
 
     if(abring.params.token)
     {
-        abringPageShow("alert","Your are already a member and login.");
+        abringPageShow("warning","Your are already a member and login.");
         return false;
     }
 
@@ -165,7 +165,7 @@ $(document).on("click",".page.profile_form .update_profile",function () {
 
     if(!abring.params.player_info)
     {
-        abringPageShow("alert","Your are not login!");
+        abringPageShow("error","Your are not login!");
         return false;
     }
 
@@ -198,7 +198,7 @@ $(document).on("click",".abring_player_logout",function () {
 
     if(!abring.params.player_info)
     {
-        abringPageShow("alert","Your are not login!");
+        abringPageShow("error","Your are not login!");
         return false;
     }
 

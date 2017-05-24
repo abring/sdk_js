@@ -2,10 +2,12 @@
 /**
  * display control
  */
-var abringPageShow = function (page,message) {
+var abringPageShow = function (page,title,message) {
     abring.params.current_page = page;
     $("#abring").show();
     $("#abring .page").hide();
+    if(title)
+        $("#abring ."+page+' .title').html(title);
     if(message)
         $("#abring ."+page+' .message').html(message);
     $("#abring ."+page).show();
