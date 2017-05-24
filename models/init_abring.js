@@ -82,7 +82,7 @@ abring.init = function (data) {
 
     checkIsOnline(function(isOnlineStatus){
         if(isOnlineStatus==false){
-            showLittleTip("You are offline.Please check your internet connection","info",50);
+            showLittleTip("Info","You are offline.Please check your internet connection","warning",50);
         }
     });
     start_loop(0,10000,abring.params.ping_time,function (counter,id) {

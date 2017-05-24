@@ -32,7 +32,9 @@ abring.params = {
     "abring_warning_url" : "abring/img/warning.png",
     "abring_logo_url" : "abring/img/abring.png",
     "abring_default_avatar_url" : "abring/img/default_avatar.png",
+
     "splashTime" : 0,
+    "tooltip_default_time" : 5,
     "sounds":{
         "beep" : "abring/sound/beep.wav",
         "notification" : "abring/sound/notification.mp3"

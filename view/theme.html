@@ -672,7 +672,7 @@
             display: inline;
         }
         #abring .page.dialog {
-            display: block;
+            display: none;
             padding: 20px;
             background-color: #eee;
             border-radius: 10px;
@@ -748,11 +748,16 @@
             <button class="close">OKey</button>
         </div>
     </div>
-<div class="little_tip">
-    <a href="#" class="close" style="margin-right: 0">X</a>
-    <img class="info" style="width:32px;" src="abring/img/info.png">
-    <h3 class="message"></h3>
-</div>
+    <div class="page dialog tooltip">
+        <h3 class="title"></h3>
+        <div class="message-parent">
+            <img class="info" src="abring/img/info.png">
+            <p class="message"></p>
+        </div>
+        <div class="button-parent">
+            <button class="close">OKey</button>
+        </div>
+    </div>
 
 <div id="abring_friends" ></div>
 <div id="abring_leaderboard" ></div>

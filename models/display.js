@@ -28,24 +28,17 @@ var abringLoadingFinish = function () {
     abring.params.current_page = "";
     $("#abring .loading").hide();
 };
-var showLittleTip = function(message,type,wait){
-    $(".splash").hide();
-    abring.params.current_page = "little_tip";
+var showLittleTip = function(title,message,type,wait){
+
+    title = title || "";
+    message = message || "";
     type = type || "info";
-    wait = parseInt(wait) || 1;
-    var type_icon = "";
-    if(type=="info") type_icon = abring.params.abring_info_url;
-    if(type=="error") type_icon = abring.params.abring_error_url;
-    $("#abring .little_tip img").attr("src",type_icon);
-    $("#abring .little_tip .message").html(message);
-    $("#abring .modal_background").hide();
-    $("#abring,#abring .little_tip").show("slow");
+    wait = wait || abring.params.tooltip_default_time;
+
+    abringPageHide();
+    abringPageShow(type,title,message);
     setTimeout(function(){
-        $("#abring,#abring .little_tip").hide(
-            {
-                "duration":"slow",
-                "complete":function(){ $("#abring .modal_background").show(); }
-            }
-        );
+        abringPageHide();
     }, wait*1000);
+
 };
