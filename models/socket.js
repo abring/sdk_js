@@ -62,7 +62,7 @@ var socketConnect = function()
                 setTimeout(function(){
                     socketConnect();
                 },
-                abring.params.socketRetryInterval
+                abring.params.socketRetryInterval*1000
             );
         };
     }
