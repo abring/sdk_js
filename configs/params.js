@@ -67,6 +67,8 @@ abring.params = {
     "socketCloseFunction" : function(){return on_socket_close()},
     "socketMessageFunction" : function(from_player_id,message){return on_socket_message(from_player_id,message)},
     "socketObject" : null,
+    "socketRetryInterval" : 5000,
+    "socketRetryIsRunning" : false,
 
     "abring_sms_number" : "10005769297561",
     "uuid" : "", //device's Universally Unique Identifier,

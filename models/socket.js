@@ -57,7 +57,13 @@ var socketConnect = function()
             log("Connection is closed...");
 
             //try to reconnect in 5 seconds
-            setTimeout(function(){socketConnect();}, 5000);
+            if(!abring.params.socketRetryIsRunning)
+                abring.params.socketRetryIsRunning=true;
+                setTimeout(function(){
+                    socketConnect();
+                },
+                abring.params.socketRetryInterval
+            );
         };
     }
     return abring.params.socketObject;
