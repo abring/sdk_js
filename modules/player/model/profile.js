@@ -347,12 +347,14 @@ var mobileVerifySuccess = function (result) {
     setCookie("token",abring.params.token,100);
     abring.params.player_info = getPlayerInfo();
     abringPageHide();
+    onPlayerLogin(result);
     return true;
 };
 var mobileVerifyFail = function () {
     abringPageShow("player_mobile_verify","Verification failed.\n"+abring.params.last_error);
     return false;
 };
+function onPlayerLogin(data) {};
 var updatePlayerTags = function(tags_to_add,tags_to_remove,updatePlayerTagsSuccess,updatePlayerTagsFailed){
     updatePlayerTagsSuccess = updatePlayerTagsSuccess || function(){};
     updatePlayerTagsFailed = updatePlayerTagsFailed || function(){};
