@@ -61,7 +61,7 @@ var abringLeaderboardSetScore = function (leaderboard,score,signature) {
 
     if(!abring.params.player_info)
     {
-        abring.params.display.showPageFunction("player_mobile_register","Your are not login!");
+        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     showLittleTip("Info","submitting your score!","info",10);
