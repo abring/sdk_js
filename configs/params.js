@@ -5,7 +5,8 @@ abring.params = {
 
 //module parent ids
     "player":{
-        "parent_id" : "abring_player"
+        "parent_id" : "abring_player",
+        "template" : "abring/modules/player/view/player.html"
     },
 
     "leaderboard":{

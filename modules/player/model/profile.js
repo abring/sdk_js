@@ -6,7 +6,7 @@
 var playerView = "";
 
 var initPlayer = function () {
-    playerView = readFile("abring/modules/player/view/player.html");
+    playerView = readFile(abring.params.player.template);
     $("#"+abring.params.player.parent_id).html(playerView);
     abring.params.player_view_detail = $("#"+abring.params.player.parent_id+" .player_view_details").html();
     $("#"+abring.params.player.parent_id+" .friends_list .player_view_details *").remove();
