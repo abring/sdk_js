@@ -16,10 +16,6 @@ abring.params = {
         "parent_id" : "abring_friends"
     },
 
-    "chat_parent_id" : "abring_chat",
-    "chat_template_parent_id" : "abring_chat_template",
-    "chat_show_page_function" : function(target_player_info){return chat_show_page(target_player_info)},
-
     "posts_parent_id" : "frog_posts", //use custom parent to show posts,
 
 //default icons
@@ -63,10 +59,14 @@ abring.params = {
     "socketConnectFunction" : function(){return on_socket_connect()},
     "socketCloseFunction" : function(){return on_socket_close()},
     "socketMessageFunction" : function(from_player_id,message){return abringOnPlayerSocketMessage(from_player_id,message)},
-    "chatMessageFunction" : function(from_player_info,message){return abringOnPlayerChatMessage(from_player_info,message)},
     "socketObject" : null,
     "socketRetryInterval" : 5,
     "socketRetryIsRunning" : false,
+
+    "chat_parent_id" : "abring_chat",
+    "chatMessageFunction" : function(from_player_info,message){return abringOnPlayerChatMessage(from_player_info,message)},
+    "chat_template_parent_id" : "abring_chat_template",
+    "chat_show_page_function" : function(target_player_info){return chat_show_page(target_player_info)},
 
     "abring_sms_number" : "10005769297561",
     "uuid" : "", //device's Universally Unique Identifier,

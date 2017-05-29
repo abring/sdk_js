@@ -23,11 +23,6 @@ var initPlayer = function () {
 function onPlayerLogin(data) {}
 function onPlayerLogout() {}
 
-
-var player_show_page = function () {
-    abringPageShow("player");
-};
-
 var viewProfile = function (other_player_id) {
 
     getOtherPlayerInfo(other_player_id,false,
