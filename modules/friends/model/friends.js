@@ -6,7 +6,7 @@
 var friendsView = "";
 
 var initFriends = function () {
-    friendsView = readFile("abring/modules/friends/view/friends.html");
+    friendsView = readFile(abring_url+"/modules/friends/view/friends.html");
     $("#"+abring.params.friends.parent_id).html(friendsView);
 
     requests_friend_detail = $("#"+abring.params.friends.parent_id+" .friends_list .requests_friend_details .friend_details").html();

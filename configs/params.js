@@ -1,7 +1,7 @@
 abring.params = {
 //configs
     "app" : "ir.abring.sdk",
-    "abring_base_url" : "http://ws.v3.abring.ir/index.php?r=",
+    "ws_base_url" : "http://ws.v3.abring.ir/index.php?r=",
 
     "display":{
         "current_page" : "",
@@ -16,17 +16,17 @@ abring.params = {
             abring.params.display.current_page = "";
             return abringPageHide();
         },
-        "abring_loading_url" : "abring/img/loading.gif",
-        "abring_error_url" : "abring/img/error.png",
-        "abring_info_url" : "abring/img/info.png",
-        "abring_warning_url" : "abring/img/warning.png",
-        "abring_logo_url" : "abring/img/abring.png",
-        "abring_default_avatar_url" : "abring/img/default_avatar.png"
+        "loading_url" : abring_url+"/img/loading.gif",
+        "error_url" : abring_url+"/img/error.png",
+        "info_url" : abring_url+"/img/info.png",
+        "warning_url" : abring_url+"/img/warning.png",
+        "logo_url" : abring_url+"/img/abring.png",
+        "default_avatar_url" : abring_url+"/img/default_avatar.png"
     },
 
     "player":{
         "parent_id" : "abring_player",
-        "template" : readFile("abring/modules/player/view/player.html"),
+        "template" : readFile(abring_url+"/modules/player/view/player.html"),
         "showPageFunction":function (subPageID) { return showMyProfile(subPageID); },
         "onLoginFunction":function (data) { return onPlayerLogin(data)},
         "onLogoutFunction":function () { return onPlayerLogout()},
@@ -44,8 +44,8 @@ abring.params = {
     "posts_parent_id" : "frog_posts", //use custom parent to show posts,
 
     "sounds":{
-        "beep" : "abring/sound/beep.wav",
-        "notification" : "abring/sound/notification.mp3"
+        "beep" : abring_url+"/sound/beep.wav",
+        "notification" : abring_url+"/sound/notification.mp3"
     },
 
 

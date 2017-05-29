@@ -7,6 +7,8 @@ document.writeln("<script type='text/javascript' src='cordova.js'></script>");
 // document.writeln("<script type='text/javascript' src='js/jquery.mobile-1.4.5.min.js'></script>");
 }
 
+var abring_url = "abring";
+
 var abringClass = function () {
     this.params = {};
     this.init = {};
@@ -15,20 +17,18 @@ abring = new abringClass();
 
 //external library
 
-document.writeln("<script type='text/javascript' src='abring/lib/md5.min.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/lib/md5.min.js'></script>");
 
-document.writeln("<script type='text/javascript' src='abring/models/helpers.js'></script>");
-document.writeln("<script type='text/javascript' src='abring/configs/params.js'></script>");
-document.writeln("<script type='text/javascript' src='abring/controller/page.js'></script>");
-document.writeln("<script type='text/javascript' src='abring/models/socket.js'></script>");
-document.writeln("<script type='text/javascript' src='abring/models/file.js'></script>");
-document.writeln("<script type='text/javascript' src='abring/models/init_abring.js'></script>");
-document.writeln("<script type='text/javascript' src='abring/models/display.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/models/helpers.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/configs/params.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/controller/page.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/models/socket.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/models/file.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/models/init_abring.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/models/display.js'></script>");
 
-document.writeln("<script type='text/javascript' src='abring/modules/player/module.js'></script>");
-document.writeln("<script type='text/javascript' src='abring/modules/leaderboard/module.js'></script>");
-document.writeln("<script type='text/javascript' src='abring/modules/friends/module.js'></script>");
-document.writeln("<script type='text/javascript' src='abring/modules/post/module.js'></script>");
-
-
+document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/player/module.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/leaderboard/module.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/friends/module.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/post/module.js'></script>");
 

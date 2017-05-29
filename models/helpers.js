@@ -109,7 +109,7 @@ var callAbringSynchronously = function (method,data) {
     $.each(data, function( index, value ) {
         data_string += "&" + index + "=" + value ;
     });
-    var url = abring.params.abring_base_url+method+data_string;
+    var url = abring.params.ws_base_url+method+data_string;
     var result = readFile(url);
     result = JSON.parse(result);
     if(result&&result['code']==200){
@@ -145,7 +145,7 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
      "avatar": $("#abring_profile_avatar_upload")[0].files[0] //value as file
      };
      */
-    var url = abring.params.abring_base_url+methodUrl;
+    var url = abring.params.ws_base_url+methodUrl;
 
     var data = new FormData();
 
@@ -549,4 +549,22 @@ var play_sound = function(sound_src){
     sound_src = sound_src || abring.params.sounds.notification;
     var audio = new Audio(sound_src);
     audio.play();
+};
+var current_file = function(relative) {
+    relative = relative || false;
+    var script = document.currentScript;
+    if(relative)
+        return $(script).attr("src");
+    else
+        return script.src;
+};
+var current_dir = function(relative) {
+    relative = relative || false;
+    var script = document.currentScript;
+    var file = "";
+    if(relative)
+        file = $(script).attr("src");
+    else
+        file = script.src;
+    return file.substring(0, file.lastIndexOf('/'));
 };

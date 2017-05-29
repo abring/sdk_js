@@ -5,7 +5,7 @@
 var leaderboardView = "";
 
 var initLeaderboard = function () {
-    leaderboardView = readFile("abring/modules/leaderboard/view/leaderboard.html");
+    leaderboardView = readFile(abring_url+"/modules/leaderboard/view/leaderboard.html");
     $("#"+abring.params.leaderboard.parent_id).html(leaderboardView);
 };
 

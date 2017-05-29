@@ -40,10 +40,10 @@ abring.init = function (data) {
     post_template = "";
 
     $("head").append('<meta charset="UTF-8">'+"\n");
-    $("head").append('<link rel="shortcut icon" href="abring/img/abring.png">'+"\n");
+    $("head").append('<link rel="shortcut icon" href="'+abring_url+'/img/abring.png">'+"\n");
 
     abring.params.timeStamp = getTime("timestamp");
-    abring.params.template = readFile("abring/view/theme.html?="+ new Date().getTime());
+    abring.params.template = readFile(abring_url+"/view/theme.html?="+ new Date().getTime());
     $("body").prepend(abring.params.template);
     $("#abring .splash").append('<img src="'+abring.params.abring_logo_url+'" />').show();
     $("#abring .dialog img.loading ").attr("src",abring.params.display.abring_loading_url);
