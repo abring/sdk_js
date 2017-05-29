@@ -85,7 +85,15 @@ $(document).on("click",".player_mobile_register .submit",function () {
 
     //send register by mobile request
     var mobile_number = $(".player_mobile_register .mobile_number").val();
-    abringPlayerMobileRegister(mobile_number);
+    abringPlayerMobileRegister(
+        mobile_number,
+        function(){
+            //showMyProfile("player_mobile_verify","Please enter verify code.\n");
+        },
+        function(x,c,e){
+            //showMyProfile("player_mobile_register",e);
+        }
+    );
 
 });
 $(document).on("click",".player_mobile_verify .submit",function () {

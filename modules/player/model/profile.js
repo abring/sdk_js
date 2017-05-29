@@ -31,9 +31,10 @@ var playerIsLogin = function(){
 };
 var showMyProfile = function(subPageID){
     subPageID = subPageID || "login";
+    abringPageHide();
     $("#"+abring.params.player.parent_id+" .page").hide();
     $("#"+abring.params.player.parent_id+" ."+subPageID).show();
-    abring.params.display.showPageFunction(subPageID);
+    abring.params.player.showPageFunction(subPageID);
 };
 var viewProfile = function (other_player_id) {
 
@@ -163,6 +164,7 @@ var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutF
     }else
     {
         onPlayerLogout();
+        showMyProfile("player_mobile_register","Logout successfully!");
         abringPlayerLogoutSuccess();
     }
 };
@@ -360,6 +362,8 @@ var abringPlayerMobileVerify = function (mobile,code,abringPlayerMobileVerifySuc
             setCookie("token",abring.params.token,100);
             abring.params.player_info = getPlayerInfo();
             abring.params.display.hidePageFunction();
+            showMyProfile("player_view_details");
+            socketConnect();
             return true;
         },
         function (x,c,e) {

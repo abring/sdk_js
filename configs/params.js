@@ -8,7 +8,7 @@ abring.params = {
         "splashTime" : 0,
         "tooltip_default_time" : 5,
         "showPageFunction":function (pageID,title,message) {
-
+            abringPageHide();
             abring.params.display.current_page = pageID;
             return abringPageShow(pageID,title,message);
         },
