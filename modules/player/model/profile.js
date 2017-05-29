@@ -447,7 +447,7 @@ var chatSend = function (target_player_id,message) {
     $(".chat_content").append("<div class='chat-result-contain my-chat-contain'><span class='my-chat-name chat-name'>"+abring.params.player_info["name"]+"</span><span class='my-chat-message chat-message'>"+message+"</span></div");
 };
 
-on_socket_message = function (from_player_id,message){
+var abringOnPlayerSocketMessage = function(from_player_id,message){
 
     if( (typeof message == "array" || typeof message == "object") && message.length>1 ) //is command from socket server
     {
@@ -456,23 +456,7 @@ on_socket_message = function (from_player_id,message){
             log("process chat");
             getOtherPlayerInfo(from_player_id,false,
                 function (from_player_info) {
-
-                    if(abring.params.current_page!=abring.params.chat_parent_id) {
-                        play_sound(abring.params.sounds.notification);
-                    }
-
-                    showChatPage(from_player_id);
-                    var chat_message =
-                        "<div class='chat-result-contain your-chat-contain'>" +
-                        "<span class='your-chat-name chat-name'>" +
-                        from_player_info["name"]+
-                        "</span>" +
-                        "<span class='your-chat-message chat-message'>" +
-                        message[1].trim()+
-                        "</span>" +
-                        "</div>";
-                    $("#"+abring.params.chat_parent_id+" #chat_"+from_player_id+" .chat_content").append(chat_message);
-
+                    abring.params.chatMessageFunction(from_player_info,message);
                 },function (x,c,e) {
                     abringPageShow("error",e);
                 }
@@ -488,6 +472,22 @@ on_socket_message = function (from_player_id,message){
         log(message);
         log("<<<<<<<< unknown message from socket");
     }
+};
+var abringOnPlayerChatMessage = function(from_player_info,message) {
+    var from_player_id= from_player_info['player_id'];
+    if(abring.params.current_page!=abring.params.chat_parent_id)
+        play_sound(abring.params.sounds.notification);
+    showChatPage(from_player_info['player_id']);
+    var chat_message =
+        "<div class='chat-result-contain your-chat-contain'>" +
+        "<span class='your-chat-name chat-name'>" +
+        from_player_info["name"]+
+        "</span>" +
+        "<span class='your-chat-message chat-message'>" +
+        message[1].trim()+
+        "</span>" +
+        "</div>";
+    $("#"+abring.params.chat_parent_id+" #chat_"+from_player_id+" .chat_content").append(chat_message);
 };
 var chatFinish = function(){
     socketClose();
