@@ -4,20 +4,17 @@ abring.params = {
     "abring_base_url" : "http://ws.v3.abring.ir/index.php?r=",
 
 //module parent ids
-    "player_parent_id" : "abring_player",
-    "player_loading_start_function" : function(){return player_loading_start()},
-    "player_loading_finish_function" : function(){return player_loading_finish()},
-    "player_show_page_function" : function(){return player_show_page()},
+    "player":{
+        "parent_id" : "abring_player"
+    },
 
-    "leaderboard_parent_id" : "abring_leaderboard",
-    "leaderboard_loading_start_function" : function(){return leaderboard_loading_start()},
-    "leaderboard_loading_finish_function" : function(){return leaderboard_loading_finish()},
-    "leaderboard_show_page_function" : function(){return leaderboard_show_page()},
+    "leaderboard":{
+        "parent_id" : "abring_leaderboard"
+    },
 
-    "friends_parent_id" : "abring_friends",
-    "friends_loading_start_function" : function(){return friends_loading_start()},
-    "friends_loading_finish_function" : function(){return friends_loading_finish()},
-    "friends_show_page_function" : function(){return friends_show_page()},
+    "friends":{
+        "parent_id" : "abring_friends"
+    },
 
     "chat_parent_id" : "abring_chat",
     "chat_template_parent_id" : "abring_chat_template",

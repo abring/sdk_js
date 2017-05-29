@@ -12,7 +12,7 @@ $(document).on("click",".abring_buttons_friends_list",function () {
 
     abringFriendsListShow();
 });
-$(document).on("keyup","#"+abring.params.friends_parent_id+" .friends_search_input",function (e) {
+$(document).on("keyup","#"+abring.params.friends.parent_id+" .friends_search_input",function (e) {
 
     if(!abring.params.player_info)
     {
@@ -29,19 +29,19 @@ $(document).on("keyup","#"+abring.params.friends_parent_id+" .friends_search_inp
     }
     abringFriendsSearch(search_pattern);
 });
-$(document).on("click","#"+abring.params.friends_parent_id+" .invite",function () {
+$(document).on("click","#"+abring.params.friends.parent_id+" .invite",function () {
     abringFriendsInvite($(this).attr("name"));
 });
-$(document).on("click","#"+abring.params.friends_parent_id+" .cancel_request",function () {
+$(document).on("click","#"+abring.params.friends.parent_id+" .cancel_request",function () {
     abringFriendsCancel($(this).attr("name"));
 });
-$(document).on("click","#"+abring.params.friends_parent_id+" .accept_request",function () {
+$(document).on("click","#"+abring.params.friends.parent_id+" .accept_request",function () {
     abringFriendsAccept($(this).attr("name"));
 });
-$(document).on("click","#"+abring.params.friends_parent_id+" .reject_request",function () {
+$(document).on("click","#"+abring.params.friends.parent_id+" .reject_request",function () {
     abringFriendsReject($(this).attr("name"));
 });
-$(document).on("click","#"+abring.params.friends_parent_id+" .unfriend_request",function () {
+$(document).on("click","#"+abring.params.friends.parent_id+" .unfriend_request",function () {
     abringFriendsUnfriend($(this).attr("name"));
 });
 

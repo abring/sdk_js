@@ -7,9 +7,9 @@ var playerView = "";
 
 var initPlayer = function () {
     playerView = readFile("abring/modules/player/view/player.html");
-    $("#"+abring.params.player_parent_id).html(playerView);
-    abring.params.player_view_detail = $("#"+abring.params.player_parent_id+" .player_view_details").html();
-    $("#"+abring.params.player_parent_id+" .friends_list .player_view_details *").remove();
+    $("#"+abring.params.player.parent_id).html(playerView);
+    abring.params.player_view_detail = $("#"+abring.params.player.parent_id+" .player_view_details").html();
+    $("#"+abring.params.player.parent_id+" .friends_list .player_view_details *").remove();
     if(!abring.params.player_info)
     {
         if(abring.params.smsIsAllowed){
@@ -23,15 +23,7 @@ var initPlayer = function () {
 function onPlayerLogin(data) {}
 function onPlayerLogout() {}
 
-var player_loading_start = function () {
 
-    abringPageShow("loading","loading player data.");
-    abringLoadingStart();
-
-};
-var player_loading_finish = function () {
-    abringPageHide();
-};
 var player_show_page = function () {
     abringPageShow("player");
 };
@@ -44,7 +36,7 @@ var viewProfile = function (other_player_id) {
             player_profile["name"] = player_profile["name"] || other_player_id;
             player_profile["avatar"] = player_profile["avatar"] || abring.params.abring_default_avatar_url;
 
-            $("#"+abring.params.player_parent_id+" .player_view_details").html(
+            $("#"+abring.params.player.parent_id+" .player_view_details").html(
                 abring.params.player_view_detail
                     .replaceAll("PLAYER_ID",other_player_id)
                     .replaceAll("PLAYER_NAME",player_profile["name"])
@@ -176,7 +168,7 @@ var abringPlayerRegister = function (username, password, variables, values) {
     );
     if(!abring.params.token)
     {
-        $("#"+abring.params.player_parent_id+" .player_register .message").html("Invalid registration!\n"+abring.params.last_error);
+        $("#"+abring.params.player.parent_id+" .player_register .message").html("Invalid registration!\n"+abring.params.last_error);
         abringPageShow("player_register");
     }else{
         setCookie("token",abring.params.token,100);
@@ -203,26 +195,26 @@ var abringPlayerInfo = function (reset_cache) {
             age = (new Date().getFullYear())-abring.params.player_info['birth'];
         abring.params.player_info['avatar'] = abring.params.player_info['avatar'] || abring.params.abring_default_avatar_url;
 
-        $("#"+abring.params.player_parent_id+" .profile_form .username").html(abring.params.player_info['username']);
-        $("#"+abring.params.player_parent_id+" .profile_form .name").html(abring.params.player_info['name']);
-        $("#"+abring.params.player_parent_id+" .profile_form .avatar").attr("src",abring.params.player_info['avatar']);
-        $("#"+abring.params.player_parent_id+" .profile-contain").css("background-image","url("+abring.params.player_info['timeline_cover']+")");
-        $("#"+abring.params.player_parent_id+" .profile_form .sex").html(abring.params.player_info['sex']);
-        $("#"+abring.params.player_parent_id+" .profile_form .age").html(age);
-        $("#"+abring.params.player_parent_id+" .profile_form .mobile").html(abring.params.player_info['mobile']);
+        $("#"+abring.params.player.parent_id+" .profile_form .username").html(abring.params.player_info['username']);
+        $("#"+abring.params.player.parent_id+" .profile_form .name").html(abring.params.player_info['name']);
+        $("#"+abring.params.player.parent_id+" .profile_form .avatar").attr("src",abring.params.player_info['avatar']);
+        $("#"+abring.params.player.parent_id+" .profile-contain").css("background-image","url("+abring.params.player_info['timeline_cover']+")");
+        $("#"+abring.params.player.parent_id+" .profile_form .sex").html(abring.params.player_info['sex']);
+        $("#"+abring.params.player.parent_id+" .profile_form .age").html(age);
+        $("#"+abring.params.player.parent_id+" .profile_form .mobile").html(abring.params.player_info['mobile']);
 
-        $("#"+abring.params.player_parent_id+" .profile_form_update .username").val(abring.params.player_info['username']);
-        $("#"+abring.params.player_parent_id+" .profile_form_update .name").val(abring.params.player_info['name']);
-        $("#"+abring.params.player_parent_id+" .profile_form_update .age").val(age);
-        $("#"+abring.params.player_parent_id+" .profile_form_update .sex").val(abring.params.player_info['sex']);
-        $("#"+abring.params.player_parent_id+" .profile_form_update .mobile").val(abring.params.player_info['mobile']);
-        $("#"+abring.params.player_parent_id+" .profile_form_update .avatar").attr("src",abring.params.player_info['avatar']);
-        $("#"+abring.params.player_parent_id+" .profile_form_update .cover").attr("src",abring.params.player_info['timeline_cover']);
+        $("#"+abring.params.player.parent_id+" .profile_form_update .username").val(abring.params.player_info['username']);
+        $("#"+abring.params.player.parent_id+" .profile_form_update .name").val(abring.params.player_info['name']);
+        $("#"+abring.params.player.parent_id+" .profile_form_update .age").val(age);
+        $("#"+abring.params.player.parent_id+" .profile_form_update .sex").val(abring.params.player_info['sex']);
+        $("#"+abring.params.player.parent_id+" .profile_form_update .mobile").val(abring.params.player_info['mobile']);
+        $("#"+abring.params.player.parent_id+" .profile_form_update .avatar").attr("src",abring.params.player_info['avatar']);
+        $("#"+abring.params.player.parent_id+" .profile_form_update .cover").attr("src",abring.params.player_info['timeline_cover']);
     }else{
-        $("#"+abring.params.player_parent_id+" .profile_form .username").html("");
-        $("#"+abring.params.player_parent_id+" .profile_form .name").html("");
-        $("#"+abring.params.player_parent_id+" .profile_form .avatar").attr("src","");
-        $("#"+abring.params.player_parent_id+" .profile_form .cover").attr("src","");
+        $("#"+abring.params.player.parent_id+" .profile_form .username").html("");
+        $("#"+abring.params.player.parent_id+" .profile_form .name").html("");
+        $("#"+abring.params.player.parent_id+" .profile_form .avatar").attr("src","");
+        $("#"+abring.params.player.parent_id+" .profile_form .cover").attr("src","");
         abringPageHide();
     }
 };
