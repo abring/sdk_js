@@ -3,7 +3,20 @@ abring.params = {
     "app" : "ir.abring.sdk",
     "abring_base_url" : "http://ws.v3.abring.ir/index.php?r=",
 
-//module parent ids
+    "display":{
+        "splashTime" : 0,
+        "tooltip_default_time" : 5,
+        "showPageFunction":function (pageID,title,message) {
+            return abringPageShow(pageID,title,message);
+        },
+        "abring_loading_url" : "abring/img/loading.gif",
+        "abring_error_url" : "abring/img/error.png",
+        "abring_info_url" : "abring/img/info.png",
+        "abring_warning_url" : "abring/img/warning.png",
+        "abring_logo_url" : "abring/img/abring.png",
+        "abring_default_avatar_url" : "abring/img/default_avatar.png"
+    },
+
     "player":{
         "parent_id" : "abring_player",
         "template" : readFile("abring/modules/player/view/player.html"),
@@ -23,16 +36,6 @@ abring.params = {
 
     "posts_parent_id" : "frog_posts", //use custom parent to show posts,
 
-//default icons
-    "abring_loading_url" : "abring/img/loading.gif",
-    "abring_error_url" : "abring/img/error.png",
-    "abring_info_url" : "abring/img/info.png",
-    "abring_warning_url" : "abring/img/warning.png",
-    "abring_logo_url" : "abring/img/abring.png",
-    "abring_default_avatar_url" : "abring/img/default_avatar.png",
-
-    "splashTime" : 0,
-    "tooltip_default_time" : 5,
     "sounds":{
         "beep" : "abring/sound/beep.wav",
         "notification" : "abring/sound/notification.mp3"

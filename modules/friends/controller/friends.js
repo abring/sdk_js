@@ -6,7 +6,7 @@ $(document).on("click",".abring_buttons_friends_list",function () {
 
     if(!abring.params.player_info)
     {
-        abringPageShow("player_mobile_register","Your are not login!");
+        abring.params.display.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
 
@@ -16,16 +16,16 @@ $(document).on("keyup","#"+abring.params.friends.parent_id+" .friends_search_inp
 
     if(!abring.params.player_info)
     {
-        abringPageShow("player_mobile_register","Your are not login!");
+        abring.params.display.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     var search_pattern = $(".friends_search input.friends_search_input").val();
     if(!search_pattern)
     {
-        abringPageShow("friends_list","Search cannot be empty");
+        abring.params.display.showPageFunction("friends_list","Search cannot be empty");
         return false;
     }else{
-        abringPageShow("friends_list","Search result!");
+        abring.params.display.showPageFunction("friends_list","Search result!");
     }
     abringFriendsSearch(search_pattern);
 });

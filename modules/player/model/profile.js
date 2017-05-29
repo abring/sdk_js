@@ -28,7 +28,7 @@ var showMyProfile = function(subPageID){
     subPageID = subPageID || "login";
     $("#"+abring.params.player.parent_id+" .page").hide();
     $("#"+abring.params.player.parent_id+" ."+subPageID).show();
-    abringPageShow(subPageID);
+    abring.params.display.showPageFunction(subPageID);
 };
 var viewProfile = function (other_player_id) {
 
@@ -47,7 +47,7 @@ var viewProfile = function (other_player_id) {
             );
             showMyProfile("player_view_details");
         },function (x,c,e) {
-            abringPageShow("error",e);
+            abring.params.display.showPageFunction("error",e);
         }
     );
 
@@ -115,7 +115,7 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
 };
 
 var abringPlayerLogin = function (username, password) {
-    abringPageShow("loading","logon to Abring\nPlease wait");
+    abring.params.display.showPageFunction("loading","logon to Abring\nPlease wait");
     if(abring.params.token)
         abringPlayerLogout();
     callAbringWithFileUpload("player/login",{"username":username,"password":password},
@@ -126,7 +126,7 @@ var abringPlayerLogin = function (username, password) {
             setCookie("player_info",abring.params.player_info,100);
             abringPageHide();
         },function (x,c,e) {
-            abringPageShow("error",e);
+            abring.params.display.showPageFunction("error",e);
         }
     );
 };
@@ -167,7 +167,7 @@ var abringPlayerRegister = function (username, password, variables, values) {
         function (res) {
 
         },function (x,c,e) {
-            abringPageShow("error",e);
+            abring.params.display.showPageFunction("error",e);
         }
     );
     if(!abring.params.token)
@@ -426,16 +426,16 @@ var showChatPage = function(target_player_id) {
 
             //init chat if needed ????????
             if(!socketConnect())
-                abringPageShow("error","error connecting to socket server");
+                abring.params.display.showPageFunction("error","error connecting to socket server");
 
             abring.params.chat_show_page_function(target_player_info);
         },function (x,c,e) {
-            abringPageShow("error",e);
+            abring.params.display.showPageFunction("error",e);
         }
     );
 };
 var chat_show_page = function (target_player_info) {
-    abringPageShow(abring.params.chat_parent_id,target_player_info["name"]);
+    abring.params.display.showPageFunction(abring.params.chat_parent_id,target_player_info["name"]);
 };
 var chatSend = function (target_player_id,message) {
     socketSendMessage(">unicast>"+target_player_id+">chat:"+message);
@@ -454,7 +454,7 @@ var abringOnPlayerSocketMessage = function(from_player_id,message){
                 function (from_player_info) {
                     abring.params.chatMessageFunction(from_player_info,message);
                 },function (x,c,e) {
-                    abringPageShow("error",e);
+                    abring.params.display.showPageFunction("error",e);
                 }
             );
         }else

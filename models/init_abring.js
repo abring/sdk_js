@@ -46,11 +46,11 @@ abring.init = function (data) {
     abring.params.template = readFile("abring/view/theme.html?="+ new Date().getTime());
     $("body").prepend(abring.params.template);
     $("#abring .splash").append('<img src="'+abring.params.abring_logo_url+'" />').show();
-    $("#abring .dialog img.loading ").attr("src",abring.params.abring_loading_url);
-    $("#abring .dialog img.error").attr("src",abring.params.abring_error_url);
-    $("#abring .dialog img.info").attr("src",abring.params.abring_info_url);
-    $("#abring .dialog img.warning").attr("src",abring.params.abring_warning_url);
-    $("#abring .dialog img.avatar").attr("src",abring.params.abring_default_avatar_url);
+    $("#abring .dialog img.loading ").attr("src",abring.params.display.abring_loading_url);
+    $("#abring .dialog img.error").attr("src",abring.params.display.abring_error_url);
+    $("#abring .dialog img.info").attr("src",abring.params.display.abring_info_url);
+    $("#abring .dialog img.warning").attr("src",abring.params.display.abring_warning_url);
+    $("#abring .dialog img.avatar").attr("src",abring.params.display.abring_default_avatar_url);
 
     initPlayer();
     initLeaderboard();
@@ -68,7 +68,7 @@ abring.init = function (data) {
     abring.params.player_info = getPlayerInfo();
 
     var current_time = get_current_time();
-    var remainSplashTime = abring.params.splashTime+abring.params.timeStamp-current_time;
+    var remainSplashTime = abring.params.display.splashTime+abring.params.timeStamp-current_time;
     if(remainSplashTime>0)
         abringShowSplash(remainSplashTime);
 

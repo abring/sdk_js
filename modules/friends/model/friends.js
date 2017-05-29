@@ -27,7 +27,7 @@ var initFriends = function () {
 
 var abringFriendsListShow = function () {
 
-    abringPageShow("loading","loading list of your friends!");
+    abring.params.display.showPageFunction("loading","loading list of your friends!");
 
     // $("#"+abring.params.friends.parent_id+" .friends_list .message").html("Loading friends list!");
     // $("#"+abring.params.friends.parent_id+" .friends_list .friend_details").hide();
@@ -95,10 +95,10 @@ var friendListSuccess = function (friends_list) {
         $("#"+abring.params.friends.parent_id+" .friends_list .suggested_friend_details .friend_details .avatar:last").attr("src",player['avatar']);
     });
 
-    abringPageShow("friends_list");
+    abring.params.display.showPageFunction("friends_list");
 };
 var friendListFail = function () {
-    abringPageShow("error","failed to load friends list!");
+    abring.params.display.showPageFunction("error","failed to load friends list!");
     // $("#"+abring.params.friends.parent_id+" .friends_list .message").html("error loading list!");
 };
 var abringFriendsSearch = function (pattern) {

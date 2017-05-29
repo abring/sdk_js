@@ -178,14 +178,14 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
                 if(abring.params.player_info || abring.params.token)
                     abringPlayerLogout();
                 //try to login with uuid
-                abringPageShow("loading","you are not login\ntry to login with your device\nplease wait");
+                abring.params.display.showPageFunction("loading","you are not login\ntry to login with your device\nplease wait");
                 abringPLayerLoginWithDeviceId(
                     function () {
                         abringPageHide();//continue previous request ????????????
                         log("Logged in with device id was successful");
                     },function (xhr,code,error) {
                         log("first in with device id was failed:\n"+error);
-                        abringPageShow("player_mobile_register","Your are not login!");
+                        abring.params.display.showPageFunction("player_mobile_register","Your are not login!");
                     }
                 );
 

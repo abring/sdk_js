@@ -33,10 +33,10 @@ var showLittleTip = function(title,message,type,wait){
     title = title || "";
     message = message || "";
     type = type || "info";
-    wait = wait || abring.params.tooltip_default_time;
+    wait = wait || abring.params.display.tooltip_default_time;
 
     abringPageHide();
-    abringPageShow(type,title,message);
+    abring.params.display.showPageFunction(type,title,message);
     setTimeout(function(){
         abringPageHide();
     }, wait*1000);

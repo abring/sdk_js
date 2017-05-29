@@ -17,7 +17,7 @@ var abringPostsShow = function () {
     $("#posts .banner").attr("src",abring.params.player_info["timeline_cover"]);
 
     //show loading page
-    abringPageShow("loading","loading your timeline");
+    abring.params.display.showPageFunction("loading","loading your timeline");
     $("#"+abring.params.posts_parent_id+" .timeline").html("");
 
     //fill my timeline page info (avatar banner ...)
@@ -156,7 +156,7 @@ var post_timeline_success = function(timeline){
     //close loading page
     //show post page
     if(abring.params.posts_parent_id=="abring_posts")
-        abringPageShow("post_timeline");
+        abring.params.display.showPageFunction("post_timeline");
     else
         abringPageHide("loading");
 

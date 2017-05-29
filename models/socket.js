@@ -75,7 +75,7 @@ var socketSendMessage = function(message)
         socketConnect();
 
     if(!socketIsConnected())
-        return abringPageShow("error","socket not connected!");
+        return abring.params.display.showPageFunction("error","socket not connected!");
 
     abring.params.socketObject.send(message+"\n");
     log("socket send: "+message);

@@ -11,7 +11,7 @@ var initLeaderboard = function () {
 
 var abringLeaderboardShow = function() {
 
-    abringPageShow("loading","loading leaderboard data.");
+    abring.params.display.showPageFunction("loading","loading leaderboard data.");
 
     var method = "leaderboard/get-all";
     var data = {};
@@ -19,7 +19,7 @@ var abringLeaderboardShow = function() {
         method,data,
         function (leaderboard_data_tmp) {
             if(leaderboard_data_tmp==undefined || leaderboard_data_tmp==false ||leaderboard_data_tmp=="" )
-                return abringPageShow("error","No leaderboard temp exists!");
+                return abring.params.display.showPageFunction("error","No leaderboard temp exists!");
             leaderboard_data = leaderboard_data_tmp;
             //display leaderboard
             log(leaderboard_data);
@@ -48,10 +48,10 @@ var abringLeaderboardShow = function() {
                 leaderboard_data_html += "</div>";//tab
             });
             $("#"+abring.params.leaderboard.parent_id+" .leaderbord_display").html(leaderboard_data_html);
-            abringPageShow("leaderboard");
+            abring.params.display.showPageFunction("leaderboard");
         },
         function (x,c,e) {
-            abringPageShow("error",e);
+            abring.params.display.showPageFunction("error",e);
             return false;
         }
     );
@@ -61,7 +61,7 @@ var abringLeaderboardSetScore = function (leaderboard,score,signature) {
 
     if(!abring.params.player_info)
     {
-        abringPageShow("player_mobile_register","Your are not login!");
+        abring.params.display.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     showLittleTip("Info","submitting your score!","info",10);
