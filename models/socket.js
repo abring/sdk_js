@@ -60,7 +60,8 @@ var socketConnect = function()
             if(!abring.params.socketRetryIsRunning)
                 abring.params.socketRetryIsRunning=true;
                 setTimeout(function(){
-                    socketConnect();
+                    if(playerIsLogin())
+                        socketConnect();
                 },
                 abring.params.socketRetryInterval*1000
             );

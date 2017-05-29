@@ -23,7 +23,12 @@ var initPlayer = function () {
 function onPlayerLogin(data) {}
 function onPlayerLogout() {}
 function onDataLoaded(data) {}
-
+var playerIsLogin = function(){
+    if(abring.params.player_info)
+        return true;
+    else
+        return false;
+};
 var showMyProfile = function(subPageID){
     subPageID = subPageID || "login";
     $("#"+abring.params.player.parent_id+" .page").hide();
@@ -300,6 +305,7 @@ var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegist
     abringPlayerMobileRegisterFailed = abringPlayerMobileRegisterFailed || function () {};
     if ( !mobile_number || !is_valid_mobile_number(mobile_number) )
     {
+        abringPlayerMobileRegisterFailed("",400,"Invalid mobile number.");
         showMyProfile("player_mobile_register","Invalid mobile number.");
         return false;
     }
