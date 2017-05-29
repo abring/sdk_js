@@ -118,13 +118,6 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
         getOtherPlayerInfoSuccess(abring.params.other_players[player_id]);
 };
 
-var abringPlayerMobileRegister = function () {
-};
-var abringPlayerMobileVerify = function () {
-};
-var abringPlayerMobileResendCode = function () {
-};
-
 var abringPlayerLogin = function (username, password) {
     abringPageShow("loading","logon to Abring\nPlease wait");
     if(abring.params.token)
@@ -306,8 +299,9 @@ var abringPLayerLoginWithDeviceId = function(loginWithDeviceIdSuccess,loginWithD
     );
 };
 
-var mobileRegisterSubmit = function(mobile_number){
-
+var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegisterSuccess,abringPlayerMobileRegisterFailed){
+    abringPlayerMobileRegisterSuccess = abringPlayerMobileRegisterSuccess || function () {};
+    abringPlayerMobileRegisterFailed = abringPlayerMobileRegisterFailed || function () {};
     if ( !mobile_number || !is_valid_mobile_number(mobile_number) )
     {
         abringPageShow("player_mobile_register","Invalid mobile number.");
@@ -320,52 +314,70 @@ var mobileRegisterSubmit = function(mobile_number){
     $(".player_mobile_verify .mobile_number").val(mobile_number);
     $(".player_mobile_verify .mobile_number_label").html(mobile_number);
 
-    callAbringWithFileUpload("player/mobile-register",data,mobileRegisterSuccess,mobileRegisterFail);
-};
-var mobileRegisterSuccess = function () {
-
-    //display verify page
-    abringPageShow("player_mobile_verify","Please enter verify code.\n");
-    var secound = 120;
-    var timerInterval = setInterval( function(){
-        $(".resend_code").hide();
-        $(".player_mobile_other_way_page").hide();
-        secound = secound - 1;
-        $(".player_mobile_retry_time").html("retry in "+ secound + "s");
-        if(secound < 1 ){
-            clearInterval(timerInterval);
-            $(".player_mobile_retry_time").html("");
-            $(".resend_code").show();
-            $(".player_mobile_other_way_page").show();
+    callAbringWithFileUpload(
+        "player/mobile-register",data,
+        function () {
+            abringPlayerMobileRegisterSuccess();
+            //display verify page
+            abringPageShow("player_mobile_verify","Please enter verify code.\n");
+            var secound = 120;
+            var timerInterval = setInterval( function(){
+                $(".resend_code").hide();
+                $(".player_mobile_other_way_page").hide();
+                secound = secound - 1;
+                $(".player_mobile_retry_time").html("retry in "+ secound + "s");
+                if(secound < 1 ){
+                    clearInterval(timerInterval);
+                    $(".player_mobile_retry_time").html("");
+                    $(".resend_code").show();
+                    $(".player_mobile_other_way_page").show();
+                }
+            }, 1000);
+            return true;
+        },
+        function (x,c,e) {
+            abringPlayerMobileRegisterFailed(x,c,e);
+            abringPageShow("player_mobile_register","registration failed.\n"+e);
+            return false;
         }
-    }, 1000);
-    return true;
+    );
 };
-var mobileRegisterFail = function () {
-    abringPageShow("player_mobile_register","registration failed.\n"+abring.params.last_error);
-    return false;
-};
-var mobileVerifySubmit = function (mobile,code) {
+var abringPlayerMobileVerify = function (mobile,code,abringPlayerMobileVerifySuccess,abringPlayerMobileVerifyFailed) {
+    abringPlayerMobileVerifySuccess = abringPlayerMobileVerifySuccess || function () {};
+    abringPlayerMobileVerifyFailed = abringPlayerMobileVerifyFailed || function () {};
     var data = {
         "mobile":mobile,
         "code":code
     };
-    callAbringWithFileUpload("player/mobile-verify",data,mobileVerifySuccess,mobileVerifyFail);
+    callAbringWithFileUpload(
+        "player/mobile-verify",data,
+        function (result) {
+            abringPlayerMobileVerifySuccess(result);
+            onPlayerLogin(result);
+            abring.params.token = result['token'];
+            setCookie("token",abring.params.token,100);
+            abring.params.player_info = getPlayerInfo();
+            abringPageHide();
+            return true;
+        },
+        function (x,c,e) {
+            abringPlayerMobileVerifyFailed(x,c,e);
+            abringPageShow("player_mobile_verify","Verification failed.\n"+e);
+            return false;
+        }
+    );
 };
-var mobileVerifySuccess = function (result) {
-    abring.params.token = result['token'];
-    setCookie("token",abring.params.token,100);
-    abring.params.player_info = getPlayerInfo();
-    abringPageHide();
-    onPlayerLogin(result);
-    return true;
-};
-var mobileVerifyFail = function () {
-    abringPageShow("player_mobile_verify","Verification failed.\n"+abring.params.last_error);
-    return false;
+var abringPlayerMobileResendCode = function (abringPlayerMobileResendCodeSuccess,abringPlayerMobileResendCodeFailed) {
+    abringPlayerMobileResendCodeSuccess = abringPlayerMobileResendCodeSuccess || function () {};
+    abringPlayerMobileResendCodeFailed = abringPlayerMobileResendCodeFailed || function () {};
+    var data = {
+        "mobile":mobile,
+        "code":code
+    };
+    callAbringWithFileUpload("player/mobile-verify",data,abringPlayerMobileResendCodeSuccess,abringPlayerMobileResendCodeFailed);
 };
 
-var updatePlayerTags = function(tags_to_add,tags_to_remove,updatePlayerTagsSuccess,updatePlayerTagsFailed){
+var abringPlayerUpdateTags = function(tags_to_add,tags_to_remove,updatePlayerTagsSuccess,updatePlayerTagsFailed){
     updatePlayerTagsSuccess = updatePlayerTagsSuccess || function(){};
     updatePlayerTagsFailed = updatePlayerTagsFailed || function(){};
     if(!tags_to_add && !tags_to_remove)
@@ -403,7 +415,6 @@ var updatePlayerTags = function(tags_to_add,tags_to_remove,updatePlayerTagsSucce
         );
     }
 };
-
 
 //chat with just one people ???????????????
 var showChatPage = function(target_player_id) {

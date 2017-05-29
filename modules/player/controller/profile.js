@@ -85,7 +85,7 @@ $(document).on("click",".player_mobile_register .submit",function () {
 
     //send register by mobile request
     var mobile_number = $(".player_mobile_register .mobile_number").val();
-    mobileRegisterSubmit(mobile_number);
+    abringPlayerMobileRegister(mobile_number);
 
 });
 $(document).on("click",".player_mobile_verify .submit",function () {
@@ -94,7 +94,7 @@ $(document).on("click",".player_mobile_verify .submit",function () {
     //send register by mobile request
     var mobile_number = $(".player_mobile_verify .mobile_number").val();
     var code = $(".player_mobile_verify .code").val();
-    mobileVerifySubmit(mobile_number,code);
+    abringPlayerMobileVerify(mobile_number,code);
 });
 $(document).on("click",".player_mobile_verify .resend_code ",function () {
 
