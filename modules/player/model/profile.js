@@ -22,7 +22,14 @@ var initPlayer = function () {
 
 function onPlayerLogin(data) {}
 function onPlayerLogout() {}
+function onDataLoaded(data) {}
 
+var showMyProfile = function(subPageID){
+    subPageID = subPageID || "login";
+    $("#"+abring.params.player.parent_id+" .page").hide();
+    $("#"+abring.params.player.parent_id+" ."+subPageID).show();
+    abringPageShow(subPageID);
+};
 var viewProfile = function (other_player_id) {
 
     getOtherPlayerInfo(other_player_id,false,
@@ -38,7 +45,7 @@ var viewProfile = function (other_player_id) {
                     .replaceAll("PLAYER_IMG",player_profile["avatar"])
 //            .replaceAll(abring.params.abring_default_avatar_url,player_profile["avatar"])
             );
-            abringPageShow("player_view_details");
+            showMyProfile("player_view_details");
         },function (x,c,e) {
             abringPageShow("error",e);
         }
@@ -59,6 +66,7 @@ var getPlayerInfo = function (resetCache,getPlayerInfoSuccess,getPlayerInfoFaile
                 if(abring.params.player_info["avatar"]=="undefined") abring.params.player_info["avatar"] = "";
                 setCookie("player_info",abring.params.player_info,100);
                 getPlayerInfoSuccess(result);
+                abring.params.player.onDataLoaded(abring.params.player_info);
             },function(){
                 getPlayerInfoFailed();
                 log("read player info failed!");
@@ -70,6 +78,7 @@ var getPlayerInfo = function (resetCache,getPlayerInfoSuccess,getPlayerInfoFaile
         return false;
     }else{
         getPlayerInfoSuccess(abring.params.player_info);
+        abring.params.player.onDataLoaded(abring.params.player_info);
         return abring.params.player_info;
     }
 };
@@ -134,7 +143,7 @@ var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutF
                 function(res){
                     onPlayerLogout();
                     abringPlayerLogoutSuccess(res);
-                    abringPageShow("player_mobile_register","Logout successfully!");
+                    showMyProfile("player_mobile_register","Logout successfully!");
                 },
                 function(x,c,e){
                     abringPlayerLogoutFailed(x,c,e);
@@ -164,7 +173,7 @@ var abringPlayerRegister = function (username, password, variables, values) {
     if(!abring.params.token)
     {
         $("#"+abring.params.player.parent_id+" .player_register .message").html("Invalid registration!\n"+abring.params.last_error);
-        abringPageShow("player_register");
+        showMyProfile("player_register");
     }else{
         setCookie("token",abring.params.token,100);
         callAbringWithFileUpload("player/get",{},
@@ -291,7 +300,7 @@ var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegist
     abringPlayerMobileRegisterFailed = abringPlayerMobileRegisterFailed || function () {};
     if ( !mobile_number || !is_valid_mobile_number(mobile_number) )
     {
-        abringPageShow("player_mobile_register","Invalid mobile number.");
+        showMyProfile("player_mobile_register","Invalid mobile number.");
         return false;
     }
     var data = {
@@ -306,7 +315,7 @@ var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegist
         function () {
             abringPlayerMobileRegisterSuccess();
             //display verify page
-            abringPageShow("player_mobile_verify","Please enter verify code.\n");
+            showMyProfile("player_mobile_verify","Please enter verify code.\n");
             var secound = 120;
             var timerInterval = setInterval( function(){
                 $(".resend_code").hide();
@@ -324,7 +333,7 @@ var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegist
         },
         function (x,c,e) {
             abringPlayerMobileRegisterFailed(x,c,e);
-            abringPageShow("player_mobile_register","registration failed.\n"+e);
+            showMyProfile("player_mobile_register","registration failed.\n"+e);
             return false;
         }
     );
@@ -349,7 +358,7 @@ var abringPlayerMobileVerify = function (mobile,code,abringPlayerMobileVerifySuc
         },
         function (x,c,e) {
             abringPlayerMobileVerifyFailed(x,c,e);
-            abringPageShow("player_mobile_verify","Verification failed.\n"+e);
+            showMyProfile("player_mobile_verify","Verification failed.\n"+e);
             return false;
         }
     );

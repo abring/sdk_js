@@ -43,13 +43,13 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                         });
 
                     },function (message) {
-                        abringPageShow("player_mobile_register","sending SMS failed\n"+message);
+                        abring.params.player.showPageFunction("player_mobile_register","sending SMS failed\n"+message);
                     },
                     ''
                 );
             }
             else
-                abringPageShow("player_mobile_register","ارسال پیامک از طرف شما ممکن نیست");
+                abring.params.player.showPageFunction("player_mobile_register","ارسال پیامک از طرف شما ممکن نیست");
 
         }
     );
@@ -62,7 +62,7 @@ $(document).on("click",".player_mobile_other_way_page",function () {
         abringPageShow("warning","Your are already a member and login.");
         return false;
     }
-    abringPageShow("player_mobile_other_way");
+    abring.params.player.showPageFunction("player_mobile_other_way");
 
 });
 $(document).on("click",".abring_buttons_player_mobile_register",function () {
@@ -72,7 +72,7 @@ $(document).on("click",".abring_buttons_player_mobile_register",function () {
         abringPageShow("warning","Your are already a member and login.");
         return false;
     }
-    abringPageShow("player_mobile_register");
+    abring.params.player.showPageFunction("player_mobile_register");
 
 });
 $(document).on("click",".player_mobile_register .submit",function () {
@@ -109,7 +109,7 @@ $(document).on("click",".player_mobile_verify .resend_code ",function () {
     var mobile_number = $(".player_mobile_register .mobile_number").val();
     if ( !mobile_number || !is_valid_mobile_number(mobile_number) )
     {
-        abringPageShow("player_mobile_register","Invalid mobile number.");
+        abring.params.player.showPageFunction("player_mobile_register","Invalid mobile number.");
         return false;
     }
     var data = {
@@ -122,10 +122,10 @@ $(document).on("click",".player_mobile_verify .resend_code ",function () {
             $(".player_mobile_verify .mobile_number").val(mobile_number);
             $(".player_mobile_verify .mobile_number_label").html(mobile_number);
 
-            abringPageShow("player_mobile_verify","Please enter verify code.\n");
+            abring.params.player.showPageFunction("player_mobile_verify","Please enter verify code.\n");
 
         },function (x,c,e) {
-            abringPageShow("player_mobile_verify","resend failed.\n"+e);
+            abring.params.player.showPageFunction("player_mobile_verify","resend failed.\n"+e);
         }
     );
 });
@@ -137,7 +137,7 @@ $(document).on("click",".register_using_abring",function () {
         return false;
     }
 
-    abringPageShow("player_register");
+    abring.params.player.showPageFunction("player_register");
 
 });
 $(document).on("click",".login_using_abring",function () {
@@ -148,18 +148,20 @@ $(document).on("click",".login_using_abring",function () {
         return false;
     }
 
-    abringPageShow("player_login","Please login!");
+    abring.params.player.showPageFunction("player_login","Please login!");
 
 });
 $(document).on("click",".abring_buttons_player_profile",function () {
     if(!abring.params.token)
     {
-        abringPageShow("player_mobile_register","Your are not login!");
+        abring.params.player.showPageFunction("player_mobile_register");
+        // abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
 
     abringPlayerInfo();
-    abringPageShow("profile_form");
+    abring.params.player.showPageFunction("profile_form");
+
 });
 $(document).on("click",".page.profile_form .update_profile",function () {
 
@@ -170,7 +172,7 @@ $(document).on("click",".page.profile_form .update_profile",function () {
     }
 
     abringPlayerInfo();
-    abringPageShow("profile_form_update","Update profile!");
+    abring.params.player.showPageFunction("profile_form_update","Update profile!");
 });
 $(document).on("click",".page.profile_form_update .submit",function () {
     abringPageShow("loading","submitting your profile!");
@@ -188,7 +190,7 @@ $(document).on("click",".page.profile_form_update .submit",function () {
     callAbringWithFileUpload( "player/set", data,function (data) {
         log("Success");
         abringPlayerInfo(true);
-        abringPageShow("profile_form","Profile updated!");
+        abring.params.player.showPageFunction("profile_form","Profile updated!");
     },function (xhr, status, error) {
         log("failed");
     });
@@ -223,7 +225,7 @@ $(document).on("click",".view_profile",function () {
     
     if(!abring.params.player_info)
     {
-        abringPageShow("player_mobile_register","Your are not login!");
+        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
 
@@ -235,7 +237,7 @@ $(document).on("click",".chat_start",function () {
 
     if(!abring.params.player_info)
     {
-        abringPageShow("player_mobile_register","Your are not login!");
+        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     var target_player_id = $(this).attr("name");
@@ -252,7 +254,7 @@ $(document).on("click",".chat_send",function () {
 
     if(!abring.params.player_info)
     {
-        abringPageShow("player_mobile_register","Your are not login!");
+        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     var target_player_id = $(this).attr("player_id");

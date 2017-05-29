@@ -6,7 +6,11 @@ abring.params = {
 //module parent ids
     "player":{
         "parent_id" : "abring_player",
-        "template" : readFile("abring/modules/player/view/player.html")
+        "template" : readFile("abring/modules/player/view/player.html"),
+        "showPageFunction":function (subPageID) { return showMyProfile(subPageID); },
+        "onLoginFunction":function (data) { return onPlayerLogin(data)},
+        "onLogoutFunction":function () { return onPlayerLogout()},
+        "onDataLoaded":function (data) { return onDataLoaded(data)}
     },
 
     "leaderboard":{
