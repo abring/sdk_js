@@ -20,6 +20,9 @@ var initPlayer = function () {
     }
 };
 
+function onPlayerLogin(data) {}
+function onPlayerLogout() {}
+
 var player_loading_start = function () {
 
     abringPageShow("loading","loading player data.");
@@ -32,7 +35,6 @@ var player_loading_finish = function () {
 var player_show_page = function () {
     abringPageShow("player");
 };
-
 
 var viewProfile = function (other_player_id) {
 
@@ -115,12 +117,14 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
     }else
         getOtherPlayerInfoSuccess(abring.params.other_players[player_id]);
 };
+
 var abringPlayerMobileRegister = function () {
 };
 var abringPlayerMobileVerify = function () {
 };
 var abringPlayerMobileResendCode = function () {
 };
+
 var abringPlayerLogin = function (username, password) {
     abringPageShow("loading","logon to Abring\nPlease wait");
     if(abring.params.token)
@@ -148,6 +152,7 @@ var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutF
             callAbringWithFileUpload(
                 "player/logout",{},
                 function(res){
+                    onPlayerLogout();
                     abringPlayerLogoutSuccess(res);
                     abringPageShow("player_mobile_register","Logout successfully!");
                 },
@@ -162,35 +167,9 @@ var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutF
         abring.params.other_players = false;
         setCookie("other_players",abring.params.other_players,0);
     }else
+    {
+        onPlayerLogout();
         abringPlayerLogoutSuccess();
-};
-var abringPlayerRegisterDevice = function(abringPlayerRegisterDeviceSuccess,abringPlayerRegisterDeviceFailed){
-
-    abringPlayerRegisterDeviceSuccess = abringPlayerRegisterDeviceSuccess || function(){};
-    abringPlayerRegisterDeviceFailed = abringPlayerRegisterDeviceFailed || function(){};
-
-    if(!abring.params.token || !abring.params.player_info || !abring.params.uuid)
-    {
-        abringPlayerRegisterDeviceFailed();
-    }else if(abring.params.player_info["device_id"] && abring.params.player_info["device_id"].indexOf(abring.params.uuid)!=-1 )
-    {
-        abringPlayerRegisterDeviceSuccess();
-    }else if(!abring.params.player_info["device_id"] || abring.params.player_info["device_id"].indexOf(abring.params.uuid)==-1 )
-    {
-        callAbringWithFileUpload(
-            "player/register-device-id",
-            {"device_id":abring.params.uuid},
-            function(res){
-                abring.params.player_info["device_id"].push(abring.params.uuid);
-                setCookie("player_info",abring.params.player_info);
-                abringPlayerRegisterDeviceSuccess();
-            },
-            function(xhr,code,error){
-                abringPlayerRegisterDeviceFailed();
-            }
-        );
-    }else{
-        abringPlayerRegisterDeviceFailed();
     }
 };
 var abringPlayerRegister = function (username, password, variables, values) {
@@ -221,6 +200,7 @@ var abringPlayerRegister = function (username, password, variables, values) {
     }
     abringLoadingFinish();
 };
+
 var abringPlayerInfo = function (reset_cache) {
     getPlayerInfo(reset_cache);
     if(abring.params.player_info)
@@ -251,6 +231,36 @@ var abringPlayerInfo = function (reset_cache) {
         $("#"+abring.params.player_parent_id+" .profile_form .avatar").attr("src","");
         $("#"+abring.params.player_parent_id+" .profile_form .cover").attr("src","");
         abringPageHide();
+    }
+};
+
+var abringPlayerRegisterDevice = function(abringPlayerRegisterDeviceSuccess,abringPlayerRegisterDeviceFailed){
+
+    abringPlayerRegisterDeviceSuccess = abringPlayerRegisterDeviceSuccess || function(){};
+    abringPlayerRegisterDeviceFailed = abringPlayerRegisterDeviceFailed || function(){};
+
+    if(!abring.params.token || !abring.params.player_info || !abring.params.uuid)
+    {
+        abringPlayerRegisterDeviceFailed();
+    }else if(abring.params.player_info["device_id"] && abring.params.player_info["device_id"].indexOf(abring.params.uuid)!=-1 )
+    {
+        abringPlayerRegisterDeviceSuccess();
+    }else if(!abring.params.player_info["device_id"] || abring.params.player_info["device_id"].indexOf(abring.params.uuid)==-1 )
+    {
+        callAbringWithFileUpload(
+            "player/register-device-id",
+            {"device_id":abring.params.uuid},
+            function(res){
+                abring.params.player_info["device_id"].push(abring.params.uuid);
+                setCookie("player_info",abring.params.player_info);
+                abringPlayerRegisterDeviceSuccess();
+            },
+            function(xhr,code,error){
+                abringPlayerRegisterDeviceFailed();
+            }
+        );
+    }else{
+        abringPlayerRegisterDeviceFailed();
     }
 };
 var abringPLayerLoginWithDeviceId = function(loginWithDeviceIdSuccess,loginWithDeviceIdFailed){
@@ -295,6 +305,7 @@ var abringPLayerLoginWithDeviceId = function(loginWithDeviceIdSuccess,loginWithD
         }
     );
 };
+
 var mobileRegisterSubmit = function(mobile_number){
 
     if ( !mobile_number || !is_valid_mobile_number(mobile_number) )
@@ -334,7 +345,6 @@ var mobileRegisterFail = function () {
     abringPageShow("player_mobile_register","registration failed.\n"+abring.params.last_error);
     return false;
 };
-
 var mobileVerifySubmit = function (mobile,code) {
     var data = {
         "mobile":mobile,
@@ -354,7 +364,7 @@ var mobileVerifyFail = function () {
     abringPageShow("player_mobile_verify","Verification failed.\n"+abring.params.last_error);
     return false;
 };
-function onPlayerLogin(data) {};
+
 var updatePlayerTags = function(tags_to_add,tags_to_remove,updatePlayerTagsSuccess,updatePlayerTagsFailed){
     updatePlayerTagsSuccess = updatePlayerTagsSuccess || function(){};
     updatePlayerTagsFailed = updatePlayerTagsFailed || function(){};
