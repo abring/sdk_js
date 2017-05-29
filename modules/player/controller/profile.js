@@ -15,7 +15,7 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
     abringPLayerLoginWithDeviceId(
         function () {
             log("Logged in with device id was successful");
-            abringPageHide();
+            abring.params.display.hidePageFunction();
         },function (xhr,code,error) {
             log("first in with device id was failed:\n"+error);
             if(abring.params.isCordovaApp)
@@ -34,7 +34,7 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                                 function () {
                                     exit_loop(id);
                                     log("Logged in with device id was successful");
-                                    abringPageHide();
+                                    abring.params.display.hidePageFunction();
                                 },function (xhr,code,error) {
                                     log(counter+"th in with device id was failed:\n"+error);
                                 }

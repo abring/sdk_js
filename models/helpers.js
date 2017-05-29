@@ -181,7 +181,7 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
                 abring.params.display.showPageFunction("loading","you are not login\ntry to login with your device\nplease wait");
                 abringPLayerLoginWithDeviceId(
                     function () {
-                        abringPageHide();//continue previous request ????????????
+                        abring.params.display.hidePageFunction();//continue previous request ????????????
                         log("Logged in with device id was successful");
                     },function (xhr,code,error) {
                         log("first in with device id was failed:\n"+error);

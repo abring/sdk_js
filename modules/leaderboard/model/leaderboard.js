@@ -82,10 +82,10 @@ var setScoreSuccess = function (set_score_result) {
     var score = set_score_result["score"];
     var rate = set_score_result["rate"];
     $(".frog_table").html("score="+score+"<br>rate="+rate+"<br>You win!");
-    abringLoadingFinish();
+    abring.params.display.hidePageFunction();
 };
 var setScoreFail = function (score_last_error) {
     //failed
     showLittleTip("Info","unable to set score:\n"+score_last_error,"error",2);
-    abringLoadingFinish();
+    abring.params.display.hidePageFunction();
 };

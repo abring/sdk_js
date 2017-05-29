@@ -4,10 +4,17 @@ abring.params = {
     "abring_base_url" : "http://ws.v3.abring.ir/index.php?r=",
 
     "display":{
+        "current_page" : "",
         "splashTime" : 0,
         "tooltip_default_time" : 5,
         "showPageFunction":function (pageID,title,message) {
+
+            abring.params.display.current_page = pageID;
             return abringPageShow(pageID,title,message);
+        },
+        "hidePageFunction":function () {
+            abring.params.display.current_page = "";
+            return abringPageHide();
         },
         "abring_loading_url" : "abring/img/loading.gif",
         "abring_error_url" : "abring/img/error.png",
@@ -49,7 +56,6 @@ abring.params = {
     "last_error" : "",
     "token" : "",
     "isCordovaApp" : false,
-    "current_page" : "",
     "other_players" : {},
     "smsIsAllowed" : false,
     "isOnline" : true,

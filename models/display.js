@@ -3,7 +3,6 @@
  * display control
  */
 var abringPageShow = function (page,title,message) {
-    abring.params.current_page = page;
     $("#abring").show();
     $("#abring .page").hide();
 
@@ -16,17 +15,11 @@ var abringPageShow = function (page,title,message) {
     $("#abring ."+page).show();
 };
 var abringPageHide = function () {
-    abring.params.current_page = "";
     $("#abring").hide();
     $("#abring .page").hide();
 };
-var abringLoadingStart = function () {
-    abring.params.current_page = "loading";
-    $("#abring .loading").show();
-};
 var abringLoadingFinish = function () {
-    abring.params.current_page = "";
-    $("#abring .loading").hide();
+
 };
 var showLittleTip = function(title,message,type,wait){
 
@@ -38,7 +31,7 @@ var showLittleTip = function(title,message,type,wait){
     abringPageHide();
     abring.params.display.showPageFunction(type,title,message);
     setTimeout(function(){
-        abringPageHide();
+        abring.params.display.hidePageFunction();
     }, wait*1000);
 
 };
