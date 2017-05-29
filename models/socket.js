@@ -18,6 +18,7 @@ var socketConnect = function()
     {
         abring.params.socketObject = new WebSocket("ws://" + abring.params.socketDomain+":"+abring.params.socketPort);
         abring.params.socketObject.onopen = function () {
+            abring.params.socketRetryIsRunning=false;
             socketSendMessage(abring.params.player_info["player_id"]);
             abring.params.socketConnectFunction();
         };
@@ -57,14 +58,15 @@ var socketConnect = function()
             log("Connection is closed...");
 
             //try to reconnect in 5 seconds
-            if(!abring.params.socketRetryIsRunning)
-                abring.params.socketRetryIsRunning=true;
-                setTimeout(function(){
-                    if(playerIsLogin())
+            if(!abring.params.socketRetryIsRunning && playerIsLogin()) {
+                abring.params.socketRetryIsRunning = true;
+                setTimeout(
+                    function () {
                         socketConnect();
-                },
-                abring.params.socketRetryInterval*1000
-            );
+                    },
+                    abring.params.socketRetryInterval * 1000
+                );
+            }
         };
     }
     return abring.params.socketObject;
