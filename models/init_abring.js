@@ -8,7 +8,12 @@ onDeviceReady = function(){
 abring.init = function (data) {
 
     $.each(data,function (variable,value) {
-        abring.params[variable] = value;
+        if(typeof value == "object")
+            $.each(value,function (sub_variable,sub_value) {
+                abring.params[variable][sub_variable] = sub_value;
+            });
+        else
+            abring.params[variable] = value;
     });
 
     if (!abring.params.isCordovaApp && navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
