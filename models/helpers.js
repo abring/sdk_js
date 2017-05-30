@@ -178,7 +178,7 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
                 if(abring.params.player_info || abring.params.token)
                     abringPlayerLogout();
                 //try to login with uuid
-                abring.params.display.showPageFunction("loading","you are not login\ntry to login with your device\nplease wait");
+                abring.params.display.loading.show("you are not login\ntry to login with your device\nplease wait");
                 abringPLayerLoginWithDeviceId(
                     function () {
                         abring.params.display.hidePageFunction();//continue previous request ????????????
@@ -520,7 +520,8 @@ var checkIsOnline = function(checkIsOnlineSuccess){
     },function () {
         abring.params.isOnline = false;
         checkIsOnlineSuccess(false);
-        abring.params.socketObject.onclose();
+        if(abring.params.socketObject != null)
+            abring.params.socketObject.onclose();
     });
 };
 var array_diff = function (a1, a2) {

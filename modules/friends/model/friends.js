@@ -27,7 +27,7 @@ var initFriends = function () {
 
 var abringFriendsListShow = function () {
 
-    abring.params.display.showPageFunction("loading","loading list of your friends!");
+    abring.params.display.loading.show("loading list of your friends!");
 
     // $("#"+abring.params.friends.parent_id+" .friends_list .message").html("Loading friends list!");
     // $("#"+abring.params.friends.parent_id+" .friends_list .friend_details").hide();

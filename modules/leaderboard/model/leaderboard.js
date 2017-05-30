@@ -11,7 +11,7 @@ var initLeaderboard = function () {
 
 var abringLeaderboardShow = function() {
 
-    abring.params.display.showPageFunction("loading","loading leaderboard data.");
+    abring.params.display.loading.show("loading leaderboard data.");
 
     var method = "leaderboard/get-all";
     var data = {};

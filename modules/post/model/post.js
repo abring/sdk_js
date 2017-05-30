@@ -17,7 +17,7 @@ var abringPostsShow = function () {
     $("#posts .banner").attr("src",abring.params.player_info["timeline_cover"]);
 
     //show loading page
-    abring.params.display.showPageFunction("loading","loading your timeline");
+    abring.params.display.loading.show("loading your timeline");
     $("#"+abring.params.posts_parent_id+" .timeline").html("");
 
     //fill my timeline page info (avatar banner ...)

@@ -121,7 +121,7 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
 };
 
 var abringPlayerLogin = function (username, password) {
-    abring.params.display.showPageFunction("loading","logon to Abring\nPlease wait");
+    abring.params.display.loading.show("logon to Abring\nPlease wait");
     if(abring.params.token)
         abringPlayerLogout();
     callAbringWithFileUpload("player/login",{"username":username,"password":password},

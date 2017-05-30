@@ -10,7 +10,7 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
         return false;
     }
 
-    abring.params.display.showPageFunction("loading","login with device id");
+    abring.params.display.loading.show("login with device id");
 
     abringPLayerLoginWithDeviceId(
         function () {
@@ -20,13 +20,13 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
             log("first in with device id was failed:\n"+error);
             if(abring.params.isCordovaApp)
             {
-                abring.params.display.showPageFunction("loading","sending SMS");
+                abring.params.display.loading.show("sending SMS");
 
                 smsSend(
                     abring.params.abring_sms_number,
                     abring.params.uuid,
                     function () {
-                        abring.params.display.showPageFunction("loading","sending SMS success.\nwaiting for server confirmation!\nplease wait ...");
+                        abring.params.display.loading.show("sending SMS success.\nwaiting for server confirmation!\nplease wait ...");
 
                         start_loop(0,10,20,function (counter,id) {
 
@@ -81,7 +81,7 @@ $(document).on("click",".player_mobile_register .submit",function () {
         abring.params.display.showPageFunction("warning","Your are already a member and login.");
         return false;
     }
-    abring.params.display.showPageFunction("loading","Registering your mobile number.\nPlease wait");
+    abring.params.display.loading.show("Registering your mobile number.\nPlease wait");
 
     //send register by mobile request
     var mobile_number = $(".player_mobile_register .mobile_number").val();
@@ -98,7 +98,7 @@ $(document).on("click",".player_mobile_register .submit",function () {
 });
 $(document).on("click",".player_mobile_verify .submit",function () {
 
-    abring.params.display.showPageFunction("loading","Verifying your mobile number.\nPlease wait");
+    abring.params.display.loading.show("Verifying your mobile number.\nPlease wait");
     //send register by mobile request
     var mobile_number = $(".player_mobile_verify .mobile_number").val();
     var code = $(".player_mobile_verify .code").val();
@@ -106,7 +106,7 @@ $(document).on("click",".player_mobile_verify .submit",function () {
 });
 $(document).on("click",".player_mobile_verify .resend_code ",function () {
 
-    abring.params.display.showPageFunction("loading","Resending code.\nPlease wait");
+    abring.params.display.loading.show("Resending code.\nPlease wait");
 
     if(abring.params.token)
     {
@@ -183,7 +183,7 @@ $(document).on("click",".page.profile_form .update_profile",function () {
     abring.params.player.showPageFunction("profile_form_update","Update profile!");
 });
 $(document).on("click",".page.profile_form_update .submit",function () {
-    abring.params.display.showPageFunction("loading","submitting your profile!");
+    abring.params.display.loading.show("submitting your profile!");
     var data = {
         "name":$(".page.profile_form_update .name").val(),
         "sex":$(".page.profile_form_update .sex").val(),

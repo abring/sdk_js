@@ -5,7 +5,7 @@ var socketIsAvailable = function()
 };
 var socketIsConnected = function()
 {
-    if(!socketIsAvailable())
+    if(!socketIsAvailable() || abring.params.socketObject==null)
         return false;
     return (abring.params.socketObject)?true:false;
 };

@@ -16,7 +16,15 @@ abring.params = {
             abring.params.display.current_page = "";
             return abringPageHide();
         },
-        "loading_url" : abring_url+"/img/loading.gif",
+        "loading":{
+            "parent_id":"loading",
+            "loading_url" : abring_url+"/img/loading.gif",
+            "show":function(title,message){
+                var pageID = abring.params.display.loading.parent_id;
+                abringPageHide();
+                abring.params.display.current_page = pageID;
+                return abringPageShow(pageID,title,message);}
+        },
         "error_url" : abring_url+"/img/error.png",
         "info_url" : abring_url+"/img/info.png",
         "warning_url" : abring_url+"/img/warning.png",
