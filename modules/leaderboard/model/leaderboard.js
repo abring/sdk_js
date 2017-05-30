@@ -19,7 +19,7 @@ var abringLeaderboardShow = function() {
         method,data,
         function (leaderboard_data_tmp) {
             if(leaderboard_data_tmp==undefined || leaderboard_data_tmp==false ||leaderboard_data_tmp=="" )
-                return abring.params.display.showPageFunction("error","No leaderboard temp exists!");
+                return abring.params.display.error.show("No leaderboard temp exists!");
             leaderboard_data = leaderboard_data_tmp;
             //display leaderboard
             log(leaderboard_data);
@@ -51,7 +51,7 @@ var abringLeaderboardShow = function() {
             abring.params.display.showPageFunction("leaderboard");
         },
         function (x,c,e) {
-            abring.params.display.showPageFunction("error",e);
+            abring.params.display.error.show(e);
             return false;
         }
     );

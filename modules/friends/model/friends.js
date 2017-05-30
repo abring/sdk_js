@@ -98,7 +98,7 @@ var friendListSuccess = function (friends_list) {
     abring.params.display.showPageFunction("friends_list");
 };
 var friendListFail = function () {
-    abring.params.display.showPageFunction("error","failed to load friends list!");
+    abring.params.display.error.show("failed to load friends list!");
     // $("#"+abring.params.friends.parent_id+" .friends_list .message").html("error loading list!");
 };
 var abringFriendsSearch = function (pattern) {

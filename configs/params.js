@@ -18,16 +18,49 @@ abring.params = {
         },
         "loading":{
             "parent_id":"loading",
-            "loading_url" : abring_url+"/img/loading.gif",
+            "url" : abring_url+"/img/loading.gif",
             "show":function(title,message){
                 var pageID = abring.params.display.loading.parent_id;
                 abringPageHide();
                 abring.params.display.current_page = pageID;
                 return abringPageShow(pageID,title,message);}
         },
-        "error_url" : abring_url+"/img/error.png",
-        "info_url" : abring_url+"/img/info.png",
-        "warning_url" : abring_url+"/img/warning.png",
+        "error":{
+            "parent_id":"error",
+            "url" : abring_url+"/img/error.gif",
+            "show":function(title,message){
+                var pageID = abring.params.display.error.parent_id;
+                abringPageHide();
+                abring.params.display.current_page = pageID;
+                return abringPageShow(pageID,title,message);}
+        },
+        "info":{
+            "parent_id":"info",
+            "url" : abring_url+"/img/info.gif",
+            "show":function(title,message){
+                var pageID = abring.params.display.info.parent_id;
+                abringPageHide();
+                abring.params.display.current_page = pageID;
+                return abringPageShow(pageID,title,message);}
+        },
+        "warning":{
+            "parent_id":"warning",
+            "url" : abring_url+"/img/warning.gif",
+            "show":function(title,message){
+                var pageID = abring.params.display.warning.parent_id;
+                abringPageHide();
+                abring.params.display.current_page = pageID;
+                return abringPageShow(pageID,title,message);}
+        },
+        "confirm":{
+            "parent_id":"confirm",
+            "url" : abring_url+"/img/warning.gif",
+            "show":function(title,message){
+                var pageID = abring.params.display.confirm.parent_id;
+                abringPageHide();
+                abring.params.display.current_page = pageID;
+                return abringPageShow(pageID,title,message);}
+        },
         "logo_url" : abring_url+"/img/abring.png",
         "default_avatar_url" : abring_url+"/img/default_avatar.png"
     },

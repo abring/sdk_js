@@ -29,7 +29,7 @@ var showLittleTip = function(title,message,type,wait){
     wait = wait || abring.params.display.tooltip_default_time;
 
     abringPageHide();
-    abring.params.display.showPageFunction(type,title,message);
+    abring.params.display[type].show(title,message);
     setTimeout(function(){
         abring.params.display.hidePageFunction();
     }, wait*1000);

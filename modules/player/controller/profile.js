@@ -6,7 +6,7 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
 
     if(abring.params.token)
     {
-        abring.params.display.showPageFunction("warning","Your are already a member and login.");
+        abring.params.display.warning.show("Your are already a member and login.");
         return false;
     }
 
@@ -59,7 +59,7 @@ $(document).on("click",".player_mobile_other_way_page",function () {
 
     if(abring.params.token)
     {
-        abring.params.display.showPageFunction("warning","Your are already a member and login.");
+        abring.params.display.warning.show("Your are already a member and login.");
         return false;
     }
     abring.params.player.showPageFunction("player_mobile_other_way");
@@ -69,7 +69,7 @@ $(document).on("click",".abring_buttons_player_mobile_register",function () {
 
     if(abring.params.token)
     {
-        abring.params.display.showPageFunction("warning","Your are already a member and login.");
+        abring.params.display.warning.show("Your are already a member and login.");
         return false;
     }
     abring.params.player.showPageFunction("player_mobile_register");
@@ -78,7 +78,7 @@ $(document).on("click",".abring_buttons_player_mobile_register",function () {
 $(document).on("click",".player_mobile_register .submit",function () {
     if(abring.params.token)
     {
-        abring.params.display.showPageFunction("warning","Your are already a member and login.");
+        abring.params.display.warning.show("Your are already a member and login.");
         return false;
     }
     abring.params.display.loading.show("Registering your mobile number.\nPlease wait");
@@ -110,7 +110,7 @@ $(document).on("click",".player_mobile_verify .resend_code ",function () {
 
     if(abring.params.token)
     {
-        abring.params.display.showPageFunction("warning","Your are already a member and login.");
+        abring.params.display.warning.show("Your are already a member and login.");
         return false;
     }
     //send register by mobile request
@@ -141,7 +141,7 @@ $(document).on("click",".register_using_abring",function () {
 
     if(abring.params.token)
     {
-        abring.params.display.showPageFunction("warning","Your are already a member and login.");
+        abring.params.display.warning.show("Your are already a member and login.");
         return false;
     }
 
@@ -152,7 +152,7 @@ $(document).on("click",".login_using_abring",function () {
 
     if(abring.params.token)
     {
-        abring.params.display.showPageFunction("warning","Your are already a member and login.");
+        abring.params.display.warning.show("Your are already a member and login.");
         return false;
     }
 
@@ -175,7 +175,7 @@ $(document).on("click",".page.profile_form .update_profile",function () {
 
     if(!abring.params.player_info)
     {
-        abring.params.display.showPageFunction("error","Your are not login!");
+        abring.params.display.error.show("Your are not login!");
         return false;
     }
 
@@ -208,7 +208,7 @@ $(document).on("click",".abring_player_logout",function () {
 
     if(!abring.params.player_info)
     {
-        abring.params.display.showPageFunction("error","Your are not login!");
+        abring.params.display.error.show("Your are not login!");
         return false;
     }
 
@@ -252,7 +252,7 @@ $(document).on("click",".chat_start",function () {
 
     if(target_player_id == abring.params.player_info["player_id"])
     {
-        abring.params.display.showPageFunction("error","You cannot chat with yourself!");
+        abring.params.display.error.show("You cannot chat with yourself!");
         return false;
     }
     showChatPage(target_player_id);
@@ -268,7 +268,7 @@ $(document).on("click",".chat_send",function () {
     var target_player_id = $(this).attr("player_id");
     if(!target_player_id)
     {
-        abring.params.display.showPageFunction("error","cannot detect target player id to send message!");
+        abring.params.display.error.show("cannot detect target player id to send message!");
         return false;
     }
     var message = $("#"+abring.params.chat_parent_id+" #chat_"+target_player_id+" .chat_message").val();
