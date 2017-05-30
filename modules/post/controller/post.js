@@ -87,7 +87,7 @@ $(document).on("click","#abring_post_create_submit",function (e){
         return false;
     }
     $(".abring_post_create_form").hide();
-    abring.params.display.showPageFunction("loading");
+    abring.params.display.loading.show();
 
     var image = $("#abring_post_create_image")[0].files[0];
     var content = $("#abring_post_create_content").val();
@@ -221,7 +221,7 @@ $(document).on("click",".abring_post_edit_submit",function (e){
         return false;
     }
     $(".abring_post_edit_form").hide();
-    abring.params.display.showPageFunction("loading");
+    abring.params.display.loading.show();
 
     var image = $(".current-post .abring_post_edit_image")[0].files[0];
     var content = $(".current-post .abring_post_edit_content").val();

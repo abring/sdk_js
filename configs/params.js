@@ -61,6 +61,25 @@ abring.params = {
                 abring.params.display.current_page = pageID;
                 return abringPageShow(pageID,title,message);}
         },
+        "tooltip":{
+            "parent_id":"tooltip",
+            "url" : abring_url+"/img/info.gif",
+            "time" : 5,
+            "show":function(title,message,type,wait) {
+                var pageID = abring.params.display.tooltip.parent_id;
+
+                title = title || "";
+                message = message || "";
+                type = type || "info";
+                wait = wait || abring.params.display.tooltip.time;
+
+                abringPageHide();
+                abring.params.display[type].show(title, message);
+                setTimeout(function () {
+                    abringPageHide();
+                }, wait * 1000);
+            }
+        },
         "logo_url" : abring_url+"/img/abring.png",
         "default_avatar_url" : abring_url+"/img/default_avatar.png"
     },
