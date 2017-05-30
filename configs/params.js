@@ -110,6 +110,7 @@ abring.params = {
 
 //global variables
     "timeStamp" : 0,
+    "badgeNumber" : 0, //an small number shown in corner of application icon
     "template" : "",
     "app_data" : "",
     "last_error" : "",

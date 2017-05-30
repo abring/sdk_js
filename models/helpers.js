@@ -569,3 +569,15 @@ var current_dir = function(relative) {
         file = script.src;
     return file.substring(0, file.lastIndexOf('/'));
 };
+var setBadge = function (badgeNumber) {//an small number shown in corner of application icon
+    abring.params.badgeNumber = badgeNumber;
+    if(abring.params.isCordovaApp)
+    {
+        // cordova.plugins.notification.badge.increase();
+        // cordova.plugins.notification.badge.decrease(2);
+        cordova.plugins.notification.badge.set(badgeNumber);
+        if(badgeNumber==0)
+            cordova.plugins.notification.badge.clear();
+    }
+    return badgeNumber;
+};
