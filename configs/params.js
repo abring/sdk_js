@@ -84,6 +84,37 @@ abring.params = {
     },
 
     "player":{
+        "pages":{
+            "other_player_profile":{
+                "parent_id":"player_view_details",
+                "show":function(other_player_id){
+                    abring.params.display.loading.show("loading","Please wait");
+                    var parent_id = abring.params.player.pages.other_player_profile.parent_id;
+                    getOtherPlayerInfo(
+                        other_player_id,false,
+                        function(other_player_info){
+
+                            $("."+parent_id+" .player_id")
+                                .attr("player_id",other_player_id)
+                                .attr("name",other_player_id);
+                            $("."+parent_id+" span.player_name").html(other_player_info["name"]);
+                            abringPageShow(parent_id);
+
+                        },
+                        function(x,c,e){
+                        }
+                    );
+                }
+            },
+            "player_mobile_register":{},
+            "player_mobile_verify":{},
+            "player_mobile_other_way":{},
+            "player_register":{},
+            "player_login":{},
+            "profile_form":{},
+            "profile_form_update":{},
+            "abring_chat":{}
+        },
         "parent_id" : "abring_player",
         "template" : readFile(abring_url+"/modules/player/view/player.html"),
         "showPageFunction":function (subPageID) { return showMyProfile(subPageID); },
