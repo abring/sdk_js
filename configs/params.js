@@ -6,7 +6,6 @@ abring.params = {
     "display":{
         "current_page" : "",
         "splashTime" : 0,
-        "tooltip_default_time" : 5,
         "showPageFunction":function (pageID,title,message) {
             abringPageHide();
             abring.params.display.current_page = pageID;
@@ -74,7 +73,7 @@ abring.params = {
                 wait = wait || abring.params.display.tooltip.time;
 
                 abringPageHide();
-                abring.params.display[type].show(title, message);
+                abringPageShow(type,title, message);
                 setTimeout(function () {
                     abringPageHide();
                 }, wait * 1000);
