@@ -6,7 +6,6 @@ abring.params = {
     "display":{
         "current_page" : "",
         "splashTime" : 0,
-        "tooltip_default_time" : 5,
         "showPageFunction":function (pageID,title,message) {
             abringPageHide();
             abring.params.display.current_page = pageID;
@@ -16,15 +15,106 @@ abring.params = {
             abring.params.display.current_page = "";
             return abringPageHide();
         },
-        "loading_url" : abring_url+"/img/loading.gif",
-        "error_url" : abring_url+"/img/error.png",
-        "info_url" : abring_url+"/img/info.png",
-        "warning_url" : abring_url+"/img/warning.png",
+        "loading":{
+            "parent_id":"loading",
+            "url" : abring_url+"/img/loading.gif",
+            "show":function(title,message){
+                var pageID = abring.params.display.loading.parent_id;
+                abringPageHide();
+                abring.params.display.current_page = pageID;
+                return abringPageShow(pageID,title,message);}
+        },
+        "error":{
+            "parent_id":"error",
+            "url" : abring_url+"/img/error.gif",
+            "show":function(title,message){
+                var pageID = abring.params.display.error.parent_id;
+                abringPageHide();
+                abring.params.display.current_page = pageID;
+                return abringPageShow(pageID,title,message);}
+        },
+        "info":{
+            "parent_id":"info",
+            "url" : abring_url+"/img/info.gif",
+            "show":function(title,message){
+                var pageID = abring.params.display.info.parent_id;
+                abringPageHide();
+                abring.params.display.current_page = pageID;
+                return abringPageShow(pageID,title,message);}
+        },
+        "warning":{
+            "parent_id":"warning",
+            "url" : abring_url+"/img/warning.gif",
+            "show":function(title,message){
+                var pageID = abring.params.display.warning.parent_id;
+                abringPageHide();
+                abring.params.display.current_page = pageID;
+                return abringPageShow(pageID,title,message);}
+        },
+        "confirm":{
+            "parent_id":"confirm",
+            "url" : abring_url+"/img/warning.gif",
+            "show":function(title,message){
+                var pageID = abring.params.display.confirm.parent_id;
+                abringPageHide();
+                abring.params.display.current_page = pageID;
+                return abringPageShow(pageID,title,message);}
+        },
+        "tooltip":{
+            "parent_id":"tooltip",
+            "url" : abring_url+"/img/info.gif",
+            "time" : 5,
+            "show":function(title,message,type,wait) {
+                var pageID = abring.params.display.tooltip.parent_id;
+
+                title = title || "";
+                message = message || "";
+                type = type || "info";
+                wait = wait || abring.params.display.tooltip.time;
+
+                abringPageHide();
+                abringPageShow(type,title, message);
+                setTimeout(function () {
+                    abringPageHide();
+                }, wait * 1000);
+            }
+        },
         "logo_url" : abring_url+"/img/abring.png",
         "default_avatar_url" : abring_url+"/img/default_avatar.png"
     },
 
     "player":{
+        "pages":{
+            "other_player_profile":{
+                "parent_id":"player_view_details",
+                "show":function(other_player_id){
+                    abring.params.display.loading.show("loading","Please wait");
+                    var parent_id = abring.params.player.pages.other_player_profile.parent_id;
+                    getOtherPlayerInfo(
+                        other_player_id,false,
+                        function(other_player_info){
+
+                            $("."+parent_id+" .player_id")
+                                .attr("player_id",other_player_id)
+                                .attr("name",other_player_id);
+                            $("."+parent_id+" span.player_name").html(other_player_info["name"]);
+                            abringPageShow(parent_id);
+
+                        },
+                        function(x,c,e){
+                        }
+                    );
+                }
+            },
+            "player_mobile_register":{},
+            "player_mobile_verify":{},
+            "player_mobile_other_way":{},
+            "player_register":{},
+            "player_login":{},
+            "profile_form":{},
+            "profile_form_update":{},
+            "abring_chat":{}
+        },
         "parent_id" : "abring_player",
         "template" : readFile(abring_url+"/modules/player/view/player.html"),
         "showPageFunction":function (subPageID) { return showMyProfile(subPageID); },

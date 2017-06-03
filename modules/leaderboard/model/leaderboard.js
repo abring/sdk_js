@@ -11,7 +11,7 @@ var initLeaderboard = function () {
 
 var abringLeaderboardShow = function() {
 
-    abring.params.display.showPageFunction("loading","loading leaderboard data.");
+    abring.params.display.loading.show("loading leaderboard data.");
 
     var method = "leaderboard/get-all";
     var data = {};
@@ -19,7 +19,7 @@ var abringLeaderboardShow = function() {
         method,data,
         function (leaderboard_data_tmp) {
             if(leaderboard_data_tmp==undefined || leaderboard_data_tmp==false ||leaderboard_data_tmp=="" )
-                return abring.params.display.showPageFunction("error","No leaderboard temp exists!");
+                return abring.params.display.error.show("No leaderboard temp exists!");
             leaderboard_data = leaderboard_data_tmp;
             //display leaderboard
             log(leaderboard_data);
@@ -51,7 +51,7 @@ var abringLeaderboardShow = function() {
             abring.params.display.showPageFunction("leaderboard");
         },
         function (x,c,e) {
-            abring.params.display.showPageFunction("error",e);
+            abring.params.display.error.show(e);
             return false;
         }
     );
@@ -64,7 +64,7 @@ var abringLeaderboardSetScore = function (leaderboard,score,signature) {
         abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
-    showLittleTip("Info","submitting your score!","info",10);
+    abring.params.display.tooltip.show("Info","submitting your score!","info",10);
     var data = {
         "leaderboard": leaderboard,
         "score":score,
@@ -78,7 +78,7 @@ var setScoreSuccess = function (set_score_result) {
     //success
     log("set score result = "+set_score_result);
     //show a little popup without any hesitate to player and fadeout after short time (one seconds)
-    showLittleTip("Info","score submitted!","info",2);
+    abring.params.display.tooltip.show("Info","score submitted!","info",2);
     var score = set_score_result["score"];
     var rate = set_score_result["rate"];
     $(".frog_table").html("score="+score+"<br>rate="+rate+"<br>You win!");
@@ -86,6 +86,6 @@ var setScoreSuccess = function (set_score_result) {
 };
 var setScoreFail = function (score_last_error) {
     //failed
-    showLittleTip("Info","unable to set score:\n"+score_last_error,"error",2);
+    abring.params.display.tooltip.show("Info","unable to set score:\n"+score_last_error,"error",2);
     abring.params.display.hidePageFunction();
 };

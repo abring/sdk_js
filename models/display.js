@@ -21,17 +21,3 @@ var abringPageHide = function () {
 var abringLoadingFinish = function () {
 
 };
-var showLittleTip = function(title,message,type,wait){
-
-    title = title || "";
-    message = message || "";
-    type = type || "info";
-    wait = wait || abring.params.display.tooltip_default_time;
-
-    abringPageHide();
-    abring.params.display.showPageFunction(type,title,message);
-    setTimeout(function(){
-        abring.params.display.hidePageFunction();
-    }, wait*1000);
-
-};

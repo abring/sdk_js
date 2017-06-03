@@ -53,7 +53,7 @@ var viewProfile = function (other_player_id) {
             );
             showMyProfile("player_view_details");
         },function (x,c,e) {
-            abring.params.display.showPageFunction("error",e);
+            abring.params.display.error.show(e);
         }
     );
 
@@ -121,7 +121,7 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
 };
 
 var abringPlayerLogin = function (username, password) {
-    abring.params.display.showPageFunction("loading","logon to Abring\nPlease wait");
+    abring.params.display.loading.show("logon to Abring\nPlease wait");
     if(abring.params.token)
         abringPlayerLogout();
     callAbringWithFileUpload("player/login",{"username":username,"password":password},
@@ -132,7 +132,7 @@ var abringPlayerLogin = function (username, password) {
             setCookie("player_info",abring.params.player_info,100);
             abring.params.display.hidePageFunction();
         },function (x,c,e) {
-            abring.params.display.showPageFunction("error",e);
+            abring.params.display.error.show(e);
         }
     );
 };
@@ -174,7 +174,7 @@ var abringPlayerRegister = function (username, password, variables, values) {
         function (res) {
 
         },function (x,c,e) {
-            abring.params.display.showPageFunction("error",e);
+            abring.params.display.error.show(e);
         }
     );
     if(!abring.params.token)
@@ -436,11 +436,11 @@ var showChatPage = function(target_player_id) {
 
             //init chat if needed ????????
             if(!socketConnect())
-                abring.params.display.showPageFunction("error","error connecting to socket server");
+                abring.params.display.error.show("error connecting to socket server");
 
             abring.params.chat_show_page_function(target_player_info);
         },function (x,c,e) {
-            abring.params.display.showPageFunction("error",e);
+            abring.params.display.error.show(e);
         }
     );
 };
@@ -464,7 +464,7 @@ var abringOnPlayerSocketMessage = function(from_player_id,message){
                 function (from_player_info) {
                     abring.params.chatMessageFunction(from_player_info,message);
                 },function (x,c,e) {
-                    abring.params.display.showPageFunction("error",e);
+                    abring.params.display.error.show(e);
                 }
             );
         }else

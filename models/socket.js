@@ -5,7 +5,7 @@ var socketIsAvailable = function()
 };
 var socketIsConnected = function()
 {
-    if(!socketIsAvailable())
+    if(!socketIsAvailable() || abring.params.socketObject==null)
         return false;
     return (abring.params.socketObject)?true:false;
 };
@@ -78,7 +78,7 @@ var socketSendMessage = function(message)
         socketConnect();
 
     if(!socketIsConnected())
-        return abring.params.display.showPageFunction("error","socket not connected!");
+        return abring.params.display.error.show("socket not connected!");
 
     abring.params.socketObject.send(message+"\n");
     log("socket send: "+message);
