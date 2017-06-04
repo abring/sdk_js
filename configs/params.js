@@ -145,6 +145,14 @@ abring.params.player = {
     "pages":{
         "other_player_profile":{
             "parent_id":"player_view_details",
+            "theme":"",
+            "getTheme":function(){
+                var theme = abring.params.player.pages.other_player_profile.theme;
+                if(!theme)
+                    abring.params.player.pages.other_player_profile.theme =
+                        $("#abring .player_view_details").html();
+                return abring.params.player.pages.other_player_profile.theme;
+            },
             "show":function(other_player_id){
                 fillOtherPlayerInfo(other_player_id,
                     function(){

@@ -239,6 +239,7 @@ var fillOtherPlayerInfo = function(other_player_id,fillOtherPlayerInfoSuccess,fi
     fillOtherPlayerInfoFailed = fillOtherPlayerInfoFailed || function(){};
     abring.params.display.loading.show("loading","Please wait");
     var parent_id = abring.params.player.pages.other_player_profile.parent_id;
+    $("."+parent_id).html(abring.params.player.pages.other_player_profile.getTheme());
     getOtherPlayerInfo(
         other_player_id,false,
         function(other_player_info){
@@ -249,7 +250,9 @@ var fillOtherPlayerInfo = function(other_player_id,fillOtherPlayerInfoSuccess,fi
                 .attr("name",other_player_id);
             $("."+parent_id+" img.avatar").attr("src",other_player_info["avatar"]);
             $("."+parent_id+" span.player_name").html(other_player_info["name"]);
-            fillOtherPlayerInfoSuccess();
+
+            abring.params.display.hidePageFunction();
+            fillOtherPlayerInfoSuccess(other_player_info);
         },
         function(x,c,e){
             fillOtherPlayerInfoFailed(x,c,e);
