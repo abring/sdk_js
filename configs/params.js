@@ -151,6 +151,8 @@ abring.params.player = {
                 if(!theme)
                     abring.params.player.pages.other_player_profile.theme =
                         $("#abring .player_view_details").html();
+                var parent_id = abring.params.player.pages.other_player_profile.parent_id;
+                $("."+parent_id).html(theme);
                 return abring.params.player.pages.other_player_profile.theme;
             },
             "show":function(other_player_id){
@@ -165,7 +167,23 @@ abring.params.player = {
                 );
             }
         },
-        "player_mobile_register":{},
+        "player_mobile_register":{
+            "parent_id":"player_mobile_register",
+            "theme":"",
+            "getTheme":function(){
+                var theme = abring.params.player.pages.player_mobile_register.theme;
+                if(!theme)
+                    abring.params.player.pages.player_mobile_register.theme =
+                        $("#abring .player_mobile_register").html();
+                var parent_id = abring.params.player.pages.player_mobile_register.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.player.pages.player_mobile_register.theme;
+            },
+            "show":function(){
+                var parent_id = abring.params.player.pages.player_mobile_register.parent_id;
+                abring.params.player.showPageFunction(parent_id);
+            }
+        },
         "player_mobile_verify":{},
         "player_mobile_other_way":{},
         "player_register":{},

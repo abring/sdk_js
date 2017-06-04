@@ -72,8 +72,7 @@ $(document).on("click",".abring_buttons_player_mobile_register",function () {
         abring.params.display.warning.show("Your are already a member and login.");
         return false;
     }
-    abring.params.player.showPageFunction("player_mobile_register");
-
+    abring.params.player.pages.player_mobile_register.show();
 });
 $(document).on("click",".player_mobile_register .submit",function () {
     if(abring.params.token)

@@ -18,6 +18,9 @@ var initPlayer = function () {
             //if login needed in application startup show player login page
         }
     }
+
+    abring.params.player.pages.other_player_profile.getTheme();
+    abring.params.player.pages.player_mobile_register.getTheme();
 };
 
 function onPlayerLogin(data) {}
