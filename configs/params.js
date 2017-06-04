@@ -151,6 +151,7 @@ abring.params.player = {
                 if(!theme)
                     theme = abring.params.player.pages.other_player_profile.theme =
                         $("#abring .player_view_details").html();
+                $("#abring .player_view_details").html("");
                 var parent_id = abring.params.player.pages.other_player_profile.parent_id;
                 $("."+parent_id).html(theme);
                 return abring.params.player.pages.other_player_profile.theme;
@@ -175,6 +176,7 @@ abring.params.player = {
                 if(!theme)
                     theme = abring.params.player.pages.player_mobile_register.theme =
                         $("#abring .player_mobile_register").html();
+                $("#abring .player_mobile_register").html("");
                 var parent_id = abring.params.player.pages.player_mobile_register.parent_id;
                 $("."+parent_id).html(theme);
                 return abring.params.player.pages.player_mobile_register.theme;
@@ -193,6 +195,7 @@ abring.params.player = {
                 if(!theme)
                     theme = abring.params.player.pages.player_mobile_verify.theme =
                         $("#abring .player_mobile_verify").html();
+                $("#abring .player_mobile_verify").html("");
                 var parent_id = abring.params.player.pages.player_mobile_verify.parent_id;
                 $("."+parent_id).html(theme);
                 return abring.params.player.pages.player_mobile_verify.theme;
