@@ -576,7 +576,7 @@ var checkIsOnline = function(checkIsOnlineSuccess){
         abring.params.isOnline = true;
         checkIsOnlineSuccess(true);
         socketConnect();
-    },function () {
+    },function (x,c,e) {
         abring.params.isOnline = false;
         checkIsOnlineSuccess(false);
         if(abring.params.socketObject != null)
