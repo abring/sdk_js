@@ -68,10 +68,15 @@ var getPlayerInfo = function (resetCache,getPlayerInfoSuccess,getPlayerInfoFaile
             "player/get",
             {},
             function(result){
+                result["device_id"] = [];
                 abring.params.player_info = result;
-                if(abring.params.player_info["avatar"]=="undefined") abring.params.player_info["avatar"] = "";
+                if(abring.params.player_info["avatar"]=="undefined")
+                    abring.params.player_info["avatar"] = "";
+
                 setCookie("player_info",abring.params.player_info,100);
+
                 getPlayerInfoSuccess(result);
+
                 abring.params.player.onDataLoaded(abring.params.player_info);
             },function(){
                 getPlayerInfoFailed();
@@ -197,7 +202,7 @@ var abringPlayerRegister = function (username, password, variables, values) {
     abringLoadingFinish();
 };
 
-var abringPlayerInfo = function (reset_cache) {
+var fillMyPlayerInfo = function (reset_cache) {
     getPlayerInfo(reset_cache);
     if(abring.params.player_info)
     {
@@ -285,7 +290,7 @@ var abringPLayerLoginWithDeviceId = function(loginWithDeviceIdSuccess,loginWithD
                 setCookie("token",abring.params.token,100, function () {
                     getPlayerInfo(true,function () {
                         log("login with device id was successful - get player info successful",true);
-                        abringPlayerInfo();
+                        fillMyPlayerInfo();
                         loginWithDeviceIdSuccess();
                     },function (xhr,code,error) {
                         loginWithDeviceIdFailed(xhr,code,error+"\nlogin with device id was successful - get player info failed");

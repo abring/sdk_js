@@ -167,7 +167,7 @@ $(document).on("click",".abring_buttons_player_profile",function () {
         return false;
     }
 
-    abringPlayerInfo();
+    fillMyPlayerInfo();
     abring.params.player.showPageFunction("profile_form");
 
 });
@@ -179,7 +179,7 @@ $(document).on("click",".page.profile_form .update_profile",function () {
         return false;
     }
 
-    abringPlayerInfo();
+    fillMyPlayerInfo();
     abring.params.player.showPageFunction("profile_form_update","Update profile!");
 });
 $(document).on("click",".page.profile_form_update .submit",function () {
@@ -197,7 +197,7 @@ $(document).on("click",".page.profile_form_update .submit",function () {
 
     callAbringWithFileUpload( "player/set", data,function (data) {
         log("Success");
-        abringPlayerInfo(true);
+        fillMyPlayerInfo(true);
         abring.params.player.showPageFunction("profile_form","Profile updated!");
     },function (xhr, status, error) {
         log("failed");
