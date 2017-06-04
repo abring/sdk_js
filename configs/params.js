@@ -145,19 +145,20 @@ abring.params.player = {
     "pages":{
         "other_player_profile":{
             "parent_id":"player_view_details",
-                "show":function(other_player_id){
+            "show":function(other_player_id){
                 abring.params.display.loading.show("loading","Please wait");
                 var parent_id = abring.params.player.pages.other_player_profile.parent_id;
                 getOtherPlayerInfo(
                     other_player_id,false,
                     function(other_player_info){
-
+                        other_player_info["avatar"] = other_player_info["avatar"] || abring.params.display.default_avatar_url;
+                        other_player_info["name"] = other_player_info["name"] || other_player_info["player_id"];
                         $("."+parent_id+" .player_id")
                             .attr("player_id",other_player_id)
                             .attr("name",other_player_id);
+                        $("."+parent_id+" img.avatar").attr("src",other_player_info["avatar"]);
                         $("."+parent_id+" span.player_name").html(other_player_info["name"]);
-                        abringPageShow(parent_id);
-
+                        abring.params.display.showPageFunction(parent_id);
                     },
                     function(x,c,e){
                     }
