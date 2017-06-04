@@ -217,6 +217,9 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
     });
 
 };
+var chunkString = function(str, length) {
+    return str.match(new RegExp('.{1,' + length + '}', 'g'));
+};
 var setCookie = function (cname, cvalue, exdays,setCookieSuccess,setCookieFailed) {
     setCookieSuccess = setCookieSuccess || function(){};
     setCookieFailed = setCookieFailed || function(){};
@@ -235,8 +238,19 @@ var setCookie = function (cname, cvalue, exdays,setCookieSuccess,setCookieFailed
         var d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
         var expires = "expires="+d.toUTCString();
-        cvalue = JSON.stringify(cvalue);
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        if(typeof cvalue != "string")
+            cvalue = JSON.stringify(cvalue);
+        if(cvalue.length>1000)
+        {
+            var cvalue_parts = chunkString(cvalue,1000);
+            setCookie(cname+"_chunk",1,100,function(){},function(){});
+            $.each(cvalue_parts,function(index,item){
+                setCookie(cname+"_"+index,item,100);
+            });
+        }else {
+            log("cookie size is " + cvalue.length);
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
         setCookieSuccess();
         return true;
     }
@@ -250,14 +264,25 @@ var delCookie = function (cname,delCookieSuccess,delCookieFailed) {
         return true;
     }else{
         log("del cookie of "+cname);
+
         var expires = "0";
-        document.cookie = cname + "=;" + expires + ";path=/";
+
+        if(checkIfCookieIsMultipart(cname))
+        {
+            for(i=0;i<100;i++)
+            {
+                if(getCookie(cname+"_"+i))
+                    document.cookie = cname + "=;" + expires + ";path=/";
+                else
+                    break;
+            }
+        }else
+            document.cookie = cname + "=;" + expires + ";path=/";
         delCookieSuccess();
         return true;
     }
 };
 var getCookie = function (cname) {
-
     if(abring.params.isCordovaApp)
     {
         cname = "c_"+cname+".txt";
@@ -270,6 +295,24 @@ var getCookie = function (cname) {
             return value;
     }else{
         log("read cookie of "+cname);
+        var cvalue = "";
+        var cvalue_part = "";
+
+        if(checkIfCookieIsMultipart(cname))
+        {
+            for(i=0;i<100;i++)
+            {
+                cvalue_part = getCookie(cname+"_"+i);
+                if(cvalue_part)
+                    cvalue += cvalue_part;
+                else
+                    break;
+            }
+            try{
+                cvalue = JSON.parse(cvalue);
+            }catch(e){}
+            return cvalue;
+        }
         var name = cname + "=";
         var ca = document.cookie.split(';');
         for(var i = 0; i < ca.length; i++) {
@@ -279,11 +322,28 @@ var getCookie = function (cname) {
             }
             if (c.indexOf(name) == 0) {
                 cvalue = c.substring(name.length, c.length);
-                cvalue = JSON.parse(cvalue);
+                try{
+                    cvalue = JSON.parse(cvalue);
+                }catch(e){}
                 return cvalue;
             }
         }
         return "";
+    }
+};
+var checkIfCookieIsMultipart = function (cname) {
+    var name = cname + "_chunk=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            cvalue = c.substring(name.length, c.length);
+            cvalue = JSON.parse(cvalue);
+            return (cvalue==1);
+        }
     }
 };
 String.prototype.replaceAll = function(search, replacement) {
