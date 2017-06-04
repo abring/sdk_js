@@ -74,7 +74,7 @@ $(document).on("click",".abring_buttons_player_mobile_register",function () {
     }
     abring.params.player.pages.player_mobile_register.show();
 });
-$(document).on("click",".player_mobile_register .submit",function () {
+$(document).on("click",".player_mobile_register_submit",function () {
     if(abring.params.token)
     {
         abring.params.display.warning.show("Your are already a member and login.");
@@ -83,13 +83,15 @@ $(document).on("click",".player_mobile_register .submit",function () {
     abring.params.display.loading.show("Registering your mobile number.\nPlease wait");
 
     //send register by mobile request
-    var mobile_number = $(".player_mobile_register .mobile_number").val();
+    var mobile_number = $(".player_mobile_register_mobile_number").val();
     abringPlayerMobileRegister(
         mobile_number,
         function(){
-            //showMyProfile("player_mobile_verify","Please enter verify code.\n");
+            abring.params.display.hidePageFunction();
+            abring.params.player.pages.player_mobile_verify.show();
         },
         function(x,c,e){
+            abring.params.display.hidePageFunction();
             //showMyProfile("player_mobile_register",e);
         }
     );

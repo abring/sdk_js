@@ -149,7 +149,7 @@ abring.params.player = {
             "getTheme":function(){
                 var theme = abring.params.player.pages.other_player_profile.theme;
                 if(!theme)
-                    abring.params.player.pages.other_player_profile.theme =
+                    theme = abring.params.player.pages.other_player_profile.theme =
                         $("#abring .player_view_details").html();
                 var parent_id = abring.params.player.pages.other_player_profile.parent_id;
                 $("."+parent_id).html(theme);
@@ -173,7 +173,7 @@ abring.params.player = {
             "getTheme":function(){
                 var theme = abring.params.player.pages.player_mobile_register.theme;
                 if(!theme)
-                    abring.params.player.pages.player_mobile_register.theme =
+                    theme = abring.params.player.pages.player_mobile_register.theme =
                         $("#abring .player_mobile_register").html();
                 var parent_id = abring.params.player.pages.player_mobile_register.parent_id;
                 $("."+parent_id).html(theme);
@@ -184,7 +184,24 @@ abring.params.player = {
                 abring.params.player.showPageFunction(parent_id);
             }
         },
-        "player_mobile_verify":{},
+        "player_mobile_verify":{
+
+            "parent_id":"player_mobile_verify",
+            "theme":"",
+            "getTheme":function(){
+                var theme = abring.params.player.pages.player_mobile_verify.theme;
+                if(!theme)
+                    theme = abring.params.player.pages.player_mobile_verify.theme =
+                        $("#abring .player_mobile_verify").html();
+                var parent_id = abring.params.player.pages.player_mobile_verify.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.player.pages.player_mobile_verify.theme;
+            },
+            "show":function(){
+                var parent_id = abring.params.player.pages.player_mobile_verify.parent_id;
+                abring.params.player.showPageFunction(parent_id);
+            }
+        },
         "player_mobile_other_way":{},
         "player_register":{},
         "player_login":{},

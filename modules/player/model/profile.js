@@ -21,6 +21,7 @@ var initPlayer = function () {
 
     abring.params.player.pages.other_player_profile.getTheme();
     abring.params.player.pages.player_mobile_register.getTheme();
+    abring.params.player.pages.player_mobile_verify.getTheme();
 };
 
 function onPlayerLogin(data) {}
@@ -337,10 +338,11 @@ var abringPLayerLoginWithDeviceId = function(loginWithDeviceIdSuccess,loginWithD
 var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegisterSuccess,abringPlayerMobileRegisterFailed){
     abringPlayerMobileRegisterSuccess = abringPlayerMobileRegisterSuccess || function () {};
     abringPlayerMobileRegisterFailed = abringPlayerMobileRegisterFailed || function () {};
+
     if ( !mobile_number || !is_valid_mobile_number(mobile_number) )
     {
         abringPlayerMobileRegisterFailed("",400,"Invalid mobile number.");
-        showMyProfile("player_mobile_register","Invalid mobile number.");
+        alert("Invalid mobile number.");
         return false;
     }
     var data = {
@@ -355,14 +357,13 @@ var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegist
         function () {
             abringPlayerMobileRegisterSuccess();
             //display verify page
-            showMyProfile("player_mobile_verify","Please enter verify code.\n");
-            var secound = 120;
+            var second = 120;
             var timerInterval = setInterval( function(){
                 $(".resend_code").hide();
                 $(".player_mobile_other_way_page").hide();
-                secound = secound - 1;
-                $(".player_mobile_retry_time").html("retry in "+ secound + "s");
-                if(secound < 1 ){
+                second = second - 1;
+                $(".player_mobile_retry_time").html("retry in "+ second + "s");
+                if(second < 1 ){
                     clearInterval(timerInterval);
                     $(".player_mobile_retry_time").html("");
                     $(".resend_code").show();
@@ -373,7 +374,7 @@ var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegist
         },
         function (x,c,e) {
             abringPlayerMobileRegisterFailed(x,c,e);
-            showMyProfile("player_mobile_register","registration failed.\n"+e);
+            alert("registration failed.\n"+e);
             return false;
         }
     );
