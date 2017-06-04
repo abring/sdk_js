@@ -34,7 +34,7 @@ var showMyProfile = function(subPageID){
     abringPageHide();
     $("#"+abring.params.player.parent_id+" .page").hide();
     $("#"+abring.params.player.parent_id+" ."+subPageID).show();
-    abring.params.player.showPageFunction(subPageID);
+    abring.params.display.showPageFunction(subPageID);
 };
 var viewProfile = function (other_player_id) {
 
