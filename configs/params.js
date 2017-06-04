@@ -56,7 +56,8 @@ abring.params = {
     "abring_sms_number" : "10005769297561",
     "uuid" : "", //device's Universally Unique Identifier,
 
-    "ping_time" : 30
+    "ping_time" : 30,
+    "cookie_max_size":4000
 };
 
 abring.params.display ={

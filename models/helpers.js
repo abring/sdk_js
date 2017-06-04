@@ -240,15 +240,14 @@ var setCookie = function (cname, cvalue, exdays,setCookieSuccess,setCookieFailed
         var expires = "expires="+d.toUTCString();
         if(typeof cvalue != "string")
             cvalue = JSON.stringify(cvalue);
-        if(cvalue.length>1000)
+        if(cvalue.length>abring.params.cookie_max_size)
         {
-            var cvalue_parts = chunkString(cvalue,1000);
+            var cvalue_parts = chunkString(cvalue,abring.params.cookie_max_size);
             setCookie(cname+"_chunk",1,100,function(){},function(){});
             $.each(cvalue_parts,function(index,item){
                 setCookie(cname+"_"+index,item,100);
             });
         }else {
-            log("cookie size is " + cvalue.length);
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
         setCookieSuccess();
