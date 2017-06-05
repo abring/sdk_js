@@ -167,6 +167,7 @@ abring.params.player = {
                 return abring.params.player.pages.my_profile.theme;
             },
             "show":function(){
+                abring.params.player.pages.my_profile.getTheme();
                 fillMyPlayerInfo(true);
                 var parent_id = abring.params.player.pages.my_profile.parent_id;
                 abring.params.display.showPageFunction(parent_id);
@@ -189,6 +190,7 @@ abring.params.player = {
                 return abring.params.player.pages.other_player_profile.theme;
             },
             "show":function(other_player_id){
+                abring.params.player.pages.other_player_profile.getTheme();
                 fillOtherPlayerInfo(other_player_id,
                     function(){
                         var parent_id = abring.params.player.pages.other_player_profile.parent_id;
@@ -217,6 +219,7 @@ abring.params.player = {
                 return abring.params.player.pages.player_mobile_register.theme;
             },
             "show":function(){
+                abring.params.player.pages.player_mobile_register.getTheme();
                 var parent_id = abring.params.player.pages.player_mobile_register.parent_id;
                 abring.params.player.showPageFunction(parent_id);
             }
@@ -238,11 +241,33 @@ abring.params.player = {
                 return abring.params.player.pages.player_mobile_verify.theme;
             },
             "show":function(){
+                abring.params.player.pages.player_mobile_verify.getTheme();
                 var parent_id = abring.params.player.pages.player_mobile_verify.parent_id;
                 abring.params.player.showPageFunction(parent_id);
             }
         },
-        "player_mobile_other_way":{},
+        "player_mobile_other_way":{
+            "parent_id":"player_mobile_other_way",
+            "theme_parent_id":"player_mobile_other_way",
+            "theme":"",
+            "getTheme":function(){
+                var theme = abring.params.player.pages.player_mobile_other_way.theme;
+                if(!theme)
+                {
+                    theme = abring.params.player.pages.player_mobile_other_way.theme =
+                        $("."+abring.params.player.pages.player_mobile_other_way.theme_parent_id).html();
+                    $("."+abring.params.player.pages.player_mobile_other_way.theme_parent_id).html("");
+                }
+                var parent_id = abring.params.player.pages.player_mobile_other_way.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.player.pages.player_mobile_other_way.theme;
+            },
+            "show":function(){
+                abring.params.player.pages.player_mobile_other_way.getTheme();
+                var parent_id = abring.params.player.pages.player_mobile_other_way.parent_id;
+                abring.params.player.showPageFunction(parent_id);
+            }
+        },
         "player_register":{},
         "player_login":{},
         "my_profile_update":{
@@ -262,6 +287,7 @@ abring.params.player = {
                 return abring.params.player.pages.my_profile_update.theme;
             },
             "show":function(){
+                abring.params.player.pages.my_profile_update.getTheme();
                 fillMyPlayerInfo(true);
                 var parent_id = abring.params.player.pages.my_profile_update.parent_id;
                 abring.params.display.showPageFunction(parent_id);

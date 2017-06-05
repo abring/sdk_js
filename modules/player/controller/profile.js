@@ -62,7 +62,8 @@ $(document).on("click",".player_mobile_other_way_page",function () {
         abring.params.display.warning.show("Your are already a member and login.");
         return false;
     }
-    abring.params.player.showPageFunction("player_mobile_other_way");
+
+    abring.params.player.pages.player_mobile_other_way.show();
 
 });
 $(document).on("click",".abring_buttons_player_mobile_register",function () {
@@ -173,8 +174,7 @@ $(document).on("click",".login_using_abring",function () {
 $(document).on("click",".abring_buttons_my_profile",function () {
     if(!abring.params.token)
     {
-        abring.params.player.showPageFunction("player_mobile_register");
-        // abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.params.player.pages.player_mobile_register.show();
         return false;
     }
     abring.params.player.pages.my_profile.show();

@@ -19,9 +19,9 @@ var initPlayer = function () {
         }
     }
 
-    abring.params.player.pages.other_player_profile.getTheme();
-    abring.params.player.pages.player_mobile_register.getTheme();
-    abring.params.player.pages.player_mobile_verify.getTheme();
+    //abring.params.player.pages.other_player_profile.getTheme();
+    //abring.params.player.pages.player_mobile_register.getTheme();
+    //abring.params.player.pages.player_mobile_verify.getTheme();
 };
 
 function onPlayerLogin(data) {}
