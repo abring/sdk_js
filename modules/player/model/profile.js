@@ -214,36 +214,40 @@ var fillMyPlayerInfo = function (reset_cache) {
     $("."+parent_id).html(abring.params.player.pages.my_profile.getTheme());
 
 
-    getPlayerInfo(reset_cache);
-    if(abring.params.player_info)
-    {
-        var age = "20";
-        if(abring.params.player_info['birth'])
-            age = (new Date().getFullYear())-abring.params.player_info['birth'];
-        abring.params.player_info['avatar'] = abring.params.player_info['avatar'] || abring.params.abring_default_avatar_url;
+    getPlayerInfo(reset_cache,
+        function(){
 
-        $("."+parent_id+" .username").html(abring.params.player_info['username']);
-        $("."+parent_id+" .name").html(abring.params.player_info['name']);
-        $("."+parent_id+" .avatar").attr("src",abring.params.player_info['avatar']);
-        $("."+parent_id+" .profile-contain").css("background-image","url("+abring.params.player_info['timeline_cover']+")");
-        $("."+parent_id+" .sex").html(abring.params.player_info['sex']);
-        $("."+parent_id+" .age").html(age);
-        $("."+parent_id+" .mobile").html(abring.params.player_info['mobile']);
+            var age = "20";
+            if(abring.params.player_info['birth'])
+                age = (new Date().getFullYear())-abring.params.player_info['birth'];
+            abring.params.player_info['avatar'] = abring.params.player_info['avatar'] || abring.params.abring_default_avatar_url;
 
-        $("."+parent_id_update+" .username").val(abring.params.player_info['username']);
-        $("."+parent_id_update+" .name").val(abring.params.player_info['name']);
-        $("."+parent_id_update+" .age").val(age);
-        $("."+parent_id_update+" .sex").val(abring.params.player_info['sex']);
-        $("."+parent_id_update+" .mobile").val(abring.params.player_info['mobile']);
-        $("."+parent_id_update+" .avatar").attr("src",abring.params.player_info['avatar']);
-        $("."+parent_id_update+" .cover").attr("src",abring.params.player_info['timeline_cover']);
-    }else{
-        $("."+parent_id+" .username").html("");
-        $("."+parent_id+" .name").html("");
-        $("."+parent_id+" .avatar").attr("src","");
-        $("."+parent_id+" .cover").attr("src","");
-    }
-    abring.params.display.hidePageFunction();
+            $("."+parent_id+" .username").html(abring.params.player_info['username']);
+            $("."+parent_id+" .name").html(abring.params.player_info['name']);
+            $("."+parent_id+" .avatar").attr("src",abring.params.player_info['avatar']);
+            $("."+parent_id+" .profile-contain").css("background-image","url("+abring.params.player_info['timeline_cover']+")");
+            $("."+parent_id+" .sex").html(abring.params.player_info['sex']);
+            $("."+parent_id+" .age").html(age);
+            $("."+parent_id+" .mobile").html(abring.params.player_info['mobile']);
+
+            $("."+parent_id_update+" .username").val(abring.params.player_info['username']);
+            $("."+parent_id_update+" .name").val(abring.params.player_info['name']);
+            $("."+parent_id_update+" .age").val(age);
+            $("."+parent_id_update+" .sex").val(abring.params.player_info['sex']);
+            $("."+parent_id_update+" .mobile").val(abring.params.player_info['mobile']);
+            $("."+parent_id_update+" .avatar").attr("src",abring.params.player_info['avatar']);
+            $("."+parent_id_update+" .cover").attr("src",abring.params.player_info['timeline_cover']);
+            abring.params.display.hidePageFunction();
+        },
+        function(){
+
+            $("."+parent_id+" .username").html("");
+            $("."+parent_id+" .name").html("");
+            $("."+parent_id+" .avatar").attr("src","");
+            $("."+parent_id+" .cover").attr("src","");
+            abring.params.display.hidePageFunction();
+        }
+    );
 };
 var fillOtherPlayerInfo = function(other_player_id,fillOtherPlayerInfoSuccess,fillOtherPlayerInfoFailed){
     fillOtherPlayerInfoSuccess = fillOtherPlayerInfoSuccess || function(){};

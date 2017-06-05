@@ -198,7 +198,7 @@ $(document).on("click",".my_profile_update_submit",function () {
 
     var data = {
         "name":$("."+parent_id_update+" .name").val(),
-        "sex":$("."+parent_id_update+" .sex").val(),
+        "sex":$("."+parent_id_update+" select.sex").val(),
         "birth":(new Date().getFullYear())-parseInt($("."+parent_id_update+" .age").val()),
         "mobile":$("."+parent_id_update+" .mobile").val()
     };
@@ -207,13 +207,14 @@ $(document).on("click",".my_profile_update_submit",function () {
     if($("#abring_profile_cover_upload")[0].files[0])
         data['timeline_cover'] = $("#abring_profile_cover_upload")[0].files[0];
 
-    callAbringWithFileUpload( "player/set", data,function (data) {
-        log("Success");
-        fillMyPlayerInfo(true);
-        abring.params.player.showPageFunction("my_profile","Profile updated!");
-    },function (xhr, status, error) {
-        log("failed");
-    });
+    callAbringWithFileUpload( "player/set", data,
+        function (data) {
+            abring.params.player.pages.my_profile.show();
+        },
+        function (xhr, status, error) {
+            log("failed");
+        }
+    );
 
 });
 $(document).on("click",".abring_player_logout",function () {
