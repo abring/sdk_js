@@ -207,6 +207,12 @@ var abringPlayerRegister = function (username, password, variables, values) {
 };
 
 var fillMyPlayerInfo = function (reset_cache) {
+
+    abring.params.display.loading.show("loading","Please wait");
+    var parent_id = abring.params.player.pages.my_profile.parent_id;
+    $("."+parent_id).html(abring.params.player.pages.my_profile.getTheme());
+
+
     getPlayerInfo(reset_cache);
     if(abring.params.player_info)
     {
@@ -215,27 +221,26 @@ var fillMyPlayerInfo = function (reset_cache) {
             age = (new Date().getFullYear())-abring.params.player_info['birth'];
         abring.params.player_info['avatar'] = abring.params.player_info['avatar'] || abring.params.abring_default_avatar_url;
 
-        $("#"+abring.params.player.parent_id+" .my_profile .username").html(abring.params.player_info['username']);
-        $("#"+abring.params.player.parent_id+" .my_profile .name").html(abring.params.player_info['name']);
-        $("#"+abring.params.player.parent_id+" .my_profile .avatar").attr("src",abring.params.player_info['avatar']);
-        $("#"+abring.params.player.parent_id+" .profile-contain").css("background-image","url("+abring.params.player_info['timeline_cover']+")");
-        $("#"+abring.params.player.parent_id+" .my_profile .sex").html(abring.params.player_info['sex']);
-        $("#"+abring.params.player.parent_id+" .my_profile .age").html(age);
-        $("#"+abring.params.player.parent_id+" .my_profile .mobile").html(abring.params.player_info['mobile']);
+        $("."+parent_id+" .username").html(abring.params.player_info['username']);
+        $("."+parent_id+" .name").html(abring.params.player_info['name']);
+        $("."+parent_id+" .avatar").attr("src",abring.params.player_info['avatar']);
+        $("."+parent_id+" .profile-contain").css("background-image","url("+abring.params.player_info['timeline_cover']+")");
+        $("."+parent_id+" .sex").html(abring.params.player_info['sex']);
+        $("."+parent_id+" .age").html(age);
+        $("."+parent_id+" .mobile").html(abring.params.player_info['mobile']);
 
-        $("#"+abring.params.player.parent_id+" .my_profile_update .username").val(abring.params.player_info['username']);
-        $("#"+abring.params.player.parent_id+" .my_profile_update .name").val(abring.params.player_info['name']);
-        $("#"+abring.params.player.parent_id+" .my_profile_update .age").val(age);
-        $("#"+abring.params.player.parent_id+" .my_profile_update .sex").val(abring.params.player_info['sex']);
-        $("#"+abring.params.player.parent_id+" .my_profile_update .mobile").val(abring.params.player_info['mobile']);
-        $("#"+abring.params.player.parent_id+" .my_profile_update .avatar").attr("src",abring.params.player_info['avatar']);
-        $("#"+abring.params.player.parent_id+" .my_profile_update .cover").attr("src",abring.params.player_info['timeline_cover']);
+        $("."+parent_id+"_update .username").val(abring.params.player_info['username']);
+        $("."+parent_id+"_update .name").val(abring.params.player_info['name']);
+        $("."+parent_id+"_update .age").val(age);
+        $("."+parent_id+"_update .sex").val(abring.params.player_info['sex']);
+        $("."+parent_id+"_update .mobile").val(abring.params.player_info['mobile']);
+        $("."+parent_id+"_update .avatar").attr("src",abring.params.player_info['avatar']);
+        $("."+parent_id+"_update .cover").attr("src",abring.params.player_info['timeline_cover']);
     }else{
-        $("#"+abring.params.player.parent_id+" .my_profile .username").html("");
-        $("#"+abring.params.player.parent_id+" .my_profile .name").html("");
-        $("#"+abring.params.player.parent_id+" .my_profile .avatar").attr("src","");
-        $("#"+abring.params.player.parent_id+" .my_profile .cover").attr("src","");
-        abring.params.display.hidePageFunction();
+        $("."+parent_id+" .username").html("");
+        $("."+parent_id+" .name").html("");
+        $("."+parent_id+" .avatar").attr("src","");
+        $("."+parent_id+" .cover").attr("src","");
     }
 };
 var fillOtherPlayerInfo = function(other_player_id,fillOtherPlayerInfoSuccess,fillOtherPlayerInfoFailed){

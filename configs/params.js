@@ -151,28 +151,22 @@ abring.params.display ={
 abring.params.player = {
     "pages":{
         "my_profile":{
-            "parent_id":"player_view_details",
+            "parent_id":"my_profile",
             "theme":"",
             "getTheme":function(){
-                var theme = abring.params.player.pages.other_player_profile.theme;
+                var theme = abring.params.player.pages.my_profile.theme;
                 if(!theme)
-                    theme = abring.params.player.pages.other_player_profile.theme =
-                        $("#abring .player_view_details").html();
-                $("#abring .player_view_details").html("");
-                var parent_id = abring.params.player.pages.other_player_profile.parent_id;
+                    theme = abring.params.player.pages.my_profile.theme =
+                        $("#abring .my_profile").html();
+                $("#abring .my_profile").html("");
+                var parent_id = abring.params.player.pages.my_profile.parent_id;
                 $("."+parent_id).html(theme);
-                return abring.params.player.pages.other_player_profile.theme;
+                return abring.params.player.pages.my_profile.theme;
             },
-            "show":function(other_player_id){
-                fillOtherPlayerInfo(other_player_id,
-                    function(){
-                        var parent_id = abring.params.player.pages.other_player_profile.parent_id;
-                        abring.params.display.showPageFunction(parent_id);
-                    },
-                    function(x,c,e){
-                        alert("Failed to fetch player data\n"+e);
-                    }
-                );
+            "show":function(){
+                fillMyPlayerInfo(true);
+                var parent_id = abring.params.player.pages.my_profile.parent_id;
+                abring.params.display.showPageFunction(parent_id);
             }
         },
         "other_player_profile":{

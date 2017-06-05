@@ -177,9 +177,7 @@ $(document).on("click",".abring_buttons_my_profile",function () {
         // abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
-
-    fillMyPlayerInfo();
-    abring.params.player.showPageFunction("my_profile");
+    abring.params.player.pages.my_profile.show();
 
 });
 $(document).on("click",".page.my_profile .update_profile",function () {
