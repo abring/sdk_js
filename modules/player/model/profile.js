@@ -349,8 +349,8 @@ var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegist
         "mobile":mobile_number
     };
 
-    $(".player_mobile_verify .mobile_number").val(mobile_number);
-    $(".player_mobile_verify .mobile_number_label").html(mobile_number);
+    $(".player_mobile_verify_mobile_number").val(mobile_number);
+    $(".player_mobile_verify_mobile_number_label").html(mobile_number);
 
     callAbringWithFileUpload(
         "player/mobile-register",data,
@@ -359,14 +359,14 @@ var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegist
             //display verify page
             var second = 120;
             var timerInterval = setInterval( function(){
-                $(".resend_code").hide();
+                $(".player_mobile_verify_resend_code").hide();
                 $(".player_mobile_other_way_page").hide();
                 second = second - 1;
                 $(".player_mobile_retry_time").html("retry in "+ second + "s");
                 if(second < 1 ){
                     clearInterval(timerInterval);
                     $(".player_mobile_retry_time").html("");
-                    $(".resend_code").show();
+                    $(".player_mobile_verify_resend_code").show();
                     $(".player_mobile_other_way_page").show();
                 }
             }, 1000);
@@ -374,7 +374,6 @@ var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegist
         },
         function (x,c,e) {
             abringPlayerMobileRegisterFailed(x,c,e);
-            alert("registration failed.\n"+e);
             return false;
         }
     );
@@ -389,19 +388,16 @@ var abringPlayerMobileVerify = function (mobile,code,abringPlayerMobileVerifySuc
     callAbringWithFileUpload(
         "player/mobile-verify",data,
         function (result) {
-            abringPlayerMobileVerifySuccess(result);
             onPlayerLogin(result);
             abring.params.token = result['token'];
             setCookie("token",abring.params.token,100);
             abring.params.player_info = getPlayerInfo();
-            abring.params.display.hidePageFunction();
-            showMyProfile("player_view_details");
             socketConnect();
+            abringPlayerMobileVerifySuccess(result);
             return true;
         },
         function (x,c,e) {
             abringPlayerMobileVerifyFailed(x,c,e);
-            showMyProfile("player_mobile_verify","Verification failed.\n"+e);
             return false;
         }
     );

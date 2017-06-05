@@ -91,19 +91,29 @@ $(document).on("click",".player_mobile_register_submit",function () {
             abring.params.player.pages.player_mobile_verify.show();
         },
         function(x,c,e){
-            abring.params.display.hidePageFunction();
+            abring.params.display.showPageFunction("error",e);
             //showMyProfile("player_mobile_register",e);
         }
     );
 
 });
-$(document).on("click",".player_mobile_verify .submit",function () {
+$(document).on("click",".player_mobile_verify_submit",function () {
 
     abring.params.display.loading.show("Verifying your mobile number.\nPlease wait");
     //send register by mobile request
-    var mobile_number = $(".player_mobile_verify .mobile_number").val();
-    var code = $(".player_mobile_verify .code").val();
-    abringPlayerMobileVerify(mobile_number,code);
+    var mobile_number = $(".player_mobile_verify_mobile_number").val();
+    var code = $(".player_mobile_verify_code").val();
+    if(!code||!mobile_number)
+        return abring.params.display.error.show("error","invalid params");
+    abringPlayerMobileVerify(mobile_number,code,
+        function(){
+            abring.params.display.hidePageFunction();
+            abring.params.display.home.show("info","login Successfully");
+        },function(x,c,e){
+            abring.params.display.error.show("error",e);
+        }
+
+    );
 });
 $(document).on("click",".player_mobile_verify .resend_code ",function () {
 

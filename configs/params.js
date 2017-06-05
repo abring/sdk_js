@@ -72,6 +72,13 @@ abring.params.display ={
         abring.params.display.current_page = "";
         return abringPageHide();
     },
+    "home":{
+        "parent_id":"home",
+        "show":function(title,message) {
+            abring.params.display.current_page = abring.params.display.home.parent_id;
+            return abringPageHide();
+        }
+    },
     "loading":{
         "parent_id":"loading",
         "url" : abring_url+"/img/loading.gif",
