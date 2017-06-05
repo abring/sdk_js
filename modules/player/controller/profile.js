@@ -258,24 +258,23 @@ $(document).on("click",".chat_start",function () {
 
     if(!abring.params.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.params.display.error.show("Your are not login!");
         return false;
     }
-    var target_player_id = $(this).attr("name");
+    var target_player_id = $(this).attr("player_id");
 
     if(target_player_id == abring.params.player_info["player_id"])
     {
         abring.params.display.error.show("You cannot chat with yourself!");
         return false;
     }
-    showChatPage(target_player_id);
+    abring.params.player.pages.abring_chat.show(target_player_id);
 });
 
 $(document).on("click",".chat_send",function () {
-
     if(!abring.params.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.params.display.error.show("Your are not login!");
         return false;
     }
     var target_player_id = $(this).attr("player_id");
@@ -284,7 +283,10 @@ $(document).on("click",".chat_send",function () {
         abring.params.display.error.show("cannot detect target player id to send message!");
         return false;
     }
-    var message = $("#"+abring.params.chat_parent_id+" #chat_"+target_player_id+" .chat_message").val();
+    var parent_id = abring.params.player.pages.abring_chat.parent_id;
+    //var message = $("."+parent_id+" #chat_"+target_player_id+" .chat_message").val();
+    var message = $("."+parent_id+" #chat_"+target_player_id+" .chat_message").val();
 
+    abring.params.player.pages.abring_chat.i_say(target_player_id,message);
     chatSend(target_player_id,message);
 });

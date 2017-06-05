@@ -640,3 +640,8 @@ var setBadge = function (badgeNumber) {//an small number shown in corner of appl
     }
     return badgeNumber;
 };
+jQuery.fn.outerHTML = function(s) {
+    return s
+        ? this.before(s).remove()
+        : jQuery("<p>").append(this.eq(0).clone()).html();
+};

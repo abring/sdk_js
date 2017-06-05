@@ -490,7 +490,7 @@ var chat_show_page = function (target_player_info) {
 var chatSend = function (target_player_id,message) {
     socketSendMessage(">unicast>"+target_player_id+">chat:"+message);
     $(".chat_message").val('');
-    $(".chat_content").append("<div class='chat-result-contain my-chat-contain'><span class='my-chat-name chat-name'>"+abring.params.player_info["name"]+"</span><span class='my-chat-message chat-message'>"+message+"</span></div");
+    //$(".chat_content").append("<div class='chat-result-contain my-chat-contain'><span class='my-chat-name chat-name'>"+abring.params.player_info["name"]+"</span><span class='my-chat-message chat-message'>"+message+"</span></div");
 };
 
 var abringOnPlayerSocketMessage = function(from_player_id,message){
@@ -523,7 +523,9 @@ var abringOnPlayerChatMessage = function(from_player_info,message) {
     var from_player_id= from_player_info['player_id'];
     if(abring.params.display.current_page!=abring.params.chat_parent_id)
         play_sound(abring.params.sounds.notification);
-    showChatPage(from_player_info['player_id']);
+
+    abring.params.player.pages.abring_chat.show(from_player_info['player_id']);
+    //showChatPage(from_player_info['player_id']);
     var chat_message =
         "<div class='chat-result-contain your-chat-contain'>" +
         "<span class='your-chat-name chat-name'>" +

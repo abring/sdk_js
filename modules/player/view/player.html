@@ -168,15 +168,9 @@
     </div>
 </div>
 
-<div class="page abring_chat" id="abring_chat">
-    <div class="action-div base-padding chat-header">
-        <a href="#" class="close"><img src="abring/img/Arrow_Back.svg" /></a>
-        <h3 class="message">Chat</h3>
-        <label class="socket_status">offline</label>
-    </div>
-</div>
-<div id="abring_chat_template">
+<div class="page abring_chat abring_chat_template" id="abring_chat">
     <style>
+        li#template{display: none}
         .abring_chat .message {
             float: left;
             margin: 0;
@@ -201,10 +195,53 @@
             overflow-x: hidden;
             overflow-y: auto;
         }
+        .tab_wrapper{
+            padding: 0px;;
+        }
+        .chat_content .me{
+            background: #eee;
+            padding: 10px;
+            float: right;
+            clear: right;
+            border-radius: 10px;
+            margin: 5px 0;
+        }
+        .chat_content .time{
+            font-size: 10px;
+            margin-bottom: 0px;
+            text-align: right;
+        }
+        .chat_content .you{
+            background: #ee9;
+            padding: 10px;
+            float: left;
+            clear: left;
+            border-radius: 10px;
+            margin: 5px 0;
+        }
     </style>
-    <div class="content-div chat_content"></div>
-    <div class="chat-footer" style="position: fixed !important;bottom: 0px !important;width:94% !important;">
-        <input class="chat_message" placeholder="Type your message here" typeof="text" style="position: inherit">
-        <input type="button" class="chat_send" value="Send" player_id="PLAYER_ID">
-    </div>
+    <ul class="tab_wrapper">
+        <li class="tab" id="template">
+            <div class="chat_header">
+                <img class="target_player_avatar" src="" style="max-width: 64px;max-height:64px;">
+                <p>chat with <span class="target_player_name">No name</span></p>
+            </div>
+            <div class="content-div chat_content">
+                <div class="me" style="display: none;">
+                    <p class="message"></p>
+                    <p class="time"></p>
+                </div>
+                <div class="you" style="display: none;">
+                    <img class="avatar" src="" style="max-width: 32px;max-height: 32px;">
+                    <span class="name"></span>
+                    <p class="message"></p>
+                    <p class="time"></p>
+                </div>
+            </div>
+            <div class="chat-footer" style="position: fixed !important;bottom: 0px !important;width:94% !important;">
+                <input class="chat_message" placeholder="Type your message here" typeof="text" style="position: inherit">
+                <input type="button" class="chat_send" value="Send" player_id="PLAYER_ID">
+            </div>
+        </li>
+    </ul>
 </div>
