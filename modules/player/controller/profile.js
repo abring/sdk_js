@@ -170,7 +170,7 @@ $(document).on("click",".login_using_abring",function () {
     abring.params.player.showPageFunction("player_login","Please login!");
 
 });
-$(document).on("click",".abring_buttons_player_profile",function () {
+$(document).on("click",".abring_buttons_my_profile",function () {
     if(!abring.params.token)
     {
         abring.params.player.showPageFunction("player_mobile_register");
@@ -179,10 +179,10 @@ $(document).on("click",".abring_buttons_player_profile",function () {
     }
 
     fillMyPlayerInfo();
-    abring.params.player.showPageFunction("profile_form");
+    abring.params.player.showPageFunction("my_profile");
 
 });
-$(document).on("click",".page.profile_form .update_profile",function () {
+$(document).on("click",".page.my_profile .update_profile",function () {
 
     if(!abring.params.player_info)
     {
@@ -191,15 +191,15 @@ $(document).on("click",".page.profile_form .update_profile",function () {
     }
 
     fillMyPlayerInfo();
-    abring.params.player.showPageFunction("profile_form_update","Update profile!");
+    abring.params.player.showPageFunction("my_profile_update","Update profile!");
 });
-$(document).on("click",".page.profile_form_update .submit",function () {
+$(document).on("click",".page.my_profile_update .submit",function () {
     abring.params.display.loading.show("submitting your profile!");
     var data = {
-        "name":$(".page.profile_form_update .name").val(),
-        "sex":$(".page.profile_form_update .sex").val(),
-        "birth":(new Date().getFullYear())-parseInt($(".page.profile_form_update .age").val()),
-        "mobile":$(".page.profile_form_update .mobile").val()
+        "name":$(".page.my_profile_update .name").val(),
+        "sex":$(".page.my_profile_update .sex").val(),
+        "birth":(new Date().getFullYear())-parseInt($(".page.my_profile_update .age").val()),
+        "mobile":$(".page.my_profile_update .mobile").val()
     };
     if($("#abring_profile_avatar_upload")[0].files[0])
         data['avatar'] = $("#abring_profile_avatar_upload")[0].files[0];
@@ -209,7 +209,7 @@ $(document).on("click",".page.profile_form_update .submit",function () {
     callAbringWithFileUpload( "player/set", data,function (data) {
         log("Success");
         fillMyPlayerInfo(true);
-        abring.params.player.showPageFunction("profile_form","Profile updated!");
+        abring.params.player.showPageFunction("my_profile","Profile updated!");
     },function (xhr, status, error) {
         log("failed");
     });

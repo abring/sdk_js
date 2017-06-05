@@ -141,7 +141,7 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
     /*
      Example:
      var postData = {
-     "name":$(".page.profile_form_update .name").val(), //value as string
+     "name":$(".page.my_profile_update .name").val(), //value as string
      "avatar": $("#abring_profile_avatar_upload")[0].files[0] //value as file
      };
      */

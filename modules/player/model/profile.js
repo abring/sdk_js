@@ -215,26 +215,26 @@ var fillMyPlayerInfo = function (reset_cache) {
             age = (new Date().getFullYear())-abring.params.player_info['birth'];
         abring.params.player_info['avatar'] = abring.params.player_info['avatar'] || abring.params.abring_default_avatar_url;
 
-        $("#"+abring.params.player.parent_id+" .profile_form .username").html(abring.params.player_info['username']);
-        $("#"+abring.params.player.parent_id+" .profile_form .name").html(abring.params.player_info['name']);
-        $("#"+abring.params.player.parent_id+" .profile_form .avatar").attr("src",abring.params.player_info['avatar']);
+        $("#"+abring.params.player.parent_id+" .my_profile .username").html(abring.params.player_info['username']);
+        $("#"+abring.params.player.parent_id+" .my_profile .name").html(abring.params.player_info['name']);
+        $("#"+abring.params.player.parent_id+" .my_profile .avatar").attr("src",abring.params.player_info['avatar']);
         $("#"+abring.params.player.parent_id+" .profile-contain").css("background-image","url("+abring.params.player_info['timeline_cover']+")");
-        $("#"+abring.params.player.parent_id+" .profile_form .sex").html(abring.params.player_info['sex']);
-        $("#"+abring.params.player.parent_id+" .profile_form .age").html(age);
-        $("#"+abring.params.player.parent_id+" .profile_form .mobile").html(abring.params.player_info['mobile']);
+        $("#"+abring.params.player.parent_id+" .my_profile .sex").html(abring.params.player_info['sex']);
+        $("#"+abring.params.player.parent_id+" .my_profile .age").html(age);
+        $("#"+abring.params.player.parent_id+" .my_profile .mobile").html(abring.params.player_info['mobile']);
 
-        $("#"+abring.params.player.parent_id+" .profile_form_update .username").val(abring.params.player_info['username']);
-        $("#"+abring.params.player.parent_id+" .profile_form_update .name").val(abring.params.player_info['name']);
-        $("#"+abring.params.player.parent_id+" .profile_form_update .age").val(age);
-        $("#"+abring.params.player.parent_id+" .profile_form_update .sex").val(abring.params.player_info['sex']);
-        $("#"+abring.params.player.parent_id+" .profile_form_update .mobile").val(abring.params.player_info['mobile']);
-        $("#"+abring.params.player.parent_id+" .profile_form_update .avatar").attr("src",abring.params.player_info['avatar']);
-        $("#"+abring.params.player.parent_id+" .profile_form_update .cover").attr("src",abring.params.player_info['timeline_cover']);
+        $("#"+abring.params.player.parent_id+" .my_profile_update .username").val(abring.params.player_info['username']);
+        $("#"+abring.params.player.parent_id+" .my_profile_update .name").val(abring.params.player_info['name']);
+        $("#"+abring.params.player.parent_id+" .my_profile_update .age").val(age);
+        $("#"+abring.params.player.parent_id+" .my_profile_update .sex").val(abring.params.player_info['sex']);
+        $("#"+abring.params.player.parent_id+" .my_profile_update .mobile").val(abring.params.player_info['mobile']);
+        $("#"+abring.params.player.parent_id+" .my_profile_update .avatar").attr("src",abring.params.player_info['avatar']);
+        $("#"+abring.params.player.parent_id+" .my_profile_update .cover").attr("src",abring.params.player_info['timeline_cover']);
     }else{
-        $("#"+abring.params.player.parent_id+" .profile_form .username").html("");
-        $("#"+abring.params.player.parent_id+" .profile_form .name").html("");
-        $("#"+abring.params.player.parent_id+" .profile_form .avatar").attr("src","");
-        $("#"+abring.params.player.parent_id+" .profile_form .cover").attr("src","");
+        $("#"+abring.params.player.parent_id+" .my_profile .username").html("");
+        $("#"+abring.params.player.parent_id+" .my_profile .name").html("");
+        $("#"+abring.params.player.parent_id+" .my_profile .avatar").attr("src","");
+        $("#"+abring.params.player.parent_id+" .my_profile .cover").attr("src","");
         abring.params.display.hidePageFunction();
     }
 };
