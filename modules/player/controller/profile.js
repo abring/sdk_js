@@ -180,7 +180,7 @@ $(document).on("click",".abring_buttons_my_profile",function () {
     abring.params.player.pages.my_profile.show();
 
 });
-$(document).on("click",".page.my_profile .update_profile",function () {
+$(document).on("click",".my_profile_update_profile",function () {
 
     if(!abring.params.player_info)
     {
@@ -191,7 +191,7 @@ $(document).on("click",".page.my_profile .update_profile",function () {
     fillMyPlayerInfo();
     abring.params.player.showPageFunction("my_profile_update","Update profile!");
 });
-$(document).on("click",".page.my_profile_update .submit",function () {
+$(document).on("click",".my_profile_update_submit",function () {
     abring.params.display.loading.show("submitting your profile!");
     var data = {
         "name":$(".page.my_profile_update .name").val(),

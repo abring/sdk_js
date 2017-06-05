@@ -234,7 +234,26 @@ abring.params.player = {
         "player_mobile_other_way":{},
         "player_register":{},
         "player_login":{},
-        "my_profile_update":{},
+        "my_profile_update":{
+
+            "parent_id":"my_profile_update",
+            "theme":"",
+            "getTheme":function(){
+                var theme = abring.params.player.pages.my_profile_update.theme;
+                if(!theme)
+                    theme = abring.params.player.pages.my_profile_update.theme =
+                        $("#abring .my_profile_update").html();
+                $("#abring .my_profile_update").html("");
+                var parent_id = abring.params.player.pages.my_profile_update.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.player.pages.my_profile_update.theme;
+            },
+            "show":function(){
+                fillMyPlayerInfo(true);
+                var parent_id = abring.params.player.pages.my_profile_update.parent_id;
+                abring.params.display.showPageFunction(parent_id);
+            }
+        },
         "abring_chat":{}
     },
     "parent_id" : "abring_player",
