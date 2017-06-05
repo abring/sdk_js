@@ -110,9 +110,10 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
         callAbringWithFileUpload(
             "player/get-multiple",
             {"player_id":player_id},
-            function (other_player_info) {
-                $.each(other_player_info,function (index,other_player_info) {
-                    if(!other_player_info["avatar"]) other_player_info["avatar"] = "";
+            function (other_players_info) {
+                $.each(other_players_info,function (index,other_player_info) {
+                    if(!other_player_info["avatar"]) other_player_info["avatar"] = abring.params.display.default_avatar_url;
+                    if(!other_player_info["name"]) other_player_info["name"] = other_player_info["player_id"];
                     if(!other_player_info["public"]) other_player_info["public"] = [];
                     var x = other_player_info["public"];
                     if(x.constructor.name=="String")
@@ -502,7 +503,7 @@ var abringOnPlayerSocketMessage = function(from_player_id,message){
             log("process chat");
             getOtherPlayerInfo(from_player_id,false,
                 function (from_player_info) {
-                    abring.params.chatMessageFunction(from_player_info,message);
+                    abring.params.chatMessageFunction(from_player_info,message[1]);
                 },function (x,c,e) {
                     abring.params.display.error.show(e);
                 }
@@ -524,18 +525,18 @@ var abringOnPlayerChatMessage = function(from_player_info,message) {
     if(abring.params.display.current_page!=abring.params.chat_parent_id)
         play_sound(abring.params.sounds.notification);
 
-    abring.params.player.pages.abring_chat.show(from_player_info['player_id']);
+    abring.params.player.pages.abring_chat.show(from_player_info['player_id'],message);
     //showChatPage(from_player_info['player_id']);
-    var chat_message =
-        "<div class='chat-result-contain your-chat-contain'>" +
-        "<span class='your-chat-name chat-name'>" +
-        from_player_info["name"]+
-        "</span>" +
-        "<span class='your-chat-message chat-message'>" +
-        message[1].trim()+
-        "</span>" +
-        "</div>";
-    $("#"+abring.params.chat_parent_id+" #chat_"+from_player_id+" .chat_content").append(chat_message);
+    //var chat_message =
+    //    "<div class='chat-result-contain your-chat-contain'>" +
+    //    "<span class='your-chat-name chat-name'>" +
+    //    from_player_info["name"]+
+    //    "</span>" +
+    //    "<span class='your-chat-message chat-message'>" +
+    //    message[1].trim()+
+    //    "</span>" +
+    //    "</div>";
+    //$("#"+abring.params.chat_parent_id+" #chat_"+from_player_id+" .chat_content").append(chat_message);
 };
 var chatFinish = function(){
     socketClose();

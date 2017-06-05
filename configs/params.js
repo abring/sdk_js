@@ -348,14 +348,14 @@ abring.params.player = {
             "theme":"",
             "getTheme":function(override){
                 var theme = abring.params.player.pages.abring_chat.theme;
+                var parent_id = abring.params.player.pages.abring_chat.parent_id;
                 if(!theme || override)
                 {
                     theme = abring.params.player.pages.abring_chat.theme =
                         $("."+abring.params.player.pages.abring_chat.theme_parent_id).html();
                     $("."+abring.params.player.pages.abring_chat.theme_parent_id).html("");
+                    $("."+parent_id).html(theme);
                 }
-                var parent_id = abring.params.player.pages.abring_chat.parent_id;
-                $("."+parent_id).html(theme);
                 return abring.params.player.pages.abring_chat.theme;
             },
             "show":function(target_player_id,init_message){
@@ -378,9 +378,10 @@ abring.params.player = {
                         $("."+parent_id+" #chat_"+target_player_id+" .target_player_name").html(target_player_info["name"]);
                         $("."+parent_id+" #chat_"+target_player_id+" .chat_send").attr("player_id",target_player_info["player_id"]);
 
+                        abring.params.display.showPageFunction(parent_id);
+
                         if(init_message)
                             abring.params.player.pages.abring_chat.target_player_say(target_player_info,init_message);
-                        abring.params.display.showPageFunction(parent_id);
                     },function (x,c,e) {
                         abring.params.display.error.show(e);
                     }
@@ -392,10 +393,13 @@ abring.params.player = {
                 var template = $(tag_selector+" .you").first().outerHTML();
                 $(tag_selector+" .chat_content").append(template);
                 $(tag_selector+" .chat_content .you:last .avatar").attr("src",target_player_info["avatar"]);
-                $(tag_selector+" .chat_content .you:last .name").html(target_player_info["name"]);
-                $(tag_selector+" .chat_content .you:last .message").html(message);
-                $(tag_selector+" .chat_content .you:last .time").html('now');//???????????
-                $(tag_selector+" .chat_content .you:last").show("slow");
+                $(tag_selector+" .chat_content .you").last().find(".name").html(target_player_info["name"]);
+                var x = $(tag_selector+" .chat_content .you");
+                var x1 = x.last();
+                var x2 = x1.find(".message");
+                $(tag_selector+" .chat_content .you").last().find(".message").html(message);
+                $(tag_selector+" .chat_content .you").last().find(".time").html('now');//???????????
+                $(tag_selector+" .chat_content .you").last().show("slow");
             },
             "i_say":function(target_player_id,message){
                 var parent_id = abring.params.player.pages.abring_chat.parent_id;

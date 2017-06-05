@@ -7,10 +7,10 @@ var abringPageShow = function (page,title,message) {
     $("#abring .page").hide();
 
     title = title || "";
-    $("#abring ."+page+' .title').html(title);
+    $("#abring ."+page+'.dialog .abring-dialog-title').html(title);
 
     message = message || "";
-    $("#abring ."+page+' .message').html(message);
+    $("#abring ."+page+'.dialog .abring-dialog-message').html(message);
 
     $("#abring ."+page).show();
 };
