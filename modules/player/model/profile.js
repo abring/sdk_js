@@ -243,6 +243,7 @@ var fillMyPlayerInfo = function (reset_cache) {
         $("."+parent_id+" .avatar").attr("src","");
         $("."+parent_id+" .cover").attr("src","");
     }
+    abring.params.display.hidePageFunction();
 };
 var fillOtherPlayerInfo = function(other_player_id,fillOtherPlayerInfoSuccess,fillOtherPlayerInfoFailed){
     fillOtherPlayerInfoSuccess = fillOtherPlayerInfoSuccess || function(){};

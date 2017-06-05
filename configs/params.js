@@ -152,11 +152,19 @@ abring.params.player = {
     "pages":{
         "my_profile":{
             "parent_id":"my_profile",
+            "setParentId":function(parent_id){
+                abring.params.player.pages.my_profile.parent_id = parent_id;
+                abring.params.player.pages.my_profile.getTheme(true);
+            },
             "theme_parent_id":"my_profile",
+            "setThemeParentId":function(theme_parent_id){
+                abring.params.player.pages.my_profile.theme_parent_id = theme_parent_id;
+                abring.params.player.pages.my_profile.getTheme(true);
+            },
             "theme":"",
-            "getTheme":function(){
+            "getTheme":function(override){
                 var theme = abring.params.player.pages.my_profile.theme;
-                if(!theme)
+                if(!theme || override)
                 {
                     theme = abring.params.player.pages.my_profile.theme =
                         $("."+abring.params.player.pages.my_profile.theme_parent_id).html();
@@ -174,12 +182,20 @@ abring.params.player = {
             }
         },
         "other_player_profile":{
-            "parent_id":"player_view_details",
-            "theme_parent_id":"player_view_details",
+            "parent_id":"other_player_profile",
+            "setParentId":function(parent_id){
+                abring.params.player.pages.other_player_profile.parent_id = parent_id;
+                abring.params.player.pages.other_player_profile.getTheme(true);
+            },
+            "theme_parent_id":"other_player_profile",
+            "setThemeParentId":function(theme_parent_id){
+                abring.params.player.pages.other_player_profile.theme_parent_id = theme_parent_id;
+                abring.params.player.pages.other_player_profile.getTheme(true);
+            },
             "theme":"",
-            "getTheme":function(){
+            "getTheme":function(override){
                 var theme = abring.params.player.pages.other_player_profile.theme;
-                if(!theme)
+                if(!theme || override)
                 {
                     theme = abring.params.player.pages.other_player_profile.theme =
                         $("."+abring.params.player.pages.other_player_profile.theme_parent_id).html();
@@ -204,11 +220,19 @@ abring.params.player = {
         },
         "player_mobile_register":{
             "parent_id":"player_mobile_register",
+            "setParentId":function(parent_id){
+                abring.params.player.pages.player_mobile_register.parent_id = parent_id;
+                abring.params.player.pages.player_mobile_register.getTheme(true);
+            },
             "theme_parent_id":"player_mobile_register",
+            "setThemeParentId":function(theme_parent_id){
+                abring.params.player.pages.player_mobile_register.theme_parent_id = theme_parent_id;
+                abring.params.player.pages.player_mobile_register.getTheme(true);
+            },
             "theme":"",
-            "getTheme":function(){
+            "getTheme":function(override){
                 var theme = abring.params.player.pages.player_mobile_register.theme;
-                if(!theme)
+                if(!theme || override)
                 {
                     theme = abring.params.player.pages.player_mobile_register.theme =
                         $("."+abring.params.player.pages.player_mobile_register.theme_parent_id).html();
@@ -226,11 +250,19 @@ abring.params.player = {
         },
         "player_mobile_verify":{
             "parent_id":"player_mobile_verify",
+            "setParentId":function(parent_id){
+                abring.params.player.pages.player_mobile_verify.parent_id = parent_id;
+                abring.params.player.pages.player_mobile_verify.getTheme(true);
+            },
             "theme_parent_id":"player_mobile_verify",
+            "setThemeParentId":function(theme_parent_id){
+                abring.params.player.pages.player_mobile_verify.theme_parent_id = theme_parent_id;
+                abring.params.player.pages.player_mobile_verify.getTheme(true);
+            },
             "theme":"",
-            "getTheme":function(){
+            "getTheme":function(override){
                 var theme = abring.params.player.pages.player_mobile_verify.theme;
-                if(!theme)
+                if(!theme || override)
                 {
                     theme = abring.params.player.pages.player_mobile_verify.theme =
                         $("."+abring.params.player.pages.player_mobile_verify.theme_parent_id).html();
@@ -248,11 +280,19 @@ abring.params.player = {
         },
         "player_mobile_other_way":{
             "parent_id":"player_mobile_other_way",
+            "setParentId":function(parent_id){
+                abring.params.player.pages.player_mobile_other_way.parent_id = parent_id;
+                abring.params.player.pages.player_mobile_other_way.getTheme(true);
+            },
             "theme_parent_id":"player_mobile_other_way",
+            "setThemeParentId":function(theme_parent_id){
+                abring.params.player.pages.player_mobile_other_way.theme_parent_id = theme_parent_id;
+                abring.params.player.pages.player_mobile_other_way.getTheme(true);
+            },
             "theme":"",
-            "getTheme":function(){
+            "getTheme":function(override){
                 var theme = abring.params.player.pages.player_mobile_other_way.theme;
-                if(!theme)
+                if(!theme || override)
                 {
                     theme = abring.params.player.pages.player_mobile_other_way.theme =
                         $("."+abring.params.player.pages.player_mobile_other_way.theme_parent_id).html();
@@ -272,11 +312,19 @@ abring.params.player = {
         "player_login":{},
         "my_profile_update":{
             "parent_id":"my_profile_update",
+            "setParentId":function(parent_id){
+                abring.params.player.pages.my_profile_update.parent_id = parent_id;
+                abring.params.player.pages.my_profile_update.getTheme(true);
+            },
             "theme_parent_id":"my_profile_update",
+            "setThemeParentId":function(theme_parent_id){
+                abring.params.player.pages.my_profile_update.theme_parent_id = theme_parent_id;
+                abring.params.player.pages.my_profile_update.getTheme(true);
+            },
             "theme":"",
-            "getTheme":function(){
+            "getTheme":function(override){
                 var theme = abring.params.player.pages.my_profile_update.theme;
-                if(!theme)
+                if(!theme || override)
                 {
                     theme = abring.params.player.pages.my_profile_update.theme =
                         $("."+abring.params.player.pages.my_profile_update.theme_parent_id).html();

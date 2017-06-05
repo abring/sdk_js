@@ -189,7 +189,7 @@ $(document).on("click",".my_profile_update_profile",function () {
     }
 
     fillMyPlayerInfo();
-    abring.params.player.showPageFunction("my_profile_update","Update profile!");
+    abring.params.player.pages.my_profile_update.show();
 });
 $(document).on("click",".my_profile_update_submit",function () {
     abring.params.display.loading.show("submitting your profile!");
