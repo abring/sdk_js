@@ -193,11 +193,14 @@ $(document).on("click",".my_profile_update_profile",function () {
 });
 $(document).on("click",".my_profile_update_submit",function () {
     abring.params.display.loading.show("submitting your profile!");
+
+    var parent_id_update = abring.params.player.pages.my_profile_update.parent_id;
+
     var data = {
-        "name":$(".page.my_profile_update .name").val(),
-        "sex":$(".page.my_profile_update .sex").val(),
-        "birth":(new Date().getFullYear())-parseInt($(".page.my_profile_update .age").val()),
-        "mobile":$(".page.my_profile_update .mobile").val()
+        "name":$("."+parent_id_update+" .name").val(),
+        "sex":$("."+parent_id_update+" .sex").val(),
+        "birth":(new Date().getFullYear())-parseInt($("."+parent_id_update+" .age").val()),
+        "mobile":$("."+parent_id_update+" .mobile").val()
     };
     if($("#abring_profile_avatar_upload")[0].files[0])
         data['avatar'] = $("#abring_profile_avatar_upload")[0].files[0];
