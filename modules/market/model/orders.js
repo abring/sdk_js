@@ -1,0 +1,4 @@
+
+var initOrders = function () {
+
+};

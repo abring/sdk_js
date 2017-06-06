@@ -31,4 +31,5 @@ document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/pla
 document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/leaderboard/module.js'></script>");
 document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/friends/module.js'></script>");
 document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/post/module.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/market/module.js'></script>");
 

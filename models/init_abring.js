@@ -56,6 +56,7 @@ abring.init = function (data) {
     initLeaderboard();
     initFriends();
     initPost();
+    initMarket();
 
     abring.params.token = getCookie("token");
 
