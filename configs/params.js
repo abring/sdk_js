@@ -455,6 +455,33 @@ abring.params.market.products = {
             "show":function (productsList) {
                 showProductsList(productsList);
             }
+        },
+        "productView":{
+            "parent_id":"product_view",
+            "theme_parent_id":"product_view",
+            "setParents":function(parent_id,theme_parent_id){
+                if(parent_id)
+                    abring.params.market.products.pages.productView.parent_id = parent_id;
+                if(theme_parent_id)
+                    abring.params.market.products.pages.productView.theme_parent_id = theme_parent_id;
+                abring.params.market.products.pages.productView.getTheme(true);
+            },
+            "theme":"",
+            "getTheme":function(override){
+                var theme = abring.params.market.products.pages.productView.theme;
+                if(!theme || override)
+                {
+                    theme = abring.params.market.products.pages.productView.theme =
+                        $("."+abring.params.market.products.pages.productView.theme_parent_id).html();
+                    $("."+abring.params.market.products.pages.productView.theme_parent_id).html("");
+                }
+                var parent_id = abring.params.market.products.pages.productView.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.market.products.pages.productView.theme;
+            },
+            "show":function (product) {
+                showProductsView(product);
+            }
         }
     }
 };
