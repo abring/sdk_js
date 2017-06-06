@@ -11,6 +11,13 @@ abring.params = {
         "parent_id" : "abring_friends"
     },
 
+    "market":{
+        "products":{},
+        "basket":{},
+        "payment":{},
+        "orders":{}
+    },
+
     "posts_parent_id" : "frog_posts", //use custom parent to show posts,
 
     "sounds":{
@@ -418,4 +425,36 @@ abring.params.player = {
     "onLoginFunction":function (data) { return onPlayerLogin(data)},
     "onLogoutFunction":function () { return onPlayerLogout()},
     "onDataLoaded":function (data) { return onDataLoaded(data)}
+};
+
+abring.params.market.products = {
+    "pages":{
+        "productList":{
+            "parent_id":"products_list",
+            "theme_parent_id":"products_list",
+            "setParents":function(parent_id,theme_parent_id){
+                if(parent_id)
+                    abring.params.market.products.pages.productList.parent_id = parent_id;
+                if(theme_parent_id)
+                    abring.params.market.products.pages.productList.theme_parent_id = theme_parent_id;
+                abring.params.market.products.pages.productList.getTheme(true);
+            },
+            "theme":"",
+            "getTheme":function(override){
+                var theme = abring.params.market.products.pages.productList.theme;
+                if(!theme || override)
+                {
+                    theme = abring.params.market.products.pages.productList.theme =
+                        $("."+abring.params.market.products.pages.productList.theme_parent_id).html();
+                    $("."+abring.params.market.products.pages.productList.theme_parent_id).html("");
+                }
+                var parent_id = abring.params.market.products.pages.productList.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.market.products.pages.productList.theme;
+            },
+            "show":function (productsList) {
+                showProductsList(productsList);
+            }
+        }
+    }
 };

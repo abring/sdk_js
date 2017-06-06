@@ -1,9 +1,34 @@
-<div class="page products_list">
+<style>
+    .products_list ul li:first-child{
+        display: none;
+    }
+    .products_list ul li * {
+        float: right;
+        padding: 10px;
+    }
+    .products_list ul li {
+        clear: both;
+        padding: 10px;
+    }
+    .products_list ul li button{
+        float: left;
+    }
+</style>
+<div class="page products_list" style="padding: 0px 0 50px 0;">
     <div class="action-div base-padding">
         <a href="#" class="close"><img src="abring/img/Arrow_Back.svg" /></a>
         <span class="message left"></span>
     </div>
     <div class="content-div base-padding">
 
+        <ul>
+            <li>
+                <img src="" class="image">
+                <h3 class="name"></h3>
+                <h3 class="fee"></h3>
+                <h3 class="amount"></h3>
+                <button class="abring_button_market_add_to_basket">add to basket</button>
+            </li>
+        </ul>
     </div>
 </div>
