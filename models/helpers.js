@@ -185,7 +185,9 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
                         log("Logged in with device id was successful");
                     },function (xhr,code,error) {
                         log("first in with device id was failed:\n"+error);
-                        abring.params.display.showPageFunction("player_mobile_register","Your are not login!");
+                        abring.params.display.error.show("error","Your are not login!");
+                        failCallback(xhr,json_result_data['code'],"failed:"+json_result_data['message']);
+                        return false;
                     }
                 );
 
