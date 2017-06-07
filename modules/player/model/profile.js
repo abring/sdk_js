@@ -147,7 +147,7 @@ var abringPlayerLogin = function (username, password) {
     );
 };
 var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutFailed) {
-
+    abring.params.display.loading.show("Process log out");
     abringPlayerLogoutSuccess = abringPlayerLogoutSuccess || function () {};
     abringPlayerLogoutFailed = abringPlayerLogoutFailed || function () {};
 
@@ -158,10 +158,11 @@ var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutF
                 "player/logout",{},
                 function(res){
                     onPlayerLogout();
+                    abring.params.display.hidePageFunction();
                     abringPlayerLogoutSuccess(res);
-                    showMyProfile("player_mobile_register","Logout successfully!");
                 },
                 function(x,c,e){
+                    abring.params.display.hidePageFunction();
                     abringPlayerLogoutFailed(x,c,e);
                 }
             );
