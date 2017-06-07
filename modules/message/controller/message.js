@@ -52,6 +52,6 @@ $(document).on("click",".abring_buttons_message_unicast_submit",function () {
         return alert("message not set");
     if(!player_id)
         return alert("player id not set");
-    sendMessageUnicast();
+    sendMessageUnicast(player_id,title,message);
 
 });
