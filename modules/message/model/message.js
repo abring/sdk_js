@@ -64,7 +64,7 @@ var fillMessageList = function (messageList) {
                 list_object.parent().find("li:last-child .title").html(message["title"]);
                 list_object.parent().find("li:last-child .date").html(message["date"]);
                 if(message["status"]!="read")
-                    list_object.addClass("unread");
+                    list_object.parent().find("li:last-child").addClass("unread");
             });
         }
     });
