@@ -7,7 +7,18 @@ $(document).on("click",".abring_buttons_message_list",function () {
         return false;
     }
 
-    abring.params.message.pages.list.show();
+    abring.params.display.loading.show("loading your messages");
+    abring.params.message.pages.list.getTheme();
+    getMessageList(
+        function (messageList) {
+            fillMessageList(messageList);
+            abring.params.display.hidePageFunction();
+            abring.params.message.pages.list.show();
+        },function (x,c,e) {
+            abring.params.display.error.show(e);
+        }
+    );
+
 
 });
 $(document).on("click",".abring_buttons_message_view",function () {
@@ -18,8 +29,20 @@ $(document).on("click",".abring_buttons_message_view",function () {
         return false;
     }
 
+    abring.params.display.loading.show("loading message");
+
     var message_id = $(this).attr("message_id");
-    abring.params.message.pages.view.show(message_id);
+    getMessage(
+        message_id,
+        function (message) {
+            fillMessage(message);
+            abring.params.display.hidePageFunction();
+            abring.params.message.pages.view.show(message_id);
+        },function (x,c,e) {
+            abring.params.display.error.show(e);
+        }
+    );
+
 
 });
 $(document).on("click",".abring_buttons_message_unicast",function () {

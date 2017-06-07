@@ -5,17 +5,8 @@ var initMessage = function () {
 };
 
 var showMessageList = function () {
-    abring.params.display.loading.show("loading your messages");
-    abring.params.message.pages.list.getTheme();
-    getMessageList(
-        function (messageList) {
-            fillMessageList(messageList);
-            var parent_id = abring.params.message.pages.list.parent_id;
-            abring.params.display.showPageFunction(parent_id);
-        },function (x,c,e) {
-            abring.params.display.error.show(e);
-        }
-    );
+    var parent_id = abring.params.message.pages.list.parent_id;
+    abring.params.display.showPageFunction(parent_id);
 };
 var getMessageList = function (getMessageListSuccess,getMessageListFailed) {
     callAbringWithFileUpload(
@@ -71,18 +62,9 @@ var fillMessageList = function (messageList) {
 
 };
 
-var showMessage = function (message_id) {
-    abring.params.display.loading.show("loading message");
-    getMessage(
-        message_id,
-        function (message) {
-            fillMessage(message);
-            var parent_id = abring.params.message.pages.view.parent_id;
-            abring.params.display.showPageFunction(parent_id);
-        },function (x,c,e) {
-            abring.params.display.error.show(e);
-        }
-    );
+var showMessage = function () {
+    var parent_id = abring.params.message.pages.view.parent_id;
+    abring.params.display.showPageFunction(parent_id);
 };
 var getMessage = function (message_id,getMessageSuccess,getMessageFailed) {
     callAbringWithFileUpload(
