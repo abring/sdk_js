@@ -18,7 +18,8 @@ $(document).on("click",".abring_buttons_message_view",function () {
         return false;
     }
 
-    abring.params.message.pages.view.show();
+    var message_id = $(this).attr("message_id");
+    abring.params.message.pages.view.show(message_id);
 
 });
 $(document).on("click",".abring_buttons_message_unicast",function () {

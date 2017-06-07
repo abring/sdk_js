@@ -31,17 +31,10 @@ var fillMessageList = function (messageList) {
     //fill list
 };
 
-var showMessageUnicast = function (player_id) {
-    var parent_id = abring.params.message.pages.unicast.parent_id;
-    $("."+parent_id+" .abring_message_form *").attr("player_id",player_id);
-    $("."+parent_id+" .abring_message_form #abring_message_player_id").val(player_id);
-    abring.params.display.showPageFunction(parent_id);
-};
-
 var showMessage = function (message_id) {
-
     abring.params.display.loading.show("loading message");
     getMessage(
+        message_id,
         function (message) {
             fillMessage(message);
             var parent_id = abring.params.message.pages.view.parent_id;
@@ -51,10 +44,10 @@ var showMessage = function (message_id) {
         }
     );
 };
-var getMessage = function (getMessageSuccess,getMessageFailed) {
+var getMessage = function (message_id,getMessageSuccess,getMessageFailed) {
     callAbringWithFileUpload(
         "message/view",
-        {},
+        {"message_id":message_id},
         function (message) {
             getMessageSuccess(message);
         },function (x,c,e) {
@@ -64,8 +57,25 @@ var getMessage = function (getMessageSuccess,getMessageFailed) {
 };
 var fillMessage = function (message) {
     //fill message
+    log("message");
+    log(message);
+
+    var parent_id = abring.params.message.pages.view.parent_id;
+
+    $("."+parent_id+" .by_avatar").attr("src",message["by_player_info"]["avatar"]);
+    $("."+parent_id+" .by_name").html(message["by_player_info"]["name"]);
+    $("."+parent_id+" .by_player_id").attr("player_id",message["by_player_info"]["player_id"]);
+    $("."+parent_id+" .title").html(message["title"]);
+    $("."+parent_id+" .message").html(message["message"]);
+    $("."+parent_id+" .date").html(message["date"]);
 };
 
+var showMessageUnicast = function (player_id) {
+    var parent_id = abring.params.message.pages.unicast.parent_id;
+    $("."+parent_id+" .abring_message_form *").attr("player_id",player_id);
+    $("."+parent_id+" .abring_message_form #abring_message_player_id").val(player_id);
+    abring.params.display.showPageFunction(parent_id);
+};
 var sendMessageUnicast = function (player_id,title,message) {
     callAbringWithFileUpload(
         "message/unicast",
