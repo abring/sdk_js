@@ -155,6 +155,92 @@ abring.params.display ={
 
 };
 
+abring.params.message = {
+    "pages":{
+        "list":{
+            "parent_id":"message_list",
+            "theme_parent_id":"message_list",
+            "setParents":function(parent_id,theme_parent_id){
+                if(parent_id)
+                    abring.params.message.pages.list.parent_id = parent_id;
+                if(theme_parent_id)
+                    abring.params.message.pages.list.theme_parent_id = theme_parent_id;
+                abring.params.message.pages.list.getTheme(true);
+            },
+            "theme":"",
+            "getTheme":function(override){
+                var theme = abring.params.message.pages.list.theme;
+                if(!theme || override)
+                {
+                    theme = abring.params.message.pages.list.theme =
+                        $("."+abring.params.message.pages.list.theme_parent_id).html();
+                    $("."+abring.params.message.pages.list.theme_parent_id).html("");
+                }
+                var parent_id = abring.params.message.pages.list.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.message.pages.list.theme;
+            },
+            "show":function () {
+                showMessageList();
+            }
+        },
+        "view":{
+            "parent_id":"message_view",
+            "theme_parent_id":"message_view",
+            "setParents":function(parent_id,theme_parent_id){
+                if(parent_id)
+                    abring.params.message.pages.view.parent_id = parent_id;
+                if(theme_parent_id)
+                    abring.params.message.pages.view.theme_parent_id = theme_parent_id;
+                abring.params.message.pages.view.getTheme(true);
+            },
+            "theme":"",
+            "getTheme":function(override){
+                var theme = abring.params.message.pages.view.theme;
+                if(!theme || override)
+                {
+                    theme = abring.params.message.pages.view.theme =
+                        $("."+abring.params.message.pages.view.theme_parent_id).html();
+                    $("."+abring.params.message.pages.view.theme_parent_id).html("");
+                }
+                var parent_id = abring.params.message.pages.view.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.message.pages.view.theme;
+            },
+            "show":function (messageId) {
+                showMessage(messageId);
+            }
+        },
+        "unicast":{
+            "parent_id":"message_unicast",
+            "theme_parent_id":"message_unicast",
+            "setParents":function(parent_id,theme_parent_id){
+                if(parent_id)
+                    abring.params.message.pages.unicast.parent_id = parent_id;
+                if(theme_parent_id)
+                    abring.params.message.pages.unicast.theme_parent_id = theme_parent_id;
+                abring.params.message.pages.unicast.getTheme(true);
+            },
+            "theme":"",
+            "getTheme":function(override){
+                var theme = abring.params.message.pages.unicast.theme;
+                if(!theme || override)
+                {
+                    theme = abring.params.message.pages.unicast.theme =
+                        $("."+abring.params.message.pages.unicast.theme_parent_id).html();
+                    $("."+abring.params.message.pages.unicast.theme_parent_id).html("");
+                }
+                var parent_id = abring.params.message.pages.unicast.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.message.pages.unicast.theme;
+            },
+            "show":function (player_id) {
+                showMessageUnicast(player_id);
+            }
+        }
+    }
+};
+
 abring.params.player = {
     "pages":{
         "my_profile":{
@@ -485,6 +571,7 @@ abring.params.market.products = {
         }
     }
 };
+
 abring.params.market.basket = {
     "pages":{
         "basketView":{

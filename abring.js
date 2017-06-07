@@ -28,6 +28,7 @@ document.writeln("<script type='text/javascript' src='"+abring_url+"/models/init
 document.writeln("<script type='text/javascript' src='"+abring_url+"/models/display.js'></script>");
 
 document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/player/module.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/message/module.js'></script>");
 document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/leaderboard/module.js'></script>");
 document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/friends/module.js'></script>");
 document.writeln("<script type='text/javascript' src='"+abring_url+"/modules/post/module.js'></script>");
