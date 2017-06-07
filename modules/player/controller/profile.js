@@ -73,6 +73,8 @@ $(document).on("click",".abring_buttons_player_mobile_register",function () {
         abring.params.display.warning.show("Your are already a member and login.");
         return false;
     }
+
+    abring.params.player.pages.player_mobile_register.getTheme();
     abring.params.player.pages.player_mobile_register.show();
 });
 $(document).on("click",".player_mobile_register_submit",function () {
@@ -88,6 +90,10 @@ $(document).on("click",".player_mobile_register_submit",function () {
     abringPlayerMobileRegister(
         mobile_number,
         function(){
+            var parent_id = abring.params.player.pages.player_mobile_verify.parent_id;
+            abring.params.player.pages.player_mobile_verify.getTheme();
+            $("."+parent_id+" .player_mobile_verify_mobile_number_label").html(mobile_number);
+            $("."+parent_id+" .player_mobile_verify_mobile_number").val(mobile_number);
             abring.params.display.hidePageFunction();
             abring.params.player.pages.player_mobile_verify.show();
         },

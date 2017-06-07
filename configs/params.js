@@ -331,7 +331,6 @@ abring.params.player = {
                 return abring.params.player.pages.player_mobile_register.theme;
             },
             "show":function(){
-                abring.params.player.pages.player_mobile_register.getTheme();
                 var parent_id = abring.params.player.pages.player_mobile_register.parent_id;
                 abring.params.player.showPageFunction(parent_id);
             }
@@ -360,7 +359,6 @@ abring.params.player = {
                 return abring.params.player.pages.player_mobile_verify.theme;
             },
             "show":function(){
-                abring.params.player.pages.player_mobile_verify.getTheme();
                 var parent_id = abring.params.player.pages.player_mobile_verify.parent_id;
                 abring.params.player.showPageFunction(parent_id);
             }
