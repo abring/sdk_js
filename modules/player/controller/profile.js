@@ -185,8 +185,11 @@ $(document).on("click",".abring_buttons_my_profile",function () {
     }
 
     abring.params.player.pages.my_profile.getTheme();
-    fillMyPlayerInfo(true);
-    abring.params.player.pages.my_profile.show();
+    fillMyPlayerInfo(true,
+        function(){
+            abring.params.player.pages.my_profile.show();
+        }
+    );
 
 });
 $(document).on("click",".my_profile_update_profile",function () {
@@ -246,7 +249,11 @@ $(document).on("click",".abring_player_logout",function () {
 $(document).on("click","#abring .player_login .submit",function () {
     var username = $(".player_login .username").val();
     var password = $(".player_login .password").val();
-    abringPlayerLogin(username,password);
+    abringPlayerLogin(username,password,
+        function(res){
+            abring.params.display.home.show();
+        }
+    );
 });
 $(document).on("click","#abring .player_register .submit",function () {
     var username = $(".player_register .username").val();

@@ -130,7 +130,8 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
         getOtherPlayerInfoSuccess(abring.params.other_players[player_id]);
 };
 
-var abringPlayerLogin = function (username, password) {
+var abringPlayerLogin = function (username, password , abringPlayerLoginSuccess) {
+    abringPlayerLoginSuccess = abringPlayerLoginSuccess || function(){};
     abring.params.display.loading.show("logon to Abring\nPlease wait");
     if(abring.params.token)
         abringPlayerLogout();
@@ -141,6 +142,7 @@ var abringPlayerLogin = function (username, password) {
             setCookie("token",abring.params.token,100);
             setCookie("player_info",abring.params.player_info,100);
             abring.params.display.hidePageFunction();
+            abringPlayerLoginSuccess(res);
         },function (x,c,e) {
             abring.params.display.error.show(e);
         }
@@ -208,8 +210,8 @@ var abringPlayerRegister = function (username, password, variables, values) {
     abringLoadingFinish();
 };
 
-var fillMyPlayerInfo = function (reset_cache) {
-
+var fillMyPlayerInfo = function (reset_cache,fillMyPlayerInfoSuccess) {
+    fillMyPlayerInfoSuccess = fillMyPlayerInfoSuccess || function(){};
     abring.params.display.loading.show("loading","Please wait");
     var parent_id = abring.params.player.pages.my_profile.parent_id;
     var parent_id_update = abring.params.player.pages.my_profile_update.parent_id;
@@ -240,6 +242,7 @@ var fillMyPlayerInfo = function (reset_cache) {
             $("."+parent_id_update+" .avatar").attr("src",abring.params.player_info['avatar']);
             $("."+parent_id_update+" .cover").attr("src",abring.params.player_info['timeline_cover']);
             abring.params.display.hidePageFunction();
+            fillMyPlayerInfoSuccess();
         },
         function(){
 
