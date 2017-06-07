@@ -1,27 +1,30 @@
 <style>
-    .products_list ul li:first-child{
+    .message_list ul li:first-child{
         display: none;
     }
-    .products_list ul li * {
-        float: right;
-        padding: 10px;
+    .message_list ul li.unread{
+        font-weight: bold;
     }
-    .products_list ul li {
+    .message_list ul li * {
+        float: right;
+        padding: 7px;
+    }
+    .message_list ul li {
         clear: both;
         padding: 10px;
     }
-    .products_list ul li button{
+    .message_list ul li button{
         float: left;
     }
-    .product_view ul li * {
+    .message_view ul li * {
         float: right;
         padding: 10px;
     }
-    .product_view ul li {
+    .message_view ul li {
         clear: both;
         padding: 10px;
     }
-    .product_view ul li button{
+    .message_view ul li button{
         float: left;
     }
 </style>
@@ -31,15 +34,35 @@
         <span class="message left"></span>
     </div>
     <div class="content-div base-padding">
-
-        <ul>
+        <ul id="abring_message_list_broadcast">
             <li>
-                <img src="" class="image">
-                <h3 class="name"></h3>
-                <h3 class="fee"></h3>
-                <h3 class="amount"></h3>
-                <input type="number" class="order" value="1">
-                <button class="abring_button_market_add_to_basket">add to basket</button>
+                <img src="" class="by_avatar" style="width: 32px;"><span class="by_name"></span>
+                <span class="date"></span>
+                <span class="title"></span>
+                <button class="by_player_id abring_buttons_message_unicast">Reply</button>
+            </li>
+        </ul>
+        <ul id="abring_message_list_multicast">
+            <li>
+                <img src="" class="by_avatar" style="width: 32px;"><span class="by_name"></span>
+                <span class="date"></span>
+                <span class="title"></span>
+                <button class="by_player_id abring_buttons_message_unicast">Reply</button>
+            </li>
+        </ul>
+        <ul id="abring_message_list_unicast">
+            <li>
+                <img src="" class="by_avatar" style="width: 32px;"><span class="by_name"></span>
+                <span class="date"></span>
+                <span class="title"></span>
+                <button class="by_player_id abring_buttons_message_unicast">Reply</button>
+            </li>
+        </ul>
+        <ul id="abring_message_list_sent">
+            <li>
+                <img src="" class="by_avatar" style="width: 32px;"><span class="by_name"></span>
+                <span class="date"></span>
+                <span class="title"></span>
             </li>
         </ul>
     </div>

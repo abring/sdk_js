@@ -6,6 +6,7 @@ var initMessage = function () {
 
 var showMessageList = function () {
     abring.params.display.loading.show("loading your messages");
+    abring.params.message.pages.list.getTheme();
     getMessageList(
         function (messageList) {
             fillMessageList(messageList);
@@ -29,6 +30,44 @@ var getMessageList = function (getMessageListSuccess,getMessageListFailed) {
 };
 var fillMessageList = function (messageList) {
     //fill list
+    log("message list");
+    log(messageList);
+
+    var parent_id = abring.params.message.pages.list.parent_id;
+    var message_types = [
+        "broadcast",
+        "multicast",
+        "unicast",
+        "sent"
+    ];
+    var type_template = "";
+    var messages = {};
+    var message = {};
+    var type_object = null;
+    var list_object = null;
+    $.each(message_types,function (index,type) {
+        type_object = $("."+parent_id+" ul#abring_message_list_"+type);
+        if(!messageList[type]||messageList[type].length==0)
+        {
+            type_object.hide();
+        }else{
+            messages = messageList[type];
+            type_object.append('<h3>'+type+'</h3>');
+            $.each(messages,function (index,message) {
+                list_object = $("."+parent_id+" ul#abring_message_list_"+type+" li:first-child");
+                type_template = list_object.outerHTML();
+                type_object.append(type_template);
+                list_object.parent().find("li:last-child .by_player_id").attr("player_id",message["by_player_info"]["player_id"]);
+                list_object.parent().find("li:last-child .by_avatar").attr("src",message["by_player_info"]["avatar"]);
+                list_object.parent().find("li:last-child .by_name").html(message["by_player_info"]["name"]);
+                list_object.parent().find("li:last-child .title").html(message["title"]);
+                list_object.parent().find("li:last-child .date").html(message["date"]);
+                if(message["status"]!="read")
+                    list_object.addClass("unread");
+            });
+        }
+    });
+
 };
 
 var showMessage = function (message_id) {
@@ -56,9 +95,6 @@ var getMessage = function (message_id,getMessageSuccess,getMessageFailed) {
     );
 };
 var fillMessage = function (message) {
-    //fill message
-    log("message");
-    log(message);
 
     var parent_id = abring.params.message.pages.view.parent_id;
 
