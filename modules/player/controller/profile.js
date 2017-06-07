@@ -49,8 +49,10 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                 );
             }
             else
-                abring.params.player.showPageFunction("player_mobile_register","ارسال پیامک از طرف شما ممکن نیست");
-
+            {
+                abring.params.player.pages.player_mobile_register.show();
+                abring.params.display.error.show("error","ارسال پیامک از طرف شما ممکن نیست");
+            }
         }
     );
 
