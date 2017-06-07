@@ -44,9 +44,10 @@ var fillMessageList = function (messageList) {
         }else{
             messages = messageList[type];
             type_object.append('<h3>'+type+'</h3>');
+            list_object = $("."+parent_id+" ul#abring_message_list_"+type+" li:first-child");
+            type_template = list_object.outerHTML();
+            list_object.hide();
             $.each(messages,function (message_id,message) {
-                list_object = $("."+parent_id+" ul#abring_message_list_"+type+" li:first-child");
-                type_template = list_object.outerHTML();
                 type_object.append(type_template);
                 list_object.parent().find("li:last-child").attr("message_id",message_id);
                 list_object.parent().find("li:last-child .by_player_id").attr("player_id",message["by_player_info"]["player_id"]);

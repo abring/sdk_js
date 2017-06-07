@@ -177,6 +177,9 @@ $(document).on("click",".abring_buttons_my_profile",function () {
         abring.params.player.pages.player_mobile_register.show();
         return false;
     }
+
+    abring.params.player.pages.my_profile.getTheme();
+    fillMyPlayerInfo(true);
     abring.params.player.pages.my_profile.show();
 
 });
@@ -225,7 +228,14 @@ $(document).on("click",".abring_player_logout",function () {
         return false;
     }
 
-    abringPlayerLogout();
+    abringPlayerLogout(
+        function(){
+            abring.params.display.home.show();
+        },
+        function(){
+            abring.params.display.error.show("Logout failed");
+        }
+    );
 });
 $(document).on("click","#abring .player_login .submit",function () {
     var username = $(".player_login .username").val();

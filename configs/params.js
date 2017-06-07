@@ -267,8 +267,6 @@ abring.params.player = {
                 return abring.params.player.pages.my_profile.theme;
             },
             "show":function(){
-                abring.params.player.pages.my_profile.getTheme();
-                fillMyPlayerInfo(true);
                 var parent_id = abring.params.player.pages.my_profile.parent_id;
                 abring.params.display.showPageFunction(parent_id);
             }
