@@ -100,7 +100,7 @@ $(document).on("click",".player_mobile_register_submit",function () {
             abring.params.player.pages.player_mobile_verify.show();
         },
         function(x,c,e){
-            abring.params.display.showPageFunction("error",e);
+            abring.params.display.error.show(e);
             //showMyProfile("player_mobile_register",e);
         }
     );
@@ -137,7 +137,7 @@ $(document).on("click",".player_mobile_verify .resend_code ",function () {
     var mobile_number = $(".player_mobile_register .mobile_number").val();
     if ( !mobile_number || !is_valid_mobile_number(mobile_number) )
     {
-        abring.params.player.showPageFunction("player_mobile_register","Invalid mobile number.");
+        alert("Invalid mobile number.");
         return false;
     }
     var data = {

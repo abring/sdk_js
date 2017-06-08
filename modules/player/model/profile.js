@@ -358,7 +358,6 @@ var abringPlayerMobileRegister = function(mobile_number,abringPlayerMobileRegist
     if ( !mobile_number || !is_valid_mobile_number(mobile_number) )
     {
         abringPlayerMobileRegisterFailed("",400,"Invalid mobile number.");
-        alert("Invalid mobile number.");
         return false;
     }
     var data = {
