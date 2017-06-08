@@ -36,8 +36,8 @@ var playerIsLogin = function(){
 var showMyProfile = function(subPageID){
     subPageID = subPageID || "login";
     abringPageHide();
-    $("#"+abring.params.player.parent_id+" .page").hide();
-    $("#"+abring.params.player.parent_id+" ."+subPageID).show();
+    //$("#"+abring.params.player.parent_id+" .page").hide();
+    //$("#"+abring.params.player.parent_id+" ."+subPageID).show();
     abring.params.display.showPageFunction(subPageID);
 };
 var viewProfile = function (other_player_id) {

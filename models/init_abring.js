@@ -45,7 +45,6 @@ abring.init = function (data) {
     abring.params.timeStamp = getTime("timestamp");
     abring.params.template = readFile(abring_url+"/view/theme.html?="+ new Date().getTime());
     $("body").prepend(abring.params.template);
-    $("#abring .splash").append('<img src="'+abring.params.abring_logo_url+'" />').show();
     $("#abring .dialog img.loading ").attr("src",abring.params.display.abring_loading_url);
     $("#abring .dialog img.error").attr("src",abring.params.display.abring_error_url);
     $("#abring .dialog img.info").attr("src",abring.params.display.abring_info_url);
@@ -59,6 +58,9 @@ abring.init = function (data) {
     initPost();
     initMarket();
 
+    $("#abring>div").hide();
+    $("#abring>div.modal_background").show();
+
     abring.params.token = getCookie("token");
 
     getAppData(false,
@@ -68,11 +70,6 @@ abring.init = function (data) {
     );
 
     abring.params.player_info = getPlayerInfo();
-
-    var current_time = get_current_time();
-    var remainSplashTime = abring.params.display.splashTime+abring.params.timeStamp-current_time;
-    if(remainSplashTime>0)
-        abringShowSplash(remainSplashTime);
 
     if(!socketConnect())
         log("Socket is not available");

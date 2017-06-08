@@ -4,20 +4,22 @@
  */
 var abringPageShow = function (page,title,message) {
     $("#abring").show();
-    $("#abring .page").hide();
+    var default_page = abring.params.display.default_page_id;
 
     title = title || "";
-    $("#abring ."+page+'.dialog .abring-dialog-title').html(title);
+    $("#abring #"+default_page+" .abring-dialog-title").html(title);
 
     message = message || "";
-    $("#abring ."+page+'.dialog .abring-dialog-message').html(message);
+    $("#abring #"+default_page+" .abring-dialog-message").html(message);
 
-    $("#abring ."+page).show();
+    var content = $("."+page).outerHTML();
+    $("#abring #"+default_page+" .page_content").html(content);
+
+    $("#abring #"+default_page+" ."+page).show();
+    $("#abring #"+default_page).show();
 };
 var abringPageHide = function () {
+    var default_page = abring.params.display.default_page_id;
     $("#abring").hide();
-    $("#abring .page").hide();
-};
-var abringLoadingFinish = function () {
-
+    $("#abring #"+default_page+"").hide();
 };

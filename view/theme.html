@@ -653,17 +653,7 @@
             font-style: 13px !important;
         }
     </style>
-    <div class="page splash">
-        GAMEHUB SPLASH screen<br>
-        show on startup and close in about one second
-    </div>
     <div class="modal_background"></div>
-   <!-- <div id="abring_wrapper">
-        <a href="#" class="close"><img src="abring/img/Arrow_Back.svg" /></a>
-        <br>
-        <h3 class="message"></h3>
-        <img class="icon" src="">
-    </div> -->
     <style>
         #abring .dialog img{
             width:5%;
@@ -696,7 +686,16 @@
             margin-left: -8%;
         }
     </style>
-    <div class="page dialog info">
+    <div class="page default" id="default_page">
+        <h3 class="abring-dialog-title"></h3>
+        <div class="message-parent">
+            <p class="abring-dialog-message"></p>
+        </div>
+        <div class="page_content">
+
+        </div>
+    </div>
+    <div class="page dialog info" id="info">
         <h3 class="abring-dialog-title"></h3>
         <div class="message-parent">
             <img class="info" src="abring/img/info.png">
@@ -706,7 +705,7 @@
             <button class="close">OKey</button>
         </div>
     </div>
-    <div class="page dialog warning">
+    <div class="page dialog warning" id="warning">
         <h3 class="abring-dialog-title"></h3>
         <div class="message-parent">
             <img class="warning" src="abring/img/warning.png">
@@ -716,7 +715,7 @@
             <button class="close">OKey</button>
         </div>
     </div>
-    <div class="page dialog loading">
+    <div class="page dialog loading" id="loading">
         <h3 class="abring-dialog-title"></h3>
         <div class="message-parent">
             <img class="loading" src="abring/img/loading.gif">
@@ -727,7 +726,7 @@
             <button class="loading_retry">Retry</button>
         </div>
     </div>
-    <div class="page dialog confirm">
+    <div class="page dialog confirm" id="confirm">
         <h3 class="abring-dialog-title"></h3>
         <div class="message-parent">
             <img class="warning" src="abring/img/warning.png">
@@ -738,7 +737,7 @@
             <button class="confirm_no">No</button>
         </div>
     </div>
-    <div class="page dialog error">
+    <div class="page dialog error" id="error">
         <h3 class="abring-dialog-title"></h3>
         <div class="message-parent">
             <img class="error" src="abring/img/error.png">
@@ -748,7 +747,7 @@
             <button class="close">OKey</button>
         </div>
     </div>
-    <div class="page dialog tooltip">
+    <div class="page dialog tooltip" id="tooltip">
         <h3 class="abring-dialog-title"></h3>
         <div class="message-parent">
             <img class="info" src="abring/img/info.png">

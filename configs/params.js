@@ -68,8 +68,8 @@ abring.params = {
 };
 
 abring.params.display ={
+    "default_page_id":"default_page",
     "current_page" : "",
-    "splashTime" : 0,
     "showPageFunction":function (pageID,title,message) {
         abringPageHide();
         abring.params.display.current_page = pageID;

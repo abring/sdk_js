@@ -7,11 +7,9 @@
  * reset global data
  * init Game hub
  * -add abring theme to body
- * -show splash page
  * -read token from cookie
  * -load app data
  * -load player info
- * -hide splash if load is less than one second or remain until loading completed
  */
 var getPostTimeAgo = function (check_timestamp) {
     //get current_time_stamp
@@ -361,11 +359,6 @@ var getTime = function (format) {
 };
 var is_valid_mobile_number = function(mobile_number) {
     return (mobile_number.replace("+98","").replace("0098","").replace("091","").length==10);
-};
-var abringShowSplash = function(wait){
-    wait = wait || 3;
-    $("#abring .splash,#abring").show();
-    setTimeout(function(){ $("#abring .splash,#abring").hide(); }, wait*1000);
 };
 var rand = function(min,max){
     return Math.floor(Math.random() * (parseInt(max) - parseInt(min) + 1)) + parseInt(min);
