@@ -254,7 +254,7 @@
             right: 20px;
             position: absolute;
             top: 43px;
-        } 
+        }
         .player_rate {
             position: absolute;
             left: 0;
@@ -653,7 +653,6 @@
             font-style: 13px !important;
         }
     </style>
-    <div class="modal_background"></div>
     <style>
         #abring .dialog img{
             width:5%;
@@ -686,6 +685,7 @@
             margin-left: -8%;
         }
     </style>
+    <div class="modal_background"></div>
     <div class="page default" id="default_page">
         <h3 class="abring-dialog-title"></h3>
         <div class="message-parent">
@@ -761,122 +761,6 @@
     <div id="abring_friends" ></div>
     <div id="abring_leaderboard" ></div>
     <div id="abring_player" ></div>
-    <div id="abring_posts" class="page post_timeline">
-    <button id="abring_post_create">Create new post</button>
-    <div class="abring_post_create_form" style="display: none;">
-        <input type="file" id="abring_post_create_image" />
-        <textarea id="abring_post_create_content" placeholder="Your idea ..."></textarea>
-        <textarea id="abring_post_create_tags" placeholder="#Tag1#tag2"></textarea>
-        <button id="abring_post_create_submit">POST</button>
-        <button id="abring_post_create_cancel">CANCEL</button>
-    </div>
-    <div class="post_search">
-        <input type="text" id="abring_post_search_input" class="post_search_input" placeholder="SEARCH IN POSTS">
-        <div id="abring_post_tag_suggestion" class="post_tag_suggestion"><!--tag auto suggest--></div>
-    </div>
-    <div class="timeline_wall_banner" style="position: relative;">
-        <img class="avatar view_profile" name="PLAYER_ID" src="abring/img/default_avatar.png" />
-        <div class="banner-container">
-            <img class="banner" src="abring/img/default_post_banner.png" />
-        </div>
-    </div>
-    <div class="timeline">
-        <div class="post POST_ID" id="POST_ID">
-            <div class="post-title">
-                <h1 style="display: none">POST_ID</h1>
-                <button name="POST_ID" class="post_edit post-btn-action">E</button>
-                <button name="POST_ID" class="post_delete post-btn-action">D</button>
-                <label class="post-time-label">TIME</label>
-            </div>
-            <div class="post-content">
-                <div class="post_by_player_player_id" style="display: none">player_id = PLAYER_ID</div>
-                <div class="post_by_player_name"><label class="view_profile" name="PLAYER_ID">NAME</label></div>
-                <div class="post_by_player_avatar"><img class="view_profile" src="AVATAR" name="PLAYER_ID" /></div>
-                <div class="shared-contain-div">
-                    <div class="shared-contain" style="display: SHARED_TEMPLATE">
-                        <div class="post_by_player_avatar shared-avatar">
-                            <img class="view_profile" src="SHARED_AVATAR" name="SHARED_P_ID" />
-                            <label style="display: initial" class="view_profile" name="SHARED_P_ID">POST_OWNER</label>
-                        </div>
-                        <div class="post-img-div">
-                            <!-- <img class="post-img" src="IMAGE" /> -->
-                            IMAGE
-                        </div>
-                        <div class="post-content-div">
-                            <p class="post-content">SHARED_TEXT</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="post-img-div" style="display: SHARED_MAIN_IMG">
-                    <!-- <img class="post-img" src="IMAGE" /> -->
-                    IMAGE
-                </div>
-                <div class="post-content-div">
-                    <p class="post-content">CONTENT</p>
-                </div>
-                <div style="display:none" class="post-tags-content">
-                    <p class="post-tags-p">TAGS</p>
-                </div>
-                <div class="post-action-row">
-                    <div class="post-like-contain">
-                        <a class="abring_post_like_this_post" name="POST_ID">Like</a>
-                        <label>LIKES</label>
-                    </div>
-                    <div class="post-comment-contain">
-                        <label class="post-commnet-label">comments</label>
-                        <label class="post-commnet-number">COMMENTS_COUNT</label>
-                    </div>
-                    <div class="post-view-contain">
-                        <label class="post-view-label">views</label>
-                        <label class="post-view-number">VIEWS</label>
-                    </div>
-                    <!--<div class="post-share-contain">
-                        <label class="post-share-label">share</label>
-                        <label class="post-share-number">SHARED time</label>
-                    </div>-->
-                    <div class="post-share-contain">
-                        <a class="abring_post_share_this_post post-share-label" name="POST_ID">Share</a>
-                        <label class="post-share-number">SHARED</label>
-                    </div>
-                </div>
-                <div class="post-comments-row">
-                    <div class="post-comments-div">
-                        <input class="new-comment-input" type="text" placeholder="Write your comment" />
-                        <button class="post_comment_add" name="POST_ID">Add</button>
-                    </div>
-                </div>
-                <div class="post-more-commnets-contain">
-                    <div id="COMMENT_PLAYER_ID" class="post-comment POST_ID" style="display:COMMENT_DISPLAY;">
-                        <div class="avatar-box">
-                            <img class="post-more-comment-avatar view_profile" name="PLAYER_ID" src="COMMENT_PLAYER_AVATAR" />
-                            <label class="post-more-comment-name view_profile" name="PLAYER_ID">
-                                COMMENT_PLAYER_NAME
-                            </label>
-                        </div>
-                        <div id="post-POST_ID" class="comment-box">
-                            <p id="COMMENT_ID" class="post-more-comment-content">
-                                <span class ="post-more-comment-content-span">COMMENT_CONTENT</span>
-                                <span class="comment-btn-action">
-                                        <a class="abring_post_comment_edit" href="#">edit</a>
-                                        <a class="abring_post_comment_delete" href="#">delete</a>
-                                    </span>
-                            </p>
-                        </div>
-
-                    </div>
-                    <a href="#" name="POST_ID" class="post_comments_more">more</a>
-                </div>
-            </div>
-            <div class="abring_post_edit_form" style="display: none;">
-                <input class="edit-post-id" type="hidden" value="POST_ID" />
-                <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"><input type="file" class="abring_post_edit_image"></div>
-                <textarea placeholder="Your idea ..." class="abring_post_edit_content ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all ui-textinput-autogrow"></textarea>
-                <textarea placeholder="#Tag1#tag2" class="abring_post_edit_tags ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all ui-textinput-autogrow"></textarea>
-                <button class="abring_post_edit_submit ui-btn ui-shadow ui-corner-all">Edit</button>
-                <button class="abring_post_edit_cancel ui-btn ui-shadow ui-corner-all">CANCEL</button>
-            </div>
-        </div>
-    </div>
-</div>
+    <div id="abring_posts" ></div>
 </div>
 

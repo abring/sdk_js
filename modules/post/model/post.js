@@ -5,6 +5,9 @@
  */
 var initPost = function () {
 
+    var postView = abring.params.post.template;
+    $("#"+abring.params.post.parent_id).html(postView);
+
     post_template = $("#abring_posts .timeline").html();
     var tmp = $("#abring_posts").html();
     $("#abring_posts").html("");
