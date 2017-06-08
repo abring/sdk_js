@@ -2,24 +2,27 @@
 /**
  * display control
  */
-var abringPageShow = function (page,title,message) {
+var abringPageShow = function (page,title,message,template_page_id) {
+
     $("#abring").show();
-    var default_page = abring.params.display.default_page_id;
+    $("#abring>div").hide();
+    $("#abring>div.modal_background").show();
+
+    template_page_id = template_page_id || abring.params.display.default_page_id;
 
     var content = $("."+page).outerHTML();
-    $("#abring #"+default_page+"").html(content);
+    $("#abring #"+template_page_id+" .content-div").html(content);
 
     title = title || "";
-    $("#abring #"+default_page+" .abring-dialog-title").html(title);
+    $("#abring #"+template_page_id+" .abring-dialog-title").html(title);
 
     message = message || "";
-    $("#abring #"+default_page+" .abring-dialog-message").html(message);
+    $("#abring #"+template_page_id+" .abring-dialog-message").html(message);
 
-    $("#abring #"+default_page+" ."+page).show();
-    $("#abring #"+default_page).show();
+    $("#abring #"+template_page_id+" ."+page).show();
+    $("#abring #"+template_page_id).show();
 };
 var abringPageHide = function () {
-    var default_page = abring.params.display.default_page_id;
     $("#abring").hide();
-    $("#abring #"+default_page+"").hide();
+    $("#abring>div").hide();
 };

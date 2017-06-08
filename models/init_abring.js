@@ -58,9 +58,6 @@ abring.init = function (data) {
     initPost();
     initMarket();
 
-    $("#abring>div").hide();
-    $("#abring>div.modal_background").show();
-
     abring.params.token = getCookie("token");
 
     getAppData(false,

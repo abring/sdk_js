@@ -93,7 +93,7 @@ abring.params.display ={
             var pageID = abring.params.display.loading.parent_id;
             abringPageHide();
             abring.params.display.current_page = pageID;
-            return abringPageShow(pageID,title,message);}
+            return abringPageShow(pageID,title,message,"default_page_empty");}
     },
     "error":{
         "parent_id":"error",
@@ -102,7 +102,7 @@ abring.params.display ={
             var pageID = abring.params.display.error.parent_id;
             abringPageHide();
             abring.params.display.current_page = pageID;
-            return abringPageShow(pageID,title,message);}
+            return abringPageShow(pageID,title,message,"default_page_empty");}
     },
     "info":{
         "parent_id":"info",
@@ -111,7 +111,7 @@ abring.params.display ={
             var pageID = abring.params.display.info.parent_id;
             abringPageHide();
             abring.params.display.current_page = pageID;
-            return abringPageShow(pageID,title,message);}
+            return abringPageShow(pageID,title,message,"default_page_empty");}
     },
     "warning":{
         "parent_id":"warning",
@@ -120,7 +120,7 @@ abring.params.display ={
             var pageID = abring.params.display.warning.parent_id;
             abringPageHide();
             abring.params.display.current_page = pageID;
-            return abringPageShow(pageID,title,message);}
+            return abringPageShow(pageID,title,message,"default_page_empty");}
     },
     "confirm":{
         "parent_id":"confirm",
@@ -129,7 +129,7 @@ abring.params.display ={
             var pageID = abring.params.display.confirm.parent_id;
             abringPageHide();
             abring.params.display.current_page = pageID;
-            return abringPageShow(pageID,title,message);}
+            return abringPageShow(pageID,title,message,"default_page_empty");}
     },
     "tooltip":{
         "parent_id":"tooltip",
