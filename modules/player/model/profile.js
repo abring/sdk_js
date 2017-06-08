@@ -6,13 +6,12 @@
 var playerView = "";
 
 var initPlayer = function () {
-    playerView = abring.params.player.template;
-    $("#"+abring.params.player.parent_id).html(playerView);
+    playerView = readFile(abring_url+"/modules/player/view/player.html");
+    $("#abring").append(playerView);
 
-    abring.params.player_view_detail = $("#"+abring.params.player.parent_id+" .player_view_details").html();
-    $("#"+abring.params.player.parent_id+" .friends_list .player_view_details *").remove();
-    if(!abring.params.player_info)
-    {
+    //abring.params.player_view_detail = $("#"+abring.params.player.parent_id+" .player_view_details").html();
+    //$("#"+abring.params.player.parent_id+" .friends_list .player_view_details *").remove();
+    if(!abring.params.player_info){
         if(abring.params.smsIsAllowed){
             //login using send sms directly without intent
         }else{

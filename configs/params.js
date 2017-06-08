@@ -332,7 +332,7 @@ abring.params.player = {
             },
             "show":function(){
                 var parent_id = abring.params.player.pages.player_mobile_register.parent_id;
-                abring.params.player.showPageFunction(parent_id);
+                abring.params.display.showPageFunction(parent_id);
             }
         },
         "player_mobile_verify":{
