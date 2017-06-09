@@ -121,7 +121,10 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
                     abring.params.other_players[other_player_info["player_id"]] = other_player_info;
                 });
                 setCookie("other_players",abring.params.other_players,100);
-                getOtherPlayerInfoSuccess(abring.params.other_players[player_id]);
+                if(other_players_info.length==1)
+                    getOtherPlayerInfoSuccess(abring.params.other_players[player_id]);
+                else
+                    getOtherPlayerInfoSuccess(abring.params.other_players);
             },function (x,c,e) {
                 getOtherPlayerInfoFailed(x,c,e);
             }
