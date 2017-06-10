@@ -863,3 +863,64 @@ abring.params.posts = {
     "parent_id" : "abring_posts",
     "template" : readFile(abring_url+"/modules/post/view/post.html")
 };
+
+abring.params.chat = {
+    "pages":{
+        "list":{
+            "parent_id":"chat_list",
+            "theme_parent_id":"chat_list",
+            "setParents":function(parent_id,theme_parent_id){
+                if(parent_id)
+                    abring.params.chat.pages.list.parent_id = parent_id;
+                if(theme_parent_id)
+                    abring.params.chat.pages.list.theme_parent_id = theme_parent_id;
+                abring.params.chat.pages.list.getTheme(true);
+            },
+            "theme":"",
+            "getTheme":function(override){
+                var theme = abring.params.chat.pages.list.theme;
+                if(!theme || override)
+                {
+                    theme = abring.params.chat.pages.list.theme =
+                        $("."+abring.params.chat.pages.list.theme_parent_id).html();
+                    $("."+abring.params.chat.pages.list.theme_parent_id).html("");
+                }
+                var parent_id = abring.params.chat.pages.list.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.chat.pages.list.theme;
+            },
+            "show":function(){
+                var parent_id = abring.params.chat.pages.list.parent_id;
+                abring.params.display.showPageFunction(parent_id);
+            }
+        },
+        "room":{
+            "parent_id":"chat_room",
+            "theme_parent_id":"chat_room",
+            "setParents":function(parent_id,theme_parent_id){
+                if(parent_id)
+                    abring.params.chat.pages.room.parent_id = parent_id;
+                if(theme_parent_id)
+                    abring.params.chat.pages.room.theme_parent_id = theme_parent_id;
+                abring.params.chat.pages.room.getTheme(true);
+            },
+            "theme":"",
+            "getTheme":function(override){
+                var theme = abring.params.chat.pages.room.theme;
+                if(!theme || override)
+                {
+                    theme = abring.params.chat.pages.room.theme =
+                        $("."+abring.params.chat.pages.room.theme_parent_id).html();
+                    $("."+abring.params.chat.pages.room.theme_parent_id).html("");
+                }
+                var parent_id = abring.params.chat.pages.room.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.chat.pages.room.theme;
+            },
+            "show":function(){
+                var parent_id = abring.params.chat.pages.room.parent_id;
+                abring.params.display.showPageFunction(parent_id);
+            }
+        }
+    }
+};

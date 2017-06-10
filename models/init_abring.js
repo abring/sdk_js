@@ -52,6 +52,7 @@ abring.init = function (data) {
     $("#abring .dialog img.avatar").attr("src",abring.params.display.abring_default_avatar_url);
 
     initPlayer();
+    initChat();
     initMessage();
     initLeaderboard();
     initFriends();
