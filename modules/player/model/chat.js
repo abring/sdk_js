@@ -29,7 +29,7 @@ var chat_show_page = function (target_player_id,init_message) {
             $("."+parent_id+" .chat_"+target_player_id+" .target_player_name").html(target_player_info["name"]);
             $("."+parent_id+" .chat_"+target_player_id+" .chat_send").attr("player_id",target_player_info["player_id"]);
 
-            abring.params.chat.pages.room.show();
+            abring.params.chat.pages.room.show(target_player_info);
 
             if(init_message)
                 abring.params.chat.pages.room.target_player_say(target_player_info,init_message);
