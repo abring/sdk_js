@@ -4,5 +4,101 @@
 </div>
 
 <div class="page chat_room">
-    hat room here
+    <style>
+        li.template{display: none}
+        .abring_chat .message {
+            float: left;
+            margin: 0;
+        }
+        .chat_room {
+            text-align: center;
+        }
+        .chat-footer {
+            position: relative;
+        }
+        .chat_send {
+            position: absolute;
+            right: 0;
+            bottom: 0px;
+            height: 46px;
+        }
+        .chat_content {
+            display: inline-block;
+            width: 100%;
+            padding: 0 15px;
+            min-height: 250px;
+            height: 465px;
+            overflow: auto;
+        }
+        .tab_wrapper{
+            padding: 0px;;
+        }
+        .chat_content .me{
+            width: 100%;
+            float: right;
+        }
+        .chat_content .you{
+            width: 100%;
+            float: left;
+        }
+        .chat_content .time{
+            font-size: 10px;
+            margin-bottom: 0px;
+            text-align: right;
+        }
+        .chat_content .you img{
+            padding: 5px;
+            float: left;
+            clear: left;
+        }
+        .chat_content .chat_dialog{
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0;
+        }
+        .chat_content .message{
+            width: 100%;
+            text-align: right;
+        }
+        .chat_content .you .chat_dialog{
+            background: #ee9;
+            float: left;
+            clear: left;
+        }
+        .chat_content .me .chat_dialog{
+            background: #eee;
+            float: right;
+            clear: right;
+        }
+    </style>
+
+    <ul class="tab_wrapper">
+        <li class="tab template" style="margin-bottom: 80px;">
+            <div class="chat_header">
+                <img class="target_player_avatar" src="" style="max-width: 64px;max-height:64px;">
+                <p>chat with <span class="target_player_name">No name</span></p>
+            </div>
+            <div class="content-div chat_content">
+
+                <div class="me" style="display: none;">
+                    <div class="chat_dialog">
+                        <p class="message">mmm</p>
+                        <p class="time"></p>
+                    </div>
+                </div>
+                <div class="you" style="display: none;">
+                    <div class="chat_dialog">
+                        <img class="avatar" src="" style="max-width: 32px;max-height: 32px;">
+                        <span class="name"></span>
+                        <p class="message">yyy</p>
+                        <p class="time"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-footer" style="position: fixed !important;bottom: 0px !important;width:94% !important;">
+                <input class="chat_message" placeholder="Type your message here" typeof="text" style="position: inherit">
+                <input type="button" class="chat_send" value="Send" player_id="PLAYER_ID">
+            </div>
+        </li>
+    </ul>
 </div>

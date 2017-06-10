@@ -13,7 +13,7 @@ $(document).on("click",".chat_start",function () {
         abring.params.display.error.show("You cannot chat with yourself!");
         return false;
     }
-    abring.params.player.pages.abring_chat.show(target_player_id);
+    chat_show_page(target_player_id);
 });
 
 $(document).on("click",".chat_send",function () {
@@ -28,10 +28,10 @@ $(document).on("click",".chat_send",function () {
         abring.params.display.error.show("cannot detect target player id to send message!");
         return false;
     }
-    var parent_id = abring.params.player.pages.abring_chat.parent_id;
+    var parent_id = abring.params.chat.pages.room.parent_id;
     //var message = $("."+parent_id+" #chat_"+target_player_id+" .chat_message").val();
-    var message = $("."+parent_id+" #chat_"+target_player_id+" .chat_message").val();
+    var message = $("."+parent_id+" .chat_"+target_player_id+" .chat_message").val();
 
-    abring.params.player.pages.abring_chat.i_say(target_player_id,message);
+    abring.params.chat.pages.room.i_say(target_player_id,message);
     chatSend(target_player_id,message);
 });
