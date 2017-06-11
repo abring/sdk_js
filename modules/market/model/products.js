@@ -15,6 +15,7 @@ var fillProductsList = function(productsList){
         $("."+parent_id+" ul li:last .image").attr("src",product["image"]).addClass("abring_buttons_view_product_details");
         $("."+parent_id+" ul li:last .name").html(product["name"]).addClass("abring_buttons_view_product_details");
         $("."+parent_id+" ul li:last .fee").html(product["fee"]);
+        $("."+parent_id+" ul li:last .short_description").html(product["data"]["short_description"]);
         if(product["amount"]>0)
             $("."+parent_id+" ul li:last .amount").html("Available");
         else

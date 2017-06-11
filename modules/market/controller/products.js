@@ -24,6 +24,7 @@ $(document).on("click",".abring_buttons_view_product_details",function () {
         "products/view",
         {"id":$(this).attr("product_id")},
         function (products) {
+            products.data = JSON.parse(products.data); 
             abring.params.market.products.pages.productView.show(products);
         },function (x,c,e) {
             abring.params.display.error.show(e);
