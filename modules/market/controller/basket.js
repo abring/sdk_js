@@ -16,8 +16,9 @@ $(document).on("click",".abring_button_market_add_to_basket",function () {
     addToBasket(
         product_id,
         amount,
-        function (productsList) {
-            abring.params.market.basket.pages.basketView.show(productsList);
+        function (basket) {
+            fillBasketView(basket);
+            abring.params.market.basket.pages.basketView.show();
         },function (x,c,e) {
             abring.params.display.error.show(e);
         }
@@ -32,10 +33,11 @@ $(document).on("click",".abring_buttons_market_basket_view",function () {
     }
 
     callAbringWithFileUpload(
-        "basket/view",
+        "basket/index",
         {},
-        function (productsList) {
-            abring.params.market.basket.pages.basketView.show(productsList);
+        function (basket) {
+            fillBasketView(basket);
+            abring.params.market.basket.pages.basketView.show();
         },function (x,c,e) {
             abring.params.display.error.show(e);
         }

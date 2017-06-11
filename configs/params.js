@@ -494,26 +494,27 @@ abring.params.market.basket = {
             "theme_parent_id":"basket_view",
             "setParents":function(parent_id,theme_parent_id){
                 if(parent_id)
-                    abring.params.market.products.pages.basketView.parent_id = parent_id;
+                    abring.params.market.basket.pages.basketView.parent_id = parent_id;
                 if(theme_parent_id)
-                    abring.params.market.products.pages.basketView.theme_parent_id = theme_parent_id;
-                abring.params.market.products.pages.basketView.getTheme(true);
+                    abring.params.market.basket.pages.basketView.theme_parent_id = theme_parent_id;
+                abring.params.market.basket.pages.basketView.getTheme(true);
             },
             "theme":"",
             "getTheme":function(override){
-                var theme = abring.params.market.products.pages.basketView.theme;
+                var theme = abring.params.market.basket.pages.basketView.theme;
                 if(!theme || override)
                 {
-                    theme = abring.params.market.products.pages.basketView.theme =
-                        $("."+abring.params.market.products.pages.basketView.theme_parent_id).html();
-                    $("."+abring.params.market.products.pages.basketView.theme_parent_id).html("");
+                    theme = abring.params.market.basket.pages.basketView.theme =
+                        $("."+abring.params.market.basket.pages.basketView.theme_parent_id).html();
+                    $("."+abring.params.market.basket.pages.basketView.theme_parent_id).html("");
                 }
-                var parent_id = abring.params.market.products.pages.basketView.parent_id;
+                var parent_id = abring.params.market.basket.pages.basketView.parent_id;
                 $("."+parent_id).html(theme);
-                return abring.params.market.products.pages.basketView.theme;
+                return abring.params.market.basket.pages.basketView.theme;
             },
-            "show":function (productsList) {
-                showBasketView(productsList);
+            "show":function () {
+                var parent_id = abring.params.market.basket.pages.basketView.parent_id;
+                abring.params.display.showPageFunction(parent_id);
             }
         }
     }
