@@ -25,8 +25,8 @@ var showBasketView = function(productsList){
 };
 var addToBasket = function(product_id,amount,addToBasketSuccess,addToBasketFailed){
     callAbringWithFileUpload(
-        "basket/add",
-        {"product_id":product_id,"amount":amount},
+        "basket/set",
+        {"id":product_id,"amount":amount},
         function (productsList) {
             addToBasketSuccess(productsList);
         },function (x,c,e) {

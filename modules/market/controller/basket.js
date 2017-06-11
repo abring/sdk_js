@@ -11,7 +11,7 @@ $(document).on("click",".abring_button_market_add_to_basket",function () {
     }
 
     var product_id = $(this).attr("product_id");
-    var amount = $(this).parent().find("input.order").val();
+    var amount = $(this).parent().find("input.order").val() || 1;
 
     addToBasket(
         product_id,
