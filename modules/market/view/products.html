@@ -3,7 +3,6 @@
         display: none;
     }
     .products_list ul li * {
-        float: right;
         padding: 10px;
     }
     .products_list ul li {
@@ -24,6 +23,75 @@
     .product_view ul li button{
         float: left;
     }
+    .product-item {
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        width: 100%;
+        margin-top: 15px;
+    }
+    .product-main-ul {
+        padding: 0;
+    }
+    .product-img-div {
+        float: right;
+        width: 50%;
+    }
+    .product-data-div {
+        float: right;
+        width: 50%;
+    }
+    .product-data-div .product-price-div {
+        width: 100%;
+        display: block;
+        text-align: right;
+        direction: rtl;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 30px;
+    }
+    .product-data-div .product-btn-div {
+        width: 100%;
+        display: block;
+        padding-top: 30px;
+    }
+    .product-img-div img {
+        width: 100%;
+    }
+    .product-data-div .product-price-div h3 {
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+    }
+    .product-price-div .name {
+        color: #5B8FC1;
+        font-size: 18px;
+    }
+    .product-price-div .amount {
+        color: #A5A8B1;
+        font-size: 16px;
+    }
+    .product-data-div .product-price-div .fee {
+        color: #7FCAF3;
+        font-size: 24px;
+        display: inline;
+        width: auto;
+        padding-top: 7px;
+    }
+    .product-data-div .product-price-div .unit {
+        color: #7FCAF3;
+        font-size: 24px;
+        display: inline-block;
+        width: auto;
+        padding-top: 7px;
+    }
+    .product-btn-div .order {
+        height: 48px;
+        width: 60px;
+        float: right;
+    }
+    .product-btn-div button {
+        background-color: #58c2b3;
+        border-radius: 0;
+    }
 </style>
 <div class="page products_list" style="padding: 0px 0 50px 0;">
     <div class="action-div base-padding">
@@ -31,15 +99,26 @@
         <span class="message left"></span>
     </div>
     <div class="content-div base-padding">
-<img src="http://shared.v3.abring.ir/data/applications/ir.abring.sdk/sample_product_templateuntitled.png" style="width: 100%;">
-        <ul>
-            <li>
-                <img src="" class="image">
-                <h3 class="name"></h3>
-                <h3 class="fee"></h3>
-                <h3 class="amount"></h3>
-                <input type="number" class="order" value="1">
-                <button class="abring_button_market_add_to_basket">add to basket</button>
+        <ul class="product-main-ul">
+            <li class="product-item">
+                <div class="product-img-div">
+                    <img src="" class="image">
+                </div>
+                <div class="product-data-div">
+                    <div class="product-price-div">
+                        <h3 class="name"></h3>
+                        <h3 class="amount"></h3>
+                        <h3 class="unit">T</h3>
+                        <h3 class="fee"></h3>
+                    </div>
+                    <div class="product-btn-div">
+                        <input type="number" class="order" value="1">
+                        <button class="abring_button_market_add_to_basket">افزودن به سبد</button>
+                    </div>
+                </div>
+
+
+
             </li>
         </ul>
     </div>
