@@ -6,7 +6,7 @@ $(document).on("click",".abring_button_market_add_to_basket",function () {
 
     if(!abring.params.player_info)
     {
-        abring.params.display.error.show("error","Your are not login!");
+        abring.params.player.pages.player_mobile_register.show("Your are not login!");
         return false;
     }
 
@@ -28,7 +28,7 @@ $(document).on("click",".abring_button_market_delete_from_basket",function () {
 
     if(!abring.params.player_info)
     {
-        abring.params.display.error.show("error","Your are not login!");
+        abring.params.player.pages.player_mobile_register.show("Your are not login!");
         return false;
     }
 
@@ -50,7 +50,7 @@ $(document).on("click",".abring_buttons_market_basket_view",function () {
 
     if(!abring.params.player_info)
     {
-        abring.params.display.error.show("error","Your are not login!");
+        abring.params.player.pages.player_mobile_register.show("Your are not login!");
         return false;
     }
 
