@@ -20,13 +20,13 @@ var getPayments = function()
     );
 };
 
-var payByBank = function(payment_id)
+var payByBank = function(basket_id)
 {
     abring.params.display.loading.show("Process payment ...");
-    payment_id = payment_id || false;
+    basket_id = basket_id || false;
     callAbringWithFileUpload(
         "payment/index",
-        {"payment_id":payment_id},
+        {"basket_id":basket_id},
         function (payment_info) {
             log(">>>>>>>>>payment_info<<<<<<<<<<");
             log(payment_info);
