@@ -2,7 +2,7 @@
 /**
  * products event lister
  */
-$(document).on("click",".abring_buttons_view_products_list",function () {
+$(document).on("click",".abring_buttons_market_products_list",function () {
     abring.params.display.loading.show("Get products list");
     callAbringWithFileUpload(
         "products/list",
