@@ -58,6 +58,8 @@ $(document).on("click",".abring_buttons_market_basket_view",function () {
         "basket/index",
         {},
         function (basket) {
+            if(!basket || basket.length==0)
+                return abring.params.display.error.show("basket is empty!");
             fillBasketView(basket);
             abring.params.market.basket.pages.basketView.show();
         },function (x,c,e) {

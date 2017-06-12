@@ -2,7 +2,7 @@
 /**
  * payment event lister
  */
-$(document).on("click",".abring_buttons_payment_list",function () {
+$(document).on("click",".abring_buttons_market_pay",function () {
 
     if(!abring.params.player_info)
     {
@@ -10,4 +10,16 @@ $(document).on("click",".abring_buttons_payment_list",function () {
         return false;
     }
 
+    var payment_id = $(this).attr("payment_id");
+    payByBank(payment_id);
+});
+$(document).on("click",".abring_buttons_market_get_payments",function () {
+
+    if(!abring.params.player_info)
+    {
+        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        return false;
+    }
+
+    getPayments();
 });
