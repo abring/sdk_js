@@ -35,6 +35,7 @@ var fillProductsView = function(product){
     $("."+parent_id+" .image").attr("src",product["image"]);
     $("."+parent_id+" .name").html(product["name"]);
     $("."+parent_id+" .fee").html(product["fee"]);
+    $("."+parent_id+" .description").html(product["data"]["full_description"]);
     $.each(product["data"]["more_pic"] , function(index , pic){
         $(".product-more-pic").append('<img src="'+pic+'" />');
     });
