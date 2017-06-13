@@ -2,21 +2,50 @@
     .basket_view ul li:first-child{
         display: none;
     }
+    .basket-row li img {
+        width: 80px;
+        height: 60px;
+    }
+    .basket-row li * {
+        float: right;
+        margin: 0 10px;
+    }
+    .basket-row li {
+        display: inline-block;
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 15px;
+    }
+    .basket-contain ul.basket-row {
+        direction: rtl;
+        padding: 0;
+        text-align: right;
+    }
+    .basket-contain {
+        padding: 15px 25px;
+        margin-right: -10px;
+    }
+    .basket-row li h3 {
+        margin-top: 38px;
+    }
+    .basket-row li button {
+        margin-top: 38px;
+    }
 </style>
 <div class="page basket_view">
     <div class="action-div base-padding">
         <a href="#" class="close"><img src="abring/img/Arrow_Back.svg" /></a>
         <span class="message left"></span>
     </div>
-    <div class="content-div base-padding">
+    <div class="content-div base-padding basket-contain">
 
-        <ul>
+        <ul class="basket-row">
             <li>
                 <img src="" class="image">
                 <h3 class="name"></h3>
                 <h3 class="fee"></h3>
                 <h3 class="order"></h3>
-                <button class="abring_button_market_delete_from_basket">delete from basket</button>
+                <button style="float: left" class="abring_button_market_delete_from_basket">حذف</button>
             </li>
         </ul>
 
