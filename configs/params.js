@@ -1,7 +1,7 @@
 abring.params = {
 //configs
     "app" : "ir.abring.sdk",
-    "ws_base_url" : "http://ws.v3.abring.ir/index.php?r=",
+    "ws_base_url" : "http://ws.v3.abring.dev/index.php?r=",
 
     "leaderboard":{
         "parent_id" : "abring_leaderboard"
@@ -514,6 +514,34 @@ abring.params.market.basket = {
             },
             "show":function () {
                 var parent_id = abring.params.market.basket.pages.basketView.parent_id;
+                abring.params.display.showPageFunction(parent_id);
+            }
+        },
+        "basketList":{
+            "parent_id":"basket_list",
+            "theme_parent_id":"basket_list",
+            "setParents":function(parent_id,theme_parent_id){
+                if(parent_id)
+                    abring.params.market.basket.pages.basketList.parent_id = parent_id;
+                if(theme_parent_id)
+                    abring.params.market.basket.pages.basketList.theme_parent_id = theme_parent_id;
+                abring.params.market.basket.pages.basketList.getTheme(true);
+            },
+            "theme":"",
+            "getTheme":function(override){
+                var theme = abring.params.market.basket.pages.basketList.theme;
+                if(!theme || override)
+                {
+                    theme = abring.params.market.basket.pages.basketList.theme =
+                        $("."+abring.params.market.basket.pages.basketList.theme_parent_id).html();
+                    $("."+abring.params.market.basket.pages.basketList.theme_parent_id).html("");
+                }
+                var parent_id = abring.params.market.basket.pages.basketList.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.params.market.basket.pages.basketList.theme;
+            },
+            "show":function () {
+                var parent_id = abring.params.market.basket.pages.basketList.parent_id;
                 abring.params.display.showPageFunction(parent_id);
             }
         }

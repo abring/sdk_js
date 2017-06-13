@@ -3,23 +3,6 @@ var initPayment = function () {
     var html = readFile(abring_url+"/modules/market/view/payment.html");
     $("body #abring").append(html);
 };
-
-var getPayments = function()
-{
-    abring.params.display.loading.show("get payment list ...");
-    callAbringWithFileUpload(
-        "payment/list",
-        {},
-        function (payment_list) {
-            log(">>>>>>>>>payment_list<<<<<<<<<<");
-            log(payment_list);
-            abring.params.display.hidePageFunction();
-        },function (x,c,e) {
-            abring.params.display.error.show(e);
-        }
-    );
-};
-
 var payByBank = function(basket_id)
 {
     abring.params.display.loading.show("Process payment ...");

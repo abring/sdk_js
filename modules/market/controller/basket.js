@@ -55,7 +55,7 @@ $(document).on("click",".abring_buttons_market_basket_view",function () {
     }
 
     callAbringWithFileUpload(
-        "basket/index",
+        "basket/view",
         {},
         function (basket) {
             if(!basket || basket.length==0)
@@ -66,4 +66,17 @@ $(document).on("click",".abring_buttons_market_basket_view",function () {
             abring.params.display.error.show(e);
         }
     );
+});
+
+$(document).on("click",".abring_buttons_market_basket_list",function () {
+
+    if(!abring.params.player_info)
+    {
+        abring.params.player.pages.player_mobile_register.show("Your are not login!");
+        return false;
+    }
+
+    getBaskets(function () {
+        abring.params.market.basket.pages.basketList.show();
+    });
 });
