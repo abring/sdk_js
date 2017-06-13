@@ -104,7 +104,7 @@
     }
     .product-detail-div {
         text-align: right;
-        padding: 30px;
+        padding: 30px 30px 0 30px;
     }
     .product-detail-div .name {
         color: #5B8FC1;
@@ -128,10 +128,26 @@
         width: auto;
         padding-top: 7px;
     }
+    .product-detail-div .data {
+        margin: 0;
+    }
     .product-detail-div h3 {
         margin: 0;
         padding: 0;
         font-weight: normal;
+    }
+    .product-more-pic {
+        margin: 10px -10px;
+    }
+    .product-more-pic img {
+        margin-right: 10px;
+        width: 80px;
+        height: 60px;
+    }
+    .product-detail-div button {
+        background-color: #58c2b3;
+        border-radius: 0;
+        margin-top: 40px;
     }
 </style>
 <div class="page products_list" style="padding: 0px 0 50px 0;">
@@ -173,11 +189,12 @@
     <div class="content-div base-padding product-detail-div">
         <img src="" class="image product-detail-img">
         <h3 class="name"></h3>
+        <div class="product-more-pic"></div>
         <h3 class="amount"></h3>
         <p class="data"></p>
         <h3 class="fee"></h3>
         <h3 class="unit">T</h3>
 
-        <div><button class="abring_button_market_add_to_basket">add to basket</button></div>
+        <div><button class="abring_button_market_add_to_basket">افزودن به سبد</button></div>
     </div>
 </div>

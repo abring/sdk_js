@@ -31,12 +31,13 @@ var showProductsList = function(productsList){
 var fillProductsView = function(product){
     abring.params.market.products.pages.productView.getTheme();
     var parent_id = abring.params.market.products.pages.productView.parent_id;
-
     $("."+parent_id+" *").attr("product_id",product["id"]);
     $("."+parent_id+" .image").attr("src",product["image"]);
     $("."+parent_id+" .name").html(product["name"]);
-    $("."+parent_id+" .data").html(product["data"]);
     $("."+parent_id+" .fee").html(product["fee"]);
+    $.each(product["data"]["more_pic"] , function(index , pic){
+        $(".product-more-pic").append('<img src="'+pic+'" />');
+    });
     if(product["amount"]>0)
         $("."+parent_id+" .amount").html("Available");
     else
