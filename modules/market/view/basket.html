@@ -1,35 +1,53 @@
 <style>
-    .basket_view ul li:first-child{
+    .basket_list ul li:first-child{
         display: none;
     }
-    .basket-row li img {
+    table tr:nth-child(-2n + 2) {
+        display: none;
+    }
+    #basket-row tr td img {
         width: 80px;
         height: 60px;
     }
-    .basket-row li * {
-        float: right;
-        margin: 0 10px;
-    }
-    .basket-row li {
-        display: inline-block;
-        width: 100%;
-        border: 1px solid #ccc;
-        padding: 15px;
-    }
-    .basket-contain ul.basket-row {
+    table#basket-row {
         direction: rtl;
-        padding: 0;
+        width: 100%;
+        background-color: white;
         text-align: right;
+        border-collapse: collapse;
     }
-    .basket-contain {
-        padding: 15px 25px;
-        margin-right: -10px;
+    tbody {
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: inherit;
     }
-    .basket-row li h3 {
-        margin-top: 38px;
+    tr {
+        display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
     }
-    .basket-row li button {
-        margin-top: 38px;
+    td, #basket-row th {
+        border: 1px solid #dddddd;
+        text-align: right;
+        padding: 8px;
+    }
+    th {
+        font-weight: bold;
+        font-size: 16px;
+    }
+    td, th {
+        display: table-cell;
+        vertical-align: inherit;
+    }
+    #basket-row tr td {
+        font-weight: normal !important;
+        font-size: 12px !important;
+    }
+    td .order {
+        width: 40px;
+    }
+    .basket_list .content-div {
+        padding: 20px;
     }
 </style>
 <div class="page basket_view">
@@ -39,15 +57,22 @@
     </div>
     <div class="content-div base-padding basket-contain">
 
-        <ul class="basket-row">
-            <li>
-                <img src="" class="image">
-                <h3 class="name"></h3>
-                <h3 class="fee"></h3>
-                <h3 class="order"></h3>
-                <button style="float: left" class="abring_button_market_delete_from_basket">حذف</button>
-            </li>
-        </ul>
+        <table id="basket-row" style="width:100%">
+            <tr>
+                <th>عکس</th>
+                <th>نام محصول</th>
+                <th>قیمت</th>
+                <th>وضعیت</th>
+                <th></th>
+            </tr>
+            <tr class="template">
+                <td><img src="" class="image"></td>
+                <td><label class="name"></label></td>
+                <td><label class="fee"></label></td>
+                <td><input type="number" class="order"></td>
+                <td style="text-align: center"><button class="abring_button_market_delete_from_basket">حذف</button></td>
+            </tr>
+        </table>
 
     </div>
 </div>
@@ -58,14 +83,21 @@
         <span class="message left"></span>
     </div>
     <div class="content-div base-padding">
-        <ul>
-            <li>
-                <h3 class="create_time"></h3>
-                <h3 class="fee"></h3>
-                <h3 class="status"></h3>
-                <button class="abring_buttons_market_basket_view">view basket</button>
-            </li>
-        </ul>
+        <table id="basket-row" style="width:100%">
+            <tr>
+                <th>زمان ایجاد</th>
+                <th>قیمت</th>
+                <th>وضعیت</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr class="template">
+                <td><label class="create_time"></label></td>
+                <td><label class="fee"></label></td>
+                <td><label class="status"></label></td>
+                <td style="text-align: center"><button class="abring_buttons_market_basket_view">نمایش سبد</button></td>
+            </tr>
+        </table>
 
     </div>
 </div>
