@@ -9,7 +9,7 @@ var payByBank = function(basket_id)
     basket_id = basket_id || false;
     callAbringWithFileUpload(
         "payment/index",
-        {"basket_id":basket_id},
+        {"basket_id":basket_id,extra_data:{var1:"val1",var2:"val2"}},
         function (payment_info) {
             log(">>>>>>>>>payment_info<<<<<<<<<<");
             log(payment_info);
