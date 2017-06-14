@@ -1,7 +1,7 @@
 abring.params = {
 //configs
     "app" : "ir.abring.sdk",
-    "ws_base_url" : "http://ws.v3.abring.dev/index.php?r=",
+    "ws_base_url" : "http://ws.v3.abring.ir/index.php?r=",
 
     "leaderboard":{
         "parent_id" : "abring_leaderboard"
