@@ -54,9 +54,11 @@ $(document).on("click",".abring_buttons_market_basket_view",function () {
         return false;
     }
 
+    var basket_id = $(this).attr("basket_id")||0;
+
     callAbringWithFileUpload(
         "basket/view",
-        {},
+        {"id":basket_id},
         function (basket) {
             if(!basket || basket.length==0)
                 return abring.params.display.error.show("basket is empty!");
