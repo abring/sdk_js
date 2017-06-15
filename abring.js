@@ -21,6 +21,7 @@ document.writeln("<script type='text/javascript' src='"+abring_url+"/lib/md5.min
 
 document.writeln("<script type='text/javascript' src='"+abring_url+"/models/helpers.js'></script>");
 document.writeln("<script type='text/javascript' src='"+abring_url+"/configs/params.js'></script>");
+document.writeln("<script type='text/javascript' src='"+abring_url+"/models/translation.js'></script>");
 document.writeln("<script type='text/javascript' src='"+abring_url+"/controller/page.js'></script>");
 document.writeln("<script type='text/javascript' src='"+abring_url+"/models/socket.js'></script>");
 document.writeln("<script type='text/javascript' src='"+abring_url+"/models/file.js'></script>");

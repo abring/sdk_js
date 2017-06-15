@@ -51,6 +51,7 @@ abring.init = function (data) {
     $("#abring .dialog img.warning").attr("src",abring.params.display.abring_warning_url);
     $("#abring .dialog img.avatar").attr("src",abring.params.display.abring_default_avatar_url);
 
+    initTranslation();
     initPlayer();
     initChat();
     initMessage();
