@@ -7,10 +7,14 @@ var initTranslation = function () {
     };
 };
 
-abring.t = function(source,lang){
+abring.t = function(source,params,lang){
+    params = params || {};
     lang = lang || 'fa';
     try{
         var t = abring.params.translation[source][lang] || source;
+        $.each(params,function(key,value){
+            t = t.replaceAll("{"+key+"}",value);
+        });
         return t;
     }catch(e)
     {
