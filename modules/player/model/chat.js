@@ -27,10 +27,11 @@ var chat_show_page = function (from_player_id,init_message) {
                 abring.params.display.error.show("error connecting to socket server");
 
             if(init_message)
+            {
                 abring.params.chat.pages.room.target_player_say(from_player_info,init_message);
-
-            if(abring.params.display.current_page!=abring.params.chat.pages.room.parent_id)
-                play_sound(abring.params.sounds.notification);
+                if(abring.params.display.current_page!=abring.params.chat.pages.room.parent_id)
+                    play_sound(abring.params.sounds.notification);
+            }
 
             abring.params.display.current_page = parent_id;
             abring.params.chat.pages.room.show(from_player_info,init_message);
