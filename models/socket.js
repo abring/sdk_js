@@ -19,7 +19,10 @@ var socketConnect = function()
         abring.params.socketObject = new WebSocket("ws://" + abring.params.socketDomain+":"+abring.params.socketPort);
         abring.params.socketObject.onopen = function () {
             abring.params.socketRetryIsRunning=false;
-            socketSendMessage(abring.params.player_info["player_id"]);
+            if (abring.params.token)
+                socketSendMessage(abring.params.token);
+            else
+                socketSendMessage(randomString(10));
             abring.params.socketConnectFunction();
         };
 
@@ -34,7 +37,12 @@ var socketConnect = function()
                 var socket_message_0 = socket_message[0].trim();
                 if(socket_target_player_id==0){
                     if(socket_message_0=="0") log("ping from socket");
-                    else if(socket_message_0=="1") socketSendMessage(abring.params.player_info["player_id"]);
+                    else if(socket_message_0=="1") {
+                        if (abring.params.token)
+                            socketSendMessage(abring.params.token);
+                        else
+                            socketSendMessage(randomString(10));
+                    }
                     else if(socket_message_0=="2") socketSendMessage(abring.params.app);//set app id as default group for this player
                     else if(socket_message_0=="3") log("ready for multicast");
                     else if(socket_message_0=="6") log("socket command executed");
