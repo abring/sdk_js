@@ -4,10 +4,6 @@ var initMessage = function () {
     $("body #abring").append(html);
 };
 
-var showMessageList = function () {
-    var parent_id = abring.params.message.pages.list.parent_id;
-    abring.params.display.showPageFunction(parent_id);
-};
 var getMessageList = function (getMessageListSuccess,getMessageListFailed) {
     callAbringWithFileUpload(
         "message/list",

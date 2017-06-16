@@ -177,7 +177,10 @@ abring.params.message = {
                 return abring.params.message.pages.list.theme;
             },
             "show":function () {
-                showMessageList();
+
+                var parent_id = abring.params.message.pages.list.parent_id;
+                abring.params.display.showPageFunction(parent_id);
+
             }
         },
         "view":{
