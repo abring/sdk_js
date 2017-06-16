@@ -89,27 +89,42 @@ abring.init = function (data) {
         checkIsOnline();
     });
 
+
+
+    if(!abring.params.chat_template)
+        abring.params.chat_template = '<div class="player_chat" id="chat_PLAYER_ID" player_id="PLAYER_ID">'+$("#"+abring.params.chat_template_parent_id).html()+"</div>";
+    $("#"+abring.params.chat_template_parent_id).html("");
+
+
     if(!abring.params.token)
     {
         if(abring.params.uuid)
             abringPLayerLoginWithDeviceId(
                 function () {
+
+                    abring.params.init_completed = true;
                     if(!socketConnect())
                         log("Socket is not available");
 
                     log("Logged in with device id!");
                 },function (xhr,code,error) {
 
+                    abring.params.init_completed = true;
                     if(!socketConnect())
                         log("Socket is not available");
 
                     log("Failed to login with device id:\n"+error);
                 }
             );
-        else if(!socketConnect())
+        else {
+
+            abring.params.init_completed = true;
+            if(!socketConnect())
                 log("Socket is not available");
+        }
     }else{
 
+        abring.params.init_completed = true;
         if(!socketConnect())
             log("Socket is not available");
 
@@ -130,13 +145,5 @@ abring.init = function (data) {
         else if(abring.params.uuid)
             abringPlayerRegisterDevice();
     }
-
-
-
-    if(!abring.params.chat_template)
-        abring.params.chat_template = '<div class="player_chat" id="chat_PLAYER_ID" player_id="PLAYER_ID">'+$("#"+abring.params.chat_template_parent_id).html()+"</div>";
-    $("#"+abring.params.chat_template_parent_id).html("");
-
-    abring.params.init_completed = true;
 };
 
