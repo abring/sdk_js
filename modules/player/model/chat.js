@@ -11,7 +11,7 @@ var chat_show_page = function (from_player_id,init_message) {
             abring.params.chat.pages.room.getTheme();
             var parent_id = abring.params.chat.pages.room.parent_id;
             var from_player_id = from_player_info["player_id"];
-            
+
             if($("."+parent_id+" #chat_"+from_player_id).length==0)
             {
                 var template = $("."+abring.params.chat.pages.room.theme_parent_id+" ul li:first-child").outerHTML();
@@ -50,7 +50,7 @@ var abringOnPlayerSocketMessage = function(from_player_id,message){
     if( (typeof message == "array" || typeof message == "object") && message.length>1 ) //is command from socket server
     {
         if(message[0]=="chat"){ //is chat
-            chat_show_page(from_player_id,message);
+            chat_show_page(from_player_id,message[1]);
         }else
         {
             log("unknown command from socket >>>>>>>");
