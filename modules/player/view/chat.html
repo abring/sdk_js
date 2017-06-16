@@ -4,28 +4,33 @@
 </div>
 
 <div class="page chat_room">
-    <style>
-        li{
+    <style type="text/css">
+        ul.chat_rooms {
+            padding: 0px;
+        }
+        .chat_rooms li{
             list-style: none;
         }
-        .chat_room ul>li:first-child{display: none}
-        .chat_room .message {
+        ul.chat_rooms li:first-child{
+            display: none;
+        }
+        .chat_rooms .message {
             float: left;
             margin: 0;
         }
-        .chat_room {
+        .chat_rooms {
             text-align: center;
         }
-        .chat-footer {
+        .chat_rooms .chat-footer {
             position: relative;
         }
-        .chat_send {
+        .chat_rooms .chat_send {
             position: absolute;
             right: 0;
             bottom: 0px;
             height: 46px;
         }
-        .chat_content {
+        .chat_rooms .chat_content {
             display: inline-block;
             width: 100%;
             padding: 0 15px;
@@ -33,49 +38,46 @@
             height: 465px;
             overflow: auto;
         }
-        .tab_wrapper{
-            padding: 0px;;
-        }
-        .chat_content .me{
+        .chat_rooms .chat_content .me{
             width: 100%;
             float: right;
         }
-        .chat_content .you{
+        .chat_rooms .chat_content .you{
             width: 100%;
             float: left;
         }
-        .chat_content .time{
+        .chat_rooms .chat_content .time{
             font-size: 10px;
             margin-bottom: 0px;
             text-align: right;
         }
-        .chat_content .you img{
+        .chat_rooms .chat_content .you img{
             padding: 5px;
             float: left;
             clear: left;
         }
-        .chat_content .chat_dialog{
+        .chat_rooms .chat_content .chat_dialog{
             padding: 10px;
             border-radius: 10px;
             margin: 5px 0;
         }
-        .chat_content .message{
+        .chat_rooms .chat_content .message{
             width: 100%;
             text-align: right;
         }
-        .chat_content .you .chat_dialog{
+        .chat_rooms .chat_content .you .chat_dialog{
             background: #ee9;
             float: left;
             clear: left;
         }
-        .chat_content .me .chat_dialog{
+        .chat_rooms .chat_content .me .chat_dialog{
             background: #eee;
             float: right;
             clear: right;
         }
     </style>
 
-    <ul>
+    <ul class="chat_rooms">
         <li class="tab" style="margin-bottom: 80px;">
             <div class="chat_header">
                 <img class="target_player_avatar" src="" style="max-width: 64px;max-height:64px;">
