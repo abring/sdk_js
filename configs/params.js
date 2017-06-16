@@ -230,8 +230,9 @@ abring.params.message = {
                 $("."+parent_id).html(theme);
                 return abring.params.message.pages.unicast.theme;
             },
-            "show":function (player_id) {
-                showMessageUnicast(player_id);
+            "show":function (player_info) {
+                var parent_id = abring.params.message.pages.unicast.parent_id;
+                abring.params.display.showPageFunction(parent_id);
             }
         }
     }

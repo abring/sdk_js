@@ -24,7 +24,7 @@ var chat_show_page = function (from_player_id,init_message) {
             }
 
             if(!socketConnect())
-                abring.params.display.error.show("error connecting to socket server");
+                return abring.params.display.error.show("error connecting to socket server");
 
             if(init_message)
             {

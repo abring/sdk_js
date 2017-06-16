@@ -55,7 +55,26 @@ $(document).on("click",".abring_buttons_message_unicast",function () {
     var player_id = $(this).attr("player_id");
     if(!player_id)
         return abring.params.display.error.show("player id not set");
-    abring.params.message.pages.unicast.show(player_id);
+
+    var parent_id = abring.params.message.pages.unicast.parent_id;
+
+    getOtherPlayerInfo(player_id,false,
+        function(player_info){
+
+            $("."+parent_id+" .abring_message_form *").attr("player_id",player_id);
+            $("."+parent_id+" .abring_message_form #abring_message_player_id").val(player_id);
+            $("."+parent_id+" .avatar").attr("src",player_info["avatar"]);
+            $("."+parent_id+" .name").html(player_info["name"]);
+            $.each(player_info["public"],function(index,item){
+                if(typeof item == "string")
+                    $("."+parent_id+" ."+index).html(item);
+            });
+            abring.params.message.pages.unicast.show(player_info);
+        },
+        function(x,c,e){
+            return abring.params.display.error.show(e);
+        }
+    );
 
 });
 $(document).on("click",".abring_buttons_message_unicast_submit",function () {
