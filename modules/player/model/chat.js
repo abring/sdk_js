@@ -9,12 +9,12 @@ var chat_show_page = function (from_player_id,init_message) {
     getOtherPlayerInfo(from_player_id,false,
         function (from_player_info) {
             abring.params.chat.pages.room.getTheme();
+            var template = $("."+abring.params.chat.pages.room.parent_id+" li:first-child").outerHTML();
             var parent_id = abring.params.chat.pages.room.parent_id;
             var from_player_id = from_player_info["player_id"];
 
             if($("."+parent_id+" #chat_"+from_player_id).length==0)
             {
-                var template = $("."+abring.params.chat.pages.room.theme_parent_id+" ul li:first-child").outerHTML();
                 $("."+parent_id+" ul").append(template);
                 $("."+parent_id+" ul>li:last-child").attr("id","chat_"+from_player_id);
 
