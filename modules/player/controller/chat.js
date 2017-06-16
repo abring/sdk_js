@@ -29,7 +29,7 @@ $(document).on("click",".chat_send",function () {
         return false;
     }
     var parent_id = abring.params.chat.pages.room.parent_id;
-    var message = $("."+parent_id+" .chat_"+target_player_id+" .chat_message").val();
+    var message = $("."+parent_id+" #chat_"+target_player_id+" .chat_message").val();
 
     abring.params.chat.pages.room.i_say(target_player_id,message);
     chatSend(target_player_id,message);

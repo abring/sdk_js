@@ -731,82 +731,6 @@ abring.params.posts = {
                 var parent_id = abring.params.player.pages.my_profile_update.parent_id;
                 abring.params.display.showPageFunction(parent_id);
             }
-        },
-        "abring_chat":{
-            "parent_id":"abring_chat",
-            "theme_parent_id":"abring_chat_template",
-            "setParents":function(parent_id,theme_parent_id){
-                if(parent_id)
-                    abring.params.player.pages.abring_chat.parent_id = parent_id;
-                if(theme_parent_id)
-                    abring.params.player.pages.abring_chat.theme_parent_id = theme_parent_id;
-                abring.params.player.pages.abring_chat.getTheme(true);
-            },
-            "theme":"",
-            "getTheme":function(override){
-                var theme = abring.params.player.pages.abring_chat.theme;
-                var parent_id = abring.params.player.pages.abring_chat.parent_id;
-                if(!theme || override)
-                {
-                    theme = abring.params.player.pages.abring_chat.theme =
-                        $("."+abring.params.player.pages.abring_chat.theme_parent_id).html();
-                    $("."+abring.params.player.pages.abring_chat.theme_parent_id).html("");
-                    $("."+parent_id).html(theme);
-                }
-                return abring.params.player.pages.abring_chat.theme;
-            },
-            "show":function(target_player_id,init_message){
-                abring.params.player.pages.abring_chat.getTheme();
-                var parent_id = abring.params.player.pages.abring_chat.parent_id;
-
-                if($("."+abring.params.player.pages.abring_chat.parent_id+" #chat_"+target_player_id).length==0)
-                {
-                    var template = $("."+abring.params.player.pages.abring_chat.parent_id+" #template").outerHTML();
-                    template = template.replace('id="template"','id="chat_'+target_player_id+'"');
-                    $("."+abring.params.player.pages.abring_chat.parent_id+" .tab_wrapper").append(template);
-                }
-
-                getOtherPlayerInfo(target_player_id,false,
-                    function (target_player_info ) {
-                        if(!socketConnect())
-                            abring.params.display.error.show("error connecting to socket server");
-
-                        $("."+parent_id+" #chat_"+target_player_id+" .target_player_avatar").attr("src",target_player_info["avatar"]);
-                        $("."+parent_id+" #chat_"+target_player_id+" .target_player_name").html(target_player_info["name"]);
-                        $("."+parent_id+" #chat_"+target_player_id+" .chat_send").attr("player_id",target_player_info["player_id"]);
-
-                        abring.params.display.showPageFunction(parent_id);
-
-                        if(init_message)
-                            abring.params.player.pages.abring_chat.target_player_say(target_player_info,init_message);
-                    },function (x,c,e) {
-                        abring.params.display.error.show(e);
-                    }
-                );
-            },
-            "target_player_say":function(target_player_info,message){
-                var parent_id = abring.params.player.pages.abring_chat.parent_id;
-                var tag_selector = "."+parent_id+" #chat_"+target_player_info["player_id"];
-                var template = $(tag_selector+" .you").first().outerHTML();
-                $(tag_selector+" .chat_content").append(template);
-                $(tag_selector+" .chat_content .you:last .avatar").attr("src",target_player_info["avatar"]);
-                $(tag_selector+" .chat_content .you").last().find(".name").html(target_player_info["name"]);
-                var x = $(tag_selector+" .chat_content .you");
-                var x1 = x.last();
-                var x2 = x1.find(".message");
-                $(tag_selector+" .chat_content .you").last().find(".message").html(message);
-                $(tag_selector+" .chat_content .you").last().find(".time").html('now');//???????????
-                $(tag_selector+" .chat_content .you").last().show("slow");
-            },
-            "i_say":function(target_player_id,message){
-                var parent_id = abring.params.player.pages.abring_chat.parent_id;
-                var tag_selector = "."+parent_id+" #chat_"+target_player_id;
-                var template = $(tag_selector+" .me").first().outerHTML();
-                $(tag_selector+" .chat_content").append(template);
-                $(tag_selector+" .chat_content .me:last .message").html(message);
-                $(tag_selector+" .chat_content .me:last .time").html('now');//???????????
-                $(tag_selector+" .chat_content .me:last").show("slow");
-            }
         }
     },
     "parent_id" : "abring_posts",
@@ -814,15 +738,8 @@ abring.params.posts = {
 };
 
 abring.params.chat = {
-
-    //"chat_parent_id" : "abring_chat",
-    //"chatMessageFunction" : function(from_player_info,message){return abringOnPlayerChatMessage(from_player_info,message)},
-    //"chat_template_parent_id" : "abring_chat_template",
-    //"chat_show_page_function" : function(target_player_info){return chat_show_page(target_player_info)},
-
-
-    "pages":{
-        "list":{
+    pages:{
+        list:{
             "parent_id":"chat_list",
             "theme_parent_id":"chat_list",
             "setParents":function(parent_id,theme_parent_id){
@@ -850,7 +767,8 @@ abring.params.chat = {
                 abring.params.display.showPageFunction(parent_id);
             }
         },
-        "room":{
+        room:{
+
             "parent_id":"chat_room",
             "theme_parent_id":"chat_room",
             "setParents":function(parent_id,theme_parent_id){
@@ -873,27 +791,24 @@ abring.params.chat = {
                 }
                 return abring.params.chat.pages.room.theme;
             },
-            "show":function(){
+            "show":function(target_player_info,init_message){
                 var parent_id = abring.params.chat.pages.room.parent_id;
                 abring.params.display.showPageFunction(parent_id);
             },
             "target_player_say":function(target_player_info,message){
                 var parent_id = abring.params.chat.pages.room.parent_id;
-                var tag_selector = "."+parent_id+" .chat_"+target_player_info["player_id"];
+                var tag_selector = "."+parent_id+" #chat_"+target_player_info["player_id"];
                 var template = $(tag_selector+" .you").first().outerHTML();
                 $(tag_selector+" .chat_content").append(template);
                 $(tag_selector+" .chat_content .you:last .avatar").attr("src",target_player_info["avatar"]);
                 $(tag_selector+" .chat_content .you").last().find(".name").html(target_player_info["name"]);
-                var x = $(tag_selector+" .chat_content .you");
-                var x1 = x.last();
-                var x2 = x1.find(".message");
                 $(tag_selector+" .chat_content .you").last().find(".message").html(message);
                 $(tag_selector+" .chat_content .you").last().find(".time").html('now');//???????????
                 $(tag_selector+" .chat_content .you").last().show("slow");
             },
             "i_say":function(target_player_id,message){
                 var parent_id = abring.params.chat.pages.room.parent_id;
-                var tag_selector = "."+parent_id+" .chat_"+target_player_id;
+                var tag_selector = "."+parent_id+" #chat_"+target_player_id;
                 var template = $(tag_selector+" .me").first().outerHTML();
                 $(tag_selector+" .chat_content").append(template);
                 var dialog_tag = $(tag_selector+" .chat_content .me:last");
