@@ -27,6 +27,7 @@ abring.params = {
 
 
 //global variables
+    "init_completed" : false,
     "timeStamp" : 0,
     "badgeNumber" : 0, //an small number shown in corner of application icon
     "template" : "",

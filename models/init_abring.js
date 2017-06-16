@@ -70,9 +70,6 @@ abring.init = function (data) {
 
     abring.params.player_info = getPlayerInfo();
 
-    if(!socketConnect())
-        log("Socket is not available");
-
     updateLocation(
         function(current_location){
             $(".current_location_country").html(abring.params.current_location_country).val(abring.params.current_location_country);
@@ -97,12 +94,25 @@ abring.init = function (data) {
         if(abring.params.uuid)
             abringPLayerLoginWithDeviceId(
                 function () {
+                    if(!socketConnect())
+                        log("Socket is not available");
+
                     log("Logged in with device id!");
                 },function (xhr,code,error) {
+
+                    if(!socketConnect())
+                        log("Socket is not available");
+
                     log("Failed to login with device id:\n"+error);
                 }
             );
+        else if(!socketConnect())
+                log("Socket is not available");
     }else{
+
+        if(!socketConnect())
+            log("Socket is not available");
+
         if(!abring.params.player_info)
             getPlayerInfo(true,
                 function(){
@@ -121,8 +131,12 @@ abring.init = function (data) {
             abringPlayerRegisterDevice();
     }
 
+
+
     if(!abring.params.chat_template)
         abring.params.chat_template = '<div class="player_chat" id="chat_PLAYER_ID" player_id="PLAYER_ID">'+$("#"+abring.params.chat_template_parent_id).html()+"</div>";
     $("#"+abring.params.chat_template_parent_id).html("");
+
+    abring.params.init_completed = true;
 };
 

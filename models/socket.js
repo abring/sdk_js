@@ -12,7 +12,7 @@ var socketIsConnected = function()
 
 var socketConnect = function()
 {
-    if(!socketIsAvailable())
+    if(!socketIsAvailable() || !abring.params.init_completed )
         return false;
     if(!socketIsConnected())
     {
