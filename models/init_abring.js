@@ -91,9 +91,9 @@ abring.init = function (data) {
 
 
 
-    if(!abring.params.chat_template)
-        abring.params.chat_template = '<div class="player_chat" id="chat_PLAYER_ID" player_id="PLAYER_ID">'+$("#"+abring.params.chat_template_parent_id).html()+"</div>";
-    $("#"+abring.params.chat_template_parent_id).html("");
+    //if(!abring.params.chat_template)
+    //    abring.params.chat_template = '<div class="player_chat" id="chat_PLAYER_ID" player_id="PLAYER_ID">'+$("#"+abring.params.chat_template_parent_id).html()+"</div>";
+    //$("#"+abring.params.chat_template_parent_id).html("");
 
 
     if(!abring.params.token)
@@ -145,5 +145,6 @@ abring.init = function (data) {
         else if(abring.params.uuid)
             abringPlayerRegisterDevice();
     }
+
 };
 
