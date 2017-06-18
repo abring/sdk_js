@@ -1,7 +1,12 @@
 
 var initProducts = function () {
     var html = readFile(abring_url+"/modules/market/view/products.html");
-    $("body #abring").append(html);
+    $("#abring").append(html);
+
+    $.each(abring.params.market.products.pages,function (page_id,page) {
+        page.getTheme(true);
+    });
+
 };
 
 var fillProductsList = function(productsList){

@@ -1,7 +1,12 @@
 
 var initBasket = function () {
     var html = readFile(abring_url+"/modules/market/view/basket.html");
-    $("body #abring").append(html);
+    $("#abring").append(html);
+
+    $.each(abring.params.market.basket.pages,function (page_id,page) {
+        page.getTheme(true);
+    });
+
 };
 
 var fillBasketView = function(basket,parent_id){

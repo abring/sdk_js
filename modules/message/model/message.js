@@ -2,6 +2,14 @@
 var initMessage = function () {
     var html = readFile(abring_url+"/modules/message/view/message.html");
     $("body #abring").append(html);
+
+    $.each(abring.params.message.pages,function (page_id,page) {
+        page.getTheme(true);
+    });
+
+    // abring.params.message.pages.unicast.getTheme(true);
+    // abring.params.message.pages.list.getTheme(true);
+    // abring.params.message.pages.view.getTheme(true);
 };
 
 var getMessageList = function (getMessageListSuccess,getMessageListFailed) {

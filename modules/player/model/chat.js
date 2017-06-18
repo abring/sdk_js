@@ -3,6 +3,10 @@ var initChat = function () {
     var view = readFile(abring_url+"/modules/player/view/chat.html");
     $("#abring").append(view);
 
+    $.each(abring.params.chat.pages,function (page_id,page) {
+        page.getTheme(true);
+    });
+
 };
 
 var chat_show_page = function (from_player_id,init_message) {

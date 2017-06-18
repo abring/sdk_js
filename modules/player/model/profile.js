@@ -9,6 +9,10 @@ var initPlayer = function () {
     playerView = readFile(abring_url+"/modules/player/view/player.html");
     $("#abring").append(playerView);
 
+    $.each(abring.params.player.pages,function (page_id,page) {
+        page.getTheme(true);
+    });
+
     //abring.params.player_view_detail = $("#"+abring.params.player.parent_id+" .player_view_details").html();
     //$("#"+abring.params.player.parent_id+" .friends_list .player_view_details *").remove();
     if(!abring.params.player_info){
