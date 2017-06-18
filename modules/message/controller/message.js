@@ -3,19 +3,19 @@ $(document).on("click",".abring_buttons_message_list",function () {
 
     if(!abring.params.token)
     {
-        abring.params.display.error.show("Your are not login.");
+        abring.display.error.show("Your are not login.");
         return false;
     }
 
-    abring.params.display.loading.show("loading your messages");
-    abring.params.message.pages.list.getTheme();
+    abring.display.loading.show("loading your messages");
+    abring.message.pages.list.getTheme();
     getMessageList(
         function (messageList) {
             fillMessageList(messageList);
-            abring.params.display.hidePageFunction();
-            abring.params.message.pages.list.show();
+            abring.display.hidePageFunction();
+            abring.message.pages.list.show();
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 
@@ -25,21 +25,21 @@ $(document).on("click",".abring_buttons_message_view",function () {
 
     if(!abring.params.token)
     {
-        abring.params.display.error.show("Your are not login.");
+        abring.display.error.show("Your are not login.");
         return false;
     }
 
-    abring.params.display.loading.show("loading message");
+    abring.display.loading.show("loading message");
 
     var message_id = $(this).attr("message_id");
     getMessage(
         message_id,
         function (message) {
             fillMessage(message);
-            abring.params.display.hidePageFunction();
-            abring.params.message.pages.view.show(message_id);
+            abring.display.hidePageFunction();
+            abring.message.pages.view.show(message_id);
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 
@@ -49,14 +49,14 @@ $(document).on("click",".abring_buttons_message_unicast",function () {
 
     if(!abring.params.token)
     {
-        abring.params.display.error.show("Your are not login.");
+        abring.display.error.show("Your are not login.");
         return false;
     }
     var player_id = $(this).attr("player_id");
     if(!player_id)
-        return abring.params.display.error.show("player id not set");
+        return abring.display.error.show("player id not set");
 
-    var parent_id = abring.params.message.pages.unicast.parent_id;
+    var parent_id = abring.message.pages.unicast.parent_id;
 
     getOtherPlayerInfo(player_id,false,
         function(player_info){
@@ -69,10 +69,10 @@ $(document).on("click",".abring_buttons_message_unicast",function () {
                 if(typeof item == "string")
                     $("."+parent_id+" ."+index).html(item);
             });
-            abring.params.message.pages.unicast.show(player_info);
+            abring.message.pages.unicast.show(player_info);
         },
         function(x,c,e){
-            return abring.params.display.error.show(e);
+            return abring.display.error.show(e);
         }
     );
 
@@ -81,7 +81,7 @@ $(document).on("click",".abring_buttons_message_unicast_submit",function () {
 
     if(!abring.params.token)
     {
-        abring.params.display.error.show("Your are not login.");
+        abring.display.error.show("Your are not login.");
         return false;
     }
 

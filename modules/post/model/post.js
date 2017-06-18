@@ -8,24 +8,24 @@ var initPost = function () {
     var postView = readFile(abring_url+"/modules/post/view/post.html");
     $("#abring").append(postView);
 
-    $.each(abring.params.posts.pages,function (page_id,page) {
+    $.each(abring.posts.pages,function (page_id,page) {
         page.getTheme(true);
     });
 
 };
 var abringPostsShow = function () {
 
-    $("#posts .banner").attr("src",abring.params.player_info["timeline_cover"]);
+    $("#posts .banner").attr("src",abring.player_info["timeline_cover"]);
 
     //show loading page
-    abring.params.display.loading.show("loading your timeline");
-    $("#"+abring.params.posts_parent_id+" .timeline").html("");
+    abring.display.loading.show("loading your timeline");
+    $("#"+abring.posts_parent_id+" .timeline").html("");
 
     //fill my timeline page info (avatar banner ...)
-    if(abring.params.player_info["post_banner"])
-        $("#"+abring.params.posts_parent_id+" .timeline_wall_banner img.banner").attr("src",abring.params.player_info["post_banner"]);
-    if(abring.params.player_info["avatar"])
-        $("#"+abring.params.posts_parent_id+" .timeline_wall_banner img.avatar").attr("src",abring.params.player_info["avatar"]);
+    if(abring.player_info["post_banner"])
+        $("#"+abring.posts_parent_id+" .timeline_wall_banner img.banner").attr("src",abring.player_info["post_banner"]);
+    if(abring.player_info["avatar"])
+        $("#"+abring.posts_parent_id+" .timeline_wall_banner img.avatar").attr("src",abring.player_info["avatar"]);
 
     //get my timeline
     callAbringWithFileUpload("post/timeline" ,false, post_timeline_success,post_timeline_failed);
@@ -116,10 +116,10 @@ var abringPostPutIntoTimeline = function(post) {
 
 
     //fill post in timeline
-    $("#"+abring.params.posts_parent_id+" .timeline").append(tmp_post_html);
+    $("#"+abring.posts_parent_id+" .timeline").append(tmp_post_html);
 
     if(post['comments'].constructor !== Object || post['comments']['list'].length<=0)
-        $("#"+abring.params.posts_parent_id+" .timeline:last .post_comment").html("");
+        $("#"+abring.posts_parent_id+" .timeline:last .post_comment").html("");
 };
 var abringPostLike = function(post_id) {
     $(".abring_post_like_this_post[name='"+post_id+"']").parent().children('label').html("updating ...");
@@ -156,23 +156,23 @@ var post_timeline_success = function(timeline){
 
     //close loading page
     //show post page
-    if(abring.params.posts_parent_id=="abring_posts")
-        abring.params.display.showPageFunction("post_timeline");
+    if(abring.posts_parent_id=="abring_posts")
+        abring.display.showPageFunction("post_timeline");
     else
         abringPageHide("loading");
 
     var allPost = $(".post");
     var allComment = $(".post-more-commnets-contain .post-comment");
     $.each(allPost , function( postIndex , postValue){
-        if(postValue.id.indexOf(abring.params.player_info['player_id']) == -1){
+        if(postValue.id.indexOf(abring.player_info['player_id']) == -1){
             $(postValue).addClass('other-post');
             //log(postValue.class);
         }
         $(".other-post .post-btn-action").hide();
     });
     $.each(allComment , function( commentIndex , commentValue){
-        log(commentValue.id+'----'+abring.params.player_info['player_id']);
-        if(commentValue.id !== abring.params.player_info['player_id']){
+        log(commentValue.id+'----'+abring.player_info['player_id']);
+        if(commentValue.id !== abring.player_info['player_id']){
             $(commentValue).addClass('other-comment');
             //log(postValue.class);
         }

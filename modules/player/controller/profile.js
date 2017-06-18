@@ -6,27 +6,27 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
 
     if(abring.params.token)
     {
-        abring.params.display.warning.show("Your are already a member and login.");
+        abring.display.warning.show("Your are already a member and login.");
         return false;
     }
 
-    abring.params.display.loading.show("login with device id");
+    abring.display.loading.show("login with device id");
 
     abringPLayerLoginWithDeviceId(
         function () {
             log("Logged in with device id was successful");
-            abring.params.display.hidePageFunction();
+            abring.display.hidePageFunction();
         },function (xhr,code,error) {
             log("first in with device id was failed:\n"+error);
             if(abring.params.isCordovaApp)
             {
-                abring.params.display.loading.show("sending SMS");
+                abring.display.loading.show("sending SMS");
 
                 smsSend(
                     abring.params.abring_sms_number,
                     abring.params.uuid,
                     function () {
-                        abring.params.display.loading.show("sending SMS success.\nwaiting for server confirmation!\nplease wait ...");
+                        abring.display.loading.show("sending SMS success.\nwaiting for server confirmation!\nplease wait ...");
 
                         start_loop(0,10,20,function (counter,id) {
 
@@ -34,7 +34,7 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                                 function () {
                                     exit_loop(id);
                                     log("Logged in with device id was successful");
-                                    abring.params.display.hidePageFunction();
+                                    abring.display.hidePageFunction();
                                 },function (xhr,code,error) {
                                     log(counter+"th in with device id was failed:\n"+error);
                                 }
@@ -43,15 +43,15 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                         });
 
                     },function (message) {
-                        abring.params.player.showPageFunction("player_mobile_register","sending SMS failed\n"+message);
+                        abring.player.showPageFunction("player_mobile_register","sending SMS failed\n"+message);
                     },
                     ''
                 );
             }
             else
             {
-                abring.params.player.pages.player_mobile_register.show();
-                abring.params.display.error.show("error","ارسال پیامک از طرف شما ممکن نیست");
+                abring.player.pages.player_mobile_register.show();
+                abring.display.error.show("error","ارسال پیامک از طرف شما ممکن نیست");
             }
         }
     );
@@ -61,46 +61,46 @@ $(document).on("click",".player_mobile_other_way_page",function () {
 
     if(abring.params.token)
     {
-        abring.params.display.warning.show("Your are already a member and login.");
+        abring.display.warning.show("Your are already a member and login.");
         return false;
     }
 
-    abring.params.player.pages.player_mobile_other_way.show();
+    abring.player.pages.player_mobile_other_way.show();
 
 });
 $(document).on("click",".abring_buttons_player_mobile_register",function () {
 
     if(abring.params.token)
     {
-        abring.params.display.warning.show("Your are already a member and login.");
+        abring.display.warning.show("Your are already a member and login.");
         return false;
     }
 
-    abring.params.player.pages.player_mobile_register.getTheme();
-    abring.params.player.pages.player_mobile_register.show();
+    abring.player.pages.player_mobile_register.getTheme();
+    abring.player.pages.player_mobile_register.show();
 });
 $(document).on("click",".player_mobile_register_submit",function () {
     if(abring.params.token)
     {
-        abring.params.display.warning.show("Your are already a member and login.");
+        abring.display.warning.show("Your are already a member and login.");
         return false;
     }
-    abring.params.display.loading.show("Registering your mobile number.\nPlease wait");
+    abring.display.loading.show("Registering your mobile number.\nPlease wait");
 
     //send register by mobile request
     var mobile_number = $(".player_mobile_register_mobile_number").val();
     abringPlayerMobileRegister(
         mobile_number,
         function(){
-            var parent_id = abring.params.player.pages.player_mobile_verify.parent_id;
-            abring.params.player.pages.player_mobile_verify.getTheme();
+            var parent_id = abring.player.pages.player_mobile_verify.parent_id;
+            abring.player.pages.player_mobile_verify.getTheme();
             $("."+parent_id+" .player_mobile_verify_mobile_number_label").html(mobile_number);
             $("."+parent_id+" .player_mobile_verify_mobile_number").val(mobile_number);
-            abring.params.display.hidePageFunction();
-            abring.params.player.pages.player_mobile_verify.show();
+            abring.display.hidePageFunction();
+            abring.player.pages.player_mobile_verify.show();
         },
         function(x,c,e){
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
             //showMyProfile("player_mobile_register",e);
         }
     );
@@ -108,29 +108,29 @@ $(document).on("click",".player_mobile_register_submit",function () {
 });
 $(document).on("click",".player_mobile_verify_submit",function () {
 
-    abring.params.display.loading.show("Verifying your mobile number.\nPlease wait");
+    abring.display.loading.show("Verifying your mobile number.\nPlease wait");
     //send register by mobile request
     var mobile_number = $(".player_mobile_verify_mobile_number").val();
     var code = $(".player_mobile_verify_code").val();
     if(!code||!mobile_number)
-        return abring.params.display.error.show("error","invalid params");
+        return abring.display.error.show("error","invalid params");
     abringPlayerMobileVerify(mobile_number,code,
         function(){
-            abring.params.display.hidePageFunction();
-            abring.params.display.home.show("info","login Successfully");
+            abring.display.hidePageFunction();
+            abring.display.home.show("info","login Successfully");
         },function(x,c,e){
-            abring.params.display.error.show("error",e);
+            abring.display.error.show("error",e);
         }
 
     );
 });
 $(document).on("click",".player_mobile_verify .resend_code ",function () {
 
-    abring.params.display.loading.show("Resending code.\nPlease wait");
+    abring.display.loading.show("Resending code.\nPlease wait");
 
     if(abring.params.token)
     {
-        abring.params.display.warning.show("Your are already a member and login.");
+        abring.display.warning.show("Your are already a member and login.");
         return false;
     }
     //send register by mobile request
@@ -150,10 +150,10 @@ $(document).on("click",".player_mobile_verify .resend_code ",function () {
             $(".player_mobile_verify .mobile_number").val(mobile_number);
             $(".player_mobile_verify .mobile_number_label").html(mobile_number);
 
-            abring.params.player.showPageFunction("player_mobile_verify","Please enter verify code.\n");
+            abring.player.showPageFunction("player_mobile_verify","Please enter verify code.\n");
 
         },function (x,c,e) {
-            abring.params.player.showPageFunction("player_mobile_verify","resend failed.\n"+e);
+            abring.player.showPageFunction("player_mobile_verify","resend failed.\n"+e);
         }
     );
 });
@@ -161,54 +161,54 @@ $(document).on("click",".register_using_abring",function () {
 
     if(abring.params.token)
     {
-        abring.params.display.warning.show("Your are already a member and login.");
+        abring.display.warning.show("Your are already a member and login.");
         return false;
     }
 
-    abring.params.player.showPageFunction("player_register");
+    abring.player.showPageFunction("player_register");
 
 });
 $(document).on("click",".login_using_abring",function () {
 
     if(abring.params.token)
     {
-        abring.params.display.warning.show("Your are already a member and login.");
+        abring.display.warning.show("Your are already a member and login.");
         return false;
     }
 
-    abring.params.player.showPageFunction("player_login","Please login!");
+    abring.player.showPageFunction("player_login","Please login!");
 
 });
 $(document).on("click",".abring_buttons_my_profile",function () {
     if(!abring.params.token)
     {
-        abring.params.player.pages.player_mobile_register.show();
+        abring.player.pages.player_mobile_register.show();
         return false;
     }
 
-    abring.params.player.pages.my_profile.getTheme();
+    abring.player.pages.my_profile.getTheme();
     fillMyPlayerInfo(true,
         function(){
-            abring.params.player.pages.my_profile.show();
+            abring.player.pages.my_profile.show();
         }
     );
 
 });
 $(document).on("click",".my_profile_update_profile",function () {
 
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.display.error.show("Your are not login!");
+        abring.display.error.show("Your are not login!");
         return false;
     }
 
     fillMyPlayerInfo();
-    abring.params.player.pages.my_profile_update.show();
+    abring.player.pages.my_profile_update.show();
 });
 $(document).on("click",".my_profile_update_submit",function () {
-    abring.params.display.loading.show("submitting your profile!");
+    abring.display.loading.show("submitting your profile!");
 
-    var parent_id_update = abring.params.player.pages.my_profile_update.parent_id;
+    var parent_id_update = abring.player.pages.my_profile_update.parent_id;
 
     var data = {
         "name":$("."+parent_id_update+" .name").val(),
@@ -223,7 +223,7 @@ $(document).on("click",".my_profile_update_submit",function () {
 
     callAbringWithFileUpload( "player/set", data,
         function (data) {
-            abring.params.player.pages.my_profile.show();
+            abring.player.pages.my_profile.show();
         },
         function (xhr, status, error) {
             log("failed");
@@ -233,18 +233,18 @@ $(document).on("click",".my_profile_update_submit",function () {
 });
 $(document).on("click",".abring_player_logout",function () {
 
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.display.error.show("Your are not login!");
+        abring.display.error.show("Your are not login!");
         return false;
     }
 
     abringPlayerLogout(
         function(){
-            abring.params.display.home.show();
+            abring.display.home.show();
         },
         function(){
-            abring.params.display.error.show("Logout failed");
+            abring.display.error.show("Logout failed");
         }
     );
 });
@@ -253,7 +253,7 @@ $(document).on("click","#abring .player_login .submit",function () {
     var password = $(".player_login .password").val();
     abringPlayerLogin(username,password,
         function(res){
-            abring.params.display.home.show();
+            abring.display.home.show();
         }
     );
 });
@@ -269,9 +269,9 @@ $(document).on("click","#abring .player_register .submit",function () {
 
 $(document).on("click",".view_profile",function () {
     
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
 

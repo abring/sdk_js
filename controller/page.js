@@ -10,10 +10,10 @@ $(document).on("click",".abring_buttons_reset",function () {
  * event listener to show pages
  */
 $(document).on("click","#abring .close",function () {
-    abring.params.display.hidePageFunction();
+    abring.display.hidePageFunction();
 });
 $(document).on("click","#abring .modal_background",function () {
-    abring.params.display.hidePageFunction();
+    abring.display.hidePageFunction();
 });
 $(document).on("click",".abring_cancel_request",function () {
     //terminate request ??????????????????????????

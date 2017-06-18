@@ -4,9 +4,9 @@
  */
 $(document).on("click",".abring_buttons_market_pay",function () {
 
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.pages.player_mobile_register.show("Your are not login!");
+        abring.player.pages.player_mobile_register.show("Your are not login!");
         return false;
     }
 

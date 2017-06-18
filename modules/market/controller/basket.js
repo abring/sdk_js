@@ -4,9 +4,9 @@
  */
 $(document).on("click",".abring_button_market_add_to_basket",function () {
 
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.pages.player_mobile_register.show("Your are not login!");
+        abring.player.pages.player_mobile_register.show("Your are not login!");
         return false;
     }
 
@@ -18,17 +18,17 @@ $(document).on("click",".abring_button_market_add_to_basket",function () {
         amount,
         function (basket) {
             fillBasketView(basket);
-            abring.params.market.basket.pages.basketView.show();
+            abring.market.basket.pages.basketView.show();
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 });
 $(document).on("click",".abring_button_market_delete_from_basket",function () {
 
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.pages.player_mobile_register.show("Your are not login!");
+        abring.player.pages.player_mobile_register.show("Your are not login!");
         return false;
     }
 
@@ -40,17 +40,17 @@ $(document).on("click",".abring_button_market_delete_from_basket",function () {
         amount,
         function (basket) {
             fillBasketView(basket);
-            abring.params.market.basket.pages.basketView.show();
+            abring.market.basket.pages.basketView.show();
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 });
 $(document).on("click",".abring_buttons_market_basket_view",function () {
 
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.pages.player_mobile_register.show("Your are not login!");
+        abring.player.pages.player_mobile_register.show("Your are not login!");
         return false;
     }
 
@@ -61,24 +61,24 @@ $(document).on("click",".abring_buttons_market_basket_view",function () {
         {"id":basket_id},
         function (basket) {
             if(!basket || basket.length==0)
-                return abring.params.display.error.show("basket is empty!");
+                return abring.display.error.show("basket is empty!");
             fillBasketView(basket);
-            abring.params.market.basket.pages.basketView.show();
+            abring.market.basket.pages.basketView.show();
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 });
 
 $(document).on("click",".abring_buttons_market_basket_list",function () {
 
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.pages.player_mobile_register.show("Your are not login!");
+        abring.player.pages.player_mobile_register.show("Your are not login!");
         return false;
     }
 
     getBaskets(function () {
-        abring.params.market.basket.pages.basketList.show();
+        abring.market.basket.pages.basketList.show();
     });
 });

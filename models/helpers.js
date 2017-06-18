@@ -175,17 +175,17 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
 
             if(json_result_data['code']&&json_result_data['code']=="401")
             {
-                if(abring.params.player_info || abring.params.token)
+                if(abring.player_info || abring.params.token)
                     abringPlayerLogout();
                 //try to login with uuid
-                abring.params.display.loading.show("you are not login\ntry to login with your device\nplease wait");
+                abring.display.loading.show("you are not login\ntry to login with your device\nplease wait");
                 abringPLayerLoginWithDeviceId(
                     function () {
-                        abring.params.display.hidePageFunction();//continue previous request ????????????
+                        abring.display.hidePageFunction();//continue previous request ????????????
                         log("Logged in with device id was successful");
                     },function (xhr,code,error) {
                         log("first in with device id was failed:\n"+error);
-                        abring.params.display.error.show("error","Your are not login!");
+                        abring.display.error.show("error","Your are not login!");
                         failCallback(xhr,json_result_data['code'],"failed:"+json_result_data['message']);
                         return false;
                     }

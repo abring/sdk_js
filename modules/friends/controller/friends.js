@@ -4,9 +4,9 @@
  */
 $(document).on("click",".abring_buttons_friends_list",function () {
 
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
 
@@ -14,18 +14,18 @@ $(document).on("click",".abring_buttons_friends_list",function () {
 });
 $(document).on("keyup","#"+abring.params.friends.parent_id+" .friends_search_input",function (e) {
 
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     var search_pattern = $(".friends_search input.friends_search_input").val();
     if(!search_pattern)
     {
-        abring.params.display.showPageFunction("friends_list","Search cannot be empty");
+        abring.display.showPageFunction("friends_list","Search cannot be empty");
         return false;
     }else{
-        abring.params.display.showPageFunction("friends_list","Search result!");
+        abring.display.showPageFunction("friends_list","Search result!");
     }
     abringFriendsSearch(search_pattern);
 });

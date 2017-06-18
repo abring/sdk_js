@@ -4,17 +4,17 @@
  * posts event lister
  */
 $(document).on("click",".abring_buttons_posts_timeline",function () {
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     abringPostsShow();
 });
 $(document).on("keyup","#abring_post_search_input",function (e) {
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     var tag  = $("#abring_post_search_input").val();
@@ -32,9 +32,9 @@ $(document).on("keyup","#abring_post_search_input",function (e) {
     );
 });
 $(document).on("click","#abring_suggested_tag",function (e) {
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     $("#abring_post_search_input").val($(this).html());
@@ -42,7 +42,7 @@ $(document).on("click","#abring_suggested_tag",function (e) {
     var tag  = $("#abring_post_search_input").val();
     callAbringWithFileUpload("post/search",{"tag":tag},
         function (search_result_posts) {
-            $("#"+abring.params.posts_parent_id+" .timeline").html("");
+            $("#"+abring.posts_parent_id+" .timeline").html("");
             $.each(search_result_posts,function (index,search_result_post) {
                 log(search_result_post);
                 abringPostPutIntoTimeline(search_result_post);
@@ -53,41 +53,41 @@ $(document).on("click","#abring_suggested_tag",function (e) {
     );
 });
 $(document).on("click",".abring_post_like_this_post",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     var post_id = $(this).attr("name");
     abringPostLike(post_id);
 });
 $(document).on("click",".abring_post_share_this_post",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     var post_id = $(this).attr("name");
     abringPostShare(post_id);
 });
 $(document).on("click","#abring_post_create",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     $(this).hide();
     $(".abring_post_create_form").show("slow");
 });
 $(document).on("click","#abring_post_create_submit",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     $(".abring_post_create_form").hide();
-    abring.params.display.loading.show();
+    abring.display.loading.show();
 
     var image = $("#abring_post_create_image")[0].files[0];
     var content = $("#abring_post_create_content").val();
@@ -118,18 +118,18 @@ $(document).on("click","#abring_post_create_submit",function (e){
     });
 });
 $(document).on("click","#abring_post_create_cancel",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     $(".abring_post_create_form").hide();
     $("#abring_post_create").show("slow");
 });
 $(document).on("click",".post_comment_add",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     if($(this).parent().children('input').val() == ''){
@@ -140,18 +140,18 @@ $(document).on("click",".post_comment_add",function (e){
         comment = $(this).parent().children('input').val();
         callAbringWithFileUpload("post/comment",{"post_id":post_id,"comment":comment},
             function (post_comment_result) {
-                $(".current-post .post-more-commnets-contain").prepend('<div class="post-comment player_'+abring.params.player_info.id+'" style="display:block;"><div class="avatar-box"> <img class="post-more-comment-avatar view_profile" name="'+abring.params.player_info.id+'" src="'+abring.params.player_info.avatar+'"> <label class="post-more-comment-name view_profile" name="'+abring.params.player_info.id+'">'+abring.params.player_info.name+'</label></div><div class="comment-box"><p class="post-more-comment-content">'+comment+'</p></div></div>');
+                $(".current-post .post-more-commnets-contain").prepend('<div class="post-comment player_'+abring.player_info.id+'" style="display:block;"><div class="avatar-box"> <img class="post-more-comment-avatar view_profile" name="'+abring.player_info.id+'" src="'+abring.player_info.avatar+'"> <label class="post-more-comment-name view_profile" name="'+abring.player_info.id+'">'+abring.player_info.name+'</label></div><div class="comment-box"><p class="post-more-comment-content">'+comment+'</p></div></div>');
                 $(".current-post").removeClass("current-post");
             },function (x,c,e) {
-                abring.params.display.error.show(c);
+                abring.display.error.show(c);
             }
         );
     }
 });
 $(document).on("click",".post_delete",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     $(this).parent().parent().addClass('current-post');
@@ -168,9 +168,9 @@ $(document).on("click",".post_delete",function (e){
 var limit = 10;
 var offset =1;
 $(document).on("click",".post_comments_more",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     $(this).parent().parent().parent().addClass('current-post');
@@ -195,9 +195,9 @@ $(document).on("click",".post_comments_more",function (e){
     );
 });
 $(document).on("click",".post_edit",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     $(this).parent().parent().addClass('current-post');
@@ -215,13 +215,13 @@ $(document).on("click",".post_edit",function (e){
     $(".current-post .abring_post_edit_form").show(300);
 });
 $(document).on("click",".abring_post_edit_submit",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
     $(".abring_post_edit_form").hide();
-    abring.params.display.loading.show();
+    abring.display.loading.show();
 
     var image = $(".current-post .abring_post_edit_image")[0].files[0];
     var content = $(".current-post .abring_post_edit_content").val();
@@ -260,9 +260,9 @@ $(document).on("click",".abring_post_edit_submit",function (e){
     });
 });
 $(document).on("click",".abring_post_edit_cancel",function (e){
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
 

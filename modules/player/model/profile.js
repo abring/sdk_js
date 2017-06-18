@@ -9,13 +9,13 @@ var initPlayer = function () {
     playerView = readFile(abring_url+"/modules/player/view/player.html");
     $("#abring").append(playerView);
 
-    $.each(abring.params.player.pages,function (page_id,page) {
+    $.each(abring.player.pages,function (page_id,page) {
         page.getTheme(true);
     });
 
-    //abring.params.player_view_detail = $("#"+abring.params.player.parent_id+" .player_view_details").html();
-    //$("#"+abring.params.player.parent_id+" .friends_list .player_view_details *").remove();
-    if(!abring.params.player_info){
+    //abring.player_view_detail = $("#"+abring.player.parent_id+" .player_view_details").html();
+    //$("#"+abring.player.parent_id+" .friends_list .player_view_details *").remove();
+    if(!abring.player_info){
         if(abring.params.smsIsAllowed){
             //login using send sms directly without intent
         }else{
@@ -23,16 +23,16 @@ var initPlayer = function () {
         }
     }
 
-    //abring.params.player.pages.other_player_profile.getTheme();
-    //abring.params.player.pages.player_mobile_register.getTheme();
-    //abring.params.player.pages.player_mobile_verify.getTheme();
+    //abring.player.pages.other_player_profile.getTheme();
+    //abring.player.pages.player_mobile_register.getTheme();
+    //abring.player.pages.player_mobile_verify.getTheme();
 };
 
 function onPlayerLogin(data) {}
 function onPlayerLogout() {}
 function onDataLoaded(data) {}
 var playerIsLogin = function(){
-    if(abring.params.player_info)
+    if(abring.player_info)
         return true;
     else
         return false;
@@ -40,9 +40,9 @@ var playerIsLogin = function(){
 var showMyProfile = function(subPageID){
     subPageID = subPageID || "login";
     abringPageHide();
-    //$("#"+abring.params.player.parent_id+" .page").hide();
-    //$("#"+abring.params.player.parent_id+" ."+subPageID).show();
-    abring.params.display.showPageFunction(subPageID);
+    //$("#"+abring.player.parent_id+" .page").hide();
+    //$("#"+abring.player.parent_id+" ."+subPageID).show();
+    abring.display.showPageFunction(subPageID);
 };
 var viewProfile = function (other_player_id) {
 
@@ -52,8 +52,8 @@ var viewProfile = function (other_player_id) {
             player_profile["name"] = player_profile["name"] || other_player_id;
             player_profile["avatar"] = player_profile["avatar"] || abring.params.abring_default_avatar_url;
 
-            $("#"+abring.params.player.parent_id+" .player_view_details").html(
-                abring.params.player_view_detail
+            $("#"+abring.player.parent_id+" .player_view_details").html(
+                abring.player_view_detail
                     .replaceAll("PLAYER_ID",other_player_id)
                     .replaceAll("PLAYER_NAME",player_profile["name"])
                     .replaceAll("PLAYER_IMG",player_profile["avatar"])
@@ -61,44 +61,44 @@ var viewProfile = function (other_player_id) {
             );
             showMyProfile("player_view_details");
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 
 };
 var getPlayerInfo = function (resetCache,getPlayerInfoSuccess,getPlayerInfoFailed) {
-    abring.params.player_info = getCookie("player_info");
+    abring.player_info = getCookie("player_info");
     getPlayerInfoSuccess = getPlayerInfoSuccess || function(){};
     getPlayerInfoFailed = getPlayerInfoFailed || function(){};
-    if( resetCache || (!abring.params.player_info && abring.params.token) )
+    if( resetCache || (!abring.player_info && abring.params.token) )
     {
         callAbringWithFileUpload(
             "player/get",
             {},
             function(result){
                 result["device_id"] = [];
-                abring.params.player_info = result;
-                if(abring.params.player_info["avatar"]=="undefined")
-                    abring.params.player_info["avatar"] = "";
+                abring.player_info = result;
+                if(abring.player_info["avatar"]=="undefined")
+                    abring.player_info["avatar"] = "";
 
-                setCookie("player_info",abring.params.player_info,100);
+                setCookie("player_info",abring.player_info,100);
 
                 getPlayerInfoSuccess(result);
 
-                abring.params.player.onDataLoaded(abring.params.player_info);
+                abring.player.onDataLoaded(abring.player_info);
             },function(){
                 getPlayerInfoFailed();
                 log("read player info failed!");
             }
         );
-        //abring.params.player_info = callAbring("player/get");
-        //if(abring.params.player_info["avatar"]=="undefined") abring.params.player_info["avatar"] = "";
-        //setCookie("player_info",abring.params.player_info,100);
+        //abring.player_info = callAbring("player/get");
+        //if(abring.player_info["avatar"]=="undefined") abring.player_info["avatar"] = "";
+        //setCookie("player_info",abring.player_info,100);
         return false;
     }else{
-        getPlayerInfoSuccess(abring.params.player_info);
-        abring.params.player.onDataLoaded(abring.params.player_info);
-        return abring.params.player_info;
+        getPlayerInfoSuccess(abring.player_info);
+        abring.player.onDataLoaded(abring.player_info);
+        return abring.player_info;
     }
 };
 var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSuccess,getOtherPlayerInfoFailed) {
@@ -116,7 +116,7 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
             {"player_id":player_id},
             function (other_players_info) {
                 $.each(other_players_info,function (index,other_player_info) {
-                    if(!other_player_info["avatar"]) other_player_info["avatar"] = abring.params.display.default_avatar_url;
+                    if(!other_player_info["avatar"]) other_player_info["avatar"] = abring.display.default_avatar_url;
                     if(!other_player_info["name"]) other_player_info["name"] = other_player_info["player_id"];
                     if(!other_player_info["public"]) other_player_info["public"] = [];
                     var x = other_player_info["public"];
@@ -139,46 +139,46 @@ var getOtherPlayerInfo = function (player_id,resetCache,getOtherPlayerInfoSucces
 
 var abringPlayerLogin = function (username, password , abringPlayerLoginSuccess) {
     abringPlayerLoginSuccess = abringPlayerLoginSuccess || function(){};
-    abring.params.display.loading.show("logon to Abring\nPlease wait");
+    abring.display.loading.show("logon to Abring\nPlease wait");
     if(abring.params.token)
         abringPlayerLogout();
     callAbringWithFileUpload("player/login",{"username":username,"password":password},
         function (res) {
             abring.params.token = res["token"];
-            abring.params.player_info = res["player_info"];
+            abring.player_info = res["player_info"];
             setCookie("token",abring.params.token,100);
-            setCookie("player_info",abring.params.player_info,100);
-            abring.params.display.hidePageFunction();
+            setCookie("player_info",abring.player_info,100);
+            abring.display.hidePageFunction();
             abringPlayerLoginSuccess(res);
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 };
 var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutFailed) {
-    abring.params.display.loading.show("Process log out");
+    abring.display.loading.show("Process log out");
     abringPlayerLogoutSuccess = abringPlayerLogoutSuccess || function () {};
     abringPlayerLogoutFailed = abringPlayerLogoutFailed || function () {};
 
-    if(abring.params.player_info || abring.params.token)
+    if(abring.player_info || abring.params.token)
     {
         if(abring.params.token)
             callAbringWithFileUpload(
                 "player/logout",{},
                 function(res){
                     onPlayerLogout();
-                    abring.params.display.hidePageFunction();
+                    abring.display.hidePageFunction();
                     abringPlayerLogoutSuccess(res);
                 },
                 function(x,c,e){
-                    abring.params.display.hidePageFunction();
+                    abring.display.hidePageFunction();
                     abringPlayerLogoutFailed(x,c,e);
                 }
             );
         abring.params.token = false;
         setCookie("token",abring.params.token,0);
-        abring.params.player_info = false;
-        setCookie("player_info",abring.params.player_info,0);
+        abring.player_info = false;
+        setCookie("player_info",abring.player_info,0);
         abring.params.other_players = false;
         setCookie("other_players",abring.params.other_players,0);
     }else
@@ -189,28 +189,28 @@ var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutF
     }
 };
 var abringPlayerRegister = function (username, password, variables, values) {
-    abring.params.display.showPageFunction("loading");
+    abring.display.showPageFunction("loading");
     abring.params.token = callAbringWithFileUpload("player/register",{"username":username,"password":password,"variables":variables,"values":values},
         function (res) {
 
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
     if(!abring.params.token)
     {
-        $("#"+abring.params.player.parent_id+" .player_register .message").html("Invalid registration!\n"+abring.params.last_error);
+        $("#"+abring.player.parent_id+" .player_register .message").html("Invalid registration!\n"+abring.params.last_error);
         showMyProfile("player_register");
     }else{
         setCookie("token",abring.params.token,100);
         callAbringWithFileUpload("player/get",{},
             function(result){
-                abring.params.player_info = result;
-                setCookie("player_info",abring.params.player_info,100);
-                abring.params.display.hidePageFunction();
+                abring.player_info = result;
+                setCookie("player_info",abring.player_info,100);
+                abring.display.hidePageFunction();
             },
             function(){
-                abring.params.display.hidePageFunction();
+                abring.display.hidePageFunction();
             }
         );
     }
@@ -219,36 +219,36 @@ var abringPlayerRegister = function (username, password, variables, values) {
 
 var fillMyPlayerInfo = function (reset_cache,fillMyPlayerInfoSuccess) {
     fillMyPlayerInfoSuccess = fillMyPlayerInfoSuccess || function(){};
-    abring.params.display.loading.show("loading","Please wait");
-    var parent_id = abring.params.player.pages.my_profile.parent_id;
-    var parent_id_update = abring.params.player.pages.my_profile_update.parent_id;
-    $("."+parent_id).html(abring.params.player.pages.my_profile.getTheme());
+    abring.display.loading.show("loading","Please wait");
+    var parent_id = abring.player.pages.my_profile.parent_id;
+    var parent_id_update = abring.player.pages.my_profile_update.parent_id;
+    $("."+parent_id).html(abring.player.pages.my_profile.getTheme());
 
 
     getPlayerInfo(reset_cache,
         function(){
 
             var age = "20";
-            if(abring.params.player_info['birth'])
-                age = (new Date().getFullYear())-abring.params.player_info['birth'];
-            abring.params.player_info['avatar'] = abring.params.player_info['avatar'] || abring.params.abring_default_avatar_url;
+            if(abring.player_info['birth'])
+                age = (new Date().getFullYear())-abring.player_info['birth'];
+            abring.player_info['avatar'] = abring.player_info['avatar'] || abring.params.abring_default_avatar_url;
 
-            $("."+parent_id+" .username").html(abring.params.player_info['username']);
-            $("."+parent_id+" .name").html(abring.params.player_info['name']);
-            $("."+parent_id+" .avatar").attr("src",abring.params.player_info['avatar']);
-            $("."+parent_id+" .profile-contain").css("background-image","url("+abring.params.player_info['timeline_cover']+")");
-            $("."+parent_id+" .sex").html(abring.params.player_info['sex']);
+            $("."+parent_id+" .username").html(abring.player_info['username']);
+            $("."+parent_id+" .name").html(abring.player_info['name']);
+            $("."+parent_id+" .avatar").attr("src",abring.player_info['avatar']);
+            $("."+parent_id+" .profile-contain").css("background-image","url("+abring.player_info['timeline_cover']+")");
+            $("."+parent_id+" .sex").html(abring.player_info['sex']);
             $("."+parent_id+" .age").html(age);
-            $("."+parent_id+" .mobile").html(abring.params.player_info['mobile']);
+            $("."+parent_id+" .mobile").html(abring.player_info['mobile']);
 
-            $("."+parent_id_update+" .username").val(abring.params.player_info['username']);
-            $("."+parent_id_update+" .name").val(abring.params.player_info['name']);
+            $("."+parent_id_update+" .username").val(abring.player_info['username']);
+            $("."+parent_id_update+" .name").val(abring.player_info['name']);
             $("."+parent_id_update+" .age").val(age);
-            $("."+parent_id_update+" .sex").val(abring.params.player_info['sex']);
-            $("."+parent_id_update+" .mobile").val(abring.params.player_info['mobile']);
-            $("."+parent_id_update+" .avatar").attr("src",abring.params.player_info['avatar']);
-            $("."+parent_id_update+" .cover").attr("src",abring.params.player_info['timeline_cover']);
-            abring.params.display.hidePageFunction();
+            $("."+parent_id_update+" .sex").val(abring.player_info['sex']);
+            $("."+parent_id_update+" .mobile").val(abring.player_info['mobile']);
+            $("."+parent_id_update+" .avatar").attr("src",abring.player_info['avatar']);
+            $("."+parent_id_update+" .cover").attr("src",abring.player_info['timeline_cover']);
+            abring.display.hidePageFunction();
             fillMyPlayerInfoSuccess();
         },
         function(){
@@ -257,20 +257,20 @@ var fillMyPlayerInfo = function (reset_cache,fillMyPlayerInfoSuccess) {
             $("."+parent_id+" .name").html("");
             $("."+parent_id+" .avatar").attr("src","");
             $("."+parent_id+" .cover").attr("src","");
-            abring.params.display.hidePageFunction();
+            abring.display.hidePageFunction();
         }
     );
 };
 var fillOtherPlayerInfo = function(other_player_id,fillOtherPlayerInfoSuccess,fillOtherPlayerInfoFailed){
     fillOtherPlayerInfoSuccess = fillOtherPlayerInfoSuccess || function(){};
     fillOtherPlayerInfoFailed = fillOtherPlayerInfoFailed || function(){};
-    abring.params.display.loading.show("loading","Please wait");
-    var parent_id = abring.params.player.pages.other_player_profile.parent_id;
-    $("."+parent_id).html(abring.params.player.pages.other_player_profile.getTheme());
+    abring.display.loading.show("loading","Please wait");
+    var parent_id = abring.player.pages.other_player_profile.parent_id;
+    $("."+parent_id).html(abring.player.pages.other_player_profile.getTheme());
     getOtherPlayerInfo(
         other_player_id,false,
         function(other_player_info){
-            other_player_info["avatar"] = other_player_info["avatar"] || abring.params.display.default_avatar_url;
+            other_player_info["avatar"] = other_player_info["avatar"] || abring.display.default_avatar_url;
             other_player_info["name"] = other_player_info["name"] || other_player_info["player_id"];
             $("."+parent_id+" .player_id")
                 .attr("player_id",other_player_id)
@@ -278,7 +278,7 @@ var fillOtherPlayerInfo = function(other_player_id,fillOtherPlayerInfoSuccess,fi
             $("."+parent_id+" img.avatar").attr("src",other_player_info["avatar"]);
             $("."+parent_id+" span.player_name").html(other_player_info["name"]);
 
-            abring.params.display.hidePageFunction();
+            abring.display.hidePageFunction();
             fillOtherPlayerInfoSuccess(other_player_info);
         },
         function(x,c,e){
@@ -291,20 +291,20 @@ var abringPlayerRegisterDevice = function(abringPlayerRegisterDeviceSuccess,abri
     abringPlayerRegisterDeviceSuccess = abringPlayerRegisterDeviceSuccess || function(){};
     abringPlayerRegisterDeviceFailed = abringPlayerRegisterDeviceFailed || function(){};
 
-    if(!abring.params.token || !abring.params.player_info || !abring.params.uuid)
+    if(!abring.params.token || !abring.player_info || !abring.params.uuid)
     {
         abringPlayerRegisterDeviceFailed();
-    }else if(abring.params.player_info["device_id"] && abring.params.player_info["device_id"].indexOf(abring.params.uuid)!=-1 )
+    }else if(abring.player_info["device_id"] && abring.player_info["device_id"].indexOf(abring.params.uuid)!=-1 )
     {
         abringPlayerRegisterDeviceSuccess();
-    }else if(!abring.params.player_info["device_id"] || abring.params.player_info["device_id"].indexOf(abring.params.uuid)==-1 )
+    }else if(!abring.player_info["device_id"] || abring.player_info["device_id"].indexOf(abring.params.uuid)==-1 )
     {
         callAbringWithFileUpload(
             "player/register-device-id",
             {"device_id":abring.params.uuid},
             function(res){
-                abring.params.player_info["device_id"].push(abring.params.uuid);
-                setCookie("player_info",abring.params.player_info);
+                abring.player_info["device_id"].push(abring.params.uuid);
+                setCookie("player_info",abring.player_info);
                 abringPlayerRegisterDeviceSuccess();
             },
             function(xhr,code,error){
@@ -323,7 +323,7 @@ var abringPLayerLoginWithDeviceId = function(loginWithDeviceIdSuccess,loginWithD
         loginWithDeviceIdFailed();
         return false;
     }
-    if(abring.params.token || abring.params.player_info)
+    if(abring.params.token || abring.player_info)
     {
         log("login with device id failed.\nYou are already login",true);
         loginWithDeviceIdFailed();
@@ -413,7 +413,7 @@ var abringPlayerMobileVerify = function (mobile,code,abringPlayerMobileVerifySuc
             onPlayerLogin(result);
             abring.params.token = result['token'];
             setCookie("token",abring.params.token,100);
-            abring.params.player_info = getPlayerInfo();
+            abring.player_info = getPlayerInfo();
             socketConnect();
             abringPlayerMobileVerifySuccess(result);
             return true;

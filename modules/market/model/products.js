@@ -3,15 +3,15 @@ var initProducts = function () {
     var html = readFile(abring_url+"/modules/market/view/products.html");
     $("#abring").append(html);
 
-    $.each(abring.params.market.products.pages,function (page_id,page) {
+    $.each(abring.market.products.pages,function (page_id,page) {
         page.getTheme(true);
     });
 
 };
 
 var fillProductsList = function(productsList){
-    abring.params.market.products.pages.productList.getTheme();
-    var parent_id = abring.params.market.products.pages.productList.parent_id;
+    abring.market.products.pages.productList.getTheme();
+    var parent_id = abring.market.products.pages.productList.parent_id;
     var list_row_template = $("."+parent_id+" ul li:first-child").outerHTML();
     $.each(productsList,function (index,product) {
         $("."+parent_id+" ul").append(list_row_template);
@@ -29,13 +29,13 @@ var fillProductsList = function(productsList){
 };
 var showProductsList = function(productsList){
     fillProductsList(productsList);
-    var parent_id = abring.params.market.products.pages.productList.parent_id;
-    abring.params.display.showPageFunction(parent_id);
+    var parent_id = abring.market.products.pages.productList.parent_id;
+    abring.display.showPageFunction(parent_id);
 };
 
 var fillProductsView = function(product){
-    abring.params.market.products.pages.productView.getTheme();
-    var parent_id = abring.params.market.products.pages.productView.parent_id;
+    abring.market.products.pages.productView.getTheme();
+    var parent_id = abring.market.products.pages.productView.parent_id;
     $("."+parent_id+" *").attr("product_id",product["id"]);
     $("."+parent_id+" .image").attr("src",product["image"]);
     $("."+parent_id+" .name").html(product["name"]);
@@ -51,6 +51,6 @@ var fillProductsView = function(product){
 };
 var showProductsView = function(product){
     fillProductsView(product);
-    var parent_id = abring.params.market.products.pages.productView.parent_id;
-    abring.params.display.showPageFunction(parent_id);
+    var parent_id = abring.market.products.pages.productView.parent_id;
+    abring.display.showPageFunction(parent_id);
 };

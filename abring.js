@@ -10,8 +10,21 @@ document.writeln("<script type='text/javascript' src='cordova.js'></script>");
 var abring_url = "abring";
 
 var abringClass = function () {
-    this.params = {};
     this.init = {};
+    this.params = {};
+    this.player = {};
+    this.market = {
+        products: {},
+        basket: {},
+        payment: {},
+        orders: {}
+    };
+    this.posts = {};
+    this.friends = {};
+    this.leaderboard = {};
+    this.message = {};
+    this.chat = {};
+
 };
 abring = new abringClass();
 

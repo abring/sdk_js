@@ -3,16 +3,16 @@ var initBasket = function () {
     var html = readFile(abring_url+"/modules/market/view/basket.html");
     $("#abring").append(html);
 
-    $.each(abring.params.market.basket.pages,function (page_id,page) {
+    $.each(abring.market.basket.pages,function (page_id,page) {
         page.getTheme(true);
     });
 
 };
 
 var fillBasketView = function(basket,parent_id){
-    abring.params.market.basket.pages.basketView.getTheme();
+    abring.market.basket.pages.basketView.getTheme();
     if(!parent_id)
-        parent_id = abring.params.market.basket.pages.basketView.parent_id;
+        parent_id = abring.market.basket.pages.basketView.parent_id;
     var list_row_template = $("."+parent_id+" table tr.template").outerHTML();
     $.each(basket["products"],function (index,product) {
         $("."+parent_id+" table").append(list_row_template);
@@ -45,17 +45,17 @@ var getBaskets = function(getBasketsSuccess)
         {},
         function (baskets) {
             if(!baskets || baskets.length==0)
-                return abring.params.display.error.show("there is not any basket!");
+                return abring.display.error.show("there is not any basket!");
             fillBasketList(baskets);
             getBasketsSuccess();
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 };
 var fillBasketList = function(baskets){
-    abring.params.market.basket.pages.basketList.getTheme();
-    var parent_id = abring.params.market.basket.pages.basketList.parent_id;
+    abring.market.basket.pages.basketList.getTheme();
+    var parent_id = abring.market.basket.pages.basketList.parent_id;
     var list_row_template = $("."+parent_id+" table tr.template").outerHTML();
     $.each(baskets,function (index,basket) {
         $("."+parent_id+" table").append(list_row_template);

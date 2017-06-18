@@ -6,7 +6,7 @@ var initPayment = function () {
 };
 var payByBank = function(basket_id)
 {
-    abring.params.display.loading.show("Process payment ...");
+    abring.display.loading.show("Process payment ...");
     basket_id = basket_id || false;
     callAbringWithFileUpload(
         "payment/index",
@@ -20,10 +20,10 @@ var payByBank = function(basket_id)
             $(".abring_payment_pay .pay form").submit(function () {
                 document.getElementById('abring_buttons_payment_form').submit();
             });
-            abring.params.display.hidePageFunction();
-            abring.params.display.showPageFunction('abring_payment_pay');
+            abring.display.hidePageFunction();
+            abring.display.showPageFunction('abring_payment_pay');
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 };

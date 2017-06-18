@@ -11,7 +11,7 @@ var initLeaderboard = function () {
 
 var abringLeaderboardShow = function() {
 
-    abring.params.display.loading.show("loading leaderboard data.");
+    abring.display.loading.show("loading leaderboard data.");
 
     var method = "leaderboard/get-all";
     var data = {};
@@ -19,18 +19,18 @@ var abringLeaderboardShow = function() {
         method,data,
         function (leaderboard_data_tmp) {
             if(leaderboard_data_tmp==undefined || leaderboard_data_tmp==false ||leaderboard_data_tmp=="" )
-                return abring.params.display.error.show("No leaderboard temp exists!");
+                return abring.display.error.show("No leaderboard temp exists!");
             leaderboard_data = leaderboard_data_tmp;
             //display leaderboard
             log(leaderboard_data);
             var leaderboard_data_html = "";
             $.each(leaderboard_data ,function (key,_leaderboard_data) { console.log(_leaderboard_data);
                 var leaderboard_id = _leaderboard_data["leaderboard"];
-                if(!abring.params.player_info["avatar"])abring.params.player_info["avatar"] = abring.params.abring_default_avatar_url;
+                if(!abring.player_info["avatar"])abring.player_info["avatar"] = abring.params.abring_default_avatar_url;
                 leaderboard_data_html += "<div class='tab "+leaderboard_id+"'>\n";
                 leaderboard_data_html += "<div class='my-leaderboard-contain'>\n";
-                leaderboard_data_html += "<div class='name view_profile' name='"+abring.params.player_info["player_id"]+"'>"+_leaderboard_data["title"]+"</div>\n";
-                leaderboard_data_html += "<img class='avatar view_profile' name='"+abring.params.player_info["player_id"]+"' src="+abring.params.player_info["avatar"]+" />\n";
+                leaderboard_data_html += "<div class='name view_profile' name='"+abring.player_info["player_id"]+"'>"+_leaderboard_data["title"]+"</div>\n";
+                leaderboard_data_html += "<img class='avatar view_profile' name='"+abring.player_info["player_id"]+"' src="+abring.player_info["avatar"]+" />\n";
                 leaderboard_data_html += "<div class='rate'>You: "+_leaderboard_data["rate"]+"-</div>\n";
                 leaderboard_data_html += "<div class='score'>"+_leaderboard_data["score"]+"</div>\n";
                 leaderboard_data_html +="</div>\n";//my-leaderboard-contain
@@ -48,10 +48,10 @@ var abringLeaderboardShow = function() {
                 leaderboard_data_html += "</div>";//tab
             });
             $("#"+abring.params.leaderboard.parent_id+" .leaderbord_display").html(leaderboard_data_html);
-            abring.params.display.showPageFunction("leaderboard");
+            abring.display.showPageFunction("leaderboard");
         },
         function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
             return false;
         }
     );
@@ -59,12 +59,12 @@ var abringLeaderboardShow = function() {
 
 var abringLeaderboardSetScore = function (leaderboard,score,signature) {
 
-    if(!abring.params.player_info)
+    if(!abring.player_info)
     {
-        abring.params.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
-    abring.params.display.tooltip.show("Info","submitting your score!","info",10);
+    abring.display.tooltip.show("Info","submitting your score!","info",10);
     var data = {
         "leaderboard": leaderboard,
         "score":score,
@@ -78,14 +78,14 @@ var setScoreSuccess = function (set_score_result) {
     //success
     log("set score result = "+set_score_result);
     //show a little popup without any hesitate to player and fadeout after short time (one seconds)
-    abring.params.display.tooltip.show("Info","score submitted!","info",2);
+    abring.display.tooltip.show("Info","score submitted!","info",2);
     var score = set_score_result["score"];
     var rate = set_score_result["rate"];
     $(".frog_table").html("score="+score+"<br>rate="+rate+"<br>You win!");
-    abring.params.display.hidePageFunction();
+    abring.display.hidePageFunction();
 };
 var setScoreFail = function (score_last_error) {
     //failed
-    abring.params.display.tooltip.show("Info","unable to set score:\n"+score_last_error,"error",2);
-    abring.params.display.hidePageFunction();
+    abring.display.tooltip.show("Info","unable to set score:\n"+score_last_error,"error",2);
+    abring.display.hidePageFunction();
 };

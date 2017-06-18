@@ -27,7 +27,7 @@ var initFriends = function () {
 
 var abringFriendsListShow = function () {
 
-    abring.params.display.loading.show("loading list of your friends!");
+    abring.display.loading.show("loading list of your friends!");
 
     // $("#"+abring.params.friends.parent_id+" .friends_list .message").html("Loading friends list!");
     // $("#"+abring.params.friends.parent_id+" .friends_list .friend_details").hide();
@@ -95,10 +95,10 @@ var friendListSuccess = function (friends_list) {
         $("#"+abring.params.friends.parent_id+" .friends_list .suggested_friend_details .friend_details .avatar:last").attr("src",player['avatar']);
     });
 
-    abring.params.display.showPageFunction("friends_list");
+    abring.display.showPageFunction("friends_list");
 };
 var friendListFail = function () {
-    abring.params.display.error.show("failed to load friends list!");
+    abring.display.error.show("failed to load friends list!");
     // $("#"+abring.params.friends.parent_id+" .friends_list .message").html("error loading list!");
 };
 var abringFriendsSearch = function (pattern) {
@@ -122,7 +122,7 @@ var abringFriendsSearchSuccess = function (search_result ) {
         if(player['name']=="No name" || player['name']=="")player['name']=player['player_id'];
         var friend_detail = searched_friend_detail.replaceAll("PLAYER_ID",player['player_id']).replaceAll("PLAYER_AVATAR",player['avatar']).replaceAll("PLAYER_NAME",player['name']);
         friend_detail = friend_detail.replaceAll("PLAYER_INVITE", 'block');
-        $.each(abring.params.player_info['friends']['members'] , function(friendsKey , friendsValue){ console.log(friendsValue[['player_id']] +'----'+ player['player_id']);
+        $.each(abring.player_info['friends']['members'] , function(friendsKey , friendsValue){ console.log(friendsValue[['player_id']] +'----'+ player['player_id']);
             if(friendsValue['player_id'] == player['player_id']){
                 friend_detail = friend_detail.replaceAll("PLAYER_INVITE", 'none');
             }

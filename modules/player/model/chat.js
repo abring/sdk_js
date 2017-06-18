@@ -3,7 +3,7 @@ var initChat = function () {
     var view = readFile(abring_url+"/modules/player/view/chat.html");
     $("#abring").append(view);
 
-    $.each(abring.params.chat.pages,function (page_id,page) {
+    $.each(abring.chat.pages,function (page_id,page) {
         page.getTheme(true);
     });
 
@@ -12,9 +12,9 @@ var initChat = function () {
 var chat_show_page = function (from_player_id,init_message) {
     getOtherPlayerInfo(from_player_id,false,
         function (from_player_info) {
-            abring.params.chat.pages.room.getTheme();
-            var template = $("."+abring.params.chat.pages.room.parent_id+" li:first-child").outerHTML();
-            var parent_id = abring.params.chat.pages.room.parent_id;
+            abring.chat.pages.room.getTheme();
+            var template = $("."+abring.chat.pages.room.parent_id+" li:first-child").outerHTML();
+            var parent_id = abring.chat.pages.room.parent_id;
             var from_player_id = from_player_info["player_id"];
 
             if($("."+parent_id+" #chat_"+from_player_id).length==0)
@@ -28,19 +28,19 @@ var chat_show_page = function (from_player_id,init_message) {
             }
 
             if(!socketConnect())
-                return abring.params.display.error.show("error connecting to socket server");
+                return abring.display.error.show("error connecting to socket server");
 
             if(init_message)
             {
-                abring.params.chat.pages.room.target_player_say(from_player_info,init_message);
-                if(abring.params.display.current_page!=abring.params.chat.pages.room.parent_id)
+                abring.chat.pages.room.target_player_say(from_player_info,init_message);
+                if(abring.display.current_page!=abring.chat.pages.room.parent_id)
                     play_sound(abring.params.sounds.notification);
             }
 
-            abring.params.display.current_page = parent_id;
-            abring.params.chat.pages.room.show(from_player_info,init_message);
+            abring.display.current_page = parent_id;
+            abring.chat.pages.room.show(from_player_info,init_message);
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 };

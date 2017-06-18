@@ -3,13 +3,13 @@ var initMessage = function () {
     var html = readFile(abring_url+"/modules/message/view/message.html");
     $("body #abring").append(html);
 
-    $.each(abring.params.message.pages,function (page_id,page) {
+    $.each(abring.message.pages,function (page_id,page) {
         page.getTheme(true);
     });
 
-    // abring.params.message.pages.unicast.getTheme(true);
-    // abring.params.message.pages.list.getTheme(true);
-    // abring.params.message.pages.view.getTheme(true);
+    // abring.message.pages.unicast.getTheme(true);
+    // abring.message.pages.list.getTheme(true);
+    // abring.message.pages.view.getTheme(true);
 };
 
 var getMessageList = function (getMessageListSuccess,getMessageListFailed) {
@@ -28,7 +28,7 @@ var fillMessageList = function (messageList) {
     log("message list");
     log(messageList);
 
-    var parent_id = abring.params.message.pages.list.parent_id;
+    var parent_id = abring.message.pages.list.parent_id;
     var message_types = [
         "broadcast",
         "multicast",
@@ -68,8 +68,8 @@ var fillMessageList = function (messageList) {
 };
 
 var showMessage = function () {
-    var parent_id = abring.params.message.pages.view.parent_id;
-    abring.params.display.showPageFunction(parent_id);
+    var parent_id = abring.message.pages.view.parent_id;
+    abring.display.showPageFunction(parent_id);
 };
 var getMessage = function (message_id,getMessageSuccess,getMessageFailed) {
     callAbringWithFileUpload(
@@ -84,7 +84,7 @@ var getMessage = function (message_id,getMessageSuccess,getMessageFailed) {
 };
 var fillMessage = function (message) {
 
-    var parent_id = abring.params.message.pages.view.parent_id;
+    var parent_id = abring.message.pages.view.parent_id;
 
     $("."+parent_id+" .by_avatar").attr("src",message["by_player_info"]["avatar"]);
     $("."+parent_id+" .by_name").html(message["by_player_info"]["name"]);
@@ -92,26 +92,26 @@ var fillMessage = function (message) {
     $("."+parent_id+" .title").html(message["title"]);
     $("."+parent_id+" .message").html(message["message"]);
     $("."+parent_id+" .date").html(message["date"]);
-    if(message["by_player_info"]["player_id"]==abring.params.player_info["player_id"])
+    if(message["by_player_info"]["player_id"]==abring.player_info["player_id"])
         $("."+parent_id+" .abring_buttons_message_unicast").hide();
     else
         $("."+parent_id+" .abring_buttons_message_unicast").show();
 };
 
 var showMessageUnicast = function (player_id) {
-    var parent_id = abring.params.message.pages.unicast.parent_id;
+    var parent_id = abring.message.pages.unicast.parent_id;
     $("."+parent_id+" .abring_message_form *").attr("player_id",player_id);
     $("."+parent_id+" .abring_message_form #abring_message_player_id").val(player_id);
-    abring.params.display.showPageFunction(parent_id);
+    abring.display.showPageFunction(parent_id);
 };
 var sendMessageUnicast = function (player_id,title,message) {
     callAbringWithFileUpload(
         "message/unicast",
         {"player_id":player_id,"title":title,"message":message},
         function () {
-            abring.params.display.info.show("message is sent");
+            abring.display.info.show("message is sent");
         },function (x,c,e) {
-            abring.params.display.error.show(e);
+            abring.display.error.show(e);
         }
     );
 };
