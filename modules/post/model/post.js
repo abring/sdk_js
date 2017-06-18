@@ -8,11 +8,9 @@ var initPost = function () {
     var postView = readFile(abring_url+"/modules/post/view/post.html");
     $("#abring").append(postView);
 
-    //post_template = $("#abring_posts .timeline").html();
-    //var tmp = $("#abring_posts").html();
-    //$("#abring_posts").html("");
-    //$("#"+abring.params.posts_parent_id).html(tmp);
-    //$("#"+abring.params.posts_parent_id+" .timeline *").remove();
+    $.each(abring.params.posts.pages,function (page_id,page) {
+        page.getTheme(true);
+    });
 
 };
 var abringPostsShow = function () {
