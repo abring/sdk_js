@@ -7,6 +7,8 @@ onDeviceReady = function(){
 
 abring.init = function (data) {
 
+    data = data || {};
+
     $.each(data,function (variable,value) {
         if(typeof value == "object")
             $.each(value,function (sub_variable,sub_value) {
