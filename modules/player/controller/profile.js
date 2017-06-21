@@ -186,7 +186,6 @@ $(document).on("click",".abring_buttons_my_profile",function () {
         return false;
     }
 
-    abring.player.pages.my_profile.getTheme();
     fillMyPlayerInfo(true,
         function(){
             abring.player.pages.my_profile.show();
@@ -196,7 +195,7 @@ $(document).on("click",".abring_buttons_my_profile",function () {
 });
 $(document).on("click",".my_profile_update_profile",function () {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.display.error.show("Your are not login!");
         return false;
@@ -233,7 +232,7 @@ $(document).on("click",".my_profile_update_submit",function () {
 });
 $(document).on("click",".abring_player_logout",function () {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.display.error.show("Your are not login!");
         return false;
@@ -266,10 +265,9 @@ $(document).on("click","#abring .player_register .submit",function () {
     var values = name+","+avatar;
     abringPlayerRegister(username,password,variables,values);
 });
-
 $(document).on("click",".view_profile",function () {
     
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;

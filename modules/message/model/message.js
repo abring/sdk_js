@@ -92,7 +92,7 @@ var fillMessage = function (message) {
     $("."+parent_id+" .title").html(message["title"]);
     $("."+parent_id+" .message").html(message["message"]);
     $("."+parent_id+" .date").html(message["date"]);
-    if(message["by_player_info"]["player_id"]==abring.player_info["player_id"])
+    if(message["by_player_info"]["player_id"]==abring.params.player_info["player_id"])
         $("."+parent_id+" .abring_buttons_message_unicast").hide();
     else
         $("."+parent_id+" .abring_buttons_message_unicast").show();

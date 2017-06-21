@@ -4,7 +4,7 @@
  */
 $(document).on("click",".abring_button_market_add_to_basket",function () {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.pages.player_mobile_register.show("Your are not login!");
         return false;
@@ -26,7 +26,7 @@ $(document).on("click",".abring_button_market_add_to_basket",function () {
 });
 $(document).on("click",".abring_button_market_delete_from_basket",function () {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.pages.player_mobile_register.show("Your are not login!");
         return false;
@@ -48,7 +48,7 @@ $(document).on("click",".abring_button_market_delete_from_basket",function () {
 });
 $(document).on("click",".abring_buttons_market_basket_view",function () {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.pages.player_mobile_register.show("Your are not login!");
         return false;
@@ -72,7 +72,7 @@ $(document).on("click",".abring_buttons_market_basket_view",function () {
 
 $(document).on("click",".abring_buttons_market_basket_list",function () {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.pages.player_mobile_register.show("Your are not login!");
         return false;

@@ -15,17 +15,17 @@ var initPost = function () {
 };
 var abringPostsShow = function () {
 
-    $("#posts .banner").attr("src",abring.player_info["timeline_cover"]);
+    $("#posts .banner").attr("src",abring.params.player_info["timeline_cover"]);
 
     //show loading page
     abring.display.loading.show("loading your timeline");
     $("#"+abring.posts_parent_id+" .timeline").html("");
 
     //fill my timeline page info (avatar banner ...)
-    if(abring.player_info["post_banner"])
-        $("#"+abring.posts_parent_id+" .timeline_wall_banner img.banner").attr("src",abring.player_info["post_banner"]);
-    if(abring.player_info["avatar"])
-        $("#"+abring.posts_parent_id+" .timeline_wall_banner img.avatar").attr("src",abring.player_info["avatar"]);
+    if(abring.params.player_info["post_banner"])
+        $("#"+abring.posts_parent_id+" .timeline_wall_banner img.banner").attr("src",abring.params.player_info["post_banner"]);
+    if(abring.params.player_info["avatar"])
+        $("#"+abring.posts_parent_id+" .timeline_wall_banner img.avatar").attr("src",abring.params.player_info["avatar"]);
 
     //get my timeline
     callAbringWithFileUpload("post/timeline" ,false, post_timeline_success,post_timeline_failed);
@@ -164,15 +164,15 @@ var post_timeline_success = function(timeline){
     var allPost = $(".post");
     var allComment = $(".post-more-commnets-contain .post-comment");
     $.each(allPost , function( postIndex , postValue){
-        if(postValue.id.indexOf(abring.player_info['player_id']) == -1){
+        if(postValue.id.indexOf(abring.params.player_info['player_id']) == -1){
             $(postValue).addClass('other-post');
             //log(postValue.class);
         }
         $(".other-post .post-btn-action").hide();
     });
     $.each(allComment , function( commentIndex , commentValue){
-        log(commentValue.id+'----'+abring.player_info['player_id']);
-        if(commentValue.id !== abring.player_info['player_id']){
+        log(commentValue.id+'----'+abring.params.player_info['player_id']);
+        if(commentValue.id !== abring.params.player_info['player_id']){
             $(commentValue).addClass('other-comment');
             //log(postValue.class);
         }

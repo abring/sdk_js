@@ -4,7 +4,7 @@
  */
 $(document).on("click",".abring_buttons_market_pay",function () {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.pages.player_mobile_register.show("Your are not login!");
         return false;

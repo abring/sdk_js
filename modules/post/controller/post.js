@@ -4,7 +4,7 @@
  * posts event lister
  */
 $(document).on("click",".abring_buttons_posts_timeline",function () {
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -12,7 +12,7 @@ $(document).on("click",".abring_buttons_posts_timeline",function () {
     abringPostsShow();
 });
 $(document).on("keyup","#abring_post_search_input",function (e) {
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -32,7 +32,7 @@ $(document).on("keyup","#abring_post_search_input",function (e) {
     );
 });
 $(document).on("click","#abring_suggested_tag",function (e) {
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -53,7 +53,7 @@ $(document).on("click","#abring_suggested_tag",function (e) {
     );
 });
 $(document).on("click",".abring_post_like_this_post",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
@@ -63,7 +63,7 @@ $(document).on("click",".abring_post_like_this_post",function (e){
     abringPostLike(post_id);
 });
 $(document).on("click",".abring_post_share_this_post",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -72,7 +72,7 @@ $(document).on("click",".abring_post_share_this_post",function (e){
     abringPostShare(post_id);
 });
 $(document).on("click","#abring_post_create",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -81,7 +81,7 @@ $(document).on("click","#abring_post_create",function (e){
     $(".abring_post_create_form").show("slow");
 });
 $(document).on("click","#abring_post_create_submit",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -118,7 +118,7 @@ $(document).on("click","#abring_post_create_submit",function (e){
     });
 });
 $(document).on("click","#abring_post_create_cancel",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -127,7 +127,7 @@ $(document).on("click","#abring_post_create_cancel",function (e){
     $("#abring_post_create").show("slow");
 });
 $(document).on("click",".post_comment_add",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -140,7 +140,7 @@ $(document).on("click",".post_comment_add",function (e){
         comment = $(this).parent().children('input').val();
         callAbringWithFileUpload("post/comment",{"post_id":post_id,"comment":comment},
             function (post_comment_result) {
-                $(".current-post .post-more-commnets-contain").prepend('<div class="post-comment player_'+abring.player_info.id+'" style="display:block;"><div class="avatar-box"> <img class="post-more-comment-avatar view_profile" name="'+abring.player_info.id+'" src="'+abring.player_info.avatar+'"> <label class="post-more-comment-name view_profile" name="'+abring.player_info.id+'">'+abring.player_info.name+'</label></div><div class="comment-box"><p class="post-more-comment-content">'+comment+'</p></div></div>');
+                $(".current-post .post-more-commnets-contain").prepend('<div class="post-comment player_'+abring.params.player_info.id+'" style="display:block;"><div class="avatar-box"> <img class="post-more-comment-avatar view_profile" name="'+abring.params.player_info.id+'" src="'+abring.params.player_info.avatar+'"> <label class="post-more-comment-name view_profile" name="'+abring.params.player_info.id+'">'+abring.params.player_info.name+'</label></div><div class="comment-box"><p class="post-more-comment-content">'+comment+'</p></div></div>');
                 $(".current-post").removeClass("current-post");
             },function (x,c,e) {
                 abring.display.error.show(c);
@@ -149,7 +149,7 @@ $(document).on("click",".post_comment_add",function (e){
     }
 });
 $(document).on("click",".post_delete",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -168,7 +168,7 @@ $(document).on("click",".post_delete",function (e){
 var limit = 10;
 var offset =1;
 $(document).on("click",".post_comments_more",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -195,7 +195,7 @@ $(document).on("click",".post_comments_more",function (e){
     );
 });
 $(document).on("click",".post_edit",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -215,7 +215,7 @@ $(document).on("click",".post_edit",function (e){
     $(".current-post .abring_post_edit_form").show(300);
 });
 $(document).on("click",".abring_post_edit_submit",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -260,7 +260,7 @@ $(document).on("click",".abring_post_edit_submit",function (e){
     });
 });
 $(document).on("click",".abring_post_edit_cancel",function (e){
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;

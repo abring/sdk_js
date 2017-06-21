@@ -31,7 +31,7 @@ abring.init = function (data) {
     abring.params.template = "";
     abring.params.app_data = "";
     abring.params.token = "";
-    abring.player_info = "";
+    abring.params.player_info = "";
     abring.params.last_error = "";
     requests_friend_detail = "";
     members_friend_detail = "";
@@ -53,6 +53,7 @@ abring.init = function (data) {
     $("#abring .dialog img.warning").attr("src",abring.display.abring_warning_url);
     $("#abring .dialog img.avatar").attr("src",abring.display.abring_default_avatar_url);
 
+
     initTranslation();
     initPlayer();
     initChat();
@@ -62,15 +63,18 @@ abring.init = function (data) {
     initPost();
     initMarket();
 
-    abring.params.token = getCookie("token");
-
-    getAppData(false,
+    getAppData(true,
         function(res){
             abring.params.app_data = res;
+        },function () {
+            getAppData(false,
+                function(res){
+                    abring.params.app_data = res;
+                }
+            );
         }
     );
 
-    abring.player_info = getPlayerInfo();
 
     updateLocation(
         function(current_location){
@@ -130,7 +134,7 @@ abring.init = function (data) {
         if(!socketConnect())
             log("Socket is not available");
 
-        if(!abring.player_info)
+        if(!abring.params.player_info)
             getPlayerInfo(true,
                 function(){
                     abringPlayerRegisterDevice(

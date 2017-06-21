@@ -122,7 +122,7 @@ var abringFriendsSearchSuccess = function (search_result ) {
         if(player['name']=="No name" || player['name']=="")player['name']=player['player_id'];
         var friend_detail = searched_friend_detail.replaceAll("PLAYER_ID",player['player_id']).replaceAll("PLAYER_AVATAR",player['avatar']).replaceAll("PLAYER_NAME",player['name']);
         friend_detail = friend_detail.replaceAll("PLAYER_INVITE", 'block');
-        $.each(abring.player_info['friends']['members'] , function(friendsKey , friendsValue){ console.log(friendsValue[['player_id']] +'----'+ player['player_id']);
+        $.each(abring.params.player_info['friends']['members'] , function(friendsKey , friendsValue){ console.log(friendsValue[['player_id']] +'----'+ player['player_id']);
             if(friendsValue['player_id'] == player['player_id']){
                 friend_detail = friend_detail.replaceAll("PLAYER_INVITE", 'none');
             }

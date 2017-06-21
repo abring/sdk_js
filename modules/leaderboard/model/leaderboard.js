@@ -26,11 +26,11 @@ var abringLeaderboardShow = function() {
             var leaderboard_data_html = "";
             $.each(leaderboard_data ,function (key,_leaderboard_data) { console.log(_leaderboard_data);
                 var leaderboard_id = _leaderboard_data["leaderboard"];
-                if(!abring.player_info["avatar"])abring.player_info["avatar"] = abring.params.abring_default_avatar_url;
+                if(!abring.params.player_info["avatar"])abring.params.player_info["avatar"] = abring.params.abring_default_avatar_url;
                 leaderboard_data_html += "<div class='tab "+leaderboard_id+"'>\n";
                 leaderboard_data_html += "<div class='my-leaderboard-contain'>\n";
-                leaderboard_data_html += "<div class='name view_profile' name='"+abring.player_info["player_id"]+"'>"+_leaderboard_data["title"]+"</div>\n";
-                leaderboard_data_html += "<img class='avatar view_profile' name='"+abring.player_info["player_id"]+"' src="+abring.player_info["avatar"]+" />\n";
+                leaderboard_data_html += "<div class='name view_profile' name='"+abring.params.player_info["player_id"]+"'>"+_leaderboard_data["title"]+"</div>\n";
+                leaderboard_data_html += "<img class='avatar view_profile' name='"+abring.params.player_info["player_id"]+"' src="+abring.params.player_info["avatar"]+" />\n";
                 leaderboard_data_html += "<div class='rate'>You: "+_leaderboard_data["rate"]+"-</div>\n";
                 leaderboard_data_html += "<div class='score'>"+_leaderboard_data["score"]+"</div>\n";
                 leaderboard_data_html +="</div>\n";//my-leaderboard-contain
@@ -59,7 +59,7 @@ var abringLeaderboardShow = function() {
 
 var abringLeaderboardSetScore = function (leaderboard,score,signature) {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;

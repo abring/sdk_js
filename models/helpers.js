@@ -175,7 +175,7 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
 
             if(json_result_data['code']&&json_result_data['code']=="401")
             {
-                if(abring.player_info || abring.params.token)
+                if(abring.params.player_info || abring.params.token)
                     abringPlayerLogout();
                 //try to login with uuid
                 abring.display.loading.show("you are not login\ntry to login with your device\nplease wait");

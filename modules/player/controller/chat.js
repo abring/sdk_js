@@ -1,14 +1,14 @@
 
 $(document).on("click",".chat_start",function () {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.display.error.show("Your are not login!");
         return false;
     }
     var target_player_id = $(this).attr("player_id");
 
-    if(target_player_id == abring.player_info["player_id"])
+    if(target_player_id == abring.params.player_info["player_id"])
     {
         abring.display.error.show("You cannot chat with yourself!");
         return false;
@@ -17,7 +17,7 @@ $(document).on("click",".chat_start",function () {
 });
 
 $(document).on("click",".chat_send",function () {
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.display.error.show("Your are not login!");
         return false;

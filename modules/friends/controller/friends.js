@@ -4,7 +4,7 @@
  */
 $(document).on("click",".abring_buttons_friends_list",function () {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
@@ -14,7 +14,7 @@ $(document).on("click",".abring_buttons_friends_list",function () {
 });
 $(document).on("keyup","#"+abring.params.friends.parent_id+" .friends_search_input",function (e) {
 
-    if(!abring.player_info)
+    if(!abring.params.player_info)
     {
         abring.player.showPageFunction("player_mobile_register","Your are not login!");
         return false;
