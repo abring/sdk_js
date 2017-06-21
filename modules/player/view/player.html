@@ -1,4 +1,156 @@
-
+<style>
+    .player_view_details .name {
+        position: absolute;
+        top: 84px;
+        left: 90px;
+    }
+    .player_view_details .friend-action {
+        display: block;
+    }
+    .player_view_details .friend-action a {
+        display: inline-block;
+        width: 49%;
+        border: 1px solid #ccc;
+        height: 42px;
+        margin-top: 15px;
+        padding-top: 10px;
+        text-align: center;
+        font-size: 13px;
+    }
+    .view_profile {
+        cursor: pointer;
+    }
+    .profile-data-contain {
+        border: 1px solid #ccc;
+        margin-top: 15px;
+        height: 128px;
+        position: relative;
+    }
+    .view_profile .avatar {
+        border-radius: 50%;
+        width: 50px !important;
+        margin-right: 13px;
+        position: relative;
+        top: -20px;
+        left: -15px;
+    }
+    .view_profile label {
+        margin-top: 10px;
+        position: absolute;
+        bottom: 7px;
+        left: 70px;
+        color: #000;
+    }
+    .profile-contain .avatar {
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        position: relative;
+        left: -15px;
+        top: -35px;
+        width: 64px;
+    }
+    .profile-contain {
+        border: 1px solid #ccc;
+        margin-top: 15px;
+        height: 150px;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .profile-contain-edit {
+        margin-top: 15px;
+        height: 330px;
+    }
+    .action-div {
+        background-color: #58C2B3;
+        overflow: auto;
+    }
+    .username-div {
+        position: absolute;
+        left: 20px;
+        top: 15px;
+    }
+    .inner-profile {
+        font-size: 14px;
+        float: left;
+        margin: 0 3px;
+    }
+    .name-div {
+        position: absolute;
+        left: 20px;
+        top: 45px;
+    }
+    .sex-div {
+        position: absolute;
+        left: 280px;
+        top: 15px;
+    }
+    .age-div {
+        position: absolute;
+        left: 283px;
+        top: 67px;
+    }
+    .mobile-div {
+        position: absolute;
+        left: 20px;
+        top: 75px;
+    }
+    .avatar-edit {
+        border: 1px solid #ccc;
+        border-radius: 0 !important;
+        left: 66px;
+        position: absolute;
+        top: 0;
+        width: inherit !important;
+    }
+    .cover-edit {
+        border: 1px solid #ccc;
+        border-radius: 0 !important;
+        left: 66px;
+        position: absolute;
+        top: 0;
+        width: inherit !important;
+    }
+    .share-div-edit {
+        position: absolute;
+        top: 210px;
+        left: 20px;
+    }
+    .avatar-div-edit {
+        position: absolute;
+        top: 137px;
+        left: 20px;
+    }
+    .cover-div-edit {
+        position: absolute;
+        top: 167px;
+        left: 20px;
+    }
+    .inner-profile-input {
+        font-size: 14px;
+        float: left;
+        margin: 0 3px;
+    }
+    .name-div-edit {
+        left: 20px;
+        position: absolute;
+        top: 247px;
+    }
+    .sex-div-edit {
+        left: 20px;
+        position: absolute;
+        top: 357px;
+    }
+    .age-div-edit {
+        left: 20px;
+        position: absolute;
+        top: 407px;
+    }
+    .mobile-div-edit {
+        left: 20px;
+        position: absolute;
+        top: 297px;
+    }
+</style>
 <div class="page other_player_profile">
     <!--img style="width:60px;" class="friend_avatar avatar" src="AVATAR" alt="Avatar"><br-->
     <a href="" target="_blank">
