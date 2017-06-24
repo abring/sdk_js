@@ -33,6 +33,8 @@ abring.params = {
     "isOnline" : true,
     "player_info":{},
     "player_view_detail":{},
+    "new_message":0,
+    "new_friend":0,
 
     "current_location_latitude" : 0,
     "current_location_longitude" : 0,

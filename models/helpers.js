@@ -56,12 +56,23 @@ var getAppData = function (resetCache,getAppDataSuccess,getAppDataFailed) {
     if( resetCache || !abring.params.app_data )
     {
         callAbringWithFileUpload(
-            "app/get",{},
+            "app/init",{},
             function(res){
-                abring.params.app_data = res;
+                abring.params.app_data = res['app'];
+
+                abring.params.new_message = res['messages']['unicast']['unread'];
+                if(abring.params.new_message >0){
+                    $(".abring_message_new").html($(".abring_message_new_theme").html());
+                    $(".abring_message_new_amount").html(abring.params.new_message);
+                }
+
+                abring.params.new_friend = res['friends']['invitations'];
+                if(abring.params.new_friend >0){
+                    $(".abring_friends_new").html(abring.params.new_friend);
+                }
+
                 setCookie("app_data",abring.params.app_data,100);
                 getAppDataSuccess(abring.params.app_data);
-
             },function(x,code,error){
                 getAppDataFailed(x,code,error);
             }
