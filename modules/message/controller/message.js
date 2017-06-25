@@ -91,6 +91,8 @@ $(document).on("click",".abring_buttons_message_unicast_submit",function () {
         return false;
     }
 
+    abring.display.loading.show("sending your message");
+
     var title = $("#abring_message_title").val();
     var message = $("#abring_message_message").val();
     var player_id = $(this).attr("player_id");
