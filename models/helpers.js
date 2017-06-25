@@ -62,7 +62,8 @@ var getAppData = function (resetCache,getAppDataSuccess,getAppDataFailed) {
 
                 abring.params.new_message = res['messages']['unicast']['unread'];
                 if(abring.params.new_message >0){
-                    $(".abring_message_new").html($(".abring_message_new_theme").html());
+                    $(".abring_buttons_message_list .abring_message_new").remove();
+                    $(".abring_buttons_message_list").append($(".abring_message_new_theme").html());
                     $(".abring_message_new_amount").html(abring.params.new_message);
                 }
 
