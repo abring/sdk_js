@@ -110,6 +110,7 @@ var sendMessageUnicast = function (player_id,title,message) {
         {"player_id":player_id,"title":title,"message":message},
         function () {
             abring.display.info.show("message is sent");
+            abring.message.pages.list.show();
         },function (x,c,e) {
             abring.display.error.show(e);
         }
