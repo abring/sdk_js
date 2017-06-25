@@ -115,3 +115,14 @@ var sendMessageUnicast = function (player_id,title,message) {
         }
     );
 };
+
+var updateNewMessageTip = function(amount)
+{
+    abring.params.new_message = amount;
+    $(".abring_buttons_message_list .abring_message_new_theme_wrapper").remove();
+    if(amount>0) {
+        $(".abring_buttons_message_list").append($(".abring_message_new_theme").html());
+        $(".abring_message_new_amount").html(amount);
+    }
+    setBadge(amount);
+};

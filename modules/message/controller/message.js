@@ -32,10 +32,16 @@ $(document).on("click",".abring_buttons_message_view",function () {
     abring.display.loading.show("loading message");
 
     var message_id = $(this).attr("message_id");
+    var is_unread = $(this).hasClass("unread");
     getMessage(
         message_id,
         function (message) {
             fillMessage(message);
+            if(is_unread)
+            {
+                updateNewMessageTip(abring.params.new_message-1);
+                $(this).removeClass("unread");
+            }
             abring.display.hidePageFunction();
             abring.message.pages.view.show(message_id);
         },function (x,c,e) {

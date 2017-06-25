@@ -61,11 +61,8 @@ var getAppData = function (resetCache,getAppDataSuccess,getAppDataFailed) {
                 abring.params.app_data = res['app'];
 
                 abring.params.new_message = res['messages']['unicast']['unread'];
-                if(abring.params.new_message >0){
-                    $(".abring_buttons_message_list .abring_message_new").remove();
-                    $(".abring_buttons_message_list").append($(".abring_message_new_theme").html());
-                    $(".abring_message_new_amount").html(abring.params.new_message);
-                }
+                if(abring.params.new_message >0)
+                    updateNewMessageTip(abring.params.new_message);
 
                 abring.params.new_friend = res['friends']['invitations'];
                 if(abring.params.new_friend >0){
