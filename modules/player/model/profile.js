@@ -237,7 +237,7 @@ var abringPlayerRegister = function (username, password, variables, values) {
 
 var fillMyPlayerInfo = function (reset_cache,fillMyPlayerInfoSuccess) {
     fillMyPlayerInfoSuccess = fillMyPlayerInfoSuccess || function(){};
-    abring.display.loading.show("loading","Please wait");
+    abring.display.loading.show("loading profile","Please wait");
     var parent_id = abring.player.pages.my_profile.parent_id;
     var parent_id_update = abring.player.pages.my_profile_update.parent_id;
     $("."+parent_id).html(abring.player.pages.my_profile.getTheme());
@@ -282,7 +282,7 @@ var fillMyPlayerInfo = function (reset_cache,fillMyPlayerInfoSuccess) {
 var fillOtherPlayerInfo = function(other_player_id,fillOtherPlayerInfoSuccess,fillOtherPlayerInfoFailed){
     fillOtherPlayerInfoSuccess = fillOtherPlayerInfoSuccess || function(){};
     fillOtherPlayerInfoFailed = fillOtherPlayerInfoFailed || function(){};
-    abring.display.loading.show("loading","Please wait");
+    abring.display.loading.show("loading profile","Please wait");
     var parent_id = abring.player.pages.other_player_profile.parent_id;
     $("."+parent_id).html(abring.player.pages.other_player_profile.getTheme());
     getOtherPlayerInfo(
