@@ -43,7 +43,7 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                         });
 
                     },function (message) {
-                        abring.player.showPageFunction("player_mobile_register","sending SMS failed\n"+message);
+                        abring.display.showPageFunction("player_mobile_register","sending SMS failed\n"+message);
                     },
                     ''
                 );
@@ -150,10 +150,10 @@ $(document).on("click",".player_mobile_verify .resend_code ",function () {
             $(".player_mobile_verify .mobile_number").val(mobile_number);
             $(".player_mobile_verify .mobile_number_label").html(mobile_number);
 
-            abring.player.showPageFunction("player_mobile_verify","Please enter verify code.\n");
+            abring.display.showPageFunction("player_mobile_verify","Please enter verify code.\n");
 
         },function (x,c,e) {
-            abring.player.showPageFunction("player_mobile_verify","resend failed.\n"+e);
+            abring.display.showPageFunction("player_mobile_verify","resend failed.\n"+e);
         }
     );
 });
@@ -165,7 +165,7 @@ $(document).on("click",".register_using_abring",function () {
         return false;
     }
 
-    abring.player.showPageFunction("player_register");
+    abring.display.showPageFunction("player_register");
 
 });
 $(document).on("click",".login_using_abring",function () {
@@ -176,7 +176,7 @@ $(document).on("click",".login_using_abring",function () {
         return false;
     }
 
-    abring.player.showPageFunction("player_login","Please login!");
+    abring.display.showPageFunction("player_login","Please login!");
 
 });
 $(document).on("click",".abring_buttons_my_profile",function () {
@@ -269,7 +269,7 @@ $(document).on("click",".view_profile",function () {
     
     if(!abring.params.player_info)
     {
-        abring.player.showPageFunction("player_mobile_register","Your are not login!");
+        abring.display.showPageFunction("player_mobile_register","Your are not login!");
         return false;
     }
 

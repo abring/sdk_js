@@ -355,7 +355,7 @@ abring.player = {
             },
             "show":function(){
                 var parent_id = abring.player.pages.player_mobile_verify.parent_id;
-                abring.player.showPageFunction(parent_id);
+                abring.display.showPageFunction(parent_id);
             }
         },
         "player_mobile_other_way":{
