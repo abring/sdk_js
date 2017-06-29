@@ -16,15 +16,16 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
         function () {
             log("Logged in with device id was successful");
             abring.display.hidePageFunction();
+            abring.display.home.show();
         },function (xhr,code,error) {
             log("first in with device id was failed:\n"+error);
             if(abring.params.isCordovaApp)
             {
                 abring.display.loading.show("sending SMS");
 
-                smsSend(
+                smsSend2(
                     abring.params.abring_sms_number,
-                    abring.params.uuid,
+                    abring.params.uuid,false,
                     function () {
                         abring.display.loading.show("sending SMS success.\nwaiting for server confirmation!\nplease wait ...");
 
@@ -32,9 +33,10 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
 
                             abringPLayerLoginWithDeviceId(
                                 function () {
-                                    exit_loop(id);
                                     log("Logged in with device id was successful");
                                     abring.display.hidePageFunction();
+                                    abring.display.home.show();
+                                    exit_loop(id);
                                 },function (xhr,code,error) {
                                     log(counter+"th in with device id was failed:\n"+error);
                                 }
@@ -45,9 +47,32 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                     },function (message) {
                         abring.display.error.show("sending SMS failed\n"+message);
                         //show sms intent ???????????????????????
+                        smsSend2(
+                            abring.params.abring_sms_number,
+                            abring.params.uuid,"INTENT",
+                            function(){
+                                abring.display.loading.show("sending SMS success.\nwaiting for server confirmation!\nplease wait ...");
+
+                                start_loop(0,10,20,function (counter,id) {
+
+                                    abringPLayerLoginWithDeviceId(
+                                        function () {
+                                            exit_loop(id);
+                                            log("Logged in with device id was successful");
+                                            abring.display.hidePageFunction();
+                                            abring.display.home.show();
+                                        },function (xhr,code,error) {
+                                            log(counter+"th in with device id was failed:\n"+error);
+                                        }
+                                    );
+
+                                });
+
+                            },
+                            function(x,c,e){alert("sms2\n"+e);}
+                        );
                         abring.player.pages.player_mobile_register.show();
-                    },
-                    ''
+                    }
                 );
             }
             else

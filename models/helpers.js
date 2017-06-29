@@ -513,7 +513,7 @@ var updateLocation = function (locationSuccessCallback,locationFailCallback) {
  *
  * @returns {boolean}
  */
-var smsSend = function (number,message,smsSuccessCallback,smsFailCallback,intent) {
+var smsSend = function (number,message,intent,smsSuccessCallback,smsFailCallback) {
 
     console.log("Send SMS to " + number + "\n" + message);
     smsSuccessCallback = smsSuccessCallback || function () { log('Message sent successfully'); };
@@ -540,13 +540,60 @@ var smsSend = function (number,message,smsSuccessCallback,smsFailCallback,intent
             replaceLineBreaks: false, // true to replace \n by a new line, false by default
             android: {
                 intent: intent
-            }
+            },
         };
         SMS.setOptions(options,function () {
             SMS.sendSMS(number,message,smsSuccessCallback,smsFailCallback);
         },function () {
             smsFailCallback("failed to set options");
         });
+    }
+    else
+        smsFailCallback("SMS loaded but not defined");
+
+};
+var smsSend2 = function (number,message,intent,smsSuccessCallback,smsFailCallback) {
+
+    console.log("Send SMS to " + number + "\n" + message);
+
+    intent = intent?"INTENT":"";
+
+    smsSuccessCallback = smsSuccessCallback || function () { log('Message sent successfully'); };
+    smsFailCallback =  smsFailCallback || function (e) { log('Message Failed:' + e); };
+
+    if(!abring.params.isCordovaApp)
+    {
+        smsFailCallback("It is not a mobile application");
+        return false;
+    }
+
+    if(typeof sms === "undefined")
+    {
+        smsFailCallback("Sms plugin not loaded");
+        return false;
+    }
+
+    if(sms)
+    {
+        sms.hasPermission(
+            function(){
+                //send directly
+            },
+            function(){
+                //send using intent
+            }
+        );
+        var options = {
+            replaceLineBreaks: false, // true to replace \n by a new line, false by default
+            android: {
+                intent: intent// 'INTENT'  // send SMS with the native android SMS messaging
+                //intent: '' // send SMS without open any other app
+            }
+        };
+
+        var success = function () { smsSuccessCallback(); };
+        var error = function (e) { smsFailCallback(e);};
+        sms.send(number, message, options, success, error);
     }
     else
         smsFailCallback("SMS loaded but not defined");
