@@ -384,7 +384,7 @@ abring.player = {
             "show":function(){
                 abring.player.pages.player_mobile_other_way.getTheme();
                 var parent_id = abring.player.pages.player_mobile_other_way.parent_id;
-                abring.player.showPageFunction(parent_id);
+                abring.display.showPageFunction(parent_id);
             }
         },
         "player_register":{
