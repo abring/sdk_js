@@ -56,6 +56,7 @@ abring.params = {
     "uuid" : "", //device's Universally Unique Identifier,
 
     "ping_time" : 30,
+    "last_ping_time" : 0,
     "cookie_max_size":4000
 };
 

@@ -58,15 +58,20 @@ var getAppData = function (resetCache,getAppDataSuccess,getAppDataFailed) {
         callAbringWithFileUpload(
             "app/init",{},
             function(res){
-                abring.params.app_data = res['app'];
+                if(res['app'])
+                    abring.params.app_data = res['app'];
 
-                abring.params.new_message = res['messages']['unicast']['unread'];
-                if(abring.params.new_message >0)
-                    updateNewMessageTip(abring.params.new_message);
+                if(res['messages']) {
+                    abring.params.new_message = res['messages']['unicast']['unread'];
+                    if (abring.params.new_message > 0)
+                        updateNewMessageTip(abring.params.new_message);
+                }
 
-                abring.params.new_friend = res['friends']['invitations'];
-                if(abring.params.new_friend >0){
-                    $(".abring_friends_new").html(abring.params.new_friend);
+                if(res['friends']) {
+                    abring.params.new_friend = res['friends']['invitations'];
+                    if (abring.params.new_friend > 0) {
+                        $(".abring_friends_new").html(abring.params.new_friend);
+                    }
                 }
 
                 setCookie("app_data",abring.params.app_data,100);
@@ -102,7 +107,7 @@ var readFile = function (filePath) {
 };
 var callAbringSynchronously = function (method,data) {
 
-    if(!abring.params.isOnline)
+    if(!abring.params.isOnline && abring.params.last_ping_time>(get_current_time()-abring.params.ping_time) )
     {
         log("You are offline!\nPlease check your internet connection");
         return false;
@@ -139,7 +144,7 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
     successCallback = successCallback || function () {};
     failCallback = failCallback || function () {};
 
-    if(!abring.params.isOnline)
+    if(!abring.params.isOnline && abring.params.last_ping_time>(get_current_time()-abring.params.ping_time) )
     {
         log("You are offline!\nPlease check your internet connection");
         failCallback({},500,"You are offline!\nPlease check your internet connection");
@@ -178,7 +183,8 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
             //show loading dialog
         },
         success: function (json_result_data,status,xhr) {
-
+            abring.params.isOnline = true;
+            abring.params.last_ping_time = get_current_time();
             //hide loading dialog
             json_result_data = JSON.parse(json_result_data);
 
@@ -220,6 +226,8 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
             return result;
         },
         error: function (xhr, status, error) {
+            abring.params.isOnline = false;
+            abring.params.last_ping_time = get_current_time();
             //hide loading dialog
             if(failCallback)
                 failCallback(xhr, status, error,identifier);

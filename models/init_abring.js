@@ -86,14 +86,15 @@ abring.init = function (data) {
         }
     );
 
-    checkIsOnline(function(isOnlineStatus){
-        if(isOnlineStatus==false){
-            abring.display.tooltip.show("Info","You are offline.Please check your internet connection","warning",50);
-        }
-    });
-    start_loop(0,10000,abring.params.ping_time,function (counter,id) {
-        checkIsOnline();
-    });
+    //checkIsOnline(function(isOnlineStatus){
+    //    if(isOnlineStatus==false){
+    //        abring.display.tooltip.show("Info","You are offline.Please check your internet connection","warning",50);
+    //    }
+    //});
+
+    //start_loop(0,10000,abring.params.ping_time,function (counter,id) {
+    //    checkIsOnline();
+    //});
 
 
 
