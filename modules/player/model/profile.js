@@ -20,6 +20,12 @@ var initPlayer = function (initPlayerSuccess,initPlayerFailed) {
 
     abring.params.token = getCookie("token");
 
+    if(abring.params.uuid){
+        $(".device_id").html(abring.params.uuid).val(abring.params.uuid);
+        $(".abring_sms_number").html(abring.params.abring_sms_number).val(abring.params.abring_sms_number);
+    }else{
+        $(".other_ways").hide();
+    }
 
     if(abring.params.token) {
         getPlayerInfo(

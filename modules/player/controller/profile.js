@@ -43,7 +43,9 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                         });
 
                     },function (message) {
-                        abring.display.showPageFunction("player_mobile_register","sending SMS failed\n"+message);
+                        abring.display.error.show("sending SMS failed\n"+message);
+                        //show sms intent ???????????????????????
+                        abring.player.pages.player_mobile_register.show();
                     },
                     ''
                 );
@@ -53,6 +55,27 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                 abring.player.pages.player_mobile_register.show();
                 abring.display.error.show("error","ارسال پیامک از طرف شما ممکن نیست");
             }
+        }
+    );
+
+});
+$(document).on("click",".player_mobile_register_by_send_sms_verify",function () {
+
+    if(abring.params.token)
+    {
+        abring.display.warning.show("Your are already a member and login.");
+        return false;
+    }
+
+    abring.display.loading.show("login with device id");
+
+    abringPLayerLoginWithDeviceId(
+        function () {
+            log("Logged in with device id was successful");
+            abring.display.hidePageFunction();
+            abring.display.home.show();
+        },function (xhr,code,error) {
+            abring.display.error.show(error);
         }
     );
 
