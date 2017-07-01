@@ -5,9 +5,10 @@ onDeviceReady = function(){
     abring.init({});
 };
 
-abring.init = function (data) {
+abring.init = function (data,initCompleted) {
 
     data = data || {};
+    initCompleted = initCompleted || function(){};
 
     $.each(data,function (variable,value) {
         if(typeof value == "object")
@@ -110,6 +111,7 @@ abring.init = function (data) {
                 function () {
 
                     abring.params.init_completed = true;
+                    initCompleted();
                     if(!socketConnect())
                         log("Socket is not available");
 
@@ -117,6 +119,7 @@ abring.init = function (data) {
                 },function (xhr,code,error) {
 
                     abring.params.init_completed = true;
+                    initCompleted();
                     if(!socketConnect())
                         log("Socket is not available");
 
@@ -126,12 +129,14 @@ abring.init = function (data) {
         else {
 
             abring.params.init_completed = true;
+            initCompleted();
             if(!socketConnect())
                 log("Socket is not available");
         }
     }else{
 
         abring.params.init_completed = true;
+        initCompleted();
         if(!socketConnect())
             log("Socket is not available");
 
