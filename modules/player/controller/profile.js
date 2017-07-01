@@ -38,6 +38,8 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                                     abring.display.home.show();
                                     exit_loop(id);
                                 },function (xhr,code,error) {
+                                    abring.display.hidePageFunction();
+                                    abring.player.pages.player_mobile_register_send_sms.show();
                                     log(counter+"th in with device id was failed:\n"+error);
                                 }
                             );
@@ -45,7 +47,8 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                         });
 
                     },function (message) {
-                        abring.display.error.show("sending SMS failed\n"+message);
+                        abring.display.hidePageFunction();
+                        abring.player.pages.player_mobile_register_send_sms.show("sending SMS failed\n"+message);
                         //show sms intent ???????????????????????
                         smsSend2(
                             abring.params.abring_sms_number,
@@ -62,6 +65,7 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                                             abring.display.hidePageFunction();
                                             abring.display.home.show();
                                         },function (xhr,code,error) {
+                                            abring.display.error.show(counter+"th in with device id was failed:\n"+error);
                                             log(counter+"th in with device id was failed:\n"+error);
                                         }
                                     );
@@ -69,9 +73,12 @@ $(document).on("click",".player_mobile_register_by_send_sms_submit",function () 
                                 });
 
                             },
-                            function(x,c,e){alert("sms2\n"+e);}
+                            function(x,c,e){
+                                abring.display.hidePageFunction();
+                                abring.player.pages.player_mobile_register_send_sms.show();
+                            }
                         );
-                        abring.player.pages.player_mobile_register.show();
+                        // abring.player.pages.player_mobile_register.show();
                     }
                 );
             }

@@ -331,6 +331,34 @@ abring.player = {
                 abring.display.showPageFunction(parent_id);
             }
         },
+        "player_mobile_register_send_sms":{
+            "parent_id":"player_mobile_register_send_sms",
+            "theme_parent_id":"player_mobile_register_send_sms",
+            "setParents":function(parent_id,theme_parent_id){
+                if(parent_id)
+                    abring.player.pages.player_mobile_register_send_sms.parent_id = parent_id;
+                if(theme_parent_id)
+                    abring.player.pages.player_mobile_register_send_sms.theme_parent_id = theme_parent_id;
+                abring.player.pages.player_mobile_register_send_sms.getTheme(true);
+            },
+            "theme":"",
+            "getTheme":function(override){
+                var theme = abring.player.pages.player_mobile_register_send_sms.theme;
+                if(!theme || override)
+                {
+                    theme = abring.player.pages.player_mobile_register_send_sms.theme =
+                        $("."+abring.player.pages.player_mobile_register_send_sms.theme_parent_id).html();
+                    $("."+abring.player.pages.player_mobile_register_send_sms.theme_parent_id).html("");
+                }
+                var parent_id = abring.player.pages.player_mobile_register_send_sms.parent_id;
+                $("."+parent_id).html(theme);
+                return abring.player.pages.player_mobile_register_send_sms.theme;
+            },
+            "show":function(){
+                var parent_id = abring.player.pages.player_mobile_register_send_sms.parent_id;
+                abring.display.showPageFunction(parent_id);
+            }
+        },
         "player_mobile_verify":{
             "parent_id":"player_mobile_verify",
             "theme_parent_id":"player_mobile_verify",
@@ -477,9 +505,8 @@ abring.player = {
                 var parent_id = abring.player.pages.my_profile_update.parent_id;
                 abring.display.showPageFunction(parent_id);
             }
-        },
-    }
-    ,
+        }
+    },
     // "parent_id" : "abring_player",
     // "template" : readFile(abring_url+"/modules/player/view/player.html"),
     // "showPageFunction":function (subPageID) { return showMyProfile(subPageID); },
