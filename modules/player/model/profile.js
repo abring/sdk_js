@@ -192,6 +192,7 @@ var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutF
                 function(res){
                     abring.player.onLogoutFunction();
                     abring.display.hidePageFunction();
+                    updateNewMessageTip(0);
                     abringPlayerLogoutSuccess(res);
                 },
                 function(x,c,e){
@@ -209,6 +210,7 @@ var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutF
     {
         abring.player.onLogoutFunction();
         showMyProfile("player_mobile_register","Logout successfully!");
+        updateNewMessageTip(0);
         abringPlayerLogoutSuccess();
     }
 };
