@@ -25,7 +25,19 @@ $( document ).on( "onDeviceReady", function() {
     document.addEventListener("backbutton", function(e){
         if($.mobile.activePage.is('#home')){
             e.preventDefault();
-            navigator.app.exitApp();
+
+            navigator.notification.confirm(
+                abring.t("Do you want to exit?"), // message
+                function (button){
+                    if(button=="1" || button==1)
+                    {
+                        navigator.app.exitApp();
+                    }
+                }, // callback
+                abring.t("Confirm exit"), // title
+                abring.t('YES')+','+abring.t('NO') // buttonName
+            );
+
         }
         else {
             navigator.app.backHistory()

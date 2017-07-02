@@ -1,15 +1,29 @@
 var initTranslation = function () {
     abring.params.language = 'fa';
     abring.params.translation = {
-        "You are not login":{
+        "you are not login":{
             "fa":"شما لوین نیستید"
+        },
+        "do you want to exit?":{
+            "fa":"آیا از خروج اطمینان دارید؟"
+        },
+        "yes":{
+            "fa":"بله"
+        },
+        "no":{
+            "fa":"خیر"
+        },
+        "confirm exit":{
+            "fa":"تایید خروج"
         }
     };
 };
 
 abring.t = function(source,params,lang){
+    var origin_source = source;
+    source = source.toLowerCase();
     params = params || {};
-    lang = lang || 'fa';
+    lang = lang || abring.params.language;
     try{
         var t = abring.params.translation[source][lang] || source;
         $.each(params,function(key,value){
@@ -18,6 +32,6 @@ abring.t = function(source,params,lang){
         return t;
     }catch(e)
     {
-        return source;
+        return origin_source;
     }
 };
