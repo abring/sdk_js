@@ -1,12 +1,12 @@
 var temp_data = {};
 var temp_initCompleted = function(){};
 
-onDeviceReady = function(){
+$( document ).on( "onDeviceReady", function() {
     abring.params.isCordovaApp = true;
     abring.params.uuid = device.uuid;
 
     abring.init(temp_data,temp_initCompleted);
-};
+});
 
 abring.init = function (data,initCompleted) {
 
@@ -27,7 +27,9 @@ abring.init = function (data,initCompleted) {
 
     if (!abring.params.isCordovaApp && navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
         log("Run in mobile device");
-        document.addEventListener("deviceready", onDeviceReady, false);
+        document.addEventListener("deviceready", function () {
+            $( document ).trigger( "onDeviceReady" );
+        }, false);
         return true;
     } else {
         log("Run in web"); //this is the browser
