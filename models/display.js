@@ -20,3 +20,15 @@ var abringPageHide = function () {
     $("#abring").hide();
     $("#abring>div").hide();
 };
+
+$( document ).on( "onDeviceReady", function() {
+    document.addEventListener("backbutton", function(e){
+        if($.mobile.activePage.is('#home')){
+            e.preventDefault();
+            navigator.app.exitApp();
+        }
+        else {
+            navigator.app.backHistory()
+        }
+    }, false);
+});
