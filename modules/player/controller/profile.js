@@ -179,7 +179,7 @@ $(document).on("click",".player_mobile_verify_submit",function () {
 
     );
 });
-$(document).on("click",".player_mobile_verify .resend_code ",function () {
+$(document).on("click",".player_mobile_verify_resend_code",function () {
 
     abring.display.loading.show("Resending code.\nPlease wait");
 

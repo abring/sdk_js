@@ -167,6 +167,7 @@ abring.message = {
                     theme = abring.message.pages.list.theme =
                         $("."+abring.message.pages.list.theme_parent_id).html();
                     $("."+abring.message.pages.list.theme_parent_id).html("");
+                    $("#abring .message_list").html("");
                 }
                 var parent_id = abring.message.pages.list.parent_id;
                 $("."+parent_id).html(theme);
@@ -197,6 +198,7 @@ abring.message = {
                     theme = abring.message.pages.view.theme =
                         $("."+abring.message.pages.view.theme_parent_id).html();
                     $("."+abring.message.pages.view.theme_parent_id).html("");
+                    $("#abring .message_view").html("");
                 }
                 var parent_id = abring.message.pages.view.parent_id;
                 $("."+parent_id).html(theme);
@@ -224,6 +226,7 @@ abring.message = {
                     theme = abring.message.pages.unicast.theme =
                         $("."+abring.message.pages.unicast.theme_parent_id).html();
                     $("."+abring.message.pages.unicast.theme_parent_id).html("");
+                    $("#abring .message_unicast").html("");
                 }
                 var parent_id = abring.message.pages.unicast.parent_id;
                 $("."+parent_id).html(theme);
@@ -257,6 +260,7 @@ abring.player = {
                     theme = abring.player.pages.my_profile.theme =
                         $("."+abring.player.pages.my_profile.theme_parent_id).html();
                     $("."+abring.player.pages.my_profile.theme_parent_id).html("");
+                    $("#abring .my_profile").html("");
                 }
                 var parent_id = abring.player.pages.my_profile.parent_id;
                 $("."+parent_id).html(theme);
@@ -285,6 +289,7 @@ abring.player = {
                     theme = abring.player.pages.other_player_profile.theme =
                         $("."+abring.player.pages.other_player_profile.theme_parent_id).html();
                     $("."+abring.player.pages.other_player_profile.theme_parent_id).html("");
+                    $("#abring .other_player_profile").html("");
                 }
                 var parent_id = abring.player.pages.other_player_profile.parent_id;
                 $("."+parent_id).html(theme);
@@ -321,6 +326,7 @@ abring.player = {
                     theme = abring.player.pages.player_mobile_register.theme =
                         $("."+abring.player.pages.player_mobile_register.theme_parent_id).html();
                     $("."+abring.player.pages.player_mobile_register.theme_parent_id).html("");
+                    $("#abring .player_mobile_register").html("");
                 }
                 var parent_id = abring.player.pages.player_mobile_register.parent_id;
                 $("."+parent_id).html(theme);
@@ -349,6 +355,7 @@ abring.player = {
                     theme = abring.player.pages.player_mobile_register_send_sms.theme =
                         $("."+abring.player.pages.player_mobile_register_send_sms.theme_parent_id).html();
                     $("."+abring.player.pages.player_mobile_register_send_sms.theme_parent_id).html("");
+                    $("#abring .player_mobile_register_send_sms").html("");
                 }
                 var parent_id = abring.player.pages.player_mobile_register_send_sms.parent_id;
                 $("."+parent_id).html(theme);
@@ -377,6 +384,7 @@ abring.player = {
                     theme = abring.player.pages.player_mobile_verify.theme =
                         $("."+abring.player.pages.player_mobile_verify.theme_parent_id).html();
                     $("."+abring.player.pages.player_mobile_verify.theme_parent_id).html("");
+                    $("#abring .player_mobile_verify").html("");
                 }
                 var parent_id = abring.player.pages.player_mobile_verify.parent_id;
                 $("."+parent_id).html(theme);
@@ -405,6 +413,7 @@ abring.player = {
                     theme = abring.player.pages.player_mobile_other_way.theme =
                         $("."+abring.player.pages.player_mobile_other_way.theme_parent_id).html();
                     $("."+abring.player.pages.player_mobile_other_way.theme_parent_id).html("");
+                    $("#abring .player_mobile_other_way").html("");
                 }
                 var parent_id = abring.player.pages.player_mobile_other_way.parent_id;
                 $("."+parent_id).html(theme);
@@ -434,6 +443,7 @@ abring.player = {
                     theme = abring.player.pages.player_register.theme =
                         $("."+abring.player.pages.player_register.theme_parent_id).html();
                     $("."+abring.player.pages.player_register.theme_parent_id).html("");
+                    $("#abring .player_register").html("");
                 }
                 var parent_id = abring.player.pages.player_register.parent_id;
                 $("."+parent_id).html(theme);
@@ -464,6 +474,7 @@ abring.player = {
                     theme = abring.player.pages.player_login.theme =
                         $("."+abring.player.pages.player_login.theme_parent_id).html();
                     $("."+abring.player.pages.player_login.theme_parent_id).html("");
+                    $("#abring .player_login").html("");
                 }
                 var parent_id = abring.player.pages.player_login.parent_id;
                 $("."+parent_id).html(theme);
@@ -494,6 +505,7 @@ abring.player = {
                     theme = abring.player.pages.my_profile_update.theme =
                         $("."+abring.player.pages.my_profile_update.theme_parent_id).html();
                     $("."+abring.player.pages.my_profile_update.theme_parent_id).html("");
+                    $("#abring .my_profile_update").html("");
                 }
                 var parent_id = abring.player.pages.my_profile_update.parent_id;
                 $("."+parent_id).html(theme);
@@ -535,6 +547,7 @@ abring.market.products = {
                     theme = abring.market.products.pages.productList.theme =
                         $("."+abring.market.products.pages.productList.theme_parent_id).html();
                     $("."+abring.market.products.pages.productList.theme_parent_id).html("");
+                    $("#abring .products_list").html("");
                 }
                 var parent_id = abring.market.products.pages.productList.parent_id;
                 $("."+parent_id).html(theme);
@@ -562,6 +575,7 @@ abring.market.products = {
                     theme = abring.market.products.pages.productView.theme =
                         $("."+abring.market.products.pages.productView.theme_parent_id).html();
                     $("."+abring.market.products.pages.productView.theme_parent_id).html("");
+                    $("#abring .product_view").html("");
                 }
                 var parent_id = abring.market.products.pages.productView.parent_id;
                 $("."+parent_id).html(theme);
@@ -594,6 +608,7 @@ abring.market.basket = {
                     theme = abring.market.basket.pages.basketView.theme =
                         $("."+abring.market.basket.pages.basketView.theme_parent_id).html();
                     $("."+abring.market.basket.pages.basketView.theme_parent_id).html("");
+                    $("#abring .basket_view").html("");
                 }
                 var parent_id = abring.market.basket.pages.basketView.parent_id;
                 $("."+parent_id).html(theme);
@@ -622,6 +637,7 @@ abring.market.basket = {
                     theme = abring.market.basket.pages.basketList.theme =
                         $("."+abring.market.basket.pages.basketList.theme_parent_id).html();
                     $("."+abring.market.basket.pages.basketList.theme_parent_id).html("");
+                    $("#abring .basket_list").html("");
                 }
                 var parent_id = abring.market.basket.pages.basketList.parent_id;
                 $("."+parent_id).html(theme);
@@ -662,6 +678,7 @@ abring.chat = {
                     theme = abring.chat.pages.list.theme =
                         $("."+abring.chat.pages.list.theme_parent_id).html();
                     $("."+abring.chat.pages.list.theme_parent_id).html("");
+                    $("#abring .chat_list").html("");
                 }
                 var parent_id = abring.chat.pages.list.parent_id;
                 $("."+parent_id).html(theme);
@@ -692,6 +709,7 @@ abring.chat = {
                     theme = abring.chat.pages.room.theme =
                         $("."+abring.chat.pages.room.theme_parent_id).html();
                     $("."+abring.chat.pages.room.theme_parent_id).html("");
+                    $("#abring .chat_room").html("");
                     $("."+parent_id).html(theme);
                 }
                 return abring.chat.pages.room.theme;

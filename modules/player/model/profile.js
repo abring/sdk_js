@@ -180,7 +180,6 @@ var abringPlayerLogin = function (username, password , abringPlayerLoginSuccess)
     );
 };
 var abringPlayerLogout = function (abringPlayerLogoutSuccess,abringPlayerLogoutFailed) {
-    abring.display.loading.show("Process log out");
     abringPlayerLogoutSuccess = abringPlayerLogoutSuccess || function () {};
     abringPlayerLogoutFailed = abringPlayerLogoutFailed || function () {};
 

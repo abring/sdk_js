@@ -159,11 +159,11 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
      */
     var url = abring.params.ws_base_url+methodUrl;
 
-    var data = new FormData();
-
-    data.append("app", abring.params.app);
+    url += "&app="+abring.params.app;
     if(abring.params.token)
-        data.append("token", abring.params.token);
+        url += "&token="+abring.params.token;
+
+    var data = new FormData();
     postData = postData || {};
     $.each(postData,function (inputName,inputValue) {
         if(inputValue==undefined)
@@ -193,10 +193,8 @@ var callAbringWithFileUpload = function (methodUrl,postData,successCallback,fail
                 if(abring.params.player_info || abring.params.token)
                     abringPlayerLogout();
                 //try to login with uuid
-                abring.display.loading.show("you are not login\ntry to login with your device\nplease wait");
                 abringPLayerLoginWithDeviceId(
                     function () {
-                        abring.display.hidePageFunction();//continue previous request ????????????
                         log("Logged in with device id was successful");
                     },function (xhr,code,error) {
                         log("first in with device id was failed:\n"+error);

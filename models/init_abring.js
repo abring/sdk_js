@@ -1,13 +1,20 @@
+var temp_data = {};
+var temp_initCompleted = function(){};
 
 onDeviceReady = function(){
     abring.params.isCordovaApp = true;
     abring.params.uuid = device.uuid;
-    abring.init({});
+
+    abring.init(temp_data,temp_initCompleted);
 };
 
-abring.init = function (data) {
+abring.init = function (data,initCompleted) {
 
     data = data || {};
+    temp_data = data;
+
+    initCompleted = initCompleted || function(){};
+    temp_initCompleted = initCompleted;
 
     $.each(data,function (variable,value) {
         if(typeof value == "object")
@@ -110,6 +117,7 @@ abring.init = function (data) {
                 function () {
 
                     abring.params.init_completed = true;
+                    initCompleted();
                     if(!socketConnect())
                         log("Socket is not available");
 
@@ -117,6 +125,7 @@ abring.init = function (data) {
                 },function (xhr,code,error) {
 
                     abring.params.init_completed = true;
+                    initCompleted();
                     if(!socketConnect())
                         log("Socket is not available");
 
@@ -126,12 +135,14 @@ abring.init = function (data) {
         else {
 
             abring.params.init_completed = true;
+            initCompleted();
             if(!socketConnect())
                 log("Socket is not available");
         }
     }else{
 
         abring.params.init_completed = true;
+        initCompleted();
         if(!socketConnect())
             log("Socket is not available");
 
@@ -139,15 +150,10 @@ abring.init = function (data) {
             getPlayerInfo(true,
                 function(){
                     abringPlayerRegisterDevice(
-                        function () {
-                            log("register with device id!");
-                        },function (xhr,code,error) {
-                            log("Failed to register with device id:\n"+error);
-                        }
+                        function () {},
+                        function (xhr,code,error) {}
                     );
-                },function(xhr,code,err){
-                    log("failed");
-                }
+                },function(xhr,code,err){}
             );
         else if(abring.params.uuid)
             abringPlayerRegisterDevice();
